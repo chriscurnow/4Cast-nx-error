@@ -1,0 +1,10 @@
+<mat-toolbar color="primary">
+  <a href="/" class="logo"><img src="assets/logo.png" alt="4CastPro" /></a>
+  <span>{{ appName }}</span>
+  <span class="push-content"></span>
+  <ng-content></ng-content>
+</mat-toolbar>
+<main>
+  <router-outlet></router-outlet>
+</main>
+<footer>Ⓒ {{ year }} 4CastPro</footer>

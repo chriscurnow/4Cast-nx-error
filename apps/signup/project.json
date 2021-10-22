@@ -1,0 +1,94 @@
+{
+  "projectType": "application",
+  "root": "apps/signup",
+  "sourceRoot": "apps/signup/src",
+  "prefix": "fourcast",
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/signup",
+        "index": "apps/signup/src/index.html",
+        "main": "apps/signup/src/main.ts",
+        "polyfills": "apps/signup/src/polyfills.ts",
+        "tsConfig": "apps/signup/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
+        "assets": ["apps/signup/src/favicon.ico", "apps/signup/src/assets"],
+        "styles": [
+          "libs/shared/styles-theming/src/lib/styles.scss",
+          "apps/signup/src/styles.scss"
+        ],
+        "scripts": []
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "fileReplacements": [
+            {
+              "replace": "apps/signup/src/environments/environment.ts",
+              "with": "apps/signup/src/environments/environment.prod.ts"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "configurations": {
+        "production": {
+          "browserTarget": "signup:build:production"
+        },
+        "development": {
+          "browserTarget": "signup:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "browserTarget": "signup:build"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "apps/signup/src/**/*.ts",
+          "apps/signup/src/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/signup"],
+      "options": {
+        "jestConfig": "apps/signup/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": ["scope:app"]
+}

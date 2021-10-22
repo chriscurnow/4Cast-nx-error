@@ -1,94 +1,49 @@
+# Welcome to the @4cast/workspace
 
+### General
 
-# Workspace
+This workspace uses `@nrwl/nx` ([docs](https://nx.dev/l/a/getting-started/intro))
 
-This project was generated using [Nx](https://nx.dev).
+## Run apps
 
-<p style="text-align: center;"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="450"></p>
+Apps can be started with help of provided npm `serve:*` script, eg `npm run serve:contractor`, please add such script for every newly added application
+In case more than one app has to be started simultaneously add the `--port` flag to the serve scripts
 
-🔎 **Smart, Extensible Build Framework**
+## Generate apps & libs
 
-## Adding capabilities to your workspace
+**IMPORTANT** - always preview command output with `--dry-run` flag to make sure it is oging to generate what you expect it to, also don't hesitate to append `--help` to see additional options
 
-Nx supports many plugins which add capabilities for developing different types of applications and different tools.
+Some `generate` flags are specified as defaults so they don't need to be provided explicitly with every invocation, please see the defaults in `nx.json` file
 
-These capabilities include generating applications, libraries, etc as well as the devtools to test, and build projects as well.
+1. **app** - `nx g app <app-name> --tags scope:app --routing`
 
-Below are our core plugins:
+2. **lib** - `nx g lib <lib-group>/<lib-type>-<lib-name> --tags scope:<lib-type>`
 
-- [React](https://reactjs.org)
-  - `npm install --save-dev @nrwl/react`
-- Web (no framework frontends)
-  - `npm install --save-dev @nrwl/web`
-- [Angular](https://angular.io)
-  - `npm install --save-dev @nrwl/angular`
-- [Nest](https://nestjs.com)
-  - `npm install --save-dev @nrwl/nest`
-- [Express](https://expressjs.com)
-  - `npm install --save-dev @nrwl/express`
-- [Node](https://nodejs.org)
-  - `npm install --save-dev @nrwl/node`
+#### Lib types (for tags)
 
-There are also many [community plugins](https://nx.dev/community) you could add.
+Lib types force clean one way dependency graph in the workspace, see the `.eslintrc.json` file to see (or adjust) import rules between various scopes, keep in mind that we always want to preserve clean one way dependency graph
 
-## Generate an application
+Read more [library groups](https://nx.dev/l/a/structure/grouping-libraries), [library types](https://nx.dev/l/a/structure/library-types), [tags](https://nx.dev/l/a/structure/monorepo-tags)
 
-Run `nx g @nrwl/react:app my-app` to generate an application.
+- **scope:feature** `nx g lib <lib-group>/feature-<lib-name> --routing --lazy --tags scope:feature --parentModule apps/<app-name>/src/app/app.module.ts` (if used in more than one app (eg when `<lib-group>` is `shared`) then copy definition form the parent module into all other consumers)
+- **scope:data-access**
+- **scope:data-access**
+- **scope:ui**
+- **scope:ui:shared**
+- **scope:util**
 
-> You can use any of the plugins above to generate applications as well.
+## Generate components, services, ...
 
-When using Nx, you can create multiple applications and libraries in the same workspace.
+- **components** - `nx g c <optional-component-path>/<component-name> --project <project-name>`, eg `nx g c some-component --project shared-ui-main-navigation` will be generated in with `libs/shared/main-navigation/src/lib/some-component`, please note the `-` instead of `/` as that denotes the actual project name which can be double-checked in the `workspace.json`
 
-## Generate a library
+## Move / Remove code (workspace maintenance)
 
-Run `nx g @nrwl/react:lib my-lib` to generate a library.
+1. **move** - `nx g mv --project <project-name> <new-destination>`, eg `nx g mv --project shared-ui-main-layout shared/ui-layout`, please note the `-` instead of `/` in project name as that denotes the actual project name which can be double-checked in the `workspace.json`
 
-> You can also use any of the plugins above to generate libraries as well.
+2. **remove** - `nx g rm <path>-<app-or-lib-name>`, optional `--dry-run` (to preview changes), eg `libs/admin/feature-dashboard` will be removed with `ng g rm admin-feature-dashboard`, please note the `-` instead of `/` as that denotes the actual project name which can be double-checked in the `workspace.json`
 
-Libraries are shareable across libraries and applications. They can be imported from `@workspace/mylib`.
+## Other
 
-## Development server
+### Icons
 
-Run `nx serve my-app` for a dev server. Navigate to http://localhost:4200/. The app will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `nx g @nrwl/react:component my-component --project=my-app` to generate a new component.
-
-## Build
-
-Run `nx build my-app` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `nx test my-app` to execute the unit tests via [Jest](https://jestjs.io).
-
-Run `nx affected:test` to execute the unit tests affected by a change.
-
-## Running end-to-end tests
-
-Run `ng e2e my-app` to execute the end-to-end tests via [Cypress](https://www.cypress.io).
-
-Run `nx affected:e2e` to execute the end-to-end tests affected by a change.
-
-## Understand your workspace
-
-Run `nx dep-graph` to see a diagram of the dependencies of your projects.
-
-## Further help
-
-Visit the [Nx Documentation](https://nx.dev) to learn more.
-
-
-
-## ☁ Nx Cloud
-
-### Distributed Computation Caching & Distributed Task Execution
-
-<p style="text-align: center;"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-cloud-card.png"></p>
-
-Nx Cloud pairs with Nx in order to enable you to build and test code more rapidly, by up to 10 times. Even teams that are new to Nx can connect to Nx Cloud and start saving time instantly.
-
-Teams using Nx gain the advantage of building full-stack applications with their preferred framework alongside Nx’s advanced code generation and project dependency graph, plus a unified experience for both frontend and backend developers.
-
-Visit [Nx Cloud](https://nx.app/) to learn more.
+Included icon set can be explored [here](https://fonts.google.com/icons)

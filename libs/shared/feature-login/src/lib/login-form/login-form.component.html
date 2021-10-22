@@ -1,0 +1,28 @@
+<mat-card>
+  <h2>Login</h2>
+  <form [formGroup]="loginForm" (keydown.enter)="handleSubmit()">
+    <mat-form-field appearance="outline">
+      <mat-label>Username</mat-label>
+      <input matInput formControlName="username" />
+      <mat-error *ngIf="loginForm.get('username')?.hasError('required')"
+        >Please provide username</mat-error
+      >
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Password</mat-label>
+      <input matInput type="password" formControlName="password" />
+      <mat-error *ngIf="loginForm.get('password')?.hasError('required')"
+        >Please provide password</mat-error
+      >
+    </mat-form-field>
+
+    <button
+      type="button"
+      mat-raised-button
+      color="primary"
+      (click)="handleSubmit()"
+    >
+      Log into 4Cast
+    </button>
+  </form>
+</mat-card>

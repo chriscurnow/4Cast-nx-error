@@ -1,0 +1,26 @@
+{
+  "projectType": "library",
+  "root": "libs/shared/feature-toolbar-user",
+  "sourceRoot": "libs/shared/feature-toolbar-user/src",
+  "prefix": "fourcast",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/shared/feature-toolbar-user"],
+      "options": {
+        "jestConfig": "libs/shared/feature-toolbar-user/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/shared/feature-toolbar-user/src/**/*.ts",
+          "libs/shared/feature-toolbar-user/src/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": ["scope:feature"]
+}

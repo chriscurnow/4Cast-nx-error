@@ -1,0 +1,49 @@
+@use 'sass:color';
+
+$blue: #1b75bb;
+$blue-lighter: color.adjust($blue, $lightness: +10%);
+$blue-darker: color.adjust($blue, $lightness: -10%);
+$purple: #26247b;
+$purple-lighter: color.adjust($purple, $lightness: +10%);
+$purple-darker: color.adjust($purple, $lightness: -10%);
+$text: #222222;
+$text-contrast: #fff;
+
+// css variables used for theming of own components, eg color: var(--primary)
+:root {
+  // keep in sync with $contractor-* variables in styles.scss
+  --primary: #{$blue};
+  --primary-lighter: #{$blue-lighter};
+  --primary-darker: #{$blue-darker};
+  --accent: #{$purple};
+  --accent-lighter: #{$purple-lighter};
+  --accent-darker: #{$purple-darker};
+  --text: #222222;
+  --text-contrast: #fff;
+  --contrast: #fff;
+}
+
+// material theme palletes, used for theming of angular material components
+$fourcast-blue-palette: (
+  100: $blue-lighter,
+  500: $blue,
+  700: $blue-darker,
+  text: $text,
+  contrast: (
+    100: $text-contrast,
+    500: $text-contrast,
+    700: $text-contrast,
+  ),
+);
+
+$fourcast-purple-palette: (
+  100: color.adjust($purple, $lightness: +30%),
+  500: $purple,
+  700: color.adjust($purple, $lightness: -30%),
+  text: $text,
+  contrast: (
+    100: $text-contrast,
+    500: $text-contrast,
+    700: $text-contrast,
+  ),
+);

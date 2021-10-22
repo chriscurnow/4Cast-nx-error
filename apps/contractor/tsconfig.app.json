@@ -1,0 +1,14 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "../../dist/out-tsc",
+    "types": []
+  },
+  "files": ["src/main.ts", "src/polyfills.ts"],
+  "include": [
+    "src/**/*.d.ts",
+    "../../libs/shared/feature-login/src/index.ts",
+    "../../libs/contractor/feature-dashboard/src/index.ts",
+    "../../libs/contractor/feature-costing/src/index.ts"
+  ]
+}

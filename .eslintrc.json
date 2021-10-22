@@ -1,0 +1,70 @@
+{
+  "root": true,
+  "ignorePatterns": ["**/*"],
+  "plugins": ["@nrwl/nx"],
+  "overrides": [
+    {
+      "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
+      "rules": {
+        "@nrwl/nx/enforce-module-boundaries": [
+          "error",
+          {
+            "enforceBuildableLibDependency": true,
+            "allow": [],
+            "depConstraints": [
+              {
+                "sourceTag": "scope:app",
+                "onlyDependOnLibsWithTags": [
+                  "scope:feature",
+                  "scope:data-access",
+                  "scope:ui",
+                  "scope:ui:shared",
+                  "scope:util"
+                ]
+              },
+              {
+                "sourceTag": "scope:feature",
+                "onlyDependOnLibsWithTags": [
+                  "scope:data-access",
+                  "scope:ui",
+                  "scope:ui:shared",
+                  "scope:util"
+                ]
+              },
+              {
+                "sourceTag": "scope:data-access",
+                "onlyDependOnLibsWithTags": ["scope:util"]
+              },
+              {
+                "sourceTag": "scope:ui",
+                "onlyDependOnLibsWithTags": ["scope:ui:shared", "scope:util"]
+              },
+              {
+                "sourceTag": "scope:ui:shared",
+                "onlyDependOnLibsWithTags": ["scope:ui:shared", "scope:util"]
+              },
+              {
+                "sourceTag": "scope:util",
+                "onlyDependOnLibsWithTags": ["scope:util"]
+              },
+              {
+                "sourceTag": "scope:styles",
+                "onlyDependOnLibsWithTags": []
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "files": ["*.ts", "*.tsx"],
+      "extends": ["plugin:@nrwl/nx/typescript"],
+      "rules": {}
+    },
+    {
+      "files": ["*.js", "*.jsx"],
+      "extends": ["plugin:@nrwl/nx/javascript"],
+      "rules": {}
+    }
+  ]
+}

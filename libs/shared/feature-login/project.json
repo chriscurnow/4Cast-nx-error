@@ -1,0 +1,26 @@
+{
+  "projectType": "library",
+  "root": "libs/shared/feature-login",
+  "sourceRoot": "libs/shared/feature-login/src",
+  "prefix": "fourcast",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/shared/feature-login"],
+      "options": {
+        "jestConfig": "libs/shared/feature-login/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/shared/feature-login/src/**/*.ts",
+          "libs/shared/feature-login/src/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": ["scope:feature"]
+}

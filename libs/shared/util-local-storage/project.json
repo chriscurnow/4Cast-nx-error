@@ -1,0 +1,26 @@
+{
+  "projectType": "library",
+  "root": "libs/shared/util-local-storage",
+  "sourceRoot": "libs/shared/util-local-storage/src",
+  "prefix": "fourcast",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/shared/util-local-storage"],
+      "options": {
+        "jestConfig": "libs/shared/util-local-storage/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/shared/util-local-storage/src/**/*.ts",
+          "libs/shared/util-local-storage/src/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": ["scope:util"]
+}

@@ -13,8 +13,44 @@
     "lib": ["es2017", "dom"],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
+    "strictPropertyInitialization": false,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@workspace/contractor/feature-costing": [
+        "libs/contractor/feature-costing/src/index.ts"
+      ],
+      "@workspace/contractor/feature-dashboard": [
+        "libs/contractor/feature-dashboard/src/index.ts"
+      ],
+      "@workspace/shared-ui-default-module-collection": [
+        "libs/shared/ui-default-module-collection/src/index.ts"
+      ],
+      "@workspace/shared/data-access-auth": [
+        "libs/shared/data-access-auth/src/index.ts"
+      ],
+      "@workspace/shared/data-access-user": [
+        "libs/shared/data-access-user/src/index.ts"
+      ],
+      "@workspace/shared/feature-login": [
+        "libs/shared/feature-login/src/index.ts"
+      ],
+      "@workspace/shared/feature-toolbar-user": [
+        "libs/shared/feature-toolbar-user/src/index.ts"
+      ],
+      "@workspace/shared/styles-theming": [
+        "libs/shared/styles-theming/src/index.ts"
+      ],
+      "@workspace/shared/ui-main-layout": [
+        "libs/shared/ui-main-layout/src/index.ts"
+      ],
+      "@workspace/shared/util": ["libs/shared/util/src/index.ts"],
+      "@workspace/shared/util-local-storage": [
+        "libs/shared/util-local-storage/src/index.ts"
+      ],
+      "@workspace/shared/util-testing": [
+        "libs/shared/util-testing/src/index.ts"
+      ]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }

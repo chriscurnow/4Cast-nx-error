@@ -1,4 +1,24 @@
 {
   "version": 2,
-  "projects": {}
+  "projects": {
+    "admin": "apps/admin",
+    "admin-e2e": "apps/admin-e2e",
+    "contractor": "apps/contractor",
+    "contractor-e2e": "apps/contractor-e2e",
+    "contractor-feature-costing": "libs/contractor/feature-costing",
+    "contractor-feature-dashboard": "libs/contractor/feature-dashboard",
+    "shared-data-access-auth": "libs/shared/data-access-auth",
+    "shared-data-access-user": "libs/shared/data-access-user",
+    "shared-feature-login": "libs/shared/feature-login",
+    "shared-feature-toolbar-user": "libs/shared/feature-toolbar-user",
+    "shared-ui-default-module-collection": "libs/shared/ui-default-module-collection",
+    "shared-ui-main-layout": "libs/shared/ui-main-layout",
+    "shared-util": "libs/shared/util",
+    "shared-util-local-storage": "libs/shared/util-local-storage",
+    "shared-util-testing": "libs/shared/util-testing",
+    "signup": "apps/signup",
+    "signup-e2e": "apps/signup-e2e",
+    "sub-contractor": "apps/sub-contractor",
+    "sub-contractor-e2e": "apps/sub-contractor-e2e"
+  }
 }

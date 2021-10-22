@@ -1,0 +1,26 @@
+{
+  "projectType": "library",
+  "root": "libs/shared/styles-theming",
+  "sourceRoot": "libs/shared/styles-theming/src",
+  "prefix": "fourcast",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/shared/styles-theming"],
+      "options": {
+        "jestConfig": "libs/shared/styles-theming/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/shared/styles-theming/src/**/*.ts",
+          "libs/shared/styles-theming/src/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": ["scope:styles"]
+}
