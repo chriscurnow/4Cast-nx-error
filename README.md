@@ -87,6 +87,20 @@ Any lib which will be used in more than one app should belong to `shared` group 
 
 - **remove** - `nx g rm <path>-<app-or-lib-name>`, optional `--dry-run` (to preview changes), eg `libs/admin/feature-dashboard` will be removed with `ng g rm admin-feature-dashboard`, please note the `-` instead of `/` as that denotes the actual project name which can be double-checked in the `workspace.json`
 
+## General development organization
+
+- **apps** - should be mostly containers which bring everything together but implement very little inline logic, apps should contain:
+
+  - basic Angular vendor imports like `BrowserModule`, `BrowserAnimationModule` or `HttpClientModule` so any module which registers app global singletons (never import those in lib source code (tests are ok))
+  - empty root NgRx configuration for store, effects, router store, dev tools...
+  - eager `data-access-*` libs to register NgRx state slices available globally in the whole app
+  - `ui-*` and eager `feature-*` (without lazy loading or routing) to create main layout
+  - routing which lazy loads feature libs from `libs/<app-name>/feature-<feature-name>` or from `libs/shared/feature-<feature-name>`
+
+- **libs** - should implement most of the logic
+  - app specific libs `/libs/<app-name>/<lib-type>-<lib-name` - (mostly `feature-*` for lazy loaded app features & `data-access-*` for eager and lazy NgRx data slices & services)
+  - shared libs `/libs/shared/<lib-type>-<lib-name` - shared across multiple apps, eg `ui-*` for reusable components (widgets), `data-access-*` or even whole reusable features, eg `feature-login` which is a lazy-loaded feature which may be included used in multiple apps
+
 ## State Management
 
 ### NgRx
@@ -97,7 +111,26 @@ Please see the official [docs](https://ngrx.io/docs)
 
 The state management will be implemented in the `data-access` libraries.
 
-1. generate ````
+1. generate `data-access` lib using `nx g lib <lib-group>/data-access-<lib-name>`
+2. generate `ngrx state` in the lib using `nx g ngrx <state-name> --module libs/<lib-group>/data-access-<lib-name>/src/lib/<lib-group>-data-access-<lib-name>.module.ts --useDataPersistence true`
+
+eg 
+
+1. `nx g lib contractor/data-access-contracts`
+2. `nx g ngrx contract --module libs/contractor/data-access-contracts/src/lib/contractor-data-access-contracts.module.ts --useDataPersistence true`
+
+#### NgRx Best practices
+
+- create `select<ContainerComponentName>View` selectors which provide "perfect" state for a given component so that the component can render the state with ease without need to process data further
+- combine selectors as needed
+- feature selectors CAN use eager state and hence eager state slice selectors (one way dep graph)
+- router state (path params, query params) should be always accessed with the help of the provided [router store](https://ngrx.io/guide/router-store/selectors)
+- reducers are pure functions which just update state, never any service calls or side effects
+- in general, testing of reducers & selectors is VERY simple as they are jsut pure functions unaware of Angular
+- using should dramatically simplify implementation of Angular components which should just receive state from store using `selectors` and dispatch `actions` based on user interaction
+- NgRx is very popular so there is a lot of available community resources about the topic
+- it really pays out to familiarize yourself with NgRx as the state handling is the cause of most bugs, NgRx allows us to FULLY decouple state management from the view (components)
+- do NOT use `@ngrx/data` as it's too complex and inflexible if your use cases does NOT fit it 100% put of the box
 
 ### Redux Dev Tools
 
