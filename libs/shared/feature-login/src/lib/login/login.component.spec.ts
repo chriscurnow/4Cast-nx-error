@@ -1,4 +1,8 @@
+import { RouterTestingModule } from '@angular/router/testing';
+import { MATERIAL_SANITY_CHECKS } from '@angular/material/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { SharedFeatureLoginModule } from '../shared-feature-login.module';
 
 import { LoginComponent } from './login.component';
 
@@ -8,7 +12,8 @@ describe('LoginComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [LoginComponent],
+      imports: [RouterTestingModule, SharedFeatureLoginModule],
+      providers: [{ provide: MATERIAL_SANITY_CHECKS, useValue: false }],
     }).compileComponents();
   });
 

@@ -1,15 +1,13 @@
+import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
+import { Action } from '@ngrx/store';
 import { createEffect, Actions, ofType, OnInitEffects } from '@ngrx/effects';
-import { fetch } from '@nrwl/angular';
+import { EMPTY, of } from 'rxjs';
 import { concatMap, tap } from 'rxjs/operators';
 
 import { LocalStorageService } from '@workspace/shared/util-local-storage';
 
 import * as AuthActions from './auth.actions';
-import * as AuthFeature from './auth.reducer';
-import { Action } from '@ngrx/store';
-import { EMPTY, of } from 'rxjs';
-import { Router } from '@angular/router';
 
 @Injectable()
 export class AuthEffects implements OnInitEffects {

@@ -9,7 +9,7 @@ import { UserService } from '../user.service';
 
 @Injectable()
 export class UserEffects {
-  init$ = createEffect(() =>
+  loadUser$ = createEffect(() =>
     this.dataPersistence.fetch(UserActions.loadUser, {
       run: (
         action: ReturnType<typeof UserActions.loadUser>,

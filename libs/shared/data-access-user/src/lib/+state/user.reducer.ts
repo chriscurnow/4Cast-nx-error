@@ -19,7 +19,7 @@ export const initialState: State = {
   // set initial required properties
   user: undefined,
   loaded: false,
-  error: undefined,
+  error: null,
 };
 
 const userReducer = createReducer(
@@ -35,7 +35,7 @@ const userReducer = createReducer(
     ...state,
     user,
     loaded: true,
-    error: undefined,
+    error: null,
   })),
 
   on(UserActions.loadUserFailure, (state, { error }) => ({

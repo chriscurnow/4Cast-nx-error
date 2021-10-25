@@ -1,37 +1,30 @@
-import { Action } from '@ngrx/store';
-
 import * as AuthActions from './auth.actions';
-import { AuthEntity } from './auth.models';
 import { State, initialState, reducer } from './auth.reducer';
 
 describe('Auth Reducer', () => {
-  const createAuthEntity = (id: string, name = ''): AuthEntity => ({
-    id,
-    name: name || `name-${id}`,
-  });
-
   describe('valid Auth actions', () => {
-    it('loadAuthSuccess should return the list of known Auth', () => {
-      const auth = [
-        createAuthEntity('PRODUCT-AAA'),
-        createAuthEntity('PRODUCT-zzz'),
-      ];
-      const action = AuthActions.loadAuthSuccess({ auth });
+    it('it should update token', () => {
+      const action = AuthActions.authTokenUpdate({ token: 'abc' });
 
       const result: State = reducer(initialState, action);
 
-      expect(result.loaded).toBe(true);
-      expect(result.ids.length).toBe(2);
+      expect(result.token).toBe('abc');
     });
-  });
 
-  describe('unknown action', () => {
-    it('should return the previous state', () => {
-      const action = {} as Action;
+    it('it should remove token on logout', () => {
+      const action = AuthActions.authLogout();
 
-      const result = reducer(initialState, action);
+      const result: State = reducer({ token: 'abc' }, action);
 
-      expect(result).toBe(initialState);
+      expect(result.token).toBe(undefined);
+    });
+
+    it('it should remove token on unauthorized', () => {
+      const action = AuthActions.authInterceptorUnauthorized();
+
+      const result: State = reducer({ token: 'abc' }, action);
+
+      expect(result.token).toBe(undefined);
     });
   });
 });

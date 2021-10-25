@@ -1,62 +1,27 @@
-import { AuthEntity } from './auth.models';
-import { authAdapter, AuthPartialState, initialState } from './auth.reducer';
+// [STARTER DOCS] IMPORTANT, always keep an eye on the imports
+// especially when they are auto imported by the editor
+// make sure that the local (lib local) things are imported using relative paths
+// instead of path aliases like "@workspace/<lib-name>/..."
 import * as AuthSelectors from './auth.selectors';
+import { State, AUTH_FEATURE_KEY } from './auth.reducer';
 
 describe('Auth Selectors', () => {
-  const ERROR_MSG = 'No Error Available';
-  const getAuthId = (it: AuthEntity) => it.id;
-  const createAuthEntity = (id: string, name = '') =>
-    ({
-      id,
-      name: name || `name-${id}`,
-    } as AuthEntity);
-
-  let state: AuthPartialState;
-
-  beforeEach(() => {
-    state = {
-      auth: authAdapter.setAll(
-        [
-          createAuthEntity('PRODUCT-AAA'),
-          createAuthEntity('PRODUCT-BBB'),
-          createAuthEntity('PRODUCT-CCC'),
-        ],
-        {
-          ...initialState,
-          selectedId: 'PRODUCT-BBB',
-          error: ERROR_MSG,
-          loaded: true,
-        }
-      ),
-    };
-  });
-
   describe('Auth Selectors', () => {
-    it('getAllAuth() should return the list of Auth', () => {
-      const results = AuthSelectors.getAllAuth(state);
-      const selId = getAuthId(results[1]);
+    it('selectAuthToken() should return the auth state', () => {
+      const state: State = { token: 'abc' };
+      const results = AuthSelectors.selectAuthToken({
+        [AUTH_FEATURE_KEY]: state,
+      });
 
-      expect(results.length).toBe(3);
-      expect(selId).toBe('PRODUCT-BBB');
+      expect(results).toBe('abc');
     });
+    it('selectIsAuthenticated() should return the auth state', () => {
+      const state: State = { token: 'abc' };
+      const results = AuthSelectors.selectIsAuthenticated({
+        [AUTH_FEATURE_KEY]: state,
+      });
 
-    it('getSelected() should return the selected Entity', () => {
-      const result = AuthSelectors.getSelected(state) as AuthEntity;
-      const selId = getAuthId(result);
-
-      expect(selId).toBe('PRODUCT-BBB');
-    });
-
-    it('getAuthLoaded() should return the current "loaded" status', () => {
-      const result = AuthSelectors.getAuthLoaded(state);
-
-      expect(result).toBe(true);
-    });
-
-    it('getAuthError() should return the current "error" state', () => {
-      const result = AuthSelectors.getAuthError(state);
-
-      expect(result).toBe(ERROR_MSG);
+      expect(results).toBe(true);
     });
   });
 });

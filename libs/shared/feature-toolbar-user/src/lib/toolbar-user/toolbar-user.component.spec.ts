@@ -1,4 +1,7 @@
+import { provideMockStore } from '@ngrx/store/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { SharedFeatureToolbarUserModule } from '../shared-feature-toolbar-user.module';
 
 import { ToolbarUserComponent } from './toolbar-user.component';
 
@@ -8,7 +11,8 @@ describe('ToolbarUserComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ToolbarUserComponent],
+      imports: [SharedFeatureToolbarUserModule],
+      providers: [provideMockStore()],
     }).compileComponents();
   });
 
