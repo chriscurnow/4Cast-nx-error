@@ -129,4 +129,4 @@ Included icon set can be explored [here](https://fonts.google.com/icons)
 
 ### Stay up to date
 
-- **update nx workspace** - `nx migrate latest && npm i && nx migrate --run-migrations`, [docs](https://nx.dev/l/n/core-concepts/updating-nx#updating-nx)
+- **update nx workspace** - `nx migrate latest && npm i && nx migrate --run-migrations`, its better to do updates often (or in smaller steps), [read more](https://nx.dev/l/n/core-concepts/updating-nx#updating-nx)
