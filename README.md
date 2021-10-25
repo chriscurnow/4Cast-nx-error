@@ -13,20 +13,27 @@ There are many additional inline docs in the starter source code, please search 
 Apps can be started with help of provided npm `serve:*` script, eg `npm run serve:contractor`, please add such script for every newly added application
 In case more than one app has to be started simultaneously add the `--port` flag to the serve scripts
 
-### Lint, Test & Build apps
+### Lint, Test, E2E & Build apps
 
-Following commands work for `build`, `test`, & `lint`...
+Following commands work for `build`, `test`, `e2e` & `lint`...
 
 - `npm run build:all` - force build all apps (or `npm run test:all`, ...)
 - `npm run build:affected` - build apps that are affected by the most recent change (try to keep commits small)
+
+#### E2E (end 2 end tests with cypress)
+
+- `npm run e2e:<app-name>:watch` - build & serve application, then open Cypress UI to run and see tests in action against the runnign & rendered application to develop & debug them, it is a good practice to cover main business flows with e2e tests, [nx cypress integration](https://nx.dev/l/r/cypress/overview), [cypress docs]()
+
+### Continuous Integration (CI)
+
+- `npm run ci:pull-request` - run format:check, lint, test, e2e and build on **affected projects**
+- `npm run ci:release` - run format:check, lint, test, e2e and build on **all projects**
 
 ### Other utils
 
 - `npm run deps` - run nx analyzer to visualise workspace dependencies
 - `npm run format:write` - apply prettier styles on all changed files
 - `npm run format:check` - test if all files are prettier conform
-
-
 
 ## Schematics (generate apps, libs and others)
 
@@ -72,6 +79,7 @@ Any lib which will be used in more than one app should belong to `shared` group 
 
 - **components** - `nx g c <optional-component-path>/<component-name> --project <project-name>`, eg `nx g c some-component --project shared-ui-main-navigation` will be generated in with `libs/shared/main-navigation/src/lib/some-component`, please note the `-` instead of `/` as that denotes the actual project name which can be double-checked in the `workspace.json`, for first (container) component generated in the `feature-<lib-name>` libraries with routing, the component has to be added to a route definition of that lib main module
 - **services** - `nx g s <optional-service-path>/<service-name> --project <project-name>`, eg `nx g s user --project shared-data-access-user` will be generated in with `libs/shared/data-access-user/src/lib/user-service.ts`, please note the `-` instead of `/` as that denotes the actual project name which can be double-checked in the `workspace.json`, the services are by default `providedIn: 'root'` which makes them a global singletons, the value can be switched to `any` to get instance per lazy route, if service instance is needed per component then the `providedIn: *` can be removed and service has to be added to the `providers: []` of the desired component
+- **other** - `nx g <schematics-type> <optional-path>/<name> --project <project-name>`, see list of supported [schematics](https://angular.io/cli/generate)
 
 ### Move / Remove code (workspace maintenance)
 
@@ -108,6 +116,7 @@ Apps activate dev tools with `!environment.production ? StoreDevtoolsModule.inst
 The starter uses `@angular/material` component library which needs a custom theme to apply to all the material components
 
 This is implemented in `libs/shared/styles-theming` library (see local `// [STARTER DOCS]` comments for how to change the theme)
+These styles then have to be included in every app in the `project.json` file in the `targets -> build -> options -> styles` array as the first item in the array, eg `"libs/shared/styles-theming/src/lib/styles.scss"`
 
 Besides, it is possible to use css variables to theme own components, available variables are:
 

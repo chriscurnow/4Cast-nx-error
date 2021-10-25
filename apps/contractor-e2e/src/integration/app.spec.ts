@@ -1,4 +1,4 @@
-import { getGreeting } from '../support/app.po';
+import { getAppName } from '../support/app.po';
 
 describe('contractor', () => {
   beforeEach(() => cy.visit('/'));
@@ -8,6 +8,6 @@ describe('contractor', () => {
     cy.login('my-email@something.com', 'myPassword');
 
     // Function helper example, see `../support/app.po.ts` file
-    getGreeting().contains('Welcome to contractor!');
+    getAppName().contains('4CastPro');
   });
 });
