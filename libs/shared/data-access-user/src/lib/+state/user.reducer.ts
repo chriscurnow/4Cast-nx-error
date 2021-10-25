@@ -38,7 +38,11 @@ const userReducer = createReducer(
     error: undefined,
   })),
 
-  on(UserActions.loadUserFailure, (state, { error }) => ({ ...state, error }))
+  on(UserActions.loadUserFailure, (state, { error }) => ({
+    ...state,
+    loaded: false,
+    error,
+  }))
 );
 
 export function reducer(state: State | undefined, action: Action) {

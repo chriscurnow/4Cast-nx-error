@@ -29,7 +29,8 @@ export class LoginFormComponent implements OnInit {
     });
   }
 
-  // example of a plain (simple) state management / data handling for simple  isolated logic
+  // [STARTER DOCS] example of a plain (simple) state management / data handling
+  // suitable for simple isolated features, prefer using NgRx for most features
   handleSubmit() {
     if (!this.loginForm.valid) {
       this.loginForm.markAllAsTouched();
@@ -44,6 +45,7 @@ export class LoginFormComponent implements OnInit {
         this.router.navigate(['/app']);
       },
       (error) => {
+        // [STARTER DOCS] handle errors
         // and show user error feedback
         // maybe build shared error feature
         // with its own ngrx state and actions

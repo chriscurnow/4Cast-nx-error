@@ -27,24 +27,30 @@ import { SharedFeatureToolbarUserModule } from '@workspace/shared/feature-toolba
 @NgModule({
   declarations: [AppComponent, MainNavigationComponent],
   imports: [
+    // [STARTED DOCS] following imports represent good template for other apps in the workspace
+
     // vendor
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
+
+    // ngrx
     StoreModule.forRoot(
       {
-        router: routerReducer, // provided by NgRx
+        router: routerReducer, // [STARTED DOCS] provided by NgRx
       },
       {
-        // possible to override NgRx config
-        // eg runtimeChecks
+        // [STARTED DOCS] possible to override NgRx config
+        // eg runtimeChecks https://ngrx.io/guide/store/configuration/runtime-checks
+        // sometimes some of them needs to be disabled to support cyclical data structures (serializability), but preferably NOT
       }
     ),
     EffectsModule.forRoot([]),
     StoreRouterConnectingModule.forRoot(),
 
-    // this might cause perf issues in large APPs (DEV mode only)
-    // so it might be necessary to turn it off
+    // [STARTED DOCS] this might cause perf issues in large APPs (DEV mode only)
+    // (with lots of state in its NgRx store, eg 3+ MB of data)
+    // so it might be necessary to turn it off later on
     // and only enable when debugging something specific
     !environment.production ? StoreDevtoolsModule.instrument() : [],
 
@@ -56,7 +62,7 @@ import { SharedFeatureToolbarUserModule } from '@workspace/shared/feature-toolba
     SharedUiDefaultModuleCollectionModule,
     SharedUiMainLayoutModule,
 
-    // libs features
+    // libs features (not lazy loaded)
     SharedFeatureToolbarUserModule,
 
     // routing
@@ -69,6 +75,7 @@ import { SharedFeatureToolbarUserModule } from '@workspace/shared/feature-toolba
         },
         {
           path: 'shared-feature-login',
+          // [STARTED DOCS] redirects to /app if token is available
           canActivate: [AlreadyLoggedInGuard],
           loadChildren: () =>
             import('@workspace/shared/feature-login').then(
@@ -79,6 +86,7 @@ import { SharedFeatureToolbarUserModule } from '@workspace/shared/feature-toolba
         // once authenticated
         {
           path: 'app',
+          // [STARTED DOCS] redirects to login if no token is available
           canActivate: [AuthGuard],
           component: MainNavigationComponent,
           children: [
@@ -103,10 +111,17 @@ import { SharedFeatureToolbarUserModule } from '@workspace/shared/feature-toolba
             },
           ],
         },
+        // [STARTER DOCS] catch all route, redirect to /app (and its default route)
+        // possible to provide dedicated not found page instead
+        {
+          path: '**',
+          redirectTo: 'app'
+        }
       ],
       { initialNavigation: 'enabledBlocking' }
     ),
   ],
+  // [STARTER DOCS] DataPersistence has to be provided in every app that uses NgRx
   providers: [DataPersistence],
   bootstrap: [AppComponent],
 })
