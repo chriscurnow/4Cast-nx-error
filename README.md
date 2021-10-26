@@ -57,10 +57,10 @@ The dependency tree can be validated by running `npm run lint:all` or (`npm run 
 Read more [library groups](https://nx.dev/l/a/structure/grouping-libraries), [library types](https://nx.dev/l/a/structure/library-types), [tags](https://nx.dev/l/a/structure/monorepo-tags)
 
 - **scope:feature** `nx g lib <lib-group>/feature-<lib-name> --routing --lazy --tags scope:feature --parentModule apps/<app-name>/src/app/app.module.ts` (if used in more than one app (eg when `<lib-group>` is `shared`) then copy the routing definition form the parent module of the original consumer app into all other consumers)
-- **scope:data-access** `nx g lib <lib-group>/data-access-<lib-name>`
-- **scope:ui** `nx g lib <lib-group>/ui-<lib-name>`
-- **scope:ui:shared** `nx g lib shared/ui-<lib-name>`
-- **scope:util** `nx g lib <lib-group>/util-<lib-name>`
+- **scope:data-access** `nx g lib <lib-group>/data-access-<lib-name> --tags scope:data-access`
+- **scope:ui** `nx g lib <lib-group>/ui-<lib-name> --tags scope:ui`
+- **scope:ui:shared** `nx g lib shared/ui-<lib-name> --tags scope:ui:shared`
+- **scope:util** `nx g lib <lib-group>/util-<lib-name> --tags scope:util`
 
 ### Lib groups
 
