@@ -81,6 +81,13 @@ Any lib which will be used in more than one app should belong to `shared` group 
 - **services** - `nx g s <optional-service-path>/<service-name> --project <project-name>`, eg `nx g s user --project shared-data-access-user` will be generated in with `libs/shared/data-access-user/src/lib/user-service.ts`, please note the `-` instead of `/` as that denotes the actual project name which can be double-checked in the `workspace.json`, the services are by default `providedIn: 'root'` which makes them a global singletons, the value can be switched to `any` to get instance per lazy route, if service instance is needed per component then the `providedIn: *` can be removed and service has to be added to the `providers: []` of the desired component
 - **other** - `nx g <schematics-type> <optional-path>/<name> --project <project-name>`, see list of supported [schematics](https://angular.io/cli/generate)
 
+### Add 3rd party libraries with schematics
+
+1. install the desired package manually, eg `npm i @angular/material`
+2. (optional) check the list of available schematics `nx list @angular/material`
+3. run `ng-add` schematics of the library using `nx g @angular/material:ng-add --project <app-name>`
+
+
 ### Move / Remove code (workspace maintenance)
 
 - **move** - `nx g mv --project <project-name> <new-destination>`, eg `nx g mv --project shared-ui-main-layout shared/ui-layout`, please note the `-` instead of `/` in project name as that denotes the actual project name which can be double-checked in the `workspace.json`
@@ -127,10 +134,10 @@ eg
 - router state (path params, query params) should be always accessed with the help of the provided [router store](https://ngrx.io/guide/router-store/selectors)
 - reducers are pure functions which just update state, never any service calls or side effects
 - in general, testing of reducers & selectors is VERY simple as they are jsut pure functions unaware of Angular
-- using should dramatically simplify implementation of Angular components which should just receive state from store using `selectors` and dispatch `actions` based on user interaction
+- using NgRx selectors should dramatically simplify implementation of Angular components which should just receive state from store using `selectors` and dispatch `actions` based on user interaction
 - NgRx is very popular so there is a lot of available community resources about the topic
 - it really pays out to familiarize yourself with NgRx as the state handling is the cause of most bugs, NgRx allows us to FULLY decouple state management from the view (components)
-- do NOT use `@ngrx/data` as it's too complex and inflexible if your use cases does NOT fit it 100% put of the box
+- do NOT use `@ngrx/data` as it's too complex and inflexible if your use cases does NOT fit it 100% out of the box
 
 ### Redux Dev Tools
 
