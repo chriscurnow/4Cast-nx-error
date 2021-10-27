@@ -4,7 +4,7 @@
 
 This workspace uses `@nrwl/nx` ([docs](https://nx.dev/l/a/getting-started/intro))
 
-There are many additional inline docs in the starter source code, please search for `// [STARTED DOCS]` which is the prefix for such comments
+There are many additional inline docs in the starter source code, please search for `// [STARTER DOCS]` which is the prefix for such comments
 
 ## Scripts
 
