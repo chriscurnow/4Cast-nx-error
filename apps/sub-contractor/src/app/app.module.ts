@@ -8,7 +8,18 @@ import { RouterModule } from '@angular/router';
   declarations: [AppComponent],
   imports: [
     BrowserModule,
-    RouterModule.forRoot([], { initialNavigation: 'enabledBlocking' }),
+    RouterModule.forRoot(
+      [
+        {
+          path: 'subcontractor-feature-dashboard',
+          loadChildren: () =>
+            import('@workspace/subcontractor/feature-dashboard').then(
+              (module) => module.SubcontractorFeatureDashboardModule
+            ),
+        },
+      ],
+      { initialNavigation: 'enabledBlocking' }
+    ),
   ],
   providers: [],
   bootstrap: [AppComponent],

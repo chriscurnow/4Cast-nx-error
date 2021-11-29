@@ -49,6 +49,9 @@
       ],
       "@workspace/shared/util-testing": [
         "libs/shared/util-testing/src/index.ts"
+      ],
+      "@workspace/subcontractor/feature-dashboard": [
+        "libs/subcontractor/feature-dashboard/src/index.ts"
       ]
     }
   },

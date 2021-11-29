@@ -14,14 +14,15 @@
         "polyfills": "apps/admin/src/polyfills.ts",
         "tsConfig": "apps/admin/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
-        "assets": ["apps/admin/src/favicon.ico",
-                  "apps/admin/src/assets",
-                  {
-                    "glob": "**/*",
-                    "input": "node_modules/ngx-auth-firebaseui/assets/",
-                    "output": "appsadmin/src/assets/"
-                  }
-                ],
+        "assets": [
+          "apps/admin/src/favicon.ico",
+          "apps/admin/src/assets",
+          {
+            "glob": "**/*",
+            "input": "node_modules/ngx-auth-firebaseui/assets/",
+            "output": "appsadmin/src/assets/"
+          }
+        ],
         "styles": [
           "libs/shared/styles-theming/src/lib/styles.scss",
           "apps/admin/src/styles.scss"
