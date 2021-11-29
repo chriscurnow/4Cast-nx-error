@@ -20,6 +20,7 @@
     "signup-e2e": "apps/signup-e2e",
     "sub-contractor": "apps/sub-contractor",
     "sub-contractor-e2e": "apps/sub-contractor-e2e",
+    "subcontractor-feature-contracts": "libs/subcontractor/feature-contracts",
     "subcontractor-feature-dashboard": "libs/subcontractor/feature-dashboard"
   }
 }

@@ -17,6 +17,13 @@ import { RouterModule } from '@angular/router';
               (module) => module.SubcontractorFeatureDashboardModule
             ),
         },
+        {
+          path: 'subcontractor-feature-contracts',
+          loadChildren: () =>
+            import('@workspace/subcontractor/feature-contracts').then(
+              (module) => module.SubcontractorFeatureContractsModule
+            ),
+        },
       ],
       { initialNavigation: 'enabledBlocking' }
     ),

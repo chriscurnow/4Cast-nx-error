@@ -50,6 +50,9 @@
       "@workspace/shared/util-testing": [
         "libs/shared/util-testing/src/index.ts"
       ],
+      "@workspace/subcontractor/feature-contracts": [
+        "libs/subcontractor/feature-contracts/src/index.ts"
+      ],
       "@workspace/subcontractor/feature-dashboard": [
         "libs/subcontractor/feature-dashboard/src/index.ts"
       ]
