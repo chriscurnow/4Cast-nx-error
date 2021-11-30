@@ -1,7 +1,7 @@
 import { Action } from '@ngrx/store';
 
-import * as ContractActions from './contract.actions';
-import { ContractEntity } from './contract.models';
+import * as ContractActions from '../actions/contract.actions';
+import { ContractEntity } from '../contract.models';
 import { State, initialState, reducer } from './contract.reducer';
 
 describe('Contract Reducer', () => {

@@ -3,7 +3,7 @@ import {
   CONTRACT_FEATURE_KEY,
   State,
   contractAdapter,
-} from './contract.reducer';
+} from './reducers/contract.reducer';
 
 // Lookup the 'Contract' feature state managed by NgRx
 export const getContractState =
@@ -21,7 +21,7 @@ export const getContractError = createSelector(
   (state: State) => state.error
 );
 
-export const getAllContract = createSelector(getContractState, (state: State) =>
+export const getAllContracts = createSelector(getContractState, (state: State) =>
   selectAll(state)
 );
 

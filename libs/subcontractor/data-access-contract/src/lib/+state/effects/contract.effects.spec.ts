@@ -6,7 +6,7 @@ import { NxModule, DataPersistence } from '@nrwl/angular';
 import { hot } from '@nrwl/angular/testing';
 import { Observable } from 'rxjs';
 
-import * as ContractActions from './contract.actions';
+import * as ContractActions from '../actions/contract.actions';
 import { ContractEffects } from './contract.effects';
 
 describe('ContractEffects', () => {
