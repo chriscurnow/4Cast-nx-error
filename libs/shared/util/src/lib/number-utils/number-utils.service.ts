@@ -5,9 +5,9 @@ import { Injectable } from '@angular/core';
 })
 export class NumberUtilsService {
 
-  constructor() { }
 
-  public stringToLongNumber(val: string): number {
+
+  public stringToLongNumber(val: string): number | null{
     const longNumber = 0;
     if (val) {
     val = val.replace(/[^0-9 .]/g, ''); // remove all non-numbers except the decimal point
@@ -43,7 +43,8 @@ export class NumberUtilsService {
 
     return longAmount;
   } else {
-    return null;
+    const result: number | null = null
+    return result;
   }
   }
 
@@ -77,9 +78,12 @@ export class NumberUtilsService {
   public subtract(n1: string, n2: string): string {
     const num1 = this.stringToLongNumber(n1); // previously multiplied by 100 but stringToLongNumber already returns whole number
     const num2 = this.stringToLongNumber(n2); // ditto
-    const diff = (num1 - num2) / 100;
-
-    return diff.toString();
+    if (num1 && num2) {
+      const diff = (num1 - num2) / 100;
+       return diff.toString();
+    } else {
+      return 'NaN';
+    }
   }
 
   /**
@@ -93,9 +97,13 @@ export class NumberUtilsService {
   public divide(n1: string, n2: string) {
     const num1 = this.stringToLongNumber(n1);
     const num2 = this.stringToLongNumber(n2);
-    const result = num1 / num2;
-    const rounded = Math.round(result * 100) / 100;
-    return rounded.toString();
+    if (num1 && num2) {
+      const result = num1 / num2;
+      const rounded = Math.round(result * 100) / 100;
+      return rounded.toString();
+    } else {
+      return 'NaN';
+    }
   }
 
   /**
@@ -129,8 +137,13 @@ export class NumberUtilsService {
   public percentOf(n1: string, n2: string) {
     const num1 = this.stringToLongNumber(n1);
     const num2 = this.stringToLongNumber(n2);
-    const num = (num1 * num2) / 100;
-    const result =  Math.round(num);
-    return result.toString();
+    if (num1 && num2) {
+      const num = (num1 * num2) / 100;
+      const result = Math.round(num);
+      return result.toString();
+    } else {
+      return 'NaN';
+    }
+
   }
 }

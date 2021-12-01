@@ -1,3 +1,5 @@
+/* eslint-disable @angular-eslint/directive-selector */
+/* eslint-disable no-prototype-builtins */
 import {Directive, ElementRef, forwardRef, HostListener, Input, Output, EventEmitter} from '@angular/core';
 import {MAT_INPUT_VALUE_ACCESSOR} from '@angular/material/input';
 import {NG_VALUE_ACCESSOR} from '@angular/forms';
@@ -24,6 +26,7 @@ export class CurrencyDirective {
   private internalReadOnly = false;
 
   // tslint:disable-next-line: no-output-on-prefix
+  // eslint-disable-next-line @angular-eslint/no-output-on-prefix
   @Output() onChange = new EventEmitter<Currency>();
 
 
@@ -36,6 +39,7 @@ export class CurrencyDirective {
     return this.internalValue;
   }
 
+  // eslint-disable-next-line @angular-eslint/no-input-rename
   @Input('value')
   set value(value: Currency | null) {
     this.internalValue = value;
@@ -45,7 +49,7 @@ export class CurrencyDirective {
 
 
   private formatValue(value: any) {
-    let dVal: Dinero.Dinero = null;
+    let dVal: Dinero.Dinero | null = null;
     let displayValue = '';
 
 
@@ -68,7 +72,12 @@ export class CurrencyDirective {
 
       case (value.hasOwnProperty('getAmount')):
         dVal = value;
-        displayValue = dVal.toFormat('0,0.00');
+        if(dVal) {
+          displayValue = dVal.toFormat('0,0.00');
+        } else {
+          displayValue = '';
+        }
+
         break;
 
       default :
@@ -105,7 +114,7 @@ get readonly() {
   }
 
   @HostListener('input', ['$event.target.value'])
-  onInput(value) {
+  onInput(value: any) {
     this.internalValue = stringToDinero(value);
     // console.log('%cHost Listener, onInput value, internalValue', 'color:purple', value, this.internalValue);
     // here we cut any non numerical symbols
@@ -128,6 +137,9 @@ get readonly() {
     const value = this.elementRef.nativeElement.value;
 
     this.internalValue = stringToDinero(value);
+    if (!this.internalValue){
+      this.internalValue = new Currency();
+    }
     this.onChange.emit(this.internalValue);
   }
 
@@ -139,6 +151,7 @@ get readonly() {
 
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   _onChange(value: any): void {
 
   }
@@ -153,6 +166,7 @@ get readonly() {
     this._onChange = fn;
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   registerOnTouched() {
   }
 

@@ -176,18 +176,28 @@ public toPlainObject() {
     }
 
     public subtract(value: Currency) {
-      const newValue = this.dinero.subtract(value.dinero);
-      return Currency.dineroToCurrency(newValue);
+      if(value && value.dinero && this.dinero) {
+        const newValue = this.dinero.subtract(value.dinero);
+        return Currency.dineroToCurrency(newValue);
+      }
+      else return new Currency();
+
     }
 
     public add(value: Currency): Currency {
-      const newValue = this.dinero.add(value.dinero);
-      return Currency.dineroToCurrency(newValue);
+      if(this.dinero && value && value.dinero) {
+        const dineroValue = this.dinero
+        const newValue = dineroValue.add(value.dinero);
+        return Currency.dineroToCurrency(newValue);
+      } else {
+        return new Currency();
+      }
+
     }
 
   }
 
-export function stringToDinero(x: any): Currency {
+export function stringToDinero(x: any): Currency | null{
 
     if (x) {
       // console.log('Helpers stringToDinero, x', x)
@@ -220,7 +230,8 @@ export function stringToDinero(x: any): Currency {
       }
 
     } else {
-      return null;
+      const result: Currency | null = null;
+      return result;
     }
 
   }
