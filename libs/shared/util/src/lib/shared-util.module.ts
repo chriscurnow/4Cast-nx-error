@@ -1,7 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { CurrencyUtilitiesModule } from './currency-utilities';
+
 
 @NgModule({
-  imports: [CommonModule],
+
+  imports: [CommonModule,
+            CurrencyUtilitiesModule],
+
 })
 export class SharedUtilModule {}
+
+export * from './date-utils';
+export * from './number-utils/number-utils.service';
