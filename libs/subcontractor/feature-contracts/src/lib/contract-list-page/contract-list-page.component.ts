@@ -75,8 +75,9 @@ export class ContractListPageComponent implements OnInit {
   formatDate(date: any): string {
     // const returnValue = this.dateUtils.setDate(date);
     // return returnValue;
-
+  console.log('Format Date');
     if (date) {
+
       return DateUtilsService.formatDate(date);
     } else {
       return '';
