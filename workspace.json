@@ -3,11 +3,14 @@
   "projects": {
     "admin": "apps/admin",
     "admin-e2e": "apps/admin-e2e",
+    "books": "apps/books",
+    "books-e2e": "apps/books-e2e",
     "contractor": "apps/contractor",
     "contractor-e2e": "apps/contractor-e2e",
     "contractor-feature-costing": "libs/contractor/feature-costing",
     "contractor-feature-dashboard": "libs/contractor/feature-dashboard",
     "shared-data-access-auth": "libs/shared/data-access-auth",
+    "shared-data-access-ngrx-default-module-collection": "libs/shared/data-access-ngrx-default-module-collection",
     "shared-data-access-user": "libs/shared/data-access-user",
     "shared-feature-login": "libs/shared/feature-login",
     "shared-feature-toolbar-user": "libs/shared/feature-toolbar-user",
@@ -19,6 +22,10 @@
     "signup": "apps/signup",
     "signup-e2e": "apps/signup-e2e",
     "sub-contractor": "apps/sub-contractor",
-    "sub-contractor-e2e": "apps/sub-contractor-e2e"
+    "sub-contractor-e2e": "apps/sub-contractor-e2e",
+    "subcontractor-data-access-conbtracts": "libs/subcontractor/data-access-conbtracts",
+    "subcontractor-data-access-contract": "libs/subcontractor/data-access-contract",
+    "subcontractor-feature-contracts": "libs/subcontractor/feature-contracts",
+    "subcontractor-feature-dashboard": "libs/subcontractor/feature-dashboard"
   }
 }

@@ -1,0 +1,26 @@
+{
+  "projectType": "library",
+  "root": "libs/subcontractor/data-access-contract",
+  "sourceRoot": "libs/subcontractor/data-access-contract/src",
+  "prefix": "fourcast",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/subcontractor/data-access-contract"],
+      "options": {
+        "jestConfig": "libs/subcontractor/data-access-contract/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/subcontractor/data-access-contract/src/**/*.ts",
+          "libs/subcontractor/data-access-contract/src/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": ["scope:data-access"]
+}

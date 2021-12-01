@@ -7,6 +7,7 @@
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
     "importHelpers": true,
     "target": "es2015",
     "module": "esnext",
@@ -27,6 +28,9 @@
       ],
       "@workspace/shared/data-access-auth": [
         "libs/shared/data-access-auth/src/index.ts"
+      ],
+      "@workspace/shared/data-access-ngrx-default-module-collection": [
+        "libs/shared/data-access-ngrx-default-module-collection/src/index.ts"
       ],
       "@workspace/shared/data-access-user": [
         "libs/shared/data-access-user/src/index.ts"
@@ -49,6 +53,18 @@
       ],
       "@workspace/shared/util-testing": [
         "libs/shared/util-testing/src/index.ts"
+      ],
+      "@workspace/subcontractor/data-access-conbtracts": [
+        "libs/subcontractor/data-access-conbtracts/src/index.ts"
+      ],
+      "@workspace/subcontractor/data-access-contract": [
+        "libs/subcontractor/data-access-contract/src/index.ts"
+      ],
+      "@workspace/subcontractor/feature-contracts": [
+        "libs/subcontractor/feature-contracts/src/index.ts"
+      ],
+      "@workspace/subcontractor/feature-dashboard": [
+        "libs/subcontractor/feature-dashboard/src/index.ts"
       ]
     }
   },
