@@ -6,20 +6,20 @@ import { ContractEntity, Contract } from '../contract.models';
 
 export const CONTRACT_FEATURE_KEY = 'contract';
 
-export interface State extends EntityState<Contract> {
+export interface ContractState extends EntityState<Contract> {
   selectedId?: string | number; // which Contract record has been selected
   loaded: boolean; // has the Contract list been loaded
   error?: string | null; // last known error (if any)
 }
 
-export interface ContractPartialState {
-  readonly [CONTRACT_FEATURE_KEY]: State;
+export interface ContractPartialContractState {
+  readonly [CONTRACT_FEATURE_KEY]: ContractState;
 }
 
 export const contractAdapter: EntityAdapter<Contract> =
   createEntityAdapter<Contract>();
 
-export const initialState: State = contractAdapter.getInitialState({
+export const initialContractState: ContractState = contractAdapter.getInitialState({
   // set initial required properties
   selectedId: '',
   loaded: false,
@@ -27,7 +27,7 @@ export const initialState: State = contractAdapter.getInitialState({
 });
 
 const contractReducer = createReducer(
-  initialState,
+  initialContractState,
   on(ContractActions.init, (state) => ({
     ...state,
     loaded: false,
@@ -50,7 +50,7 @@ const contractReducer = createReducer(
   }))
 );
 
-export function reducer(state: State | undefined, action: Action) {
+export function reducer(state: ContractState | undefined, action: Action) {
   return contractReducer(state, action);
 }
 

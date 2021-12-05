@@ -3,7 +3,7 @@ import {
   CONTRACT_FEATURE_KEY,
   State,
   contractAdapter,
-} from './reducers/contract.reducer';
+} from '../reducers/contract.reducer';
 
 // Lookup the 'Contract' feature state managed by NgRx
 export const getContractState =
