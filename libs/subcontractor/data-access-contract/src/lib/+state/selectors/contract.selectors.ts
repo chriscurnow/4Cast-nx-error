@@ -1,41 +1,41 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import {
   CONTRACT_FEATURE_KEY,
-  State,
+  ContractState,
   contractAdapter,
 } from '../reducers/contract.reducer';
 
 // Lookup the 'Contract' feature state managed by NgRx
 export const getContractState =
-  createFeatureSelector<State>(CONTRACT_FEATURE_KEY);
+  createFeatureSelector<ContractState>(CONTRACT_FEATURE_KEY);
 
 const { selectAll, selectEntities } = contractAdapter.getSelectors();
 
 export const getContractLoaded = createSelector(
   getContractState,
-  (state: State) => state.loaded
+  (state: ContractState) => state.loaded
 );
 
 export const getContractError = createSelector(
   getContractState,
-  (state: State) => state.error
+  (state: ContractState) => state.error
 );
 
-export const getAllContracts = createSelector(getContractState, (state: State) =>
+export const getAllContracts = createSelector(getContractState, (state: ContractState) =>
   selectAll(state)
 );
 
 export const getContractEntities = createSelector(
   getContractState,
-  (state: State) => selectEntities(state)
+  (state: ContractState) => selectEntities(state)
 );
 
 export const getSelectedId = createSelector(
   getContractState,
-  (state: State) => state.selectedId
+  (state: ContractState) => state.selectedId
 );
 
-export const getSelected = createSelector(
+export const selectContract = createSelector(
   getContractEntities,
   getSelectedId,
   (entities, selectedId) => (selectedId ? entities[selectedId] : undefined)
