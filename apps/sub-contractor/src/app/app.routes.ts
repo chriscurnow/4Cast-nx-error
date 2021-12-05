@@ -1,11 +1,19 @@
 import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { RouterModule, ExtraOptions } from '@angular/router';
 import { MainNavigationComponent } from './main-navigation/main-navigation.component';
 import {
   AlreadyLoggedInGuard,
   AuthGuard,
   SharedDataAccessAuthModule,
 } from '@workspace/shared/data-access-auth';
+
+
+export const routingConfiguration: ExtraOptions = {
+  paramsInheritanceStrategy: 'always',
+  enableTracing: true,
+  relativeLinkResolution: 'corrected',
+  initialNavigation: 'enabledBlocking'
+};
 
 @NgModule({
   imports: [
@@ -47,6 +55,7 @@ import {
                 ),
             },
           ],
+
         },
         // [STARTER DOCS] catch all route, redirect to /app (and its default route)
         // possible to provide dedicated not found page instead
@@ -55,7 +64,8 @@ import {
           redirectTo: 'app',
         },
       ],
-      { initialNavigation: 'enabledBlocking' }
+      routingConfiguration
+
     ),
   ],
 })
