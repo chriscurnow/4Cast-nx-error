@@ -8,6 +8,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { MatTable } from '@angular/material/table';
 
+// export const selectAllContracts = createSelector(selectContractState, (state: State) =>
 
 import { selectAllContracts } from '@workspace/subcontractor/data-access-contract';
 import { CurrencyInterface, Currency } from '@workspace/shared/util'
