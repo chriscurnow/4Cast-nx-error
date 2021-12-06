@@ -12,6 +12,7 @@ import { Observable } from 'rxjs';
 })
 export class ContractDetailComponent  {
 contract$ = this.store.select(selectContract);
+contractId: string;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -20,6 +21,7 @@ contract$ = this.store.select(selectContract);
     this.contract$
     .subscribe(contract => {
       console.log('CONTRACT DETAIL contract', contract)
+      this.contractId =  contract ? contract.id : '';
     })
    }
 
