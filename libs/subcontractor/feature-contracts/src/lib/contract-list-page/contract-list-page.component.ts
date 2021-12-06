@@ -9,7 +9,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTable } from '@angular/material/table';
 
 
-import { getAllContracts } from '@workspace/subcontractor/data-access-contract';
+import { selectAllContracts } from '@workspace/subcontractor/data-access-contract';
 import { CurrencyInterface, Currency } from '@workspace/shared/util'
 import { DateUtilsService } from '@workspace/shared/util';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -46,7 +46,7 @@ export class ContractListPageComponent implements OnInit {
   constructor(private store: Store,
               private router: Router,
               private route: ActivatedRoute) {
-    this.contracts$ = store.select(getAllContracts);
+    this.contracts$ = store.select(selectAllContracts);
     this.contracts$.subscribe((res) => {
       this.filteredSubcontracts = res;
       this.subcontracts = res;

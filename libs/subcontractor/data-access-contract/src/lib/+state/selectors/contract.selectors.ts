@@ -69,7 +69,7 @@ export const getSelectedId = createSelector(
 export const selectContract = createSelector(
   selectContractEntities,
   selectRouteParams,
-  (contracts, { id }) => contracts[id]
+  (entities, { id }) => entities[id]
   // INTERESTING, note exmaple uses cars where our original used entities. Are they the same thing?
   // getSelectedId,
   // (entities, selectedId) => (selectedId ? entities[selectedId] : undefined)
