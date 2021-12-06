@@ -6,18 +6,27 @@ import { ContractEntity, Contract } from '../contract.models';
 
 export const CONTRACT_FEATURE_KEY = 'contract';
 
+// export type CarState = EntityState<Car>;
+
 export interface ContractState extends EntityState<Contract> {
   selectedId?: string | number; // which Contract record has been selected
   loaded: boolean; // has the Contract list been loaded
   error?: string | null; // last known error (if any)
 }
 
-export interface ContractPartialContractState {
+export interface ContractPartialState {
   readonly [CONTRACT_FEATURE_KEY]: ContractState;
 }
 
-export const contractAdapter: EntityAdapter<Contract> =
-  createEntityAdapter<Contract>();
+// export const carAdapter = createEntityAdapter<Car>({
+//   selectId: car => car.id,
+// });
+
+export const contractAdapter: EntityAdapter<Contract> = createEntityAdapter<Contract>({
+  selectId: contract => contract.id, // new line from example
+});
+
+// const initialState = carAdapter.getInitialState();
 
 export const initialContractState: ContractState = contractAdapter.getInitialState({
   // set initial required properties
@@ -25,6 +34,14 @@ export const initialContractState: ContractState = contractAdapter.getInitialSta
   loaded: false,
   error: null
 });
+
+// export const reducer = createReducer<CarState>(
+//   initialState,
+//   on(appInit, (state, { cars }) => carAdapter.addMany(cars, state))
+// );
+
+// the following is a bit different to the example but I don't think it
+// matters.
 
 const contractReducer = createReducer(
   initialContractState,
