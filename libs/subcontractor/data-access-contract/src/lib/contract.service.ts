@@ -24,4 +24,10 @@ export class ContractService {
         })
       );
   }
+
+  getContract(id: string) {
+    return this.afs
+    .doc<Contract>(`subcontracts/${id}`)
+    .valueChanges();
+  }
 }

@@ -1,11 +1,16 @@
 import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { RouterModule, ExtraOptions } from '@angular/router';
 import { MainNavigationComponent } from './main-navigation/main-navigation.component';
 import {
   AlreadyLoggedInGuard,
   AuthGuard,
   SharedDataAccessAuthModule,
 } from '@workspace/shared/data-access-auth';
+
+const routerConfig: ExtraOptions = {
+  initialNavigation: 'enabledBlocking',
+  enableTracing: false
+}
 
 @NgModule({
   imports: [
@@ -55,7 +60,7 @@ import {
           redirectTo: 'app',
         },
       ],
-      { initialNavigation: 'enabledBlocking' }
+      routerConfig
     ),
   ],
 })

@@ -13,13 +13,15 @@ import { ContractDetailComponent } from './contract-detail/contract-detail.compo
     SubcontractorDataAccessContractModule,
     SharedUiDefaultModuleCollectionModule,
     RouterModule.forChild([
-      {path: '', redirectTo: 'contracts-list', pathMatch: 'full'},
-      { path: 'contracts-list', component: ContractListPageComponent},
-      { path: 'contract-detail/:contractId', component: ContractDetailComponent}
+      { path: '', redirectTo: 'contracts-list', pathMatch: 'full' },
+      { path: 'contracts-list', component: ContractListPageComponent },
+      {
+        path: 'contract-detail/:contractId',
+        component: ContractDetailComponent,
+      },
     ]),
   ],
-  declarations: [
-    ContractListPageComponent
-  ],
+  declarations: [ContractListPageComponent, ContractDetailComponent],
+  exports: [ContractListPageComponent, ContractDetailComponent],
 })
 export class SubcontractorFeatureContractsModule {}
