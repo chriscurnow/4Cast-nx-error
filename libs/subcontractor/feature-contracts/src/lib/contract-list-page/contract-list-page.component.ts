@@ -13,6 +13,7 @@ import { MatTable } from '@angular/material/table';
 import { selectAllContracts } from '@workspace/subcontractor/data-access-contract';
 import { CurrencyInterface, Currency } from '@workspace/shared/util'
 import { DateUtilsService } from '@workspace/shared/util';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 @Component({
@@ -43,7 +44,9 @@ export class ContractListPageComponent implements OnInit {
     'revised',
   ];
 
-  constructor(private store: Store) {
+  constructor(private store: Store,
+              private router: Router,
+              private route: ActivatedRoute ) {
     this.contracts$ = store.select(selectAllContracts);
     this.contracts$.subscribe((res) => {
       this.filteredSubcontracts = res;
@@ -87,5 +90,6 @@ export class ContractListPageComponent implements OnInit {
 
   rowClicked(row: any) {
     console.log('row clicked', row);
+    this.router.navigate(['../contract-detail', row.id], {relativeTo: this.route})
   }
 }

@@ -5,20 +5,23 @@ import { map } from 'rxjs/operators';
 import { Contract } from '..';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ContractService {
+  constructor(private afs: AngularFirestore) {}
 
-
-
-  constructor(private afs: AngularFirestore) {
-  }
-
+  // afs.collection('items', ref => ref.where('size', '==', 'large'))
   getContracts() {
-    return this.afs.collection<Contract>('subcontracts').valueChanges()
-    .pipe(map(contracts => {
-      console.log(contracts);
-      return contracts;
-    }))
+    return this.afs
+      .collection<Contract>('subcontracts', (ref) =>
+        ref.where('supplier.id', '==', '246A06AEBC2345478A6301D3A6490B0E')
+      )
+      .valueChanges()
+      .pipe(
+        map((contracts) => {
+          console.log('CONTRACT SERVICE',contracts);
+          return contracts;
+        })
+      );
   }
 }
