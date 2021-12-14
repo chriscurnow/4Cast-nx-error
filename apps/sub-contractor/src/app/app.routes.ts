@@ -7,10 +7,13 @@ import {
   SharedDataAccessAuthModule,
 } from '@workspace/shared/data-access-auth';
 
-const routerConfig: ExtraOptions = {
-  initialNavigation: 'enabledBlocking',
-  enableTracing: false
-}
+
+export const routingConfiguration: ExtraOptions = {
+  paramsInheritanceStrategy: 'always',
+  enableTracing: true,
+  relativeLinkResolution: 'corrected',
+  initialNavigation: 'enabledBlocking'
+};
 
 @NgModule({
   imports: [
@@ -52,6 +55,7 @@ const routerConfig: ExtraOptions = {
                 ),
             },
           ],
+
         },
         // [STARTER DOCS] catch all route, redirect to /app (and its default route)
         // possible to provide dedicated not found page instead
@@ -60,7 +64,8 @@ const routerConfig: ExtraOptions = {
           redirectTo: 'app',
         },
       ],
-      routerConfig
+      routingConfiguration
+
     ),
   ],
 })

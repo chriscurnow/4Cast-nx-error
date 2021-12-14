@@ -15,13 +15,9 @@ import { ContractDetailComponent } from './contract-detail/contract-detail.compo
     RouterModule.forChild([
       { path: '', redirectTo: 'contracts-list', pathMatch: 'full' },
       { path: 'contracts-list', component: ContractListPageComponent },
-      {
-        path: 'contract-detail/:contractId',
-        component: ContractDetailComponent,
-      },
+      { path: 'contract-detail/:contractId', component: ContractDetailComponent},
     ]),
   ],
-  declarations: [ContractListPageComponent, ContractDetailComponent],
-  exports: [ContractListPageComponent, ContractDetailComponent],
+  declarations: [ContractListPageComponent],
 })
 export class SubcontractorFeatureContractsModule {}

@@ -46,7 +46,7 @@ export class ContractListPageComponent implements OnInit {
 
   constructor(private store: Store,
               private router: Router,
-              private route: ActivatedRoute ) {
+              private route: ActivatedRoute) {
     this.contracts$ = store.select(selectAllContracts);
     this.contracts$.subscribe((res) => {
       this.filteredSubcontracts = res;
@@ -90,6 +90,6 @@ export class ContractListPageComponent implements OnInit {
 
   rowClicked(row: any) {
     console.log('row clicked', row);
-    this.router.navigate(['../contract-detail', row.id], {relativeTo: this.route})
+    this.router.navigate(['../contract-detail', row.id], {relativeTo: this.route} )
   }
 }
