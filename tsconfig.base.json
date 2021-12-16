@@ -54,9 +54,6 @@
       "@workspace/shared/util-testing": [
         "libs/shared/util-testing/src/index.ts"
       ],
-      "@workspace/subcontractor/data-access-conbtracts": [
-        "libs/subcontractor/data-access-conbtracts/src/index.ts"
-      ],
       "@workspace/subcontractor/data-access-contract": [
         "libs/subcontractor/data-access-contract/src/index.ts"
       ],
