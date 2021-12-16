@@ -6,7 +6,7 @@ import { map } from 'rxjs/operators';
 import * as ContractActions from '../actions/contract.actions';
 import * as ContractFeature from '../reducers/contract.reducer';
 import { ActivatedRouteSnapshot } from '@angular/router';
-import { ContractDetailComponent} from '@workspace/subcontractor/feature-contracts'
+
 
 
 @Injectable()
@@ -54,34 +54,36 @@ export class ContractEffects {
     })
   );
 
-  loadContract$ = createEffect(() =>
-    this.actions$.pipe(
-      // listens for the routerNavigation action from @ngrx/router-store
-      navigation(ContractDetailComponent, {
-        run: (activatedRouteSnapshot: ActivatedRouteSnapshot) => {
-          const id = activatedRouteSnapshot.params['contractId'];
-          console.log('loadContract effect contractId', id)
-          return this.contractService
-            .getContract(id)
-            .pipe(
-              map((contract) => ({
-                type: "LOAD_CONTRACT_SUCCESS",
-                contract: contract,
-              }))
-            );
-        },
 
-        onError: (
-          activatedRouteSnapshot: ActivatedRouteSnapshot,
-          error: any
-        ) => {
-          // we can log and error here and return null
-          // we can also navigate back
-          return null;
-        },
-      })
-    )
-  );
+  // TODO: loadContract$ effect introduces circular dependency
+  // loadContract$ = createEffect(() =>
+  //   this.actions$.pipe(
+  //     // listens for the routerNavigation action from @ngrx/router-store
+  //     navigation(ContractDetailComponent, {
+  //       run: (activatedRouteSnapshot: ActivatedRouteSnapshot) => {
+  //         const id = activatedRouteSnapshot.params['contractId'];
+  //         console.log('loadContract effect contractId', id)
+  //         return this.contractService
+  //           .getContract(id)
+  //           .pipe(
+  //             map((contract) => ({
+  //               type: "LOAD_CONTRACT_SUCCESS",
+  //               contract: contract,
+  //             }))
+  //           );
+  //       },
+
+  //       onError: (
+  //         activatedRouteSnapshot: ActivatedRouteSnapshot,
+  //         error: any
+  //       ) => {
+  //         // we can log and error here and return null
+  //         // we can also navigate back
+  //         return null;
+  //       },
+  //     })
+  //   )
+  // );
 
   //   this.actions$.pipe(
   //     // listens for the routerNavigation action from @ngrx/router-store

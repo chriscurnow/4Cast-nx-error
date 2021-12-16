@@ -32,7 +32,7 @@ describe('ContractEffects', () => {
       actions = hot('-a-|', { a: ContractActions.init() });
 
       const expected = hot('-a-|', {
-        a: ContractActions.loadContractSuccess({ contract: [] }),
+        a: ContractActions.loadContractSuccess({ contract: {id: '0', name: ''} }),
       });
 
       expect(effects.init$).toBeObservable(expected);
