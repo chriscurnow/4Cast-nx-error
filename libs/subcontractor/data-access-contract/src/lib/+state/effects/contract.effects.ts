@@ -21,35 +21,35 @@ export class ContractEffects {
           .getContracts()
           .pipe(
             map((contracts) =>
-              ContractActions.loadContractsSuccess({ contracts })
+              ContractActions.loadContractsListSuccess({ contracts })
             )
           );
         // Your custom service 'load' logic goes here. For now just return a success action...
       },
       onError: (action: ReturnType<typeof ContractActions.init>, error) => {
         console.error('Error', error);
-        return ContractActions.loadContractsFailure({ error });
+        return ContractActions.loadContractsListFailure({ error });
       },
     })
   );
 
-    loadContracts$ = createEffect(() =>
-    this.dataPersistence.fetch(ContractActions.loadContracts, {
+    loadContractsList$ = createEffect(() =>
+    this.dataPersistence.fetch(ContractActions.loadContractsList, {
       run: (
-        action: ReturnType<typeof ContractActions.loadContracts >,
+        action: ReturnType<typeof ContractActions.loadContractsList >,
         state: ContractFeature.ContractPartialState
       ) => {
         return this.contractService
           .getContracts()
           .pipe(
             map((contracts) =>
-              ContractActions.loadContractsSuccess({ contracts })
+              ContractActions.loadContractsListSuccess({ contracts })
             )
           );
       },
-      onError: (action: ReturnType<typeof ContractActions.loadContracts>, error) => {
+      onError: (action: ReturnType<typeof ContractActions.loadContractsList>, error) => {
         console.error('Error', error);
-        return ContractActions.loadContractsFailure({ error });
+        return ContractActions.loadContractsListFailure({ error });
       },
     })
   );
@@ -93,7 +93,7 @@ export class ContractEffects {
   //           .getContract(activatedRouteSnapshot.params['contractId'])
   //           .pipe(
   //             map((contract) => ({
-  //               type: ContractActions.loadContractSuccess,
+  //               type: ContractActions.loadContractsListuccess,
   //               contract: contract,
   //             }))
   //           );

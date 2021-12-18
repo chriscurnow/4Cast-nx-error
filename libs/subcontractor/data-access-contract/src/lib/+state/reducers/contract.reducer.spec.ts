@@ -13,12 +13,12 @@ import { ContractState, initialContractState, reducer } from './contract.reducer
 //   });
 
 //   describe('valid Contract actions', () => {
-//     it('loadContractSuccess should return the list of known Contract', () => {
+//     it('loadContractsListuccess should return the list of known Contract', () => {
 //       const contract = [
 //         createContractEntity('PRODUCT-AAA'),
 //         createContractEntity('PRODUCT-zzz'),
 //       ];
-//       const action = ContractActions.loadContractSuccess({ contract });
+//       const action = ContractActions.loadContractsListuccess({ contract });
 
 //       const result: State = reducer(initialState, action);
 

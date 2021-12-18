@@ -18,7 +18,7 @@
 //             .getContract(activatedRouteSnapshot.params['contractId'])
 //             .pipe(
 //               map((contract) => ({
-//                 type: ContractActions.loadContractSuccess.name,
+//                 type: ContractActions.loadContractsListuccess.name,
 //                 contract: contract,
 //               }))
 //             );

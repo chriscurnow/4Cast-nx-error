@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { loadContracts, Contract } from '@workspace/subcontractor/data-access-contract';
+import { loadContractsList, Contract } from '@workspace/subcontractor/data-access-contract';
 import { Observable } from 'rxjs';
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatPaginator } from '@angular/material/paginator';
@@ -47,21 +47,22 @@ export class ContractListPageComponent implements OnInit {
   constructor(private store: Store,
               private router: Router,
               private route: ActivatedRoute) {
-    this.contracts$ = store.select(selectAllContracts);
-    this.contracts$.subscribe((res) => {
-      this.filteredSubcontracts = res;
-      this.subcontracts = res;
-      this.dataSource = new MatTableDataSource(res);
-      this.dataSource.sort = this.sort;
-      console.log('Table from contracts list', this.table);
-      if (this.table) {
-        this.table.dataSource = this.dataSource;
-      }
-    });
+    // console.log('About to call selectAllContracts')
+    // this.contracts$ = store.select(selectAllContracts);
+    // this.contracts$.subscribe((res) => {
+    //   this.filteredSubcontracts = res;
+    //   this.subcontracts = res;
+    //   this.dataSource = new MatTableDataSource(res);
+    //   this.dataSource.sort = this.sort;
+    //   console.log('Table from contracts list', this.table);
+    //   if (this.table) {
+    //     this.table.dataSource = this.dataSource;
+    //   }
+    // });
   }
 
   ngOnInit(): void {
-    this.store.dispatch(loadContracts());
+    this.store.dispatch(loadContractsList());
   }
 
   formatCurrency(value: number): string {

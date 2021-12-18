@@ -10,7 +10,7 @@ import {
 
 export const routingConfiguration: ExtraOptions = {
   paramsInheritanceStrategy: 'always',
-  enableTracing: true,
+  enableTracing: false,
   relativeLinkResolution: 'corrected',
   initialNavigation: 'enabledBlocking'
 };
