@@ -12,13 +12,13 @@ import { Observable } from 'rxjs';
   styleUrls: ['./contract-detail.component.scss']
 })
 export class ContractDetailComponent  {
-contract$ = this.store.select(selectContract);
+contract$: Observable<Contract | undefined>
 contractId: string;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
               private store: Store<ContractState>) {
-
+    this.contract$ = this.store.select(selectContract);
     this.contract$
     .subscribe(contract => {
       console.log('CONTRACT DETAIL contract', contract)
