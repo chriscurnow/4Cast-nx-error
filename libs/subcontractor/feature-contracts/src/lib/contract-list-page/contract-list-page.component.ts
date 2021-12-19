@@ -48,17 +48,17 @@ export class ContractListPageComponent implements OnInit {
               private router: Router,
               private route: ActivatedRoute) {
     // console.log('About to call selectAllContracts')
-    // this.contracts$ = store.select(selectAllContracts);
-    // this.contracts$.subscribe((res) => {
-    //   this.filteredSubcontracts = res;
-    //   this.subcontracts = res;
-    //   this.dataSource = new MatTableDataSource(res);
-    //   this.dataSource.sort = this.sort;
-    //   console.log('Table from contracts list', this.table);
-    //   if (this.table) {
-    //     this.table.dataSource = this.dataSource;
-    //   }
-    // });
+    this.contracts$ = store.select(selectAllContracts);
+    this.contracts$.subscribe((res) => {
+      this.filteredSubcontracts = res;
+      this.subcontracts = res;
+      this.dataSource = new MatTableDataSource(res);
+      this.dataSource.sort = this.sort;
+      console.log('Table from contracts list', this.table);
+      if (this.table) {
+        this.table.dataSource = this.dataSource;
+      }
+    });
   }
 
   ngOnInit(): void {
