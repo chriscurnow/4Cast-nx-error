@@ -24,4 +24,16 @@ export class ContractService {
         })
       );
   }
+
+  getContract(id: string | null) {
+    const path = `subcontracts/${id}`;
+    return this.afs.doc<Contract>(path)
+    .valueChanges()
+    .pipe(
+      map(contract => {
+        console.log('CONTRACT SERVICE get contract', contract);
+        return contract;
+      })
+    )
+  }
 }

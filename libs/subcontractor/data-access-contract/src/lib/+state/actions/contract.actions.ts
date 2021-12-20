@@ -15,7 +15,19 @@ export const loadContractsListFailure = createAction(
   props<{ error: any }>()
 );
 
-export const loadContractsListuccess = createAction(
-  '[Contracts/API] Load Contract Success',
-  props<{ contract: Contract | undefined }>()
+
+export const loadContract = createAction(
+  '[Contracts/API] Load Contract',
+  props<{ contractId: string }>()
+)
+
+export const loadContractSuccess = createAction(
+    '[Contracts/API] Load Contract Success',
+    props<{ contract: Contract | undefined}>()
+);
+
+// action action
+export const loadContractFailure = createAction(
+  '[Contracts/API] Load Contract Failure',
+   props<{error: any}>()
 );

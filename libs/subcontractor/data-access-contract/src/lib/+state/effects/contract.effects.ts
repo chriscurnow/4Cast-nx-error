@@ -6,11 +6,17 @@ import { map } from 'rxjs/operators';
 import * as ContractActions from '../actions/contract.actions';
 import * as ContractFeature from '../reducers/contract.reducer';
 import { ActivatedRouteSnapshot } from '@angular/router';
-
+import { ContractDetailComponent } from '@workspace/subcontractor/feature-contracts';
 
 
 @Injectable()
 export class ContractEffects {
+  constructor(
+    private readonly actions$: Actions,
+    private readonly contractService: ContractService,
+    private readonly dataPersistence: DataPersistence<ContractFeature.ContractPartialState>
+  ) {}
+
   init$ = createEffect(() =>
     this.dataPersistence.fetch(ContractActions.init, {
       run: (
@@ -33,12 +39,13 @@ export class ContractEffects {
     })
   );
 
-    loadContractsList$ = createEffect(() =>
+  loadContractsList$ = createEffect(() =>
     this.dataPersistence.fetch(ContractActions.loadContractsList, {
       run: (
-        action: ReturnType<typeof ContractActions.loadContractsList >,
+        action: ReturnType<typeof ContractActions.loadContractsList>,
         state: ContractFeature.ContractPartialState
       ) => {
+        console.log('Load contracts list effect')
         return this.contractService
           .getContracts()
           .pipe(
@@ -47,13 +54,40 @@ export class ContractEffects {
             )
           );
       },
-      onError: (action: ReturnType<typeof ContractActions.loadContractsList>, error) => {
+      onError: (
+        action: ReturnType<typeof ContractActions.loadContractsList>,
+        error
+      ) => {
         console.error('Error', error);
         return ContractActions.loadContractsListFailure({ error });
       },
     })
   );
 
+  loadContract$ = createEffect(() =>
+    this.dataPersistence.navigation(ContractDetailComponent, {
+      run: (
+        a,
+        state: ContractFeature.ContractPartialState
+      ) => {
+        console.log('Load contract effect id', a.params['contractId']);
+        return this.contractService
+          .getContract(a.params['contractId'])
+          .pipe(
+            map((contract) => {
+              console.log('Load contract success, contract', contract)
+              return ContractActions.loadContractSuccess({ contract })})
+          );
+      },
+      onError: (
+        a,
+        error
+      ) => {
+        console.error('Error', error);
+        return ContractActions.loadContractsListFailure({ error });
+      },
+    })
+  );
 
   // TODO: loadContract$ effect introduces circular dependency
   // loadContract$ = createEffect(() =>
@@ -110,10 +144,4 @@ export class ContractEffects {
   //     })
   //   )
   // );
-
-  constructor(
-    private readonly actions$: Actions,
-    private readonly contractService: ContractService,
-    private readonly dataPersistence: DataPersistence<ContractFeature.ContractPartialState>
-  ) {}
 }

@@ -64,7 +64,12 @@ const contractReducer = createReducer(
   on(ContractActions.loadContractsListFailure, (state, { error }) => ({
     ...state,
     error,
-  }))
+  })),
+
+  on(ContractActions.loadContractSuccess, (state, { contract }) =>
+    contractAdapter.setOne(contract as Contract, { ...state, loaded:true })
+  )
+
 );
 
 export function reducer(state: ContractState | undefined, action: Action) {
