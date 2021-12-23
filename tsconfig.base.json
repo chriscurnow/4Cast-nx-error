@@ -47,6 +47,9 @@
       "@workspace/shared/ui-main-layout": [
         "libs/shared/ui-main-layout/src/index.ts"
       ],
+      "@workspace/shared/ui-subcontracts": [
+        "libs/shared/ui-subcontracts/src/index.ts"
+      ],
       "@workspace/shared/util": ["libs/shared/util/src/index.ts"],
       "@workspace/shared/util-local-storage": [
         "libs/shared/util-local-storage/src/index.ts"

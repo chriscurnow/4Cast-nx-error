@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { loadContracts, Contract } from '@workspace/subcontractor/data-access-contract';
+import { loadContractsList, Contract } from '@workspace/subcontractor/data-access-contract';
 import { Observable } from 'rxjs';
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatPaginator } from '@angular/material/paginator';
@@ -47,6 +47,7 @@ export class ContractListPageComponent implements OnInit {
   constructor(private store: Store,
               private router: Router,
               private route: ActivatedRoute) {
+    // console.log('About to call selectAllContracts')
     this.contracts$ = store.select(selectAllContracts);
     this.contracts$.subscribe((res) => {
       this.filteredSubcontracts = res;
@@ -61,7 +62,7 @@ export class ContractListPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.store.dispatch(loadContracts());
+    this.store.dispatch(loadContractsList());
   }
 
   formatCurrency(value: number): string {

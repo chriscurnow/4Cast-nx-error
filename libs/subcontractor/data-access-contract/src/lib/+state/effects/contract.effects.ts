@@ -6,11 +6,17 @@ import { map } from 'rxjs/operators';
 import * as ContractActions from '../actions/contract.actions';
 import * as ContractFeature from '../reducers/contract.reducer';
 import { ActivatedRouteSnapshot } from '@angular/router';
-
+import { ContractDetailComponent } from '@workspace/subcontractor/feature-contracts';
 
 
 @Injectable()
 export class ContractEffects {
+  constructor(
+    private readonly actions$: Actions,
+    private readonly contractService: ContractService,
+    private readonly dataPersistence: DataPersistence<ContractFeature.ContractPartialState>
+  ) {}
+
   init$ = createEffect(() =>
     this.dataPersistence.fetch(ContractActions.init, {
       run: (
@@ -21,39 +27,67 @@ export class ContractEffects {
           .getContracts()
           .pipe(
             map((contracts) =>
-              ContractActions.loadContractsSuccess({ contracts })
+              ContractActions.loadContractsListSuccess({ contracts })
             )
           );
         // Your custom service 'load' logic goes here. For now just return a success action...
       },
       onError: (action: ReturnType<typeof ContractActions.init>, error) => {
         console.error('Error', error);
-        return ContractActions.loadContractsFailure({ error });
+        return ContractActions.loadContractsListFailure({ error });
       },
     })
   );
 
-    loadContracts$ = createEffect(() =>
-    this.dataPersistence.fetch(ContractActions.loadContracts, {
+  loadContractsList$ = createEffect(() =>
+    this.dataPersistence.fetch(ContractActions.loadContractsList, {
       run: (
-        action: ReturnType<typeof ContractActions.loadContracts >,
+        action: ReturnType<typeof ContractActions.loadContractsList>,
         state: ContractFeature.ContractPartialState
       ) => {
+        console.log('Load contracts list effect')
         return this.contractService
           .getContracts()
           .pipe(
             map((contracts) =>
-              ContractActions.loadContractsSuccess({ contracts })
+              ContractActions.loadContractsListSuccess({ contracts })
             )
           );
       },
-      onError: (action: ReturnType<typeof ContractActions.loadContracts>, error) => {
+      onError: (
+        action: ReturnType<typeof ContractActions.loadContractsList>,
+        error
+      ) => {
         console.error('Error', error);
-        return ContractActions.loadContractsFailure({ error });
+        return ContractActions.loadContractsListFailure({ error });
       },
     })
   );
 
+  loadContract$ = createEffect(() =>
+    this.dataPersistence.navigation(ContractDetailComponent, {
+      run: (
+        a,
+        state: ContractFeature.ContractPartialState
+      ) => {
+        console.log('Load contract effect id', a.params['contractId']);
+        return this.contractService
+          .getContract(a.params['contractId'])
+          .pipe(
+            map((contract) => {
+              console.log('Load contract success, contract', contract)
+              return ContractActions.loadContractSuccess({ contract })})
+          );
+      },
+      onError: (
+        a,
+        error
+      ) => {
+        console.error('Error', error);
+        return ContractActions.loadContractsListFailure({ error });
+      },
+    })
+  );
 
   // TODO: loadContract$ effect introduces circular dependency
   // loadContract$ = createEffect(() =>
@@ -93,7 +127,7 @@ export class ContractEffects {
   //           .getContract(activatedRouteSnapshot.params['contractId'])
   //           .pipe(
   //             map((contract) => ({
-  //               type: ContractActions.loadContractSuccess,
+  //               type: ContractActions.loadContractsListuccess,
   //               contract: contract,
   //             }))
   //           );
@@ -110,10 +144,4 @@ export class ContractEffects {
   //     })
   //   )
   // );
-
-  constructor(
-    private readonly actions$: Actions,
-    private readonly contractService: ContractService,
-    private readonly dataPersistence: DataPersistence<ContractFeature.ContractPartialState>
-  ) {}
 }

@@ -16,6 +16,7 @@
     "shared-feature-toolbar-user": "libs/shared/feature-toolbar-user",
     "shared-ui-default-module-collection": "libs/shared/ui-default-module-collection",
     "shared-ui-main-layout": "libs/shared/ui-main-layout",
+    "shared-ui-subcontracts": "libs/shared/ui-subcontracts",
     "shared-util": "libs/shared/util",
     "shared-util-local-storage": "libs/shared/util-local-storage",
     "shared-util-testing": "libs/shared/util-testing",

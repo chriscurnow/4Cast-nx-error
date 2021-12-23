@@ -7,6 +7,7 @@ import { EntityAdapter, EntityState, createEntityAdapter } from '@ngrx/entity';
 export interface Contract{
   id: string; // Primary ID
   name: string;
+  description: string;
 }
 
 export interface ContractEntity extends EntityState<Contract> {

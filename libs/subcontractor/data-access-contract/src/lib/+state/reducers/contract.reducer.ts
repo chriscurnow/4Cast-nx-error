@@ -51,20 +51,25 @@ const contractReducer = createReducer(
     error: null,
   })),
 
-  on(ContractActions.loadContracts, (state) => ({
+  on(ContractActions.loadContractsList, (state) => ({
     ...state,
     loaded: false,
     error: null,
   })),
 
-  on(ContractActions.loadContractsSuccess, (state, { contracts }) =>
+  on(ContractActions.loadContractsListSuccess, (state, { contracts }) =>
     contractAdapter.setAll(contracts, { ...state, loaded: true })
   ),
 
-  on(ContractActions.loadContractsFailure, (state, { error }) => ({
+  on(ContractActions.loadContractsListFailure, (state, { error }) => ({
     ...state,
     error,
-  }))
+  })),
+
+  on(ContractActions.loadContractSuccess, (state, { contract }) =>
+    contractAdapter.setOne(contract as Contract, { ...state, loaded:true })
+  )
+
 );
 
 export function reducer(state: ContractState | undefined, action: Action) {
