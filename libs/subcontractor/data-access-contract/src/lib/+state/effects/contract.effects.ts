@@ -7,7 +7,8 @@ import * as ContractActions from '../actions/contract.actions';
 import * as ContractFeature from '../reducers/contract.reducer';
 import { ActivatedRouteSnapshot } from '@angular/router';
 import { ContractDetailComponent } from '@workspace/subcontractor/feature-contracts';
-
+import { ContractListPageComponent } from '@workspace/subcontractor/feature-contracts';
+import { State } from '@ngrx/store';
 
 @Injectable()
 export class ContractEffects {
@@ -39,50 +40,58 @@ export class ContractEffects {
     })
   );
 
-  loadContractsList$ = createEffect(() =>
-    this.dataPersistence.fetch(ContractActions.loadContractsList, {
-      run: (
-        action: ReturnType<typeof ContractActions.loadContractsList>,
-        state: ContractFeature.ContractPartialState
-      ) => {
-        console.log('Load contracts list effect')
-        return this.contractService
-          .getContracts()
-          .pipe(
-            map((contracts) =>
-              ContractActions.loadContractsListSuccess({ contracts })
-            )
-          );
+  // loadContractsList$ = createEffect(() =>
+  //   this.dataPersistence.fetch(ContractActions.loadContractsList, {
+  //     run: (
+  //       action: ReturnType<typeof ContractActions.loadContractsList>,
+  //       state: ContractFeature.ContractPartialState
+  //     ) => {
+  //       console.log('Load contracts list effect');
+  //       return this.contractService
+  //         .getContracts()
+  //         .pipe(
+  //           map((contracts) =>
+  //             ContractActions.loadContractsListSuccess({ contracts })
+  //           )
+  //         );
+  //     },
+  //     onError: (
+  //       action: ReturnType<typeof ContractActions.loadContractsList>,
+  //       error
+  //     ) => {
+  //       console.error('Error', error);
+  //       return ContractActions.loadContractsListFailure({ error });
+  //     },
+  //   })
+  // );
+
+  loadContractListNav$ = createEffect(() =>
+    this.dataPersistence.navigation(ContractListPageComponent,  {
+      run: (a, state: ContractFeature.ContractPartialState) => {
+        return this.contractService.getContracts().pipe(
+          map((contracts) => {
+            return ContractActions.loadContractsListSuccess({ contracts })
+          })
+        );
       },
-      onError: (
-        action: ReturnType<typeof ContractActions.loadContractsList>,
-        error
-      ) => {
-        console.error('Error', error);
-        return ContractActions.loadContractsListFailure({ error });
+      onError: (a, error) => {
+        return ContractActions.loadContractsListFailure({ error })
       },
     })
   );
 
   loadContract$ = createEffect(() =>
     this.dataPersistence.navigation(ContractDetailComponent, {
-      run: (
-        a,
-        state: ContractFeature.ContractPartialState
-      ) => {
+      run: (a, state: ContractFeature.ContractPartialState) => {
         console.log('Load contract effect id', a.params['contractId']);
-        return this.contractService
-          .getContract(a.params['contractId'])
-          .pipe(
-            map((contract) => {
-              console.log('Load contract success, contract', contract)
-              return ContractActions.loadContractSuccess({ contract })})
-          );
+        return this.contractService.getContract(a.params['contractId']).pipe(
+          map((contract) => {
+            console.log('Load contract success, contract', contract);
+            return ContractActions.loadContractSuccess({ contract });
+          })
+        );
       },
-      onError: (
-        a,
-        error
-      ) => {
+      onError: (a, error) => {
         console.error('Error', error);
         return ContractActions.loadContractsListFailure({ error });
       },
