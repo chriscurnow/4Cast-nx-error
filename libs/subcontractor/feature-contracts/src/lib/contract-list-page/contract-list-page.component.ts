@@ -61,8 +61,9 @@ export class ContractListPageComponent implements OnInit {
     });
   }
 
+  // eslint-disable-next-line @angular-eslint/no-empty-lifecycle-method
   ngOnInit(): void {
-    this.store.dispatch(loadContractsList());
+    //this.store.dispatch(loadContractsList());
   }
 
   formatCurrency(value: number): string {
