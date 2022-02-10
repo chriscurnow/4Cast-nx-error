@@ -27,6 +27,9 @@ detailForm: FormGroup;
     .subscribe(contract => {
       console.log('CONTRACT DETAIL contract', contract)
       this.contractId =  contract ? contract.id : '';
+      if (contract){
+        contract.description = 'Plumbing'
+      }
       this.detailForm.reset(contract);
     })
    }

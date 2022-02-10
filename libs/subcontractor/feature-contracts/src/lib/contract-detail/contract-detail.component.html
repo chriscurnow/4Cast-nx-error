@@ -1,6 +1,6 @@
 <form [formGroup]="detailForm" novalidate >
   <mat-card class="mat-card mat-elevation-z4 p-24 mr-24">
-   <!-- <app-contract-header [subcontract]="subcontract"></app-contract-header> -->
+   <fourcast-contract-header [subcontract]="contract$ | async"></fourcast-contract-header>
   <mat-card-content style="margin-left:16px">
     <mat-form-field appearance="outline" class="full-width">
       <mat-label>Description of work</mat-label>
