@@ -32,6 +32,9 @@
       "@workspace/shared/data-access-ngrx-default-module-collection": [
         "libs/shared/data-access-ngrx-default-module-collection/src/index.ts"
       ],
+      "@workspace/shared/data-access-router": [
+        "libs/shared/data-access-router/src/index.ts"
+      ],
       "@workspace/shared/data-access-user": [
         "libs/shared/data-access-user/src/index.ts"
       ],
