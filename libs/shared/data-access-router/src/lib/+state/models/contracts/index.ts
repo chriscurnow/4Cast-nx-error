@@ -10,3 +10,4 @@ export * from './contract-details.models';
 export * from './contract-header.model';
 export * from './head-contractor.model';
 export * from './contract-amounts';
+export * from './subcontract';
