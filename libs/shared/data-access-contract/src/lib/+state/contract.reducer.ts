@@ -2,7 +2,7 @@ import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 import { createReducer, on, Action } from '@ngrx/store';
 
 import * as ContractActions from './contract.actions';
-import { SubcontractEntity } from '@workspace/shared/data-access-router';
+import { SubcontractEntity } from '@workspace/shared/util-models';
 
 export const CONTRACT_FEATURE_KEY = 'contract';
 

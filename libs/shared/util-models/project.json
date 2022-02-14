@@ -1,0 +1,26 @@
+{
+  "projectType": "library",
+  "root": "libs/shared/util-models",
+  "sourceRoot": "libs/shared/util-models/src",
+  "prefix": "fourcast",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/shared/util-models"],
+      "options": {
+        "jestConfig": "libs/shared/util-models/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/shared/util-models/src/**/*.ts",
+          "libs/shared/util-models/src/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

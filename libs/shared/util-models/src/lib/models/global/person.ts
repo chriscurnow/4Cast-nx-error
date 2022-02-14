@@ -1,5 +1,5 @@
-import { PhoneNumber } from './';
-import { EmailAddress } from './';
+import { PhoneNumber } from '.';
+import { EmailAddress } from '.';
 
 export interface Person {
 

@@ -69,6 +69,7 @@
       "@workspace/shared/util-local-storage": [
         "libs/shared/util-local-storage/src/index.ts"
       ],
+      "@workspace/shared/util-models": ["libs/shared/util-models/src/index.ts"],
       "@workspace/shared/util-testing": [
         "libs/shared/util-testing/src/index.ts"
       ],

@@ -1,7 +1,7 @@
 /* eslint-disable @nrwl/nx/enforce-module-boundaries */
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { SubcontractEntity } from '@workspace/shared/data-access-router';
+import { SubcontractEntity } from '@workspace/shared/util-models';
 import { loadContractsList } from '@workspace/shared/data-access-contract';
 import { Observable } from 'rxjs';
 import { SelectionModel } from '@angular/cdk/collections';

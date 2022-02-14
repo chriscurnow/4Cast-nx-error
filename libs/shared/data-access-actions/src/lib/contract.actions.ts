@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { SubcontractEntity } from '@workspace/shared/data-access-router';
+import { SubcontractEntity } from '@workspace/shared/util-models';
 
 export const init = createAction('[Contract Page] Init');
 

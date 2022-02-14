@@ -1,6 +1,6 @@
 
 
-import { Address } from '../'
+import { Address } from '..'
 
 // TODO: [DEV-50] Superintendant should extend Company
 export interface Superintendent {

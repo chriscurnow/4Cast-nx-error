@@ -1,4 +1,4 @@
-import { EmailAddress, PhoneNumber } from '../';
+import { EmailAddress, PhoneNumber } from '..';
 
 
 

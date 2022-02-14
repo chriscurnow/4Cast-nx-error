@@ -3,7 +3,7 @@ import { Superintendent } from './superintendent';
 import { ProjectDates } from './project-dates';
 
 
-import { Company } from '../';
+import { Company } from '..';
 
 
 

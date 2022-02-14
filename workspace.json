@@ -24,6 +24,7 @@
     "shared-ui-subcontracts": "libs/shared/ui-subcontracts",
     "shared-util": "libs/shared/util",
     "shared-util-local-storage": "libs/shared/util-local-storage",
+    "shared-util-models": "libs/shared/util-models",
     "shared-util-testing": "libs/shared/util-testing",
     "signup": "apps/signup",
     "signup-e2e": "apps/signup-e2e",

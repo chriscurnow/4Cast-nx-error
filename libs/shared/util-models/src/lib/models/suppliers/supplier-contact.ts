@@ -1,4 +1,4 @@
-import { Person } from '../';
+import { Person } from '..';
 import { Supplier } from './supplier';
 
 export interface SupplierContact extends Person {

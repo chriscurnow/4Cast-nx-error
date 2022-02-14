@@ -9,7 +9,7 @@ import {
   ContractDates,
   MostRecentPayment,
   ContractDetails
-} from '../';
+} from '..';
 
 
 
