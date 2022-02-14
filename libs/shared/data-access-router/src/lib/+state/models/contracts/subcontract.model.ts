@@ -50,7 +50,7 @@ export interface SubcontractProject {
 
 const subcontractCollectionName = 'subcontracts';
 
-export interface Subcontract {
+export interface SubcontractEntity {
   id: string;
   name?: string | undefined;
   description?: string | undefined;
@@ -71,17 +71,17 @@ export interface Subcontract {
 
 import { EntityAdapter, EntityState, createEntityAdapter } from '@ngrx/entity';
 
-export interface SubcontractEntity extends EntityState<Subcontract> {
+export interface SubcontractEntity extends EntityState<SubcontractEntity> {
   // additional entities state properties
   selectedContractId: string | null;
 }
 
-export function selectSubcontractId(a: Subcontract): string {
+export function selectSubcontractId(a: SubcontractEntity): string {
   //In this case this would be optional since primary key is id
   return a.id;
 }
 
-export function sortByName(a: Subcontract, b: Subcontract): number {
+export function sortByName(a: SubcontractEntity, b: SubcontractEntity): number {
   let aName = a.name;
   let bName = b.name;
 
@@ -89,22 +89,22 @@ export function sortByName(a: Subcontract, b: Subcontract): number {
   if(!bName){bName = ''};
   return aName.localeCompare(bName);
 }
-export const adapter: EntityAdapter<Subcontract> = createEntityAdapter<Subcontract>({
+export const adapter: EntityAdapter<SubcontractEntity> = createEntityAdapter<SubcontractEntity>({
   selectId: selectSubcontractId,
   sortComparer: sortByName,
 });
 
-export function createSubcontractWithSupplierId(supplierId: string): Subcontract {
+export function createSubcontractWithSupplierId(supplierId: string): SubcontractEntity {
     const supplier = { id: supplierId };
-    const subcontract: Subcontract = {id: ''} // new Subcontract({ supplier: supplier });
+    const subcontract: SubcontractEntity = {id: ''} // new SubcontractEntity({ supplier: supplier });
     subcontract.supplier = supplier;
     return subcontract;
   }
 
 
-  export function createNew(data: Subcontract): Subcontract {
+  export function createNew(data: SubcontractEntity): SubcontractEntity {
     // TODO: [NX-30] Create method to create subcontract from data
-    const newSubcontract: Subcontract = {id:''};
+    const newSubcontract: SubcontractEntity = {id:''};
     // TODO: [NX-29] create method to create new ContractDates
     newSubcontract.dates = {} //new ContractDates();
     newSubcontract.dates.contract = new Date();

@@ -1,9 +1,10 @@
+/* eslint-disable @nrwl/nx/enforce-module-boundaries */
 import { Injectable } from '@angular/core';
 import { createEffect, Actions, ofType } from '@ngrx/effects';
 import { DataPersistence, navigation } from '@nrwl/angular';
 import { ContractService } from '../../contract.service'
 import { map } from 'rxjs/operators';
-import * as ContractActions from '../actions/contract.actions';
+import * as ContractActions from '@workspace/shared/data-access-actions';
 import * as ContractFeature from '../reducers/contract.reducer';
 import { ActivatedRouteSnapshot } from '@angular/router';
 import { ContractDetailComponent } from '@workspace/subcontractor/feature-contracts';

@@ -1,0 +1,26 @@
+{
+  "projectType": "library",
+  "root": "libs/shared/data-access-contract",
+  "sourceRoot": "libs/shared/data-access-contract/src",
+  "prefix": "fourcast",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/shared/data-access-contract"],
+      "options": {
+        "jestConfig": "libs/shared/data-access-contract/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/shared/data-access-contract/src/**/*.ts",
+          "libs/shared/data-access-contract/src/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

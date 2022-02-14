@@ -1,6 +1,8 @@
+/* eslint-disable @nrwl/nx/enforce-module-boundaries */
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { loadContractsList, Contract } from '@workspace/subcontractor/data-access-contract';
+import { SubcontractEntity } from '@workspace/shared/data-access-router';
+import { loadContractsList } from '@workspace/shared/data-access-contract';
 import { Observable } from 'rxjs';
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatPaginator } from '@angular/material/paginator';
@@ -22,7 +24,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./contract-list-page.component.scss'],
 })
 export class ContractListPageComponent implements OnInit {
-  contracts$: Observable<Contract[]>;
+  contracts$: Observable<SubcontractEntity[]>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;

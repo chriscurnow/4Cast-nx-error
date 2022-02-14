@@ -1,16 +1,17 @@
+/* eslint-disable @nrwl/nx/enforce-module-boundaries */
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 import { createReducer, on, Action, createSelector, createFeatureSelector } from '@ngrx/store';
-
-import * as ContractActions from '../actions/contract.actions';
-import { ContractEntity, Contract } from '../contract.models';
+import { SubcontractEntity } from '@workspace/shared/data-access-router'
+import * as ContractActions from '@workspace/shared/data-access-actions';
+import { ContractEntity } from '../contract.models';
 
 export const CONTRACT_FEATURE_KEY = 'contract';
 
 // export type CarState = EntityState<Car>;
 
-export interface ContractState extends EntityState<Contract> {
-  selectedId?: string | number; // which Contract record has been selected
-  loaded: boolean; // has the Contract list been loaded
+export interface ContractState extends EntityState<SubcontractEntity> {
+  selectedId?: string | number; // which SubcontractEntity record has been selected
+  loaded: boolean; // has the SubcontractEntity list been loaded
   error?: string | null; // last known error (if any)
 }
 
@@ -22,7 +23,7 @@ export interface ContractPartialState {
 //   selectId: car => car.id,
 // });
 
-export const contractAdapter: EntityAdapter<Contract> = createEntityAdapter<Contract>({
+export const contractAdapter: EntityAdapter<SubcontractEntity> = createEntityAdapter<SubcontractEntity>({
   selectId: contract => contract.id, // new line from example
 });
 
@@ -67,7 +68,7 @@ const contractReducer = createReducer(
   })),
 
   on(ContractActions.loadContractSuccess, (state, { contract }) =>
-    contractAdapter.setOne(contract as Contract, { ...state, loaded:true })
+    contractAdapter.setOne(contract as SubcontractEntity, { ...state, loaded:true })
   )
 
 );

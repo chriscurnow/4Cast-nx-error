@@ -1,0 +1,26 @@
+{
+  "projectType": "library",
+  "root": "libs/shared/data-access-supplier",
+  "sourceRoot": "libs/shared/data-access-supplier/src",
+  "prefix": "fourcast",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/shared/data-access-supplier"],
+      "options": {
+        "jestConfig": "libs/shared/data-access-supplier/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/shared/data-access-supplier/src/**/*.ts",
+          "libs/shared/data-access-supplier/src/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": ["scope:data-access"]
+}
