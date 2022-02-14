@@ -2,7 +2,7 @@
 // import { Supplier } from '../suppliers';
 // import { CostCode } from '@4cast/classes';
 // import { Company } from '@4cast/classes';
-// import { Project, HeadContractor } from '@4cast/classes';
+// import { Project, HeadContractorEntity } from '@4cast/classes';
 
 
 import { ContractAmounts } from './contract-amounts';
@@ -19,7 +19,7 @@ import {
   MostRecentPayment
 } from './most-recent-payment';
 import { Payment } from '../payments/payment.model';
-import { SubcontractHeadContractor } from '.';
+import { SubcontractHeadContractorEntity } from '.';
 
 export interface Supplier {
   id: string;
@@ -35,7 +35,7 @@ export interface Company {
 
 export interface Project {
   id: string;
-  headContractor: SubcontractHeadContractor
+  headContractor: SubcontractHeadContractorEntity
 }
 
 

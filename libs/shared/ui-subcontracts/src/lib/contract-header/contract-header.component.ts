@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-// import {
-//   HeadContractor,
-//   Project,
-//   SubcontractEntity,
-// } from '@workspace/shared/data-access-router';
+import {
+  HeadContractorEntity,
+  Project,
+  SubcontractEntity,
+} from '@workspace/shared/data-access-router';
 
 @Component({
   selector: 'fourcast-contract-header',
@@ -12,7 +12,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ContractHeaderComponent  {
   // project: Project = null;
-  // headContractor: HeadContractorInterface = null;
+  // headContractor: HeadContractorEntityInterface = null;
   projectName: string;
   headContractorName: string;
   contactName: string;
