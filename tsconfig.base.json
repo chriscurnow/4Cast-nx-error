@@ -26,14 +26,26 @@
       "@workspace/shared-ui-default-module-collection": [
         "libs/shared/ui-default-module-collection/src/index.ts"
       ],
+      "@workspace/shared/data-access-actions": [
+        "libs/shared/data-access-actions/src/index.ts"
+      ],
       "@workspace/shared/data-access-auth": [
         "libs/shared/data-access-auth/src/index.ts"
+      ],
+      "@workspace/shared/data-access-contract": [
+        "libs/shared/data-access-contract/src/index.ts"
+      ],
+      "@workspace/shared/data-access-models": [
+        "libs/shared/data-access-models/src/index.ts"
       ],
       "@workspace/shared/data-access-ngrx-default-module-collection": [
         "libs/shared/data-access-ngrx-default-module-collection/src/index.ts"
       ],
       "@workspace/shared/data-access-router": [
         "libs/shared/data-access-router/src/index.ts"
+      ],
+      "@workspace/shared/data-access-supplier": [
+        "libs/shared/data-access-supplier/src/index.ts"
       ],
       "@workspace/shared/data-access-user": [
         "libs/shared/data-access-user/src/index.ts"

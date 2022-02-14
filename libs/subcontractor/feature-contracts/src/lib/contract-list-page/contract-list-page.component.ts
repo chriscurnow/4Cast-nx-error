@@ -2,7 +2,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Subcontract } from '@workspace/shared/data-access-router';
-import { loadContractsList } from '@workspace/subcontractor/data-access-contract';
+import { loadContractsList } from '@workspace/shared/data-access-contract';
 import { Observable } from 'rxjs';
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatPaginator } from '@angular/material/paginator';

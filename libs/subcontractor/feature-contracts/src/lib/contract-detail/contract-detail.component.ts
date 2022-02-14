@@ -2,7 +2,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 // TODO: [NX-19] resolve circular dependency
-import { ContractState, loadContractsList, selectContract } from '@workspace/subcontractor/data-access-contract';
+import { ContractState, selectContract } from '@workspace/subcontractor/data-access-contract';
+import { loadContractsList } from '@workspace/shared/data-access-actions';
 import { Subcontract } from '@workspace/shared/data-access-router';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';

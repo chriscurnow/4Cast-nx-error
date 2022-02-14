@@ -1,7 +1,8 @@
+/* eslint-disable @nrwl/nx/enforce-module-boundaries */
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 import { createReducer, on, Action, createSelector, createFeatureSelector } from '@ngrx/store';
 import { Subcontract } from '@workspace/shared/data-access-router'
-import * as ContractActions from '../actions/contract.actions';
+import * as ContractActions from '@workspace/shared/data-access-actions';
 import { ContractEntity } from '../contract.models';
 
 export const CONTRACT_FEATURE_KEY = 'contract';
