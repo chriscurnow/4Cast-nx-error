@@ -1,7 +1,7 @@
 
-//TODO: [DEV-52] HeadContractor should extend Company
+//TODO: [DEV-52] HeadContractorEntity should extend Company
 
-export interface HeadContractorInterface {
+export interface HeadContractorEntity {
   id?: string;
   name?: string;
   contact?: string;
