@@ -2,11 +2,11 @@ import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 import { createReducer, on, Action } from '@ngrx/store';
 
 import * as ContractActions from './contract.actions';
-import { Subcontract } from '@workspace/shared/data-access-router';
+import { SubcontractEntity } from '@workspace/shared/data-access-router';
 
 export const CONTRACT_FEATURE_KEY = 'contract';
 
-export interface State extends EntityState<Subcontract> {
+export interface State extends EntityState<SubcontractEntity> {
   selectedId?: string | number; // which Contract record has been selected
   loaded: boolean; // has the Contract list been loaded
   error?: string | null; // last known error (if any)
@@ -16,8 +16,8 @@ export interface ContractPartialState {
   readonly [CONTRACT_FEATURE_KEY]: State;
 }
 
-export const contractAdapter: EntityAdapter<Subcontract> =
-  createEntityAdapter<Subcontract>();
+export const contractAdapter: EntityAdapter<SubcontractEntity> =
+  createEntityAdapter<SubcontractEntity>();
 
 export const initialState: State = contractAdapter.getInitialState({
   // set initial required properties

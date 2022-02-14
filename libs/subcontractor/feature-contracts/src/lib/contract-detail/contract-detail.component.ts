@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 // TODO: [NX-19] resolve circular dependency
 import { ContractState, selectContract } from '@workspace/subcontractor/data-access-contract';
 import { loadContractsList } from '@workspace/shared/data-access-actions';
-import { Subcontract } from '@workspace/shared/data-access-router';
+import { SubcontractEntity } from '@workspace/shared/data-access-router';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { FormGroup, FormBuilder } from '@angular/forms';
@@ -16,7 +16,7 @@ import { FormGroup, FormBuilder } from '@angular/forms';
   styleUrls: ['./contract-detail.component.scss']
 })
 export class ContractDetailComponent implements OnInit {
-contract$: Observable<Subcontract | undefined>
+contract$: Observable<SubcontractEntity | undefined>
 contractId: string;
 detailForm: FormGroup;
 

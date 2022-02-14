@@ -1,10 +1,10 @@
 import { createAction, props } from '@ngrx/store';
-import { Subcontract } from '@workspace/shared/data-access-router'
+import { SubcontractEntity } from '@workspace/shared/data-access-router'
 export const init = createAction('[Contract Page] Init');
 
 export const loadContractSuccess = createAction(
   '[Contract/API] Load Contract Success',
-  props<{ contract: Subcontract[] }>()
+  props<{ contract: SubcontractEntity[] }>()
 );
 
 export const loadContractFailure = createAction(
@@ -17,7 +17,7 @@ export const loadContractsList = createAction('[Contract/API] Load Contracts');
 
 export const loadContractsListSuccess = createAction(
   '[Contract/API] Load Contracts Success',
-  props<{ contracts: Subcontract[] }>()
+  props<{ contracts: SubcontractEntity[] }>()
 );
 
 export const loadContractsListFailure = createAction(

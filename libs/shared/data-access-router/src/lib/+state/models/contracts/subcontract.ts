@@ -13,7 +13,7 @@ import {
 
 
 
-export interface Subcontract {
+export interface SubcontractEntity {
   id: string;
   name?: string | undefined;
   description?: string | undefined;

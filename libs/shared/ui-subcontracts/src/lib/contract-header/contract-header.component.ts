@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 // import {
 //   HeadContractor,
 //   Project,
-//   Subcontract,
+//   SubcontractEntity,
 // } from '@workspace/shared/data-access-router';
 
 @Component({
@@ -17,11 +17,11 @@ export class ContractHeaderComponent  {
   headContractorName: string;
   contactName: string;
   contactEmail: string;
-  // localSubcontract: Subcontract;
+  // localSubcontract: SubcontractEntity;
 
   // constructor() {}
 
-  // @Input() set subcontract(value: Subcontract) {
+  // @Input() set subcontract(value: SubcontractEntity) {
   //   this.localSubcontract = value;
   //   console.log('Setting local subcontract', this.localSubcontract);
 

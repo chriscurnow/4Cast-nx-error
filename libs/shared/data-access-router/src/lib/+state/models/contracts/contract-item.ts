@@ -2,7 +2,7 @@ import { Currency } from '@workspace/shared/util'
 
 
 import * as moment from 'moment';
-import { Subcontract } from './subcontract.model';
+import { SubcontractEntity } from './subcontract.model';
 import { PaymentStatus } from '../payments';
 
 export interface ContractItem {
@@ -33,7 +33,7 @@ export enum ContractItemStatus {
   Approved,
 }
 
-export function createItemForApprovedContract(subcontract: Subcontract): any {
+export function createItemForApprovedContract(subcontract: SubcontractEntity): any {
     const contractItem: ContractItem = {};
     if (subcontract.amounts) {
       if (subcontract.amounts.contractOriginal) {
