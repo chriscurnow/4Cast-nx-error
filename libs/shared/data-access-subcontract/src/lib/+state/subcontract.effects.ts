@@ -4,9 +4,8 @@ import { DataPersistence } from '@nrwl/angular';
 
 import * as SubcontractActions from './subcontract.actions';
 import * as SubcontractFeature from './subcontract.reducer';
-import { SubcontractService } from './Subcontract.service';
+import { SubcontractService } from './subcontract.service';
 import { map } from 'rxjs/operators';
-// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
 import { Subcontract } from '@workspace/shared/data-access-models';
 import { ActivatedRouteSnapshot } from '@angular/router';
 

@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
 import { Subcontract } from '@workspace/shared/data-access-models';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SubcontractService {
+
+
   constructor(private afs: AngularFirestore) {}
 
   // afs.collection('items', ref => ref.where('size', '==', 'large'))

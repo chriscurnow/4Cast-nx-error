@@ -2,7 +2,6 @@ import { EntityAdapter, EntityState, createEntityAdapter } from '@ngrx/entity';
 import { createReducer, on, Action } from '@ngrx/store';
 
 import * as SubcontractActions from './subcontract.actions';
-// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
 import { Subcontract } from '@workspace/shared/data-access-models';
 
 export const SUBCONTRACT_FEATURE_KEY = 'subcontract';
