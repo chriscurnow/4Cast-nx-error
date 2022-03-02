@@ -7,7 +7,7 @@ import * as SubcontractFeature from './subcontract.reducer';
 import { SubcontractService } from './Subcontract.service';
 import { map } from 'rxjs/operators';
 // eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
-import { Subcontract } from '@workspace/shared/util-models';
+import { Subcontract } from '@workspace/shared/data-access-models';
 import { ActivatedRouteSnapshot } from '@angular/router';
 
 @Injectable()

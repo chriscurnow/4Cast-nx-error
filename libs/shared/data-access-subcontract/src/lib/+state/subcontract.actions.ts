@@ -1,6 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 // eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
-import { Subcontract} from '@workspace/shared/util-models';
+import { Subcontract} from '@workspace/shared/data-access-models';
 
 export const init = createAction('[Subcontract Page] Init');
 

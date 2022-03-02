@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { SubcontractEntity } from '@workspace/shared/util-models';
+import { Subcontract } from '@workspace/shared/data-access-models';
 import { loadSubcontractsList } from '@workspace/shared/data-access-subcontract';
 import { Observable } from 'rxjs';
 import { SelectionModel } from '@angular/cdk/collections';
@@ -23,7 +23,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./contract-list-page.component.scss'],
 })
 export class ContractListPageComponent implements OnInit {
-  contracts$: Observable<SubcontractEntity[]>;
+  contracts$: Observable<Subcontract[]>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;

@@ -3,7 +3,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 // eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
-import { Subcontract } from '@workspace/shared/util-models';
+import { Subcontract } from '@workspace/shared/data-access-models';
 
 @Injectable({
   providedIn: 'root',

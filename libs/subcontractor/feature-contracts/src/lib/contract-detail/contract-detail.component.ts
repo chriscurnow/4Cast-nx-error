@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 // TODO: [NX-19] resolve circular dependency
 import { SubcontractPartialState, selectSubcontract } from '@workspace/shared/data-access-subcontract';
 import { loadSubcontractsList } from '@workspace/shared/data-access-subcontract';
-import { Subcontract } from '@workspace/shared/util-models';
+import { Subcontract } from '@workspace/shared/data-access-models';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { FormGroup, FormBuilder } from '@angular/forms';

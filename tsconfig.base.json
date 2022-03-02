@@ -32,11 +32,8 @@
       "@workspace/shared/data-access-auth": [
         "libs/shared/data-access-auth/src/index.ts"
       ],
-      "@workspace/shared/data-access-contract": [
-        "libs/shared/data-access-contract/src/index.ts"
-      ],
       "@workspace/shared/data-access-models": [
-        "libs/shared/data-access-models/src/index.ts"
+        "libs/shared/util-models/src/index.ts"
       ],
       "@workspace/shared/data-access-ngrx-default-module-collection": [
         "libs/shared/data-access-ngrx-default-module-collection/src/index.ts"
@@ -72,7 +69,6 @@
       "@workspace/shared/util-local-storage": [
         "libs/shared/util-local-storage/src/index.ts"
       ],
-      "@workspace/shared/util-models": ["libs/shared/util-models/src/index.ts"],
       "@workspace/shared/util-testing": [
         "libs/shared/util-testing/src/index.ts"
       ],
