@@ -1,8 +1,7 @@
-/* eslint-disable @nrwl/nx/enforce-module-boundaries */
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 import { createReducer, on, Action, createSelector, createFeatureSelector } from '@ngrx/store';
 import { SubcontractEntity } from '@workspace/shared/util-models'
-import * as ContractActions from '@workspace/shared/data-access-actions';
+import * as ContractActions from '../actions/contract.actions';
 import { ContractEntity } from '../contract.models';
 
 export const CONTRACT_FEATURE_KEY = 'contract';
@@ -10,7 +9,7 @@ export const CONTRACT_FEATURE_KEY = 'contract';
 // export type CarState = EntityState<Car>;
 
 export interface ContractState extends EntityState<SubcontractEntity> {
-  selectedId?: string | number; // which SubcontractEntity record has been selected
+  selectedId?: string; // which SubcontractEntity record has been selected
   loaded: boolean; // has the SubcontractEntity list been loaded
   error?: string | null; // last known error (if any)
 }
@@ -43,7 +42,7 @@ export const initialContractState: ContractState = contractAdapter.getInitialSta
 
 // the following is a bit different to the example but I don't think it
 // matters.
-
+  
 const contractReducer = createReducer(
   initialContractState,
   on(ContractActions.init, (state) => ({

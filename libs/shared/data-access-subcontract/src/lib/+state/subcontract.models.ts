@@ -2,6 +2,6 @@
  * Interface for the 'Subcontract' data
  */
 export interface SubcontractEntity {
-  id: string | number; // Primary ID
+  id: string; // Primary ID
   name: string;
 }

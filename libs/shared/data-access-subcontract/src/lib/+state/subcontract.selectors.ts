@@ -1,44 +1,54 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import {
   SUBCONTRACT_FEATURE_KEY,
-  State,
+  SubcontractEntityState,
   subcontractAdapter,
 } from './subcontract.reducer';
+import { selectRouteParams } from './subcontract.router.selectors';
 
 // Lookup the 'Subcontract' feature state managed by NgRx
-export const getSubcontractState = createFeatureSelector<State>(
+export const selectSubcontractState = createFeatureSelector<SubcontractEntityState>(
   SUBCONTRACT_FEATURE_KEY
 );
 
 const { selectAll, selectEntities } = subcontractAdapter.getSelectors();
 
-export const getSubcontractLoaded = createSelector(
-  getSubcontractState,
-  (state: State) => state.loaded
+export const selectSubcontractLoaded = createSelector(
+  selectSubcontractState,
+  (state: SubcontractEntityState) => state.loaded
 );
 
-export const getSubcontractError = createSelector(
-  getSubcontractState,
-  (state: State) => state.error
+export const selectSubcontractError = createSelector(
+  selectSubcontractState,
+  (state: SubcontractEntityState) => state.error
 );
 
-export const getAllSubcontract = createSelector(
-  getSubcontractState,
-  (state: State) => selectAll(state)
+export const selectAllSubcontracts = createSelector(
+  selectSubcontractState,
+  (state: SubcontractEntityState) => selectAll(state)
 );
 
-export const getSubcontractEntities = createSelector(
-  getSubcontractState,
-  (state: State) => selectEntities(state)
+export const selectSubcontractEntities = createSelector(
+  selectSubcontractState,
+  (state: SubcontractEntityState) => selectEntities(state)
 );
 
-export const getSelectedId = createSelector(
-  getSubcontractState,
-  (state: State) => state.selectedId
+export const selectSelectedId = createSelector(
+  selectSubcontractState,
+  (state: SubcontractEntityState) => state.selectedId
 );
 
-export const getSelected = createSelector(
-  getSubcontractEntities,
-  getSelectedId,
+export const selectSelected = createSelector(
+  selectSubcontractEntities,
+  selectSelectedId,
   (entities, selectedId) => (selectedId ? entities[selectedId] : undefined)
+);
+
+export const selectSubcontract = createSelector(
+  selectSubcontractEntities,
+  selectRouteParams,
+  (entities, { contractId }) => entities[contractId]
+  // INTERESTING, note exmaple uses cars where our original used entities. Are they the same thing?
+  // selectSelectedId,
+  // (entities, selectedId) => (selectedId ? entities[selectedId] : undefined)
 );

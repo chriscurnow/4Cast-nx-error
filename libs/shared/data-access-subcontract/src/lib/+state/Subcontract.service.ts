@@ -2,24 +2,25 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Contract } from '..';
+// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+import { Subcontract } from '@workspace/shared/util-models';
 
 @Injectable({
   providedIn: 'root',
 })
-export class ContractService {
+export class SubcontractService {
   constructor(private afs: AngularFirestore) {}
 
   // afs.collection('items', ref => ref.where('size', '==', 'large'))
-  getContracts() {
+  getContractsList() {
     return this.afs
-      .collection<Contract>('subcontracts', (ref) =>
+      .collection<Subcontract>('subcontracts', (ref) =>
         ref.where('supplier.id', '==', '246A06AEBC2345478A6301D3A6490B0E')
       )
       .valueChanges()
       .pipe(
         map((contracts) => {
-          console.log('CONTRACT SERVICE',contracts);
+          console.log('CONTRACT SERVICE', contracts);
           return contracts;
         })
       );
@@ -27,13 +28,19 @@ export class ContractService {
 
   getContract(id: string | null) {
     const path = `subcontracts/${id}`;
-    return this.afs.doc<Contract>(path)
-    .valueChanges()
-    .pipe(
-      map(contract => {
-        console.log('CONTRACT SERVICE get contract', contract);
-        return contract;
-      })
-    )
+    return this.afs
+      .doc<Subcontract>(path)
+      .valueChanges()
+      .pipe(
+        map((contract) => {
+          if(contract){
+            console.log('CONTRACT SERVICE get contract', contract);
+            return contract;
+          } else {
+            return {id: ''};
+          }
+
+        })
+      );
   }
 }

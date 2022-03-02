@@ -33,7 +33,7 @@
               },
               {
                 "sourceTag": "scope:data-access",
-                "onlyDependOnLibsWithTags": ["scope:util"]
+                "onlyDependOnLibsWithTags": ["scope:data-access", "scope:util"]
               },
               {
                 "sourceTag": "scope:ui",

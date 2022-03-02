@@ -1,8 +1,7 @@
-/* eslint-disable @nrwl/nx/enforce-module-boundaries */
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { SubcontractEntity } from '@workspace/shared/util-models';
-import { loadContractsList } from '@workspace/shared/data-access-contract';
+import { loadSubcontractsList } from '@workspace/shared/data-access-subcontract';
 import { Observable } from 'rxjs';
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatPaginator } from '@angular/material/paginator';
@@ -12,7 +11,7 @@ import { MatTable } from '@angular/material/table';
 
 // export const selectAllContracts = createSelector(selectContractState, (state: State) =>
 
-import { selectAllContracts } from '@workspace/subcontractor/data-access-contract';
+import { selectAllSubcontracts } from '@workspace/shared/data-access-subcontract';
 import { CurrencyInterface, Currency } from '@workspace/shared/util'
 import { DateUtilsService } from '@workspace/shared/util';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -50,7 +49,7 @@ export class ContractListPageComponent implements OnInit {
               private router: Router,
               private route: ActivatedRoute) {
     // console.log('About to call selectAllContracts')
-    this.contracts$ = store.select(selectAllContracts);
+    this.contracts$ = store.select(selectAllSubcontracts);
     this.contracts$.subscribe((res) => {
       this.filteredSubcontracts = res;
       this.subcontracts = res;
@@ -63,9 +62,9 @@ export class ContractListPageComponent implements OnInit {
     });
   }
 
-  // eslint-disable-next-line @angular-eslint/no-empty-lifecycle-method
   ngOnInit(): void {
-    //this.store.dispatch(loadContractsList());
+    this.store.dispatch(loadSubcontractsList());
+
   }
 
   formatCurrency(value: number): string {

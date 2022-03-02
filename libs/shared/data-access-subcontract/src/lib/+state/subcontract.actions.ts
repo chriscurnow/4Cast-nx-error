@@ -1,11 +1,17 @@
 import { createAction, props } from '@ngrx/store';
-import { SubcontractEntity } from '@workspace/shared/util-models';
+// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+import { Subcontract} from '@workspace/shared/util-models';
 
 export const init = createAction('[Subcontract Page] Init');
 
+export const loadSubcontract = createAction(
+  '[Contracts/API] Load Contract',
+  props<{ subcontractId: string }>()
+);
+
 export const loadSubcontractSuccess = createAction(
   '[Subcontract/API] Load Subcontract Success',
-  props<{ subcontract: SubcontractEntity[] }>()
+  props<{ subcontract: Subcontract  }>()
 );
 
 export const loadSubcontractFailure = createAction(
@@ -17,7 +23,7 @@ export const loadSubcontractsList = createAction('[Contract/API] Load Contracts'
 
 export const loadSubcontractsListSuccess = createAction(
   '[Contract/API] Load Contracts Success',
-  props<{ contracts: SubcontractEntity[] }>()
+  props<{ subcontracts: Subcontract[] }>()
 );
 
 export const loadSubcontractsListFailure = createAction(
@@ -25,7 +31,4 @@ export const loadSubcontractsListFailure = createAction(
   props<{ error: any }>()
 );
 
-export const loadSubcontract = createAction(
-  '[Contracts/API] Load Contract',
-  props<{ contractId: string }>()
-);
+
