@@ -8,6 +8,8 @@ import { SharedDataAccessSubcontractModule } from '@workspace/shared/data-access
 import { SharedUiDefaultModuleCollectionModule } from '@workspace/shared-ui-default-module-collection';
 import { ContractDetailComponent } from './contract-detail/contract-detail.component';
 import { ContractHeaderComponent } from './shared-forms/contract-header/contract-header.component';
+import { ContractListViewComponent } from './contract-list-page/contract-list-view/contract-list-view.component';
+
 
 @NgModule({
   imports: [
@@ -29,6 +31,8 @@ import { ContractHeaderComponent } from './shared-forms/contract-header/contract
     ContractDetailComponent,
     // ContractDatesComponent,
     ContractHeaderComponent,
+    ContractListViewComponent,
+
   ],
 })
 export class SubcontractorFeatureContractsModule {}

@@ -71,6 +71,16 @@ const subcontractReducer = createReducer(
       subcontractAdapter.setAll(subcontracts, { ...state, loaded: true })
   ),
 
+  on(SubcontractActions.loadSubcontract, (state) => ({
+    ...state,
+    loaded: false,
+    error: null
+  })),
+
+ on(SubcontractActions.loadSubcontractSuccess, (state, { subcontract}) =>
+  subcontractAdapter.setOne(subcontract, { ...state, loaded: true})
+ ),
+
   on(SubcontractActions.loadSubcontractFailure, (state, { error }) => ({
     ...state,
     error,

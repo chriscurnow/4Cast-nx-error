@@ -48,6 +48,7 @@ export const selectSubcontract = createSelector(
   selectSubcontractEntities,
   selectRouteParams,
   (entities, { contractId }) => entities[contractId]
+  // as long as the param in the router is called 'contractId', this should select the correct subcontract
   // INTERESTING, note exmaple uses cars where our original used entities. Are they the same thing?
   // selectSelectedId,
   // (entities, selectedId) => (selectedId ? entities[selectedId] : undefined)
