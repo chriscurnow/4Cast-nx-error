@@ -26,11 +26,26 @@
       "@workspace/shared-ui-default-module-collection": [
         "libs/shared/ui-default-module-collection/src/index.ts"
       ],
+      "@workspace/shared/data-access-actions": [
+        "libs/shared/data-access-actions/src/index.ts"
+      ],
       "@workspace/shared/data-access-auth": [
         "libs/shared/data-access-auth/src/index.ts"
       ],
+      "@workspace/shared/data-access-models": [
+        "libs/shared/data-access-models/src/index.ts"
+      ],
       "@workspace/shared/data-access-ngrx-default-module-collection": [
         "libs/shared/data-access-ngrx-default-module-collection/src/index.ts"
+      ],
+      "@workspace/shared/data-access-router": [
+        "libs/shared/data-access-router/src/index.ts"
+      ],
+      "@workspace/shared/data-access-subcontract": [
+        "libs/shared/data-access-subcontract/src/index.ts"
+      ],
+      "@workspace/shared/data-access-supplier": [
+        "libs/shared/data-access-supplier/src/index.ts"
       ],
       "@workspace/shared/data-access-user": [
         "libs/shared/data-access-user/src/index.ts"
@@ -47,18 +62,15 @@
       "@workspace/shared/ui-main-layout": [
         "libs/shared/ui-main-layout/src/index.ts"
       ],
+      "@workspace/shared/ui-subcontracts": [
+        "libs/shared/ui-subcontracts/src/index.ts"
+      ],
       "@workspace/shared/util": ["libs/shared/util/src/index.ts"],
       "@workspace/shared/util-local-storage": [
         "libs/shared/util-local-storage/src/index.ts"
       ],
       "@workspace/shared/util-testing": [
         "libs/shared/util-testing/src/index.ts"
-      ],
-      "@workspace/subcontractor/data-access-conbtracts": [
-        "libs/subcontractor/data-access-conbtracts/src/index.ts"
-      ],
-      "@workspace/subcontractor/data-access-contract": [
-        "libs/subcontractor/data-access-contract/src/index.ts"
       ],
       "@workspace/subcontractor/feature-contracts": [
         "libs/subcontractor/feature-contracts/src/index.ts"

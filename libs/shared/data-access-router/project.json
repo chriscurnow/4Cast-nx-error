@@ -1,0 +1,26 @@
+{
+  "projectType": "library",
+  "root": "libs/shared/data-access-router",
+  "sourceRoot": "libs/shared/data-access-router/src",
+  "prefix": "fourcast",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/shared/data-access-router"],
+      "options": {
+        "jestConfig": "libs/shared/data-access-router/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/shared/data-access-router/src/**/*.ts",
+          "libs/shared/data-access-router/src/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": ["scope:data-access"]
+}
