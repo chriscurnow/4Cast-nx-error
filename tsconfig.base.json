@@ -62,6 +62,9 @@
       "@workspace/shared/ui-main-layout": [
         "libs/shared/ui-main-layout/src/index.ts"
       ],
+      "@workspace/shared/ui-subcontract-detail": [
+        "libs/shared/ui-subcontract-detail/src/index.ts"
+      ],
       "@workspace/shared/ui-subcontracts": [
         "libs/shared/ui-subcontracts/src/index.ts"
       ],

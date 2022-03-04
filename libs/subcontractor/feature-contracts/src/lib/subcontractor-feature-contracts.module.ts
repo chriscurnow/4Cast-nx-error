@@ -21,8 +21,11 @@ import { ContractListViewComponent } from './contract-list-page/contract-list-vi
       { path: '', redirectTo: 'contracts-list', pathMatch: 'full' },
       { path: 'contracts-list', component: ContractListPageComponent },
       {
-        path: 'contract-detail/:contractId',
-        component: ContractDetailComponent,
+        path: 'contract-detail',
+        loadChildren: () =>
+          import('@workspace/shared/ui-subcontract-detail').then(
+            (module) => module.SharedUiSubcontractDetailModule
+          ),
       },
     ]),
   ],
@@ -32,7 +35,6 @@ import { ContractListViewComponent } from './contract-list-page/contract-list-vi
     // ContractDatesComponent,
     ContractHeaderComponent,
     ContractListViewComponent,
-
   ],
 })
 export class SubcontractorFeatureContractsModule {}
