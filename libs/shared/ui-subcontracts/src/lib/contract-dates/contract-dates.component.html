@@ -1,1 +1,33 @@
-<p>contract-dates works!</p>
+<h2>DATES</h2>
+
+<div [formGroup]="datesForm">
+
+  <div class="row pt-12">
+  <div class="col">
+    <mat-form-field appearance='outline' class="small-field" floatLabel="always" >
+      <mat-label>Date contract signed</mat-label>
+        <input matInput [matDatepicker]="contractPicker" placeholder="Contract Date" formControlName='contract'>
+        <mat-datepicker-toggle matSuffix [for]="contractPicker"></mat-datepicker-toggle>
+    </mat-form-field>
+      <mat-datepicker #contractPicker></mat-datepicker>
+  </div>
+  <div class="col">
+    <mat-form-field appearance='outline' class="small-field" floatLabel="always" >
+      <mat-label>Commencement date</mat-label>
+        <input matInput [matDatepicker]="commencementPicker" placeholder="Contract Date" formControlName='commencement'>
+        <mat-datepicker-toggle matSuffix [for]="commencementPicker"></mat-datepicker-toggle>
+    </mat-form-field>
+      <mat-datepicker #commencementPicker></mat-datepicker>
+  </div>
+
+  <div class="col">
+    <mat-form-field appearance='outline' class="small-field" floatLabel="always" >
+      <mat-label>Estimated completion date</mat-label>
+        <input matInput [matDatepicker]="completionPicker" placeholder="Contract Date" formControlName='completion'>
+        <mat-datepicker-toggle matSuffix [for]="completionPicker"></mat-datepicker-toggle>
+    </mat-form-field>
+      <mat-datepicker #completionPicker></mat-datepicker>
+  </div>
+  </div>
+
+</div>

@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ContractDatesComponent } from './contract-dates.component';
+import { SubcontractDetailComponent } from './subcontract-detail.component';
 
-describe('DatesComponent', () => {
-  let component: ContractDatesComponent;
-  let fixture: ComponentFixture<ContractDatesComponent>;
+describe('SubcontractDetailComponent', () => {
+  let component: SubcontractDetailComponent;
+  let fixture: ComponentFixture<SubcontractDetailComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ContractDatesComponent ]
+      declarations: [ SubcontractDetailComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ContractDatesComponent);
+    fixture = TestBed.createComponent(SubcontractDetailComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

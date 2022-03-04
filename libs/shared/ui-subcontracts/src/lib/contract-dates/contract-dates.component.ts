@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+/* eslint-disable @typescript-eslint/no-empty-function */
 import { Component, OnDestroy, forwardRef } from '@angular/core';
 import {
   ControlValueAccessor,
@@ -7,29 +7,104 @@ import {
   FormGroup,
   Validators,
   FormControl,
-  NG_VALIDATORS,
+  NG_VALIDATORS
 } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import {
-  MAT_MOMENT_DATE_FORMATS,
-  MomentDateAdapter,
-} from '@angular/material-moment-adapter';
-import {
-  DateAdapter,
-  MAT_DATE_FORMATS,
-  MAT_DATE_LOCALE,
-} from '@angular/material/core';
+import { MAT_MOMENT_DATE_FORMATS, MomentDateAdapter } from '@angular/material-moment-adapter';
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
+import { DateUtilsService } from '@workspace/shared/util';
+// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+import { ContractDates } from '@workspace/shared/data-access-models';
+
 
 @Component({
   selector: 'fourcast-contract-dates',
   templateUrl: './contract-dates.component.html',
-  styleUrls: ['./contract-dates.component.scss']
+  styleUrls: ['./contract-dates.component.scss', '../scss/contract-detail.scss'],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => ContractDatesComponent),
+      multi: true
+    },
+    {
+      provide: NG_VALIDATORS,
+      useExisting: forwardRef(() => ContractDatesComponent),
+      multi: true
+    },
+    {provide: MAT_DATE_LOCALE, useValue: 'en-AU'},
+    {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
+    {provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS},
+  ]
 })
-export class ContractDatesComponent implements OnInit {
+export class ContractDatesComponent implements ControlValueAccessor, OnDestroy  {
 
-  constructor() { }
+  datesForm: FormGroup;
+  subscriptions: Subscription[] = [];
 
-  ngOnInit(): void {
+  constructor(private fb: FormBuilder,
+              private dateUtils: DateUtilsService) {
+    this.datesForm = this.fb.group({
+      contract: [null, Validators.required],
+      commencement: [null, Validators.required],
+      completion: [null, Validators.required]
+    });
+
+    this.subscriptions.push(
+      // any time the inner form changes update the parent of any change
+      this.datesForm.valueChanges.subscribe(value => {
+        this.onChange(value);
+        this.onTouched();
+      })
+    );
+   }
+
+   get value(): ContractDates {
+
+    return this.datesForm.value;
+  }
+
+  set value(value: ContractDates) {
+      console.log('Dates component, set value', value);
+    const newDates = {
+      contract: this.dateUtils.valueToMoment(value.contract),
+      commencement: this.dateUtils.valueToMoment(value.commencement),
+      completion: this.dateUtils.valueToMoment(value.completion)
+    };
+    this.datesForm.setValue(newDates);
+    this.onChange(newDates);
+    this.onTouched();
+  }
+
+  onChange: any = () => {};
+  onTouched: any = () => {};
+
+  registerOnChange(fn: any): void {
+    this.onChange = fn;
+  }
+
+  writeValue(value: any): void {
+    if (value) {
+      this.value = value;
+    }
+
+    if (value === null) {
+      this.datesForm.reset();
+    }
+  }
+
+  registerOnTouched(fn: any): void {
+    this.onTouched = fn;
+  }
+
+  // communicate the inner form validation to the parent form
+
+  validate(_: FormControl) {
+    return this.datesForm.valid ? null : { project: { valid: false } };
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(s => s.unsubscribe());
   }
 
 }
