@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { SubcontractDetailComponent } from './subcontract-detail/subcontract-detail/subcontract-detail.component';
+import { SubcontractDetailContainerComponent } from './subcontract-detail/subcontract-detail-container/subcontract-detail-container.component';
 
 const routes: Routes = [
-  { path: ':contractId', component: SubcontractDetailComponent },
+  { path: ':contractId', component: SubcontractDetailContainerComponent},
 
   // children: [
   //   { path: '', component: ContractsDetailComponent},

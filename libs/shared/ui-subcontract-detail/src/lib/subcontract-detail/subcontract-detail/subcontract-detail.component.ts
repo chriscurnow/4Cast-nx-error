@@ -1,46 +1,44 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+
 // TODO: [NX-19] resolve circular dependency
-import {
-  SubcontractPartialState,
-  selectSubcontract,
-} from '@workspace/shared/data-access-subcontract';
-import { loadSubcontractsList } from '@workspace/shared/data-access-subcontract';
-import { Subcontract } from '@workspace/shared/data-access-models';
-import { select, Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+
+
+
 import { FormGroup, FormBuilder } from '@angular/forms';
+import { Subcontract } from '@workspace/shared/data-access-models';
 
 @Component({
+  selector: 'fourcast-subcontract-detail',
   templateUrl: './subcontract-detail.component.html',
   styleUrls: ['./subcontract-detail.component.scss'],
 })
 export class SubcontractDetailComponent implements OnInit {
-  contract$: Observable<Subcontract | undefined>;
+
   contractId: string;
   detailForm: FormGroup;
+  _subcontract: Subcontract | null | undefined;
+
+  @Input() set subcontract (v: Subcontract | null | undefined){
+    this._subcontract = v;
+    console.log('Subcontract Detail Component, set subcontract', v)
+    if (this._subcontract) {
+      this._subcontract.description = 'Plumbing';
+      this.contractId = this._subcontract.id;
+    }
+    this.detailForm.reset(this._subcontract);
+  }
+
+
+  @Output() navigateBack = new EventEmitter<null>()
 
   constructor(
-    private route: ActivatedRoute,
-    private router: Router,
-    private store: Store<SubcontractPartialState>,
     private fb: FormBuilder
   ) {
     this.createForm();
-    this.contract$ = this.store.select(selectSubcontract);
-    this.contract$.subscribe((contract) => {
-      console.log('CONTRACT DETAIL contract', contract);
-      this.contractId = contract ? contract.id : '';
-      if (contract) {
-        contract.description = 'Plumbing';
-      }
-      this.detailForm.reset(contract);
-    });
   }
 
   ngOnInit() {
     console.log();
-    //  this.store.dispatch(loadContractsList());
   }
 
   createForm() {
@@ -51,8 +49,9 @@ export class SubcontractDetailComponent implements OnInit {
     });
   }
 
-  back() {
-    this.router.navigate(['../../contracts-list'], { relativeTo: this.route });
-  }
+back(){
+  this.navigateBack.emit();
+}
+
 }
 

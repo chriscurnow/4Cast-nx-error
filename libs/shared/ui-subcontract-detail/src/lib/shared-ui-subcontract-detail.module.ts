@@ -8,6 +8,7 @@ import { LineItemsComponent } from './subcontract-detail/line-items/line-items.c
 import { ContractItemComponent } from './subcontract-detail/contract-item/contract-item.component';
 import { ContractItemArrayComponent } from './subcontract-detail/contract-item-array/contract-item-array.component';
 import { ContractHeaderComponent } from './contract-header/contract-header.component';
+import { SubcontractDetailContainerComponent } from './subcontract-detail/subcontract-detail-container/subcontract-detail-container.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { ContractHeaderComponent } from './contract-header/contract-header.compo
     ContractItemComponent,
     ContractItemArrayComponent,
     ContractHeaderComponent,
+    SubcontractDetailContainerComponent,
   ],
   imports: [
     CommonModule,
