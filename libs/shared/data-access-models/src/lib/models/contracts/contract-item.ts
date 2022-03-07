@@ -2,8 +2,10 @@ import { Currency } from '@workspace/shared/util'
 
 
 import * as moment from 'moment';
-import { SubcontractEntity } from './subcontract.model';
+import { Subcontract } from './subcontract';
 import { PaymentStatus } from '../payments';
+import { EntityAdapter, EntityState, createEntityAdapter } from '@ngrx/entity';
+
 
 export interface ContractItem {
   id?: string;
@@ -33,7 +35,31 @@ export enum ContractItemStatus {
   Approved,
 }
 
-export function createItemForApprovedContract(subcontract: SubcontractEntity): any {
+export interface SubcontractItemEntity extends EntityState<ContractItem> {
+  // additional entities state properties
+  selectedContractItemId: string | null;
+}
+
+export function selectContractItemId(a: Subcontract): string {
+  //In this case this would be optional since primary key is id
+  return a.id;
+}
+
+export function sortByNumber(a: ContractItem, b: ContractItem): number {
+  if (a.itemNumber && b.itemNumber && a.itemNumber > b.itemNumber) {
+      return 1;
+    } else {
+      return 0
+    }
+}
+
+export const subcontractAdapter: EntityAdapter<Subcontract> =
+  createEntityAdapter<Subcontract>({
+    selectId: selectContractItemId,
+    sortComparer: sortByNumber,
+  });
+
+export function createItemForApprovedContract(subcontract: Subcontract): any {
     const contractItem: ContractItem = {};
     if (subcontract.amounts) {
       if (subcontract.amounts.contractOriginal) {
