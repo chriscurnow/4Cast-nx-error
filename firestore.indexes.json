@@ -1,0 +1,131 @@
+{
+  "indexes": [
+    {
+      "collectionGroup": "adjustmentDetails",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "parent.id",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "detailNumber",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "subcontractPayments",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "subcontract.id",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "number",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "subcontractPayments",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "subcontract.id",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "number",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "subcontractPayments",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "subcontract.id",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "status.id",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "subcontractPayments",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "subcontract.supplier.id",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "id",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "subcontractPayments",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "subcontract.supplier.id",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "number",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "subcontracts",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "subcontract.id",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "number",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "subcontracts",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "subcontract.id",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "status.id",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "subcontracts",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "supplier.id",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "number",
+          "order": "ASCENDING"
+        }
+      ]
+    }
+  ],
+  "fieldOverrides": []
+}

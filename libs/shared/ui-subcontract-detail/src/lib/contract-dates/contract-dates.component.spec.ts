@@ -2,15 +2,14 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ContractDatesComponent } from './contract-dates.component';
 
-describe('ContractDatesComponent', () => {
+describe('DatesComponent', () => {
   let component: ContractDatesComponent;
   let fixture: ComponentFixture<ContractDatesComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ContractDatesComponent ]
-    })
-    .compileComponents();
+      declarations: [ContractDatesComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {
