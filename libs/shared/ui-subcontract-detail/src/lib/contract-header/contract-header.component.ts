@@ -1,4 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Project } from '@workspace/shared/data-access-models';
+import { Subcontract } from '@workspace/shared/data-access-models';
 
 @Component({
   selector: 'fourcast-contract-header',
@@ -6,15 +8,17 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./contract-header.component.scss'],
 })
 export class ContractHeaderComponent {
-  project: any = null;
+  project: Project;
   headContractor: any = null;
-  projectName: string;
+  projectName = '';
+  companyName = '';
   headContractorName: string;
-  contactName: string;
-  contactEmail: string;
+
+  contactName = '';
+  contactEmail = '';
   localSubcontract: any;
 
-  @Input() set subcontract(value: any) {
+  @Input() set subcontract(value: Subcontract) {
     this.localSubcontract = value;
     console.log('Setting local subcontract', this.localSubcontract);
 
@@ -22,7 +26,23 @@ export class ContractHeaderComponent {
       // this.project = value.project;
       if (value.project) {
         this.project = value.project;
-        this.headContractor = this.project.headContractor;
+        if(this.project){
+          this.projectName = this.project.name ? this.project.name : '';
+          const company = this.project.company;
+          if ( company ){
+            this.companyName = company.companyName ? company.companyName : '';
+            const companyContact = company.companyContact;
+            if (companyContact) {
+              this.contactName = companyContact.concatName;
+              this.contactEmail = companyContact.preferredEmail ?
+                                  companyContact.preferredEmail.address ?
+                                  companyContact.preferredEmail.address : ''
+                                  : '';
+            }
+          }
+        }
+
+
         // this.contactEmail = this.headContractor.contact;
       }
     }

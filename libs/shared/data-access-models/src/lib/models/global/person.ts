@@ -7,6 +7,7 @@ export interface Person {
   familyName: string;
   givenName: string;
   preferredName: string;
+  concatName: string;
   phoneNumbers: PhoneNumber[];
   emailAddresses: EmailAddress[];
   preferredPhone: PhoneNumber;

@@ -16,12 +16,13 @@ export class SubcontractDetailComponent implements OnInit {
 
   contractId: string;
   detailForm: FormGroup;
-  _subcontract: Subcontract | null | undefined;
+  _subcontract: Subcontract;
 
   @Input() set subcontract (v: Subcontract | null | undefined){
-    this._subcontract = v;
+
     console.log('Subcontract Detail Component, set subcontract', v)
-    if (this._subcontract) {
+    if (v) {
+      this._subcontract = v;
       this._subcontract.description = 'Plumbing';
       this.contractId = this._subcontract.id;
     }

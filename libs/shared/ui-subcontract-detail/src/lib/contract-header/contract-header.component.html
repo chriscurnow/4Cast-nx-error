@@ -1,10 +1,10 @@
 <mat-card-header>
-  <mat-card-title class="project-name">{{ project?.name }}</mat-card-title>
+  <mat-card-title class="project-name">{{ projectName }}</mat-card-title>
   <mat-card-subtitle
-    ><h2 class="contractor-name">Cockram Construction</h2>
+    ><h2 class="contractor-name">{{ companyName}}</h2>
     <br />
-    Darren Milne<br />
-    darren.milne@cockram.com
+    {{ contactName}} <br />
+    {{ contactEmail }}
   </mat-card-subtitle>
 </mat-card-header>
 
