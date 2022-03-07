@@ -15,6 +15,7 @@
     "shared-data-access-ngrx-default-module-collection": "libs/shared/data-access-ngrx-default-module-collection",
     "shared-data-access-router": "libs/shared/data-access-router",
     "shared-data-access-subcontract": "libs/shared/data-access-subcontract",
+    "shared-data-access-subcontract-items": "libs/shared/data-access-subcontract-items",
     "shared-data-access-supplier": "libs/shared/data-access-supplier",
     "shared-data-access-user": "libs/shared/data-access-user",
     "shared-feature-login": "libs/shared/feature-login",
