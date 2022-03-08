@@ -6,7 +6,16 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { routerReducer, StoreRouterConnectingModule, DefaultRouterStateSerializer } from '@ngrx/router-store';
-import { AngularFireModule } from '@angular/fire/compat'
+import { AngularFireModule } from '@angular/fire/compat';
+import {
+  AngularFirestore,
+  SETTINGS as FIRESTORE_SETTINGS,
+} from '@angular/fire/compat/firestore';
+import {
+  AngularFireDatabaseModule,
+  URL as DATABASE_URL,
+} from '@angular/fire/compat/database';
+import { ORIGIN } from '@angular/fire/compat/functions';
 import { DataPersistence } from '@nrwl/angular';
 
 import {
@@ -24,6 +33,8 @@ import { AppComponent } from './app.component';
 import { MainNavigationComponent } from './main-navigation/main-navigation.component';
 import { SharedFeatureToolbarUserModule } from '@workspace/shared/feature-toolbar-user';
 import { AppRoutes } from './app.routes';
+
+const shouldUseEmulator = () => false;
 
 @NgModule({
   declarations: [AppComponent, MainNavigationComponent],
@@ -83,7 +94,22 @@ import { AppRoutes } from './app.routes';
     // routing
   ],
   // [STARTER DOCS] DataPersistence has to be provided in every app that uses NgRx
-  providers: [DataPersistence],
+  providers: [
+    DataPersistence,
+    // AngularFirestore,
+    // {
+    //   provide: DATABASE_URL,
+    //   useFactory: () =>
+    //     shouldUseEmulator()
+    //       ? `http://localhost:9000?ns=${environment.firebaseConfig.projectId}`
+    //       : undefined,
+    // },
+    // {
+    //   provide: FIRESTORE_SETTINGS,
+    //   useValue: { host: 'localhost:8080', ssl: false },
+    // },
+    // { provide: ORIGIN, useValue: 'http://localhost:4001' }
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
