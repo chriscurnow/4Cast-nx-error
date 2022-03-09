@@ -10,11 +10,11 @@ import { CurrencyInterface, Currency } from '@workspace/shared/util';
 
 @Component({
   selector: 'fourcast-contract-list-view',
-  templateUrl: './contract-list-view.component.html',
-  styleUrls: ['./contract-list-view.component.scss'],
+  templateUrl: './subcontract-list.component.html',
+  styleUrls: ['./subcontract-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ContractListViewComponent {
+export class SubcontractListComponent {
   public selection: SelectionModel<any>;
   public dataSource: MatTableDataSource<any>;
 
@@ -32,18 +32,17 @@ export class ContractListViewComponent {
   ];
 
   @Input() set subcontracts(value: Subcontract[]) {
+    // console.log('set subcontracts', value);
     this.dataSource = new MatTableDataSource(value);
     this.dataSource.sort = this.sort;
-    console.log('Table from contracts list', this.table);
-    if (this.table) {
-      this.table.dataSource = this.dataSource;
-    }
+    // console.log('Table from contracts list', this.table);
+
   }
 
   @Output() subcontractSelected = new EventEmitter<Subcontract>();
 
   rowClicked(subcontract: Subcontract) {
-    console.log('row clicked', subcontract);
+    // console.log('row clicked', subcontract);
     this.subcontractSelected.emit(subcontract)
   }
 
@@ -62,7 +61,7 @@ export class ContractListViewComponent {
   formatDate(date: any): string {
     // const returnValue = this.dateUtils.setDate(date);
     // return returnValue;
-    console.log('Format Date');
+    // console.log('Format Date');
     if (date) {
       return DateUtilsService.formatDate(date);
     } else {

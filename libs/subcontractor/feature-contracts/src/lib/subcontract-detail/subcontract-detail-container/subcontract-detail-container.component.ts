@@ -7,7 +7,7 @@ import { Subcontract } from '@workspace/shared/data-access-models';
 import { Store } from '@ngrx/store';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { loadSubcontract } from '@workspace/shared/data-access-subcontract';
+import { loadSubcontractsList } from '@workspace/shared/data-access-subcontract';
 
 @Component({
   templateUrl: './subcontract-detail-container.component.html',
@@ -28,7 +28,7 @@ export class SubcontractDetailContainerComponent implements OnInit {
 }
 
   ngOnInit(): void {
-    // this.store.dispatch(loadSubcontract({subcontractId:'x'}));
+    this.store.dispatch(loadSubcontractsList());
     console.log('')
   }
 

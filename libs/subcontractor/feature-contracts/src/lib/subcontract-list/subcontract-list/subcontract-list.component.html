@@ -2,7 +2,7 @@
 
 
 
-  <table mat-table class="full-width-table" #table matSort aria-label="Elements" style="margin: 20px;">
+  <table mat-table class="full-width-table" #table matSort aria-label="Elements" [dataSource]="dataSource" style="margin: 20px;">
     <!-- Id Column -->
     <ng-container matColumnDef="date">
       <th mat-header-cell *matHeaderCellDef mat-sort-header class="table-header">Date</th>

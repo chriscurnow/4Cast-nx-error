@@ -8,10 +8,9 @@ import { Subcontract } from '@workspace/shared/data-access-models';
   providedIn: 'root',
 })
 export class SubcontractService {
-
-
   constructor(private afs: AngularFirestore) {}
-
+  // 246A06AEBC2345478A6301D3A6490B0E - BP Plumbing
+  // 002F048BCAAF4BACB94FF5BBE99C123B - BOSS Constructions
   // afs.collection('items', ref => ref.where('size', '==', 'large'))
   getContractsList() {
     return this.afs
@@ -21,7 +20,7 @@ export class SubcontractService {
       .valueChanges()
       .pipe(
         map((contracts) => {
-          console.log('CONTRACT SERVICE', contracts);
+          // console.log('CONTRACT SERVICE', contracts);
           return contracts;
         })
       );
@@ -34,13 +33,12 @@ export class SubcontractService {
       .valueChanges()
       .pipe(
         map((contract) => {
-          if(contract){
+          if (contract) {
             console.log('CONTRACT SERVICE get contract', contract);
             return contract;
           } else {
-            return {id: ''};
+            return { id: '' };
           }
-
         })
       );
   }

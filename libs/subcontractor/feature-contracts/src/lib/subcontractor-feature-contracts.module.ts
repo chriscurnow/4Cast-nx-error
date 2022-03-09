@@ -2,13 +2,22 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { RouterModule } from '@angular/router';
-import { ContractListPageComponent } from './contract-list-page/contract-list-page.component';
-import { SharedDataAccessSubcontractModule } from '@workspace/shared/data-access-subcontract';
 
+import { SharedDataAccessSubcontractModule } from '@workspace/shared/data-access-subcontract';
+import { MatTableModule } from '@angular/material/table';
 import { SharedUiDefaultModuleCollectionModule } from '@workspace/shared-ui-default-module-collection';
-import { ContractDetailComponent } from './contract-detail/contract-detail.component';
-import { ContractHeaderComponent } from './shared-forms/contract-header/contract-header.component';
-import { ContractListViewComponent } from './contract-list-page/contract-list-view/contract-list-view.component';
+import {
+  SubcontractListContainerComponent,
+  SubcontractListComponent,
+} from './subcontract-list';
+import {
+  SubcontractDetailContainerComponent,
+  SubcontractDetailComponent,
+  LineItemsComponent,
+  SubcontractItemComponent,
+  SubontractItemArrayComponent,
+} from './subcontract-detail';
+import { SharedUiSubcontractDetailModule } from '@workspace/shared/ui-subcontract-detail';
 
 
 @NgModule({
@@ -16,25 +25,31 @@ import { ContractListViewComponent } from './contract-list-page/contract-list-vi
     CommonModule,
     SharedDataAccessSubcontractModule,
     SharedUiDefaultModuleCollectionModule,
-
+    MatTableModule,
+    SharedUiSubcontractDetailModule,
     RouterModule.forChild([
       { path: '', redirectTo: 'contracts-list', pathMatch: 'full' },
-      { path: 'contracts-list', component: ContractListPageComponent },
+      { path: 'contracts-list', component: SubcontractListContainerComponent },
       {
-        path: 'contract-detail',
-        loadChildren: () =>
-          import('@workspace/shared/ui-subcontract-detail').then(
-            (module) => module.SharedUiSubcontractDetailModule
-          ),
+        path: 'contract-detail/:contractId',
+        component: SubcontractDetailContainerComponent,
+        // loadChildren: () =>
+        //   import('@workspace/shared/ui-subcontract-detail').then(
+        //     (module) => module.SharedUiSubcontractDetailModule
+        //   ),
       },
+
     ]),
   ],
   declarations: [
-    ContractListPageComponent,
-    ContractDetailComponent,
-    // ContractDatesComponent,
-    ContractHeaderComponent,
-    ContractListViewComponent,
+    SubcontractListContainerComponent,
+    SubcontractListComponent,
+    SubcontractDetailContainerComponent,
+    SubcontractDetailComponent,
+    LineItemsComponent,
+    SubcontractItemComponent,
+    SubontractItemArrayComponent,
+
   ],
 })
 export class SubcontractorFeatureContractsModule {}

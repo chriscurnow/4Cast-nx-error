@@ -2,24 +2,24 @@ import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 import { createReducer, on, Action } from '@ngrx/store';
 
 import * as SubcontractItemActions from './subcontract-item.actions';
-import { SubcontractItemEntity } from './subcontract-item.models';
+import { SubcontractItem } from '@workspace/shared/data-access-models';
 
 export const SUBCONTRACT_ITEM_FEATURE_KEY = 'subcontractItem';
 
-export interface State extends EntityState<SubcontractItemEntity> {
+export interface SubcontractItemEntityState extends EntityState<SubcontractItem> {
   selectedId?: string | number; // which SubcontractItem record has been selected
   loaded: boolean; // has the SubcontractItem list been loaded
   error?: string | null; // last known error (if any)
 }
 
 export interface SubcontractItemPartialState {
-  readonly [SUBCONTRACT_ITEM_FEATURE_KEY]: State;
+  readonly [SUBCONTRACT_ITEM_FEATURE_KEY]: SubcontractItemEntityState;
 }
 
-export const subcontractItemAdapter: EntityAdapter<SubcontractItemEntity> =
-  createEntityAdapter<SubcontractItemEntity>();
+export const subcontractItemAdapter: EntityAdapter<SubcontractItem> =
+  createEntityAdapter<SubcontractItem>();
 
-export const initialState: State = subcontractItemAdapter.getInitialState({
+export const initialState: SubcontractItemEntityState = subcontractItemAdapter.getInitialState({
   // set initial required properties
   loaded: false,
 });
@@ -31,17 +31,27 @@ const subcontractItemReducer = createReducer(
     loaded: false,
     error: null,
   })),
-  on(
-    SubcontractItemActions.loadSubcontractItemSuccess,
-    (state, { subcontractItem }) =>
-      subcontractItemAdapter.setAll(subcontractItem, { ...state, loaded: true })
-  ),
-  on(SubcontractItemActions.loadSubcontractItemFailure, (state, { error }) => ({
+
+
+  on(SubcontractItemActions.loadSubcontractItems, (state) => ({
     ...state,
-    error,
-  }))
+    loaded: false,
+    error: null,
+  })),
+  on(
+    SubcontractItemActions.loadSubcontractItemsSuccess,
+    (state, { subcontractItems }) =>
+      subcontractItemAdapter.setAll(subcontractItems, { ...state, loaded: true })
+  ),
+  on(
+    SubcontractItemActions.loadSubcontractItemsFailure,
+    (state, { error }) => ({
+      ...state,
+      error,
+    })
+  )
 );
 
-export function reducer(state: State | undefined, action: Action) {
+export function reducer(state: SubcontractItemEntityState | undefined, action: Action) {
   return subcontractItemReducer(state, action);
 }

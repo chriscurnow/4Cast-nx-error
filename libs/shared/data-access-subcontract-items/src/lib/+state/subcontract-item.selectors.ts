@@ -1,12 +1,12 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import {
   SUBCONTRACT_ITEM_FEATURE_KEY,
-  State,
+  SubcontractItemEntityState,
   subcontractItemAdapter,
 } from './subcontract-item.reducer';
 
 // Lookup the 'SubcontractItem' feature state managed by NgRx
-export const getSubcontractItemState = createFeatureSelector<State>(
+export const getSubcontractItemState = createFeatureSelector<SubcontractItemEntityState>(
   SUBCONTRACT_ITEM_FEATURE_KEY
 );
 
@@ -14,27 +14,27 @@ const { selectAll, selectEntities } = subcontractItemAdapter.getSelectors();
 
 export const getSubcontractItemLoaded = createSelector(
   getSubcontractItemState,
-  (state: State) => state.loaded
+  (state: SubcontractItemEntityState) => state.loaded
 );
 
 export const getSubcontractItemError = createSelector(
   getSubcontractItemState,
-  (state: State) => state.error
+  (state: SubcontractItemEntityState) => state.error
 );
 
 export const getAllSubcontractItem = createSelector(
   getSubcontractItemState,
-  (state: State) => selectAll(state)
+  (state: SubcontractItemEntityState) => selectAll(state)
 );
 
 export const getSubcontractItemEntities = createSelector(
   getSubcontractItemState,
-  (state: State) => selectEntities(state)
+  (state: SubcontractItemEntityState) => selectEntities(state)
 );
 
 export const getSelectedId = createSelector(
   getSubcontractItemState,
-  (state: State) => state.selectedId
+  (state: SubcontractItemEntityState) => state.selectedId
 );
 
 export const getSelected = createSelector(

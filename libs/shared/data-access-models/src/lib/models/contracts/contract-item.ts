@@ -7,8 +7,8 @@ import { PaymentStatus } from '../payments';
 import { EntityAdapter, EntityState, createEntityAdapter } from '@ngrx/entity';
 
 
-export interface ContractItem {
-  id?: string;
+export interface SubcontractItem {
+  id?: string | undefined;
   isNew?: boolean;
   isDraft?: boolean;
   itemDate?: Date | moment.Moment;
@@ -35,32 +35,33 @@ export enum ContractItemStatus {
   Approved,
 }
 
-export interface SubcontractItemEntity extends EntityState<ContractItem> {
-  // additional entities state properties
-  selectedContractItemId: string | null;
-}
+// export interface SubcontractItemEntityState extends EntityState<SubcontractItem> {
+//   // additional entities state properties
+//   selectedContractItemId: string | undefined;
+//   loaded: boolean;
+//   error: any;
+// }
 
-export function selectContractItemId(a: Subcontract): string {
-  //In this case this would be optional since primary key is id
-  return a.id;
-}
+// export function selectContractItemId(a: SubcontractItem): string | undefined {
+//   //In this case this would be optional since primary key is id
+//   return a.id;
+// }
 
-export function sortByNumber(a: ContractItem, b: ContractItem): number {
-  if (a.itemNumber && b.itemNumber && a.itemNumber > b.itemNumber) {
-      return 1;
-    } else {
-      return 0
-    }
-}
+// export function sortByNumber(a: SubcontractItem, b: SubcontractItem): number {
+//   if (a.itemNumber && b.itemNumber && a.itemNumber > b.itemNumber) {
+//       return 1;
+//     } else {
+//       return 0
+//     }
+// }
 
-export const subcontractAdapter: EntityAdapter<Subcontract> =
-  createEntityAdapter<Subcontract>({
-    selectId: selectContractItemId,
-    sortComparer: sortByNumber,
-  });
+// export const subcontractItemAdapter: EntityAdapter<SubcontractItem> =
+//   createEntityAdapter<SubcontractItem>({
+//     sortComparer: sortByNumber,
+//   });
 
 export function createItemForApprovedContract(subcontract: Subcontract): any {
-    const contractItem: ContractItem = {};
+    const contractItem: SubcontractItem = {};
     if (subcontract.amounts) {
       if (subcontract.amounts.contractOriginal) {
         contractItem.contractAmount = new Currency(

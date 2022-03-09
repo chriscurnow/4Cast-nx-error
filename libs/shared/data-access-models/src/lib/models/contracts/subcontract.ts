@@ -40,23 +40,7 @@ export interface SubcontractEntity extends EntityState<Subcontract> {
   selectedContractId: string | null;
 }
 
-export function selectContractId(a: Subcontract): string {
-  //In this case this would be optional since primary key is id
-  return a.id;
-}
 
-export function sortByName(a: Subcontract, b: Subcontract): number {
-  if(a.name && b.name ){
-  return a.name.localeCompare(b.name);
-  } else  {
-    return 0
-  }
-}
-
-export const subcontractAdapter: EntityAdapter<Subcontract> = createEntityAdapter<Subcontract>({
-  selectId: selectContractId,
-  sortComparer: sortByName,
-});
 
 
 

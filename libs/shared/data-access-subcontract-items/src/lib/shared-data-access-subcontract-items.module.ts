@@ -13,6 +13,10 @@ import { SubcontractItemEffects } from './+state/subcontract-item.effects';
       fromSubcontractItem.reducer
     ),
     EffectsModule.forFeature([SubcontractItemEffects]),
+    StoreModule.forFeature(
+      fromSubcontractItem.SUBCONTRACT_ITEM_FEATURE_KEY,
+      fromSubcontractItem.reducer
+    ),
   ],
 })
 export class SharedDataAccessSubcontractItemsModule {}

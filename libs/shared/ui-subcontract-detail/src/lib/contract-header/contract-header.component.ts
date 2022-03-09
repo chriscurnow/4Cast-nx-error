@@ -3,11 +3,11 @@ import { Project } from '@workspace/shared/data-access-models';
 import { Subcontract } from '@workspace/shared/data-access-models';
 
 @Component({
-  selector: 'fourcast-contract-header',
+  selector: 'fourcast-subcontract-header',
   templateUrl: './contract-header.component.html',
   styleUrls: ['./contract-header.component.scss'],
 })
-export class ContractHeaderComponent {
+export class SubcontractHeaderComponent {
   project: Project;
   headContractor: any = null;
   projectName = '';
@@ -20,7 +20,7 @@ export class ContractHeaderComponent {
 
   @Input() set subcontract(value: Subcontract) {
     this.localSubcontract = value;
-    console.log('Setting local subcontract', this.localSubcontract);
+    // console.log('Setting local subcontract', this.localSubcontract);
 
     if (value) {
       // this.project = value.project;

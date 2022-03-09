@@ -1,14 +1,19 @@
 import { createAction, props } from '@ngrx/store';
-import { SubcontractItemEntity } from './subcontract-item.models';
+import { SubcontractItem } from '@workspace/shared/data-access-models';
 
 export const init = createAction('[SubcontractItem Page] Init');
 
-export const loadSubcontractItemSuccess = createAction(
-  '[SubcontractItem/API] Load SubcontractItem Success',
-  props<{ subcontractItem: SubcontractItemEntity[] }>()
+export const loadSubcontractItems = createAction(
+  '[SubcontractItem/API] Load SubcontractItems',
+  props<{ subcontractId: string }>()
 );
 
-export const loadSubcontractItemFailure = createAction(
-  '[SubcontractItem/API] Load SubcontractItem Failure',
+export const loadSubcontractItemsSuccess = createAction(
+  '[SubcontractItem/API] Load SubcontractItems Success',
+  props<{ subcontractItems: SubcontractItem[] }>()
+);
+
+export const loadSubcontractItemsFailure = createAction(
+  '[SubcontractItem/API] Load SubcontractItems Failure',
   props<{ error: any }>()
 );
