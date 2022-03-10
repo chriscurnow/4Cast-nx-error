@@ -6,6 +6,9 @@
       <mat-label>Description of work</mat-label>
       <input matInput placeholder="Description of work" formControlName="description">
     </mat-form-field>
+    <fourcast-subcontract-dates formControlName="dates"></fourcast-subcontract-dates>
+    <h2>AMOUNTS</h2>
+      <fourcast-subcontract-item [item]="originalContractItem"></fourcast-subcontract-item>
 
     </mat-card-content>
     </mat-card>

@@ -4,7 +4,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 
 
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { Subcontract } from '@workspace/shared/data-access-models';
 
 @Component({
@@ -46,6 +46,7 @@ export class SubcontractDetailComponent implements OnInit {
     this.detailForm = this.fb.group({
       id: null,
       name: null,
+      dates: new FormControl([]),
       description: null,
     });
   }

@@ -35,7 +35,7 @@ export const selectSubcontractEntities = createSelector(
   selectSubcontractState,
   (state: SubcontractEntityState) => {
     const entities = selectEntities(state);
-    console.log('Select Subcontract State, entities', entities);
+    console.log('Select Subcontract Entities, entities', entities);
     return entities;
   }
 );

@@ -9,9 +9,9 @@ $purple-darker: color.adjust($purple, $lightness: -10%);
 $text: #222222;
 $text-contrast: #fff;
 
-// [STARTED DOCS] css variables used for theming of own components, eg color: var(--primary)
+// [STARTER DOCS] css variables used for theming of own components, eg color: var(--primary)
 :root {
-  // [STARTED DOCS] keep in sync with $contractor-* variables in styles.scss
+  // [STARTER DOCS] keep in sync with $contractor-* variables in styles.scss
   --primary: #{$blue};
   --primary-lighter: #{$blue-lighter};
   --primary-darker: #{$blue-darker};
@@ -23,7 +23,7 @@ $text-contrast: #fff;
   --contrast: #fff;
 }
 
-// [STARTED DOCS] material theme palettes, used for theming of angular material components
+// [STARTER DOCS] material theme palettes, used for theming of angular material components
 $fourcast-blue-palette: (
   100: $blue-lighter,
   500: $blue,

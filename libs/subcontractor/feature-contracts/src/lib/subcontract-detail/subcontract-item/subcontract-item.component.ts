@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'fourcast-contract-item',
+  // eslint-disable-next-line @angular-eslint/component-selector
+  selector: 'not-used-subcontract-item',
   templateUrl: './subcontract-item.component.html',
   styleUrls: ['./subcontract-item.component.scss'],
 })

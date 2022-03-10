@@ -24,21 +24,21 @@ import { DateUtilsService } from '@workspace/shared/util';
 import { ContractDates } from '@workspace/shared/data-access-models';
 
 @Component({
-  selector: 'fourcast-contract-dates',
-  templateUrl: './contract-dates.component.html',
+  selector: 'fourcast-subcontract-dates',
+  templateUrl: './subcontract-dates.component.html',
   styleUrls: [
-    './contract-dates.component.scss',
-    '../scss/contract-detail.scss',
+    './subcontract-dates.component.scss',
+    '../scss/subcontract-detail.scss',
   ],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => ContractDatesComponent),
+      useExisting: forwardRef(() => SubcontractDatesComponent),
       multi: true,
     },
     {
       provide: NG_VALIDATORS,
-      useExisting: forwardRef(() => ContractDatesComponent),
+      useExisting: forwardRef(() => SubcontractDatesComponent),
       multi: true,
     },
     { provide: MAT_DATE_LOCALE, useValue: 'en-AU' },
@@ -50,7 +50,7 @@ import { ContractDates } from '@workspace/shared/data-access-models';
     { provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS },
   ],
 })
-export class ContractDatesComponent implements ControlValueAccessor, OnDestroy {
+export class SubcontractDatesComponent implements ControlValueAccessor, OnDestroy {
   datesForm: FormGroup;
   subscriptions: Subscription[] = [];
 
