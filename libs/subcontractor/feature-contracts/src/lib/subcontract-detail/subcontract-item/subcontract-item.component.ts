@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'fourcast-contract-item',
+  selector: 'fourcast-subcontract-item',
   templateUrl: './subcontract-item.component.html',
   styleUrls: ['./subcontract-item.component.scss'],
 })

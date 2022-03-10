@@ -2,15 +2,15 @@
   width: 100%;
 }
 
-@import 'src/theming/variables';
+
 
 h2 {
   font-size: 14px;
   text-transform: capitalize;
-  color: $primary;
+  color: var(--primary);
 }
 .header-text {
-  color: $primary;
+  color: var(--primary);
 }
 
 h2,
@@ -22,7 +22,7 @@ h4 {
 
 .contract-header-text {
   font-size: 14px;
-  color: $primary;
+  color: var(--primary);
 }
 
 p {
