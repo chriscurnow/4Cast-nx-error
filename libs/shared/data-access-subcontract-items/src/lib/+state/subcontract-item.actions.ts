@@ -1,4 +1,5 @@
 import { createAction, props } from '@ngrx/store';
+// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
 import { SubcontractItem } from '@workspace/shared/data-access-models';
 
 export const init = createAction('[SubcontractItem Page] Init');

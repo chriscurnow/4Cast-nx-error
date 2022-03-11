@@ -3,11 +3,11 @@ import { provideMockActions } from '@ngrx/effects/testing';
 import { Action } from '@ngrx/store';
 import { provideMockStore } from '@ngrx/store/testing';
 import { NxModule, DataPersistence } from '@nrwl/angular';
-import { hot } from '@nrwl/angular/testing';
 import { Observable } from 'rxjs';
 
 import * as SubcontractItemActions from './subcontract-item.actions';
 import { SubcontractItemEffects } from './subcontract-item.effects';
+import { hot } from 'jasmine-marbles';
 
 describe('SubcontractItemEffects', () => {
   let actions: Observable<Action>;

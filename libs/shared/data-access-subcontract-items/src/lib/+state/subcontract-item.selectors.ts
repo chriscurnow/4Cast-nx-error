@@ -6,9 +6,10 @@ import {
 } from './subcontract-item.reducer';
 
 // Lookup the 'SubcontractItem' feature state managed by NgRx
-export const getSubcontractItemState = createFeatureSelector<SubcontractItemEntityState>(
-  SUBCONTRACT_ITEM_FEATURE_KEY
-);
+export const getSubcontractItemState =
+  createFeatureSelector<SubcontractItemEntityState>(
+    SUBCONTRACT_ITEM_FEATURE_KEY
+  );
 
 const { selectAll, selectEntities } = subcontractItemAdapter.getSelectors();
 
