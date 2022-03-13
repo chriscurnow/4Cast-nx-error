@@ -8,16 +8,19 @@
   *
   * Check to see if property exists on data and if so assigns it to this[property]
   */
- export function assignValue(data: object, newData: object, property: string) {
+ export function setValue(data: object, newData: object, property: string) {
 
   // We did have:
   // && this.hasOwnProperty(property)
   // but we never would have got here if 'this' didn't have the property
 
 
-  if (data && data.hasOwnProperty(property) ) {
+
+
+  if (data && newData && data.hasOwnProperty(property) ) {
 
     const dataObj: any = data;
+
 
     // the latest update to Angular/Typescript wonb't let us use "this[property]"
     // or data[propertry].
