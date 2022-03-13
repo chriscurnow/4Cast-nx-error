@@ -9,6 +9,7 @@
       "outputs": ["coverage/libs/subcontractor/feature-contracts"],
       "options": {
         "jestConfig": "libs/subcontractor/feature-contracts/jest.config.js",
+        "tsConfig": "libs/subcontractor/feature-contracts/tsconfig.json",
         "passWithNoTests": true
       }
     },
