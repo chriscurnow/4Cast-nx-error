@@ -30,7 +30,7 @@ export interface PaymentAmounts {
   amountRemaining?: Currency;
 }
 
-export function createAmountItem(data: PaymentAmountItem): PaymentAmountItem  {
+export function createAmountItem(data: PaymentAmountItem | undefined): PaymentAmountItem  {
    if (data) {
      return {
        percent: data.percent,

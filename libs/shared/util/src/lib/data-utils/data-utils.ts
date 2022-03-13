@@ -33,4 +33,12 @@
      enumerable: true})
 
   }
+
+
+}
+
+export function setValues(data: object, newData: object, properties: string[]){
+  properties.forEach(property => {
+    setValue(data, newData, property);
+  })
 }
