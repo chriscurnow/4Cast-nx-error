@@ -1,3 +1,4 @@
+/* eslint-disable @nrwl/nx/enforce-module-boundaries */
 /* eslint-disable no-prototype-builtins */
 import { Injectable } from '@angular/core';
 import {
@@ -61,14 +62,13 @@ export class SubcontractItemsService {
    *
    * Retrieves contract items for subcontract
    */
-  getContractItems(subcontractId: string): Observable<SubcontractItem[]> {
-    const path = 'subcontractItems'; // TODO: [SL-16] implement method to get contract item path
+  getContractItems(projectId: string, subcontractId: string): Observable<SubcontractItem[]> {
+    const path = `projects/${projectId}/subcontract/${subcontractId}/subcontractItems`; // TODO: [SL-16] implement method to get contract item path
     // ContractItem.getCollectionPath(projectId, subcontractId);
     // this.contractItemsCollection =
     return this.afs
       .collection<SubcontractItem>(path, (ref) =>
         ref
-          .where('subcontract.id', '==', subcontractId)
           .where('itemNumber', '>=', 0)
           .orderBy('itemNumber')
       )

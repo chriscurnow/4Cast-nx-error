@@ -2,8 +2,9 @@
 import { PaymentStatus } from './payment-status';
 import { MostRecentPayment } from '../contracts';
 import { Currency } from '@workspace/shared/util';
-import { PaymentHeader } from './payment-header.model';
-import { PaymentAmounts, PaymentAmountItem } from './amounts.models';
+import { PaymentHeader } from './payment-header';
+import { PaymentAmounts, PaymentAmountItem } from './amounts';
+import { SubcontractItem } from '../contracts'
 export interface ApprovedPaymentUpdate {
 
   'amounts.thisClaimed': Record<string, unknown>;
@@ -28,7 +29,7 @@ export interface PaymentSubcontractUpdate {
   amounts: Amounts;
 }
 
-export interface Payment {
+export interface SubcontractPayment {
   id?: string;
   amounts?: PaymentAmounts;
   subcontractId?: string;
@@ -36,3 +37,19 @@ export interface Payment {
   status?: PaymentStatus;
   projectId?: string;
 }
+
+export interface PaymentItem {
+  id?: string;
+  payment?: SubcontractPayment;
+  contractItem?: SubcontractItem;
+  amounts?: PaymentAmounts;
+}
+
+ export function setPaymentDate(payment: SubcontractPayment, newDate: Date): void {
+      if (!payment.paymentHeader ) {
+        payment.paymentHeader = {};
+      }
+       payment.paymentHeader.paymentDate = newDate;
+    }
+
+

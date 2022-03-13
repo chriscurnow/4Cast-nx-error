@@ -18,8 +18,8 @@ import {
 import {
   MostRecentPayment
 } from './most-recent-payment';
-import { Payment } from '../payments/payment.model';
-import { SubcontractHeadContractorEntity } from '.';
+
+
 
 export interface Supplier {
   id: string;

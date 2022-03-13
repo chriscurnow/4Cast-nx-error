@@ -2,11 +2,13 @@ import * as admin from 'firebase-admin';
 import * as functions from 'firebase-functions';
 import { Subcontract,
          PaymentAmountItem,
+         setPaymentDate,
          PaymentAmounts,
          PaymentStatus,
          SubcontractPayment,
-        } from '@4cast/classes';
-import { Currency } from '@4cast/core/utilities';
+         createAmountItem
+        } from '@workspace/shared/data-access-models';
+import { Currency } from '@workspace/shared/util';
 // tslint:disable-next-line: no-duplicate-imports
 
 
@@ -16,7 +18,7 @@ import { Currency } from '@4cast/core/utilities';
 
 let app: any = null;
 
-// eslint-disable-next-line prefer-arrow/prefer-arrow-functions
+
 const initialize = function(): void{
 
 if (!app){
@@ -82,7 +84,7 @@ export const createSubcontractPayment = functions.https.onCall((data, context) =
   });
 });
 
-// eslint-disable-next-line prefer-arrow/prefer-arrow-functions
+
 function createNewPayment(
     contractPayments: FirebaseFirestore.CollectionReference<FirebaseFirestore.DocumentData>,
     subcontractId: string): Promise<FirebaseFirestore.DocumentData | undefined> {
@@ -92,7 +94,7 @@ function createNewPayment(
   .then((subcontractDoc) => createPaymentForSubcontract (contractPayments, subcontractDoc));
 }
 
-// eslint-disable-next-line prefer-arrow/prefer-arrow-functions
+
 function createPaymentForSubcontract(
     contractPayments: FirebaseFirestore.CollectionReference<FirebaseFirestore.DocumentData>,
     subcontractDoc: FirebaseFirestore.DocumentSnapshot<FirebaseFirestore.DocumentData>): Promise<FirebaseFirestore.DocumentData | undefined> {
@@ -111,7 +113,7 @@ function createPaymentForSubcontract(
  * @param contractPayments: collection
  * @param plainData: any
  */
-// eslint-disable-next-line prefer-arrow/prefer-arrow-functions
+
 function addPaymentToCollection(contractPayments: FirebaseFirestore.CollectionReference,
                                 plainData: any): Promise<FirebaseFirestore.DocumentData | undefined> {
 
@@ -134,19 +136,19 @@ function addPaymentToCollection(contractPayments: FirebaseFirestore.CollectionRe
  * @param subcontract: Subcontract
  * @returns payment: any
  */
-// eslint-disable-next-line prefer-arrow/prefer-arrow-functions
+
 export function createNewPaymentForSubcontract(subcontract: Subcontract): any{
   // const methodName = 'createNewPaymentForSubcontract'
   // log(methodName, 'Starting method createNewPaymentForSubcontract', null)
   // log(methodName, 'creating with subcontract.mostRecentPayment', subcontract.mostRecentPayment)
   // Initialise a new payment instance
-  const payment: SubcontractPayment = new SubcontractPayment({});
+  const payment: SubcontractPayment = {};
 
 
   // console.log('Initialised new payment for subcontract:', subcontract);
 
   // let amounts: PaymentAmounts = new PaymentAmounts(null);
-  const amounts: PaymentAmounts = payment.amounts ? payment.amounts : new PaymentAmounts();
+  const amounts: PaymentAmounts = payment.amounts ? payment.amounts : {};
 
   // console.log('Creating amounts subcontract amounts', subcontract.amounts);
   if (subcontract && subcontract.amounts) {
@@ -156,22 +158,40 @@ export function createNewPaymentForSubcontract(subcontract: Subcontract): any{
     // amounts.contractRevised = new Currency(subcontract.amounts.contractRevised);
     // amounts.toDateVariations = new Currency(subcontract.amounts.toDateVariations);
     if (subcontract.mostRecentPayment) {
-      amounts.previouslyClaimed = new PaymentAmountItem(subcontract.mostRecentPayment.claimed);
-      amounts.previouslyApproved = new PaymentAmountItem(subcontract.mostRecentPayment.approved);
+      const payment = subcontract.mostRecentPayment;
+      amounts.previouslyClaimed = { 
+        toDate: payment.claimed ? payment.claimed.toDate : undefined
+     };
+     amounts.previouslyApproved = createAmountItem(
+       subcontract.mostRecentPayment.approved
+     );
+     const approved = subcontract.mostRecentPayment.approved;
+     if (approved){
+      amounts.previouslyApproved = {
+        percent: approved.percent,
+        toDate: approved.toDate,
+        amount: approved.amount
+      }
+     }
+      
+      
+      new PaymentAmountItem(subcontract.mostRecentPayment.approved);
     } else {
       log ('createNewPaymentForSubcontract', 'No previous payment found using subcontract amounts:', subcontract.amounts);
 
-      amounts.previouslyClaimed = new PaymentAmountItem({
+      amounts.previouslyClaimed = {
         toDate: subcontract.amounts.toDateClaimed,
         percent: 0,
         amount: new Currency(),
-      });
+      };
 
-      amounts.previouslyApproved = new PaymentAmountItem({
+
+
+      amounts.previouslyApproved = {
         toDate: subcontract.amounts.toDateApproved,
         percent: 0,
         amount: new Currency(),
-      });
+      };
 
 
       amounts.thisClaimed = amounts.previouslyClaimed; // default new amount claimed = previous amount claimed.
@@ -179,7 +199,7 @@ export function createNewPaymentForSubcontract(subcontract: Subcontract): any{
   }
   // console.log('Amounts set successfully', amounts);
     payment.amounts = amounts;
-    payment.setDate(new Date());
+    setPaymentDate(payment, new Date());
 
   // if (subcontract.project ){
   //     payment.paymentHeader. =  subcontract.project
@@ -204,7 +224,6 @@ export function createNewPaymentForSubcontract(subcontract: Subcontract): any{
 }
 }
 
-// eslint-disable-next-line prefer-arrow/prefer-arrow-functions
 const log = function(method: string, info: string, data: any): void{
   console.log('');
   console.log('============================================================');
