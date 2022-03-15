@@ -159,23 +159,12 @@ export function createNewPaymentForSubcontract(subcontract: Subcontract): any{
     // amounts.toDateVariations = new Currency(subcontract.amounts.toDateVariations);
     if (subcontract.mostRecentPayment) {
       const payment = subcontract.mostRecentPayment;
-      amounts.previouslyClaimed = { 
+      amounts.previouslyClaimed = {
         toDate: payment.claimed ? payment.claimed.toDate : undefined
      };
      amounts.previouslyApproved = createAmountItem(
        subcontract.mostRecentPayment.approved
      );
-     const approved = subcontract.mostRecentPayment.approved;
-     if (approved){
-      amounts.previouslyApproved = {
-        percent: approved.percent,
-        toDate: approved.toDate,
-        amount: approved.amount
-      }
-     }
-      
-      
-      new PaymentAmountItem(subcontract.mostRecentPayment.approved);
     } else {
       log ('createNewPaymentForSubcontract', 'No previous payment found using subcontract amounts:', subcontract.amounts);
 
