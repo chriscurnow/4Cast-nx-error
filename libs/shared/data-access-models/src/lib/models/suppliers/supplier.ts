@@ -1,7 +1,23 @@
-import { Company  } from '..';
+import { setTypeValues } from '@workspace/shared/util';
+import { Company, createCompany  } from '..';
 
 export interface Supplier extends Company {
-  isSupplier: boolean;
+  isSupplier?: boolean;
+}
+
+export function createSupplier(supplier: Supplier | undefined){
+
+  let newSupplier = {};
+  if(supplier){
+    newSupplier = createCompany(supplier);
+    const properties = ['isSupplier'];
+    setTypeValues(supplier, newSupplier, properties)
+  }
+
+
+
+
+  return newSupplier;
 }
 
 

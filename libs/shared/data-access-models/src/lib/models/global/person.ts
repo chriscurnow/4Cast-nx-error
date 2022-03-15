@@ -1,6 +1,6 @@
 import { PhoneNumber } from '.';
 import { EmailAddress } from '.';
-import { setValues } from '@workspace/shared/util';
+import { setTypeValues } from '@workspace/shared/util';
 
 export interface Person {
 
@@ -18,9 +18,9 @@ export interface Person {
 
 export function createPerson(person: Person | undefined): Person {
   const newPerson: Person = {};
-  const properties = ['id', 'familyName', 'givenName', 'preferredName', 'concateName']
+  const properties = ['id', 'familyName', 'givenName', 'preferredName', 'concatName']
   if(person){
-    setValues(person, newPerson, properties);
+    setTypeValues(person, newPerson, properties);
   }
 
 

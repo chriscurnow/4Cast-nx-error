@@ -1,4 +1,4 @@
-import { setValues } from "@workspace/shared/util";
+import { setTypeValues } from "@workspace/shared/util";
 
 export interface ProjectDates {
   adjusted?: Date;
@@ -11,7 +11,7 @@ export function createProjectDates (projectDates: ProjectDates | undefined ): Pr
   const newProjectDates: ProjectDates = {};
   if (projectDates) {
     const properties = ['adjusted', 'finish', 'forecastFinish', 'start'];
-    setValues(projectDates, newProjectDates, properties);
+    setTypeValues(projectDates, newProjectDates, properties);
   }
   return newProjectDates;
 

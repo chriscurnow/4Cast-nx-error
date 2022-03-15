@@ -1,4 +1,4 @@
-import { setValues } from "@workspace/shared/util";
+import { setTypeValues, setValuesArray } from "@workspace/shared/util";
 
 export interface PhoneNumber{
   format?: string | null;
@@ -6,30 +6,15 @@ export interface PhoneNumber{
   phoneName?: string | null;
 }
 
+const properties = ['format', 'phoneNumber', 'phoneName'];
+const newPhoneNumber: PhoneNumber = {};
+
 export function createPhoneNumber(phoneNumber: PhoneNumber): PhoneNumber {
-  const newPhoneNumber: PhoneNumber = {};
-  const properties = ['format', 'phoneNumber', 'phoneName']
-  setValues(phoneNumber, newPhoneNumber, properties)
+  setTypeValues<PhoneNumber>(phoneNumber, newPhoneNumber, properties)
   return newPhoneNumber
 }
 
-export function createPhoneNumbers(phoneNumbers: PhoneNumber[] | undefined): PhoneNumber[]{
-  const newPhoneNumbers: PhoneNumber[] = [];
-  if (phoneNumbers) {
-    phoneNumbers.forEach(pNumber => {
-      newPhoneNumbers.push(createPhoneNumber(pNumber))
-    })
-  }
-  return newPhoneNumbers
+export function createPhoneNumbers(phoneNumbers: PhoneNumber[] | undefined, properties: string[]): PhoneNumber[]{
+  return setValuesArray<PhoneNumber>(phoneNumbers, newPhoneNumber, properties)
 }
-// export class PhoneNumber implements PhoneNumberInterface {
-//   format?: string | null;
-//   phoneNumber?: string | null;
-//   phoneName?: string | null;
 
-//   constructor(data: PhoneNumberInterface) {
-//     this.format = data.format ? data.format : null;
-//     this.phoneNumber = data.phoneNumber ? data.phoneNumber : null;
-//     this.phoneName = data.phoneName ? data.phoneName : null;
-//   }
-// }

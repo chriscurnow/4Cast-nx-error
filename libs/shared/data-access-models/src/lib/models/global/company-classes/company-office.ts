@@ -1,6 +1,6 @@
 import { Address } from '../address';
 import { PhoneNumber } from  '../phone';
-import { setValues } from '@workspace/shared/util';
+import { setTypeValues } from '@workspace/shared/util';
 import { createAddress } from '..';
 import { createPhoneNumbers} from '..';
 
@@ -14,7 +14,7 @@ export function createOffice(companyOffice: CompanyOffice | undefined): CompanyO
   const properties = ['description'];
   const newCompanyOffice: CompanyOffice = {};
   if (companyOffice){
-     setValues(companyOffice, newCompanyOffice, properties);
+     setTypeValues(companyOffice, newCompanyOffice, properties);
      newCompanyOffice.address = createAddress(
        companyOffice ? companyOffice.address : undefined
      );

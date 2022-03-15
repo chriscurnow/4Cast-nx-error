@@ -1,7 +1,7 @@
 import { CompanyOffice  } from './company-office';
 import { Person } from '../person';
 import { createOffice, createOffices } from '.';
-import { setValue, setValues } from '@workspace/shared/util';
+import { setValue, setTypeValues } from '@workspace/shared/util';
 // import { Tenant } from '../../../tenant-classes/tenant';
 
 
@@ -24,7 +24,7 @@ export function createCompany(
   const properties = ['id', 'companyName', 'abn', 'abbreviation', 'code'];
   const newCompany: Company = {};
   if(company){
-    setValues(company, newCompany, properties);
+    setTypeValues(company, newCompany, properties);
     newCompany.mainOffice = createOffice(company.mainOffice);
     newCompany.offices = createOffices(company.offices);
   }

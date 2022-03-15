@@ -8,15 +8,20 @@ import {
   ContractAuthorisation,
   ContractDates,
   MostRecentPayment,
-  ContractDetails
+  ContractDetails,
+  createCostCode,
+  createSupplier
 } from '..';
 
+import { setTypeValues } from '@workspace/shared/util';
+
 import { EntityAdapter, EntityState, createEntityAdapter } from '@ngrx/entity';
+import { createContractAuth } from '.';
 
 
 
 export interface Subcontract {
-  id: string;
+  id?: string;
   name?: string | undefined;
   description?: string | undefined;
   number?: number | undefined;
@@ -40,6 +45,19 @@ export interface SubcontractEntity extends EntityState<Subcontract> {
   selectedContractId: string | null;
 }
 
+export function createSubcontract(subcontract: Subcontract | undefined){
+  const newSubcontract: Subcontract = {};
+  if (subcontract){
+    const properties = ['id', 'name', 'number', 'isNew', 'isDraft', 'nextItemnumber', 'nextPaymentNumber'];
+    setTypeValues(subcontract, newSubcontract, properties);
+    newSubcontract.costCode = createCostCode(subcontract.costCode);
+    newSubcontract.supplier = createSupplier(subcontract.supplier);
+    newSubcontract.authorisation = createContractAuth(subcontract.authorisation);
+
+  }
+
+  return newSubcontract;
+}
 
 
 

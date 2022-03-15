@@ -1,4 +1,4 @@
-import { setValues } from "@workspace/shared/util"
+import { setTypeValues } from "@workspace/shared/util"
 
 export interface Address {
   line1?: string;
@@ -20,7 +20,7 @@ export function createAddress(address: Address | undefined): Address {
       'country',
       'postcode',
     ];
-    setValues(address, newAddress, properties);
+    setTypeValues(address, newAddress, properties);
   }
 
   return newAddress;
