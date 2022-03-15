@@ -1,9 +1,9 @@
 import { PaymentStatus } from '../payments';
-import { PaymentAmountItem } from '../payments/amounts';
+import { PaymentAmountItem, createAmountItem } from '../payments/amounts';
 
 // import { SubcontractPayment }
 
-import { Currency } from '@workspace/shared/util';
+import { Currency, setTypeValues } from '@workspace/shared/util';
 
 export interface mostRecentamounts {
   toDate?: Currency;
@@ -17,4 +17,16 @@ export interface MostRecentPayment {
   status?: PaymentStatus;
   claimed?: PaymentAmountItem;
   approved?: PaymentAmountItem;
+}
+
+export function createMostRecentPayment(payment: MostRecentPayment | undefined): MostRecentPayment{
+  const newPayment: MostRecentPayment = {};
+  if (payment){
+    const properties = ['id', 'paymentNumber', 'status'];
+    setTypeValues<MostRecentPayment>(payment, newPayment, properties);
+    newPayment.claimed = createAmountItem(payment.claimed);
+    newPayment.approved = createAmountItem(payment.approved);
+  }
+
+  return newPayment;
 }

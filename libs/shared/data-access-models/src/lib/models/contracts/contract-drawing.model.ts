@@ -21,8 +21,8 @@ export const drawingProps: string[] = [
 export function createContractDrawing(drawing: ContractDrawing | undefined){
   const newDrawing: ContractDrawing = {};
   if(drawing){
-    const props =
-    setTypeValues(drawing, newDrawing, drawingProps);
+
+    setTypeValues<ContractDrawing>(drawing, newDrawing, drawingProps);
   }
   return newDrawing;
 }

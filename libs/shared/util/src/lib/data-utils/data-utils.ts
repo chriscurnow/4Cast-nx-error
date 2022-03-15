@@ -8,40 +8,8 @@
   *
   * Check to see if property exists on data and if so assigns it to this[property]
   */
- export function setValue(data: object, newData: object, property: string) {
-
-  // We did have:
-  // && this.hasOwnProperty(property)
-  // but we never would have got here if 'this' didn't have the property
 
 
-
-
-  if (data && newData && data.hasOwnProperty(property) ) {
-
-    const dataObj: any = data;
-
-
-    // the latest update to Angular/Typescript wonb't let us use "this[property]"
-    // or data[propertry].
-    // the linter allows us to do the following.
-    // hopefully it actually works
-
-   const value: any = dataObj[property]
-   Object.defineProperty(newData, property, {
-     value,
-     enumerable: true})
-
-  }
-
-
-}
-
-export function setTypeValues(data: object, newData: object, properties: string[]){
-  properties.forEach(property => {
-    setValue(data, newData, property);
-  })
-}
 
 export function setTypeValue<T extends object>(
   data: T,
@@ -68,10 +36,13 @@ export function setTypeValue<T extends object>(
   }
 }
 
-export function setTypeValues<T extends object>(data: T, newData: T, properties: string[]){
-  properties.forEach((property) => {
-    setTypeValue<T>(data, newData, property);
-  });
+export function setTypeValues<T extends object>(data: T | undefined, newData: T, properties: string[]){
+  if(data){
+     properties.forEach((property) => {
+       setTypeValue<T>(data, newData, property);
+     });
+  }
+
 }
 
 /**

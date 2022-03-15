@@ -11,7 +11,7 @@ export function createSupplier(supplier: Supplier | undefined){
   if(supplier){
     newSupplier = createCompany(supplier);
     const properties = ['isSupplier'];
-    setTypeValues(supplier, newSupplier, properties)
+    setTypeValues<Supplier>(supplier, newSupplier, properties)
   }
 
 

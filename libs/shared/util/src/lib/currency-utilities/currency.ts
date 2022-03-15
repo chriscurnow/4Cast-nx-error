@@ -1,30 +1,31 @@
 import Dinero from 'dinero.js';
+import { setTypeValues } from '../data-utils/data-utils';
 
 Dinero.defaultCurrency = 'AUD';
 Dinero.defaultPrecision = 2;
 
-export interface CurrencyInterface {
+export interface Currency {
   amount: number;
   currency?: string;
   precision?: number;
 }
 
-export class Currency implements CurrencyInterface {
+export class CurrencyClass implements Currency {
   amount = 0;
   currency?: string;
   precision?: number;
   dinero?: Dinero.Dinero | undefined;
-  valuesOnly: CurrencyInterface;
+  valuesOnly: Currency;
 
   static dineroToCurrency(dinero: Dinero.Dinero){
-    return new Currency({
+    return new CurrencyClass({
       amount: dinero.getAmount(),
       currency: dinero.getCurrency(),
       precision: dinero.getPrecision()});
   }
 
-  static interfaceToCurrency(iCurrency: CurrencyInterface) {
-    return iCurrency ? new Currency({amount: iCurrency.amount}) : null;
+  static interfaceToCurrency(iCurrency: Currency) {
+    return iCurrency ? new CurrencyClass({amount: iCurrency.amount}) : null;
   }
 
 
@@ -38,17 +39,17 @@ export class Currency implements CurrencyInterface {
         return obj;
 
       case (typeof(obj) === 'number'):
-        return new Currency(obj);
+        return new CurrencyClass(obj);
 
       case(typeof(obj) === 'string'):
-       return new Currency(obj);
+       return new CurrencyClass(obj);
 
       default:
-        return new Currency({amount: obj.amount, currency: obj.currency, precision: obj.precision});
+        return new CurrencyClass({amount: obj.amount, currency: obj.currency, precision: obj.precision});
     }
   }
 
-  static currencyToPlain(amount: Currency | CurrencyInterface): CurrencyInterface {
+  static currencyToPlain(amount: Currency | Currency): Currency {
     return {
       amount: amount.amount,
       currency: amount.currency,
@@ -63,7 +64,7 @@ export class Currency implements CurrencyInterface {
    * Takes CurrencyInterface and returns a Currency instante
    * If no parameter provided returns a Currency instance with amount = 0;
    */
-  constructor(data?: CurrencyInterface) {
+  constructor(data?: Currency) {
 
       if (data) {
 
@@ -175,22 +176,22 @@ public toPlainObject() {
 
     }
 
-    public subtract(value: Currency) {
+    public subtract(value: CurrencyClass) {
       if(value && value.dinero && this.dinero) {
         const newValue = this.dinero.subtract(value.dinero);
-        return Currency.dineroToCurrency(newValue);
+        return CurrencyClass.dineroToCurrency(newValue);
       }
-      else return new Currency();
+      else return new CurrencyClass();
 
     }
 
-    public add(value: Currency): Currency {
+    public add(value: CurrencyClass): CurrencyClass {
       if(this.dinero && value && value.dinero) {
         const dineroValue = this.dinero
         const newValue = dineroValue.add(value.dinero);
-        return Currency.dineroToCurrency(newValue);
+        return CurrencyClass.dineroToCurrency(newValue);
       } else {
-        return new Currency();
+        return new CurrencyClass();
       }
 
     }
@@ -217,7 +218,7 @@ export function stringToDinero(x: any): Currency | null{
         const stringVal = x.replace(/[^\d-]/g, '');
         const numVal: number = parseInt(stringVal, 10);
 
-        const dVal = new Currency({amount: numVal});
+        const dVal = new CurrencyClass({amount: numVal});
     //  console.log('x', x);
     // console.log('decPos', decPos)
     // console.log('stringVal', stringVal)
@@ -234,4 +235,14 @@ export function stringToDinero(x: any): Currency | null{
       return result;
     }
 
+  }
+
+  export function createCurrency(currency: Currency | undefined): Currency{
+    const newCurrency = {amount: 0, currency: 'AUD', precision: 2};
+    if(currency){
+      const properties = ['amount', 'currency', 'precision'];
+      setTypeValues(currency, newCurrency, properties)
+    }
+
+    return newCurrency;
   }

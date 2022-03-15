@@ -10,10 +10,10 @@ export interface Superintendent {
     // people: ProjectContactInterface[]
   }
 
-  export function createSuperintendant(superintendant: Superintendent): Superintendent{
+  export function createSuperintendant(superintendant: Superintendent | undefined): Superintendent{
     const properties = ['id', 'companyName'];
     const newSuperintendent: Superintendent = {};
-    setTypeValues(superintendant, newSuperintendent, properties);
+    setTypeValues<Superintendent>(superintendant, newSuperintendent, properties);
     newSuperintendent.address = createAddress(superintendant ? superintendant.address : undefined)
     return newSuperintendent
   }

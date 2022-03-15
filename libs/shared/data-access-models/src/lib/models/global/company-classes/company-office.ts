@@ -1,6 +1,6 @@
 import { Address } from '../address';
 import { PhoneNumber } from  '../phone';
-import { setTypeValues } from '@workspace/shared/util';
+import { setTypeValues, setValuesArray } from '@workspace/shared/util';
 import { createAddress } from '..';
 import { createPhoneNumbers} from '..';
 
@@ -10,11 +10,15 @@ export interface CompanyOffice {
   phoneNumbers?: PhoneNumber[];
 }
 
+ const properties = ['description'];
+
+
 export function createOffice(companyOffice: CompanyOffice | undefined): CompanyOffice {
-  const properties = ['description'];
+
   const newCompanyOffice: CompanyOffice = {};
+
   if (companyOffice){
-     setTypeValues(companyOffice, newCompanyOffice, properties);
+     setTypeValues<CompanyOffice>(companyOffice, newCompanyOffice, properties);
      newCompanyOffice.address = createAddress(
        companyOffice ? companyOffice.address : undefined
      );
@@ -26,14 +30,16 @@ export function createOffice(companyOffice: CompanyOffice | undefined): CompanyO
 }
 
 export function  createOffices(companyOffices: CompanyOffice[] | undefined){
-  const newCompanyOffices: CompanyOffice[] = [];
-  if (companyOffices){
-    companyOffices.forEach(office => {
-      const newOffice = createOffice(office);
-      if (newOffice){
-         newCompanyOffices.push(newOffice)
-      }
-    })
-  }
-  return newCompanyOffices;
+  const newCompanyOffice: CompanyOffice = {};
+  return setValuesArray(companyOffices, newCompanyOffice, properties)
+  // const newCompanyOffices: CompanyOffice[] = [];
+  // if (companyOffices){
+  //   companyOffices.forEach(office => {
+  //     const newOffice = createOffice(office);
+  //     if (newOffice){
+  //        newCompanyOffices.push(newOffice)
+  //     }
+  //   })
+  // }
+  // return newCompanyOffices;
 }

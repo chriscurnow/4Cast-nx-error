@@ -20,7 +20,7 @@ export function createPerson(person: Person | undefined): Person {
   const newPerson: Person = {};
   const properties = ['id', 'familyName', 'givenName', 'preferredName', 'concatName']
   if(person){
-    setTypeValues(person, newPerson, properties);
+    setTypeValues<Person>(person, newPerson, properties);
   }
 
 

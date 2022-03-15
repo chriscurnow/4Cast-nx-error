@@ -12,7 +12,7 @@ export interface CostCode {
     const newCostCode: CostCode = {};
     if (costCode) {
       const properties = ['id', 'name', 'number', 'numberName'];
-      setTypeValues(costCode, newCostCode, properties);
+      setTypeValues<CostCode>(costCode, newCostCode, properties);
     }
     return newCostCode;
   }

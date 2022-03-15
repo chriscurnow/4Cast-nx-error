@@ -14,7 +14,7 @@ export function createPhoneNumber(phoneNumber: PhoneNumber): PhoneNumber {
   return newPhoneNumber
 }
 
-export function createPhoneNumbers(phoneNumbers: PhoneNumber[] | undefined, properties: string[]): PhoneNumber[]{
+export function createPhoneNumbers(phoneNumbers: PhoneNumber[] | undefined): PhoneNumber[]{
   return setValuesArray<PhoneNumber>(phoneNumbers, newPhoneNumber, properties)
 }
 

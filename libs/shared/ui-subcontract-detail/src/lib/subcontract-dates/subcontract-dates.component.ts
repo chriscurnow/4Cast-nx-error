@@ -21,6 +21,7 @@ import {
 } from '@angular/material/core';
 import { DateUtilsService } from '@workspace/shared/util';
 
+// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
 import { ContractDates } from '@workspace/shared/data-access-models';
 
 @Component({

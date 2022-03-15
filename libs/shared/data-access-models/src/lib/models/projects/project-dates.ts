@@ -11,7 +11,7 @@ export function createProjectDates (projectDates: ProjectDates | undefined ): Pr
   const newProjectDates: ProjectDates = {};
   if (projectDates) {
     const properties = ['adjusted', 'finish', 'forecastFinish', 'start'];
-    setTypeValues(projectDates, newProjectDates, properties);
+    setTypeValues<ProjectDates>(projectDates, newProjectDates, properties);
   }
   return newProjectDates;
 

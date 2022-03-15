@@ -20,7 +20,7 @@ export function createAddress(address: Address | undefined): Address {
       'country',
       'postcode',
     ];
-    setTypeValues(address, newAddress, properties);
+    setTypeValues<Address>(address, newAddress, properties);
   }
 
   return newAddress;

@@ -26,11 +26,3 @@ export function createContractDocument(value: ContractDocument | undefined){
   return newValue;
 }
 
-export function create(value: ContractDocument | undefined) {
-  const newValue: ContractDocument = {};
-  if (value) {
-    const props = ['id', 'documentNumber', 'name', 'revision', 'date', 'file'];
-    setTypeValues(value, newValue, props);
-  }
-  return newValue;
-}

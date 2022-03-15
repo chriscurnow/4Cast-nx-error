@@ -1,7 +1,7 @@
 import { CompanyOffice  } from './company-office';
 import { Person } from '../person';
 import { createOffice, createOffices } from '.';
-import { setValue, setTypeValues } from '@workspace/shared/util';
+import { setTypeValue, setTypeValues } from '@workspace/shared/util';
 // import { Tenant } from '../../../tenant-classes/tenant';
 
 
@@ -69,7 +69,7 @@ export interface CompanyContact extends Person {
 export function createCompanyContact(companyContact: CompanyContact | undefined): CompanyContact {
   const newCompanyContact: CompanyContact = {};
   if (companyContact){
-    setValue(companyContact, newCompanyContact, 'trade')
+    setTypeValue<CompanyContact>(companyContact, newCompanyContact, 'trade')
     newCompanyContact.company = createCompany(companyContact.company)
   }
   return newCompanyContact
