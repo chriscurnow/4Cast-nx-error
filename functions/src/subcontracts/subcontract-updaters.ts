@@ -2,11 +2,11 @@ import * as admin from 'firebase-admin';
 import * as functions from 'firebase-functions';
 
 
-import { MostRecentPaymentInterface as MostRecentPaymentInterface } from '@4cast/classes';
+import { MostRecentPayment } from '@workspace/shared/data-access-models';
 
 let app: any = null;
 
-// eslint-disable-next-line prefer-arrow/prefer-arrow-functions
+
 function initialize(): void{
 
 if (!app){
@@ -50,7 +50,7 @@ export const updateSubcontractmostRecentPayment = functions.https.onCall((data, 
 
                     const mostRecentPaymentSnap = paymentsSnap.docs[0];
                     const mostRecentPayment = mostRecentPaymentSnap.data();
-                    const previousPayment: MostRecentPaymentInterface =
+                    const previousPayment: MostRecentPayment =
                     {
                         id: mostRecentPayment.id,
                         //
