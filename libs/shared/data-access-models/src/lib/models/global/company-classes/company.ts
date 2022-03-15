@@ -1,5 +1,7 @@
 import { CompanyOffice  } from './company-office';
 import { Person } from '../person';
+import { createOffice, createOffices } from '.';
+import { setValue, setValues } from '@workspace/shared/util';
 // import { Tenant } from '../../../tenant-classes/tenant';
 
 
@@ -16,7 +18,18 @@ export interface Company {
   // tenant: Tenant;
 }
 
-
+export function createCompany(
+  company: Company | undefined
+): Company {
+  const properties = ['id', 'companyName', 'abn', 'abbreviation', 'code'];
+  const newCompany: Company = {};
+  if(company){
+    setValues(company, newCompany, properties);
+    newCompany.mainOffice = createOffice(company.mainOffice);
+    newCompany.offices = createOffices(company.offices);
+  }
+  return newCompany;
+}
 
 
 
@@ -48,8 +61,17 @@ export interface Company {
 
 export interface CompanyContact extends Person {
 
-  company: Company | undefined;
-  trade: string | undefined;
+  company?: Company | undefined;
+  trade?: string | undefined;
 
+}
+
+export function createCompanyContact(companyContact: CompanyContact | undefined): CompanyContact {
+  const newCompanyContact: CompanyContact = {};
+  if (companyContact){
+    setValue(companyContact, newCompanyContact, 'trade')
+    newCompanyContact.company = createCompany(companyContact.company)
+  }
+  return newCompanyContact
 }
 
