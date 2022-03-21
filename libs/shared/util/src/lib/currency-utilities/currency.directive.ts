@@ -4,7 +4,7 @@ import {Directive, ElementRef, forwardRef, HostListener, Input, Output, EventEmi
 import {MAT_INPUT_VALUE_ACCESSOR} from '@angular/material/input';
 import {NG_VALUE_ACCESSOR} from '@angular/forms';
 import Dinero from 'dinero.js';
-import { Currency, stringToDinero} from './currency';
+import { Currency, createCurrency, stringToDinero} from './currency';
 
 
 @Directive({
@@ -138,7 +138,7 @@ get readonly() {
 
     this.internalValue = stringToDinero(value);
     if (!this.internalValue){
-      this.internalValue = new Currency();
+      this.internalValue = createCurrency();
     }
     this.onChange.emit(this.internalValue);
   }

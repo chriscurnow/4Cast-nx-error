@@ -1,7 +1,7 @@
 import * as admin from 'firebase-admin';
 // import { firestore } from 'firebase-admin';
 import * as functions from 'firebase-functions';
-import { Subcontract } from '@4cast/classes';
+import { Subcontract } from '@workspace/shared/data-access-models';
 // import { Currency } from '@4cast/subcontract';
 
 if(!admin.apps.length) {
@@ -78,7 +78,7 @@ export const oldMoveSubcontracts = functions.https.onCall((data, context) => {
     });
 });
 
-// eslint-disable-next-line prefer-arrow/prefer-arrow-functions
+
 function logProjectProgress(projectId: string) {
     console.log('');
     console.log('Moving subcontracts for project', projectId);
@@ -98,13 +98,13 @@ function logProjectProgress(projectId: string) {
 //                 })
 // }
 
-// eslint-disable-next-line prefer-arrow/prefer-arrow-functions
+
 function getProjects()  {
   return admin.firestore().collection('projects')
   .get();
 }
 
-// eslint-disable-next-line prefer-arrow/prefer-arrow-functions
+
 function doMove(contractSnapshot: FirebaseFirestore.QueryDocumentSnapshot){
 
       const subcontractId = contractSnapshot.id;
@@ -136,23 +136,25 @@ export const updateSubcontractCurrency = functions.https.onCall((data, context) 
         const subcontractData = subcontractSnapshot.data();
         const tempAmounts = subcontractData['amounts'];
 
-        if(tempAmounts && tempAmounts.hasOwnProperty('contractOriginal')) {
+        if (
+          tempAmounts &&
+          Object.prototype.hasOwnProperty.call(tempAmounts, 'contractOriginal')
 
-        if (tempAmounts?.contractOriginal.hasOwnProperty('amount')) {
-          console.log('Skipping subcontract – already updated');
-        } else {
+        ) {
+          if ( Object.prototype.hasOwnProperty.call(tempAmounts.contractOriginal, 'amount')) {
+            console.log('Skipping subcontract – already updated');
+          } else {
+            const oldAmounts = setupOldAmounts(tempAmounts);
+            const amounts = setupNewAmounts(oldAmounts);
 
-        const oldAmounts = setupOldAmounts(tempAmounts);
-        const amounts = setupNewAmounts(oldAmounts);
-
-        const update = {
-          amounts,
-          oldAmounts
-        };
-        const promise = subcontractRef.update(update);
-        promises.push(promise);
-      }
-    }
+            const update = {
+              amounts,
+              oldAmounts,
+            };
+            const promise = subcontractRef.update(update);
+            promises.push(promise);
+          }
+        }
     });
      return Promise.all(promises)
       .then(result => result);
@@ -186,7 +188,7 @@ export const updateSubcontractCurrency = functions.https.onCall((data, context) 
 // })
 
 
-  // eslint-disable-next-line prefer-arrow/prefer-arrow-functions
+
   function convertOldFormat(value: any) {
     // let newValue: Currency
     // switch (typeof(value)) {
@@ -209,7 +211,7 @@ export const updateSubcontractCurrency = functions.https.onCall((data, context) 
 
 
 
-  // eslint-disable-next-line prefer-arrow/prefer-arrow-functions
+
   function setupOldAmounts(tempAmounts: any){
     return {
       contractOriginal: tempAmounts?.contractOriginal,
@@ -219,7 +221,7 @@ export const updateSubcontractCurrency = functions.https.onCall((data, context) 
     };
   }
 
-  // eslint-disable-next-line prefer-arrow/prefer-arrow-functions
+
   function setupNewAmounts(oldAmounts: any) {
     return {
       contractOriginal: convertOldFormat(oldAmounts.contractOriginal),

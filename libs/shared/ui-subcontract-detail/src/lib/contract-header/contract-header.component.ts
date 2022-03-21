@@ -1,3 +1,4 @@
+/* eslint-disable @nrwl/nx/enforce-module-boundaries */
 import { Component, OnInit, Input } from '@angular/core';
 import { Project } from '@workspace/shared/data-access-models';
 import { Subcontract } from '@workspace/shared/data-access-models';
@@ -26,6 +27,7 @@ export class SubcontractHeaderComponent {
       // this.project = value.project;
       if (value.project) {
         this.project = value.project;
+
         if(this.project){
           this.projectName = this.project.name ? this.project.name : '';
           const company = this.project.company;
@@ -33,7 +35,7 @@ export class SubcontractHeaderComponent {
             this.companyName = company.companyName ? company.companyName : '';
             const companyContact = company.companyContact;
             if (companyContact) {
-              this.contactName = companyContact.concatName;
+              this.contactName = companyContact.concatName ? companyContact.concatName : '';
               this.contactEmail = companyContact.preferredEmail ?
                                   companyContact.preferredEmail.address ?
                                   companyContact.preferredEmail.address : ''

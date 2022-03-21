@@ -5,8 +5,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { MatTable } from '@angular/material/table';
 import { Subcontract } from '@workspace/shared/data-access-models';
-import { DateUtilsService } from '@workspace/shared/util';
-import { CurrencyInterface, Currency } from '@workspace/shared/util';
+import { createCurrency, DateUtilsService } from '@workspace/shared/util';
+import { Currency, CurrencyClass } from '@workspace/shared/util';
 
 @Component({
   selector: 'fourcast-contract-list-view',
@@ -48,9 +48,9 @@ export class SubcontractListComponent {
 
   formatCurrency(value: number): string {
     if (value) {
-      const currencyObject: CurrencyInterface = { amount: value };
+      const currencyObject: Currency = { amount: value };
 
-      const currency = new Currency(currencyObject);
+      const currency = new CurrencyClass(currencyObject);
 
       return currency.dinero ? currency.dinero.toFormat('0,0.00') : '';
     } else {

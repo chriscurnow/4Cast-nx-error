@@ -1,10 +1,10 @@
-import { Currency } from '@workspace/shared/util'
+import { createCurrency, Currency } from '@workspace/shared/util'
 
 
 import * as moment from 'moment';
 import { Subcontract } from './subcontract';
 import { PaymentStatus } from '../payments';
-import { EntityAdapter, EntityState, createEntityAdapter } from '@ngrx/entity';
+// import { EntityAdapter, EntityState, createEntityAdapter } from '@ngrx/entity';
 
 
 export interface SubcontractItem {
@@ -64,7 +64,7 @@ export function createItemForApprovedContract(subcontract: Subcontract): any {
     const contractItem: SubcontractItem = {};
     if (subcontract.amounts) {
       if (subcontract.amounts.contractOriginal) {
-        contractItem.contractAmount = new Currency(
+        contractItem.contractAmount = createCurrency(
           subcontract.amounts.contractOriginal
         );
       }
@@ -76,8 +76,8 @@ export function createItemForApprovedContract(subcontract: Subcontract): any {
     contractItem.itemNumber = 0;
     contractItem.approvedPercent = 0;
     contractItem.claimedPercent = 0;
-    contractItem.approvedToDate = new Currency();
-    contractItem.claimedToDate = new Currency();
+    contractItem.approvedToDate = createCurrency();
+    contractItem.claimedToDate = createCurrency();
     contractItem.status = PaymentStatus.Approved;
     const contractUpdate = JSON.parse(JSON.stringify(contractItem));
     return contractUpdate;

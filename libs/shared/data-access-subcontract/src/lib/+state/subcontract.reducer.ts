@@ -18,7 +18,7 @@ export interface SubcontractPartialState {
 
 export function selectContractId(a: Subcontract): string {
   //In this case this would be optional since primary key is id
-  return a.id;
+  return a.id ? a.id : '';
 }
 
 

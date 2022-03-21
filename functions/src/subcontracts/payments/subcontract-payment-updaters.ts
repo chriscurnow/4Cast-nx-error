@@ -1,14 +1,14 @@
+/* eslint-disable no-prototype-builtins */
 import * as admin from 'firebase-admin';
 import * as functions from 'firebase-functions';
 import { PaymentStatus,
         //  Currency,
-         PaymentAmountsInterface,
+
          PaymentAmounts,
-        } from '@4cast/classes';
+        } from '@workspace/shared/data-access-models';
 
 let app: any = null;
 
-// eslint-disable-next-line prefer-arrow/prefer-arrow-functions
 const initialize = function(): void{
 
 if (!app){
@@ -106,7 +106,7 @@ export const updateContractOriginal = functions.https.onCall((data, context) => 
   });
 
 /**
- * Update all payments to use new currency format
+ * Update all payments to use createCurrency format
  * (No parameters required.)
  */
 export const updatePaymentCurrency = functions.https.onCall((data, context) => {
@@ -159,11 +159,11 @@ export const updatePaymentCurrency = functions.https.onCall((data, context) => {
   //   // let newValue: Currency
   //   // switch (typeof(value)) {
   //   //   case 'string' :
-  //   //     newValue = new Currency(value);
+  //   //     newValue = createCurrency(value);
   //   //     break;
   //   //   case 'number' :
   //   //     const integerValue = Math.round(value * 100);
-  //   //     newValue = new Currency(integerValue);
+  //   //     newValue = createCurrency(integerValue);
   //   //     break;
   //   //   default :
   //   //     newValue = value
@@ -194,7 +194,7 @@ export const updatePaymentCurrency = functions.https.onCall((data, context) => {
   //   }
   // }
 
-// eslint-disable-next-line prefer-arrow/prefer-arrow-functions
+
 function setupOldAmounts(tempAmounts: any): any{
     return {
       contractAmount: tempAmounts?.contractAmount,
@@ -207,8 +207,9 @@ function setupOldAmounts(tempAmounts: any): any{
     };
   }
 
-// eslint-disable-next-line prefer-arrow/prefer-arrow-functions
-function setupNewAmounts(oldAmounts: any): PaymentAmountsInterface {
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function setupNewAmounts(oldAmounts: any): PaymentAmounts {
     // return {
     //   contractAmount: convertOldFormat(oldAmounts.contractAmount),
     //   toDateVariations: convertOldFormat(oldAmounts.toDateVariations),
@@ -219,5 +220,5 @@ function setupNewAmounts(oldAmounts: any): PaymentAmountsInterface {
     //   thisApproved: convertAmountItem(oldAmounts, 'thisApproved'),
 
     // }
-    return new PaymentAmounts();
+    return {} as PaymentAmounts;
   }

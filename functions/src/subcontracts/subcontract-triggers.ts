@@ -83,8 +83,8 @@ export const subcontractUpdate = functions.firestore.document('subcontracts/{sub
 //     .where('subcontract.id', '==', subcontractId)
 //     .get()
 //     .then(paymentsSnapshot => {
-//       let claimedToDate: Currency = new Currency()
-//       let approvedToDate: Currency = new Currency()
+//       let claimedToDate: Currency = createCurrency()
+//       let approvedToDate: Currency = createCurrency()
 
 //       paymentsSnapshot.forEach(paymentData => {
 
@@ -107,7 +107,7 @@ export const subcontractUpdate = functions.firestore.document('subcontracts/{sub
 //     //   .where('subcontract.id', '==', subcontractId)
 //     //   .get()
 //     //   .then(variationsSnapshot => {
-//     //     let toDateVariations = new Currency();
+//     //     let toDateVariations = createCurrency();
 //     //     variationsSnapshot.forEach(variationDoc => {
 //     //       const variation: SubcontractVariation = new SubcontractVariation(variationDoc.data());
 //     //       toDateVariations = toDateVariations.add(variation.variationAmount)

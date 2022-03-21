@@ -24,7 +24,7 @@ export class SubcontractDetailComponent implements OnInit {
     if (v) {
       this._subcontract = v;
       this._subcontract.description = 'Plumbing';
-      this.contractId = this._subcontract.id;
+      this.contractId = this._subcontract.id ? this._subcontract.id : '';
     }
     this.detailForm.reset(this._subcontract);
   }

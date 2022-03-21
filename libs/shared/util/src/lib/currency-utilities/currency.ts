@@ -237,7 +237,7 @@ export function stringToDinero(x: any): Currency | null{
 
   }
 
-  export function createCurrency(currency: Currency | undefined): Currency{
+  export function createCurrency(currency?: Currency | undefined): Currency{
     const newCurrency = {amount: 0, currency: 'AUD', precision: 2};
     if(currency){
       const properties = ['amount', 'currency', 'precision'];

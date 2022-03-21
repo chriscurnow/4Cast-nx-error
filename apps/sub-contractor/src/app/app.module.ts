@@ -96,19 +96,19 @@ const shouldUseEmulator = () => false;
   // [STARTER DOCS] DataPersistence has to be provided in every app that uses NgRx
   providers: [
     DataPersistence,
-    // AngularFirestore,
-    // {
-    //   provide: DATABASE_URL,
-    //   useFactory: () =>
-    //     shouldUseEmulator()
-    //       ? `http://localhost:9000?ns=${environment.firebaseConfig.projectId}`
-    //       : undefined,
-    // },
-    // {
-    //   provide: FIRESTORE_SETTINGS,
-    //   useValue: { host: 'localhost:8080', ssl: false },
-    // },
-    // { provide: ORIGIN, useValue: 'http://localhost:4001' }
+    AngularFirestore,
+    {
+      provide: DATABASE_URL,
+      useFactory: () =>
+        shouldUseEmulator()
+          ? `http://localhost:9000?ns=${environment.firebaseConfig.projectId}`
+          : undefined,
+    },
+    {
+      provide: FIRESTORE_SETTINGS,
+      useValue: { host: 'localhost:8080', ssl: false },
+    },
+    { provide: ORIGIN, useValue: 'http://localhost:4001' }
   ],
   bootstrap: [AppComponent],
 })

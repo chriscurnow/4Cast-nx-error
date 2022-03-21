@@ -5,7 +5,7 @@
  */
 
 import * as admin from 'firebase-admin';
-import { Currency } from '@4cast/core/utilities';
+// import { createCurrency } from '@workspace/shared/util';
 
 // const moduleName = 'SUBCONTRACT UPDATERS'
 
@@ -21,9 +21,9 @@ export const updateVariations = function(subcontractId: string): Promise<any> {
       .where('itemNumber', '>', 0) //
       .get()
       .then(variationsSnapshot => {
-        const toDateVariations = new Currency();
+        // const toDateVariations = createCurrency();
 
-        console.log(` Update Variation, toDateVariations`, toDateVariations.valuesOnly);
+        // console.log(` Update Variation, toDateVariations`, toDateVariations.valuesOnly);
         return Promise.resolve(null);
 
       })

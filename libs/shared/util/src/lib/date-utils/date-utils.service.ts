@@ -3,6 +3,10 @@ import { Injectable } from '@angular/core';
 import * as _moment from 'moment';
 // import { default as _rollupMoment } from 'moment';
 
+// TODO: Refactor date-utils without moment
+// 'moment is not callable'
+// This problem only occurs when we try to build the 'functions' directory
+// Moment is deprecated anyway
 
 const moment =  _moment; // _rollupMoment ||
 
@@ -23,7 +27,8 @@ export class DateUtilsService {
         return value;
 
       default :
-        return moment(value);
+        // return moment(value);
+        return value;
     }
   }
 
@@ -52,7 +57,8 @@ export class DateUtilsService {
         break;
 
       default:
-        momentValue = moment(date);
+        // momentValue = moment(date);
+        momentValue = date
     }
 
     const returnValue = momentValue.format(dateFormat);
@@ -85,7 +91,8 @@ export class DateUtilsService {
           // const returnValue = moment(value).format('DD/MM/YYYY');
           // [FCNG-354] this function should return a date value, not a string
 
-          const returnValue = moment(value).toDate();
+          // const returnValue = moment(value).toDate();
+          const returnValue = value;
 
           // set prefix to avoid long lines following
           const prefix = 'UTILITY SERVICE set data formatting with fixed format from string';
@@ -93,7 +100,8 @@ export class DateUtilsService {
             console.log(`${prefix} value`, value);
           }
           if (debug) {
-            console.log(`${prefix} moment value`, moment(value));
+            // console.log(`${prefix} moment value`, moment(value));
+            console.log(`${prefix} moment value`, value);
           }
           if (debug) {
             console.log(`${prefix} return value`, returnValue);
@@ -124,7 +132,8 @@ export class DateUtilsService {
         return value;
 
       default :
-        return moment(value);
+        // return moment(value);
+        return value
     }
 
   }

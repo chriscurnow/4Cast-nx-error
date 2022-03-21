@@ -1,14 +1,14 @@
 import * as admin from 'firebase-admin';
 import * as functions from 'firebase-functions';
 import { Subcontract,
-         PaymentAmountItem,
+
          setPaymentDate,
          PaymentAmounts,
          PaymentStatus,
          SubcontractPayment,
          createAmountItem
         } from '@workspace/shared/data-access-models';
-import { Currency } from '@workspace/shared/util';
+import { createCurrency } from '@workspace/shared/util';
 // tslint:disable-next-line: no-duplicate-imports
 
 
@@ -101,7 +101,7 @@ function createPaymentForSubcontract(
   // console.log('Starting method createPaymentForSubcontract');
   const methodName = 'createPaymentForSubcontract';
   log(methodName, 'Subcontract.mostRecentPayment as returned ', subcontractDoc.data()?.mostRecentPayment);
-  const subcontract = new Subcontract(subcontractDoc.data()); // convert result to type Subcontract
+  const subcontract = subcontractDoc.data() as Subcontract;
   const newPayment = createNewPaymentForSubcontract(subcontract);
 
   return addPaymentToCollection(contractPayments, newPayment);
@@ -154,9 +154,9 @@ export function createNewPaymentForSubcontract(subcontract: Subcontract): any{
   if (subcontract && subcontract.amounts) {
 
     // amounts = new PaymentAmounts (subcontract.amounts);
-    // amounts.contractOriginal = new Currency(subcontract.amounts.contractOriginal);
-    // amounts.contractRevised = new Currency(subcontract.amounts.contractRevised);
-    // amounts.toDateVariations = new Currency(subcontract.amounts.toDateVariations);
+    // amounts.contractOriginal = createCurrency(subcontract.amounts.contractOriginal);
+    // amounts.contractRevised = createCurrency(subcontract.amounts.contractRevised);
+    // amounts.toDateVariations = createCurrency(subcontract.amounts.toDateVariations);
     if (subcontract.mostRecentPayment) {
       const payment = subcontract.mostRecentPayment;
       amounts.previouslyClaimed = {
@@ -171,7 +171,7 @@ export function createNewPaymentForSubcontract(subcontract: Subcontract): any{
       amounts.previouslyClaimed = {
         toDate: subcontract.amounts.toDateClaimed,
         percent: 0,
-        amount: new Currency(),
+        amount: createCurrency(),
       };
 
 
@@ -179,7 +179,7 @@ export function createNewPaymentForSubcontract(subcontract: Subcontract): any{
       amounts.previouslyApproved = {
         toDate: subcontract.amounts.toDateApproved,
         percent: 0,
-        amount: new Currency(),
+        amount: createCurrency(),
       };
 
 
@@ -199,11 +199,10 @@ export function createNewPaymentForSubcontract(subcontract: Subcontract): any{
 
   // console.log('Payment status set', payment.status)
     payment.subcontractId = subcontract.id;
-  // console.log('Payment subcontract set', payment);
-    const plainPayment = payment.toPlainObject();
+
     // const msg = 'SUBCONTRACT PAYMENT FUNCTIONS - CreateNewPaymentForSubcontract - plain object amounts previously claimed';
     // console.log(msg, plainPayment.amounts.previouslyClaimed);
-    return plainPayment;
+    return payment;
 
 
 
@@ -235,7 +234,7 @@ const log = function(method: string, info: string, data: any): void{
 //     const subcontractUpdate: SubcontractInterface = {
 //       mostRecentPayment,
 //       amounts: {
-//         toDateApproved: new Currency(thisApproved.toDate)
+//         toDateApproved: createCurrency(thisApproved.toDate)
 //       },
 
 //       isNew: false,

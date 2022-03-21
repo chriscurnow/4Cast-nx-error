@@ -19,7 +19,7 @@ import {
 
 import { setTypeValues } from '@workspace/shared/util';
 
-import { EntityAdapter, EntityState, createEntityAdapter } from '@ngrx/entity';
+import { EntityState } from '@ngrx/entity';
 import { createContractAuth, createMostRecentPayment } from '.';
 
 

@@ -14,7 +14,7 @@ export class SubcontractService {
   // afs.collection('items', ref => ref.where('size', '==', 'large'))
   getContractsList() {
     return this.afs
-      .collection<Subcontract>('subcontracts', (ref) =>
+      .collectionGroup<Subcontract>('subcontracts', (ref) =>
         ref.where('supplier.id', '==', '246A06AEBC2345478A6301D3A6490B0E')
       )
       .valueChanges()

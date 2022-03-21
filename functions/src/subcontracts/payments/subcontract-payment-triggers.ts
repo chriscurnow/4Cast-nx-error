@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import * as admin from 'firebase-admin';
 import * as functions from 'firebase-functions';
 import { SubcontractPayment,
@@ -6,7 +7,7 @@ import { SubcontractPayment,
           // PaymentStatus,
           // ContractItemInterface,
           // PaymentItem,
-        } from '@4cast/classes';
+        } from '@workspace/shared/data-access-models';
 
 // [LS-12] we set the payment number in the payment create method
 // so right now we don't have to do anything on create new payment
@@ -42,7 +43,7 @@ function onCreateSubcontractPayment(snap: FirebaseFirestore.DocumentSnapshot, co
   console.log('OnCreate trigger for subcontract payment');
   const paymentId = context.params.paymentId;
   const paymentRef = snap.ref;
-  const payment: SubcontractPayment = new SubcontractPayment(snap.data());
+  const payment: SubcontractPayment = snap.data() as SubcontractPayment;
   payment.id = paymentId;
   // const mostRecentPayment = MostRecentPayment.createFromPayment(payment.valuesOnly);
   const subcontractId: string = context.params.subcontractId;
