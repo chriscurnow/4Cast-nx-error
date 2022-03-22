@@ -14,7 +14,6 @@ import {
   SubcontractDetailContainerComponent,
   SubcontractDetailComponent,
   LineItemsComponent,
-  SubcontractItemComponent,
   SubontractItemArrayComponent,
 } from './subcontract-detail';
 import { SharedUiSubcontractDetailModule } from '@workspace/shared/ui-subcontract-detail';
@@ -47,7 +46,6 @@ import { SharedUiSubcontractDetailModule } from '@workspace/shared/ui-subcontrac
     SubcontractDetailContainerComponent,
     SubcontractDetailComponent,
     LineItemsComponent,
-    SubcontractItemComponent,
     SubontractItemArrayComponent,
 
   ],

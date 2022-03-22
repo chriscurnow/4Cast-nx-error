@@ -76,15 +76,18 @@ export class SubcontractDatesComponent implements ControlValueAccessor, OnDestro
   }
 
   set value(value: ContractDates) {
-    console.log('Dates component, set value', value);
-    const newDates = {
-      contract: this.dateUtils.valueToMoment(value.contract),
-      commencement: this.dateUtils.valueToMoment(value.commencement),
-      completion: this.dateUtils.valueToMoment(value.completion),
-    };
-    this.datesForm.setValue(newDates);
-    this.onChange(newDates);
-    this.onTouched();
+    if(value){
+       console.log('Dates component, set value', value);
+       const newDates = {
+         contract: value.contract ? value.contract : null,
+         commencement: value.commencement ? value.commencement : null,
+         completion: value.completion ? value.completion : null,
+       };
+       this.datesForm.setValue(newDates);
+       this.onChange(newDates);
+       this.onTouched();
+    }
+
   }
 
   onChange: any = () => {};
