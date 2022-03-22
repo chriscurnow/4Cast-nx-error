@@ -1,4 +1,4 @@
-/* eslint-disable no-prototype-builtins */
+
 
  /**
   *
@@ -11,7 +11,7 @@
 
 
 
-export function setTypeValue<T extends object>(
+export function setTypeValue<T extends Record<string, unknown>>(
   data: T,
   newData: T,
   property: string
@@ -36,7 +36,7 @@ export function setTypeValue<T extends object>(
   }
 }
 
-export function setTypeValues<T extends object>(data: T | undefined, newData: T, properties: string[]){
+export function setTypeValues<T extends Record<string, unknown>>(data: T | undefined, newData: T, properties: string[]){
   if(data){
      properties.forEach((property) => {
        setTypeValue<T>(data, newData, property);
@@ -56,7 +56,7 @@ export function setTypeValues<T extends object>(data: T | undefined, newData: T,
  * That it must contain all required properties of type T
  * The values of the properties don't matter, they will be overwritten
  */
-export function setValuesArray<T extends object>(values: T[] | undefined, newValue: T, properties: string[]): T[]{
+export function setValuesArray<T extends Record<string, unknown>>(values: T[] | undefined, newValue: T, properties: string[]): T[]{
   const newValues: T[] = [];
   if(values){
     values.forEach(value => {

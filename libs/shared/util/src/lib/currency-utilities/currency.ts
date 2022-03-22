@@ -1,5 +1,5 @@
 import Dinero from 'dinero.js';
-import { setTypeValues } from '../data-utils/data-utils';
+import { DataUtilsService as dataUtils } from '../data-utils/data-utils.service'
 
 Dinero.defaultCurrency = 'AUD';
 Dinero.defaultPrecision = 2;
@@ -57,7 +57,7 @@ export class CurrencyClass implements Currency {
     const newCurrency = { amount: 0, currency: 'AUD', precision: 2 };
     if (currency) {
       const properties = ['amount', 'currency', 'precision'];
-      setTypeValues(currency, newCurrency, properties);
+      dataUtils.setValues<Currency>(currency, newCurrency, properties);
     }
 
     return newCurrency;
@@ -251,7 +251,7 @@ export function stringToDinero(x: any): Currency | null{
     const newCurrency = {amount: 0, currency: 'AUD', precision: 2};
     if(currency){
       const properties = ['amount', 'currency', 'precision'];
-      setTypeValues(currency, newCurrency, properties)
+      dataUtils.setValues<Currency>(currency, newCurrency, properties)
     }
 
     return newCurrency;
