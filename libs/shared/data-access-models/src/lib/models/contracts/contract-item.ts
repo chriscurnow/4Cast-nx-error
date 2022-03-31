@@ -8,18 +8,18 @@ import { PaymentStatus } from '../payments';
 
 
 export interface SubcontractItem {
-  id?: string | undefined;
-  isNew?: boolean;
-  isDraft?: boolean;
-  itemDate?: Date | moment.Moment;
-  itemNumber?: number | undefined;
-  title?: string | undefined;
-  details?: string | undefined;
+  id?: string;
+  isNew?: undefined;
+  isDraft?: undefined;
+  itemDate?: Date | string;
+  itemNumber?: number;
+  title?: string;
+  details?: string;
   contractAmount?: Currency;
   claimedToDate?: Currency;
   approvedToDate?: Currency;
-  claimedPercent?: number | undefined;
-  approvedPercent?: number | undefined;
+  claimedPercent?: number;
+  approvedPercent?: number;
   amountRemaining?: Currency;
   subcontractorRef?: string;
   contractorRef?: string;
@@ -37,7 +37,7 @@ export enum ContractItemStatus {
 
 // export interface SubcontractItemEntityState extends EntityState<SubcontractItem> {
 //   // additional entities state properties
-//   selectedContractItemId: string | undefined;
+//   selectedContractItemId: string;
 //   loaded: boolean;
 //   error: any;
 // }
@@ -61,7 +61,26 @@ export enum ContractItemStatus {
 //   });
 
 export function createItemForApprovedContract(subcontract: Subcontract): any {
-    const contractItem: SubcontractItem = {};
+    const contractItem: SubcontractItem = {
+      id: undefined,
+      isNew: undefined,
+  isDraft: undefined,
+  itemDate: undefined,
+  itemNumber: undefined,
+  title: undefined,
+  details: undefined,
+  contractAmount: undefined,
+  claimedToDate: undefined,
+  approvedToDate: undefined,
+  claimedPercent: undefined,
+  approvedPercent: undefined,
+  amountRemaining: undefined,
+  subcontractorRef: undefined,
+  contractorRef: undefined,
+  status: undefined,
+  subcontractId: undefined,
+  projectId: undefined,
+    };
     if (subcontract.amounts) {
       if (subcontract.amounts.contractOriginal) {
         contractItem.contractAmount = createCurrency(

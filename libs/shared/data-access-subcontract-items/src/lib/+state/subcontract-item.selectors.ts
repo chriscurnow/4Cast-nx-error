@@ -1,9 +1,11 @@
-import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { createFeatureSelector, createSelector, Store } from '@ngrx/store';
+import { SubcontractItem } from '@workspace/shared/data-access-models';
 import {
   SUBCONTRACT_ITEM_FEATURE_KEY,
   SubcontractItemEntityState,
   subcontractItemAdapter,
 } from './subcontract-item.reducer';
+import { selectSelectedSubcontractId } from '@workspace/shared/data-access-subcontract';
 
 // Lookup the 'SubcontractItem' feature state managed by NgRx
 export const getSubcontractItemState =
@@ -23,12 +25,12 @@ export const getSubcontractItemError = createSelector(
   (state: SubcontractItemEntityState) => state.error
 );
 
-export const getAllSubcontractItem = createSelector(
+export const selectAllSubcontractItem = createSelector(
   getSubcontractItemState,
   (state: SubcontractItemEntityState) => selectAll(state)
 );
 
-export const getSubcontractItemEntities = createSelector(
+export const selectSubcontractItemEntities = createSelector(
   getSubcontractItemState,
   (state: SubcontractItemEntityState) => selectEntities(state)
 );
@@ -38,8 +40,16 @@ export const getSelectedId = createSelector(
   (state: SubcontractItemEntityState) => state.selectedId
 );
 
+export const selectItemsForSubcontract = createSelector(
+  selectAllSubcontractItem,
+  selectSelectedSubcontractId,
+  ((items: SubcontractItem[], id: string | undefined) => items.filter(item => item.subcontractId == id))
+);
+
+
+
 export const getSelected = createSelector(
-  getSubcontractItemEntities,
+  selectSubcontractItemEntities,
   getSelectedId,
   (entities, selectedId) => (selectedId ? entities[selectedId] : undefined)
 );

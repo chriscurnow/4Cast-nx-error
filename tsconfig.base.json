@@ -71,6 +71,9 @@
       "@workspace/shared/ui-subcontract-detail": [
         "libs/shared/ui-subcontract-detail/src/index.ts"
       ],
+      "@workspace/shared/ui-subcontract-items": [
+        "libs/shared/ui-subcontract-items/src/index.ts"
+      ],
       "@workspace/shared/ui-subcontracts": [
         "libs/shared/ui-subcontracts/src/index.ts"
       ],

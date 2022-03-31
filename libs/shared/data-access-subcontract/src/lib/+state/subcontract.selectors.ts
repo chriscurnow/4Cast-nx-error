@@ -40,14 +40,14 @@ export const selectSubcontractEntities = createSelector(
   }
 );
 
-export const selectSelectedId = createSelector(
+export const selectSelectedSubcontractId = createSelector(
   selectSubcontractState,
   (state: SubcontractEntityState) => state.selectedId
 );
 
 export const selectSelected = createSelector(
   selectSubcontractEntities,
-  selectSelectedId,
+  selectSelectedSubcontractId,
   (entities, selectedId) => (selectedId ? entities[selectedId] : undefined)
 );
 

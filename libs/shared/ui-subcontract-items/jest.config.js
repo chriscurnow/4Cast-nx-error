@@ -1,5 +1,5 @@
 module.exports = {
-  displayName: 'shared-subcontract-items',
+  displayName: 'shared-ui-subcontract-items',
   preset: '../../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   globals: {
@@ -8,15 +8,10 @@ module.exports = {
       stringifyContentPathRegex: '\\.(html|svg)$',
     },
   },
-  coverageDirectory: '../../../coverage/libs/shared/subcontract-items',
+  coverageDirectory: '../../../coverage/libs/shared/ui-subcontract-items',
   transform: {
-    '^.+.(ts|mjs|js|html)$': 'jest-preset-angular',
+    '^.+\\.(ts|js|html)$': 'jest-preset-angular',
   },
-  transformIgnorePatterns: ['node_modules/(?!.*.mjs$)'],
-  transformIgnorePatterns: ['node_modules/(?!.*.mjs$)'],
-  transformIgnorePatterns: ['node_modules/(?!.*.mjs$)'],
-  transformIgnorePatterns: ['node_modules/(?!.*.mjs$)'],
-  transformIgnorePatterns: ['node_modules/(?!.*.mjs$)'],
   snapshotSerializers: [
     'jest-preset-angular/build/serializers/no-ng-attributes',
     'jest-preset-angular/build/serializers/ng-snapshot',

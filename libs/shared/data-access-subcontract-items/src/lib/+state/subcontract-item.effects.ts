@@ -1,3 +1,5 @@
+
+
 import { Injectable } from '@angular/core';
 import { createEffect, Actions, ofType } from '@ngrx/effects';
 import { DataPersistence } from '@nrwl/angular';
@@ -5,36 +7,65 @@ import { map } from 'rxjs/operators';
 import { SubcontractItemsService } from './subcontract-items.service';
 import * as SubcontractItemActions from './subcontract-item.actions';
 import * as SubcontractItemFeature from './subcontract-item.reducer';
+import { Subcontract } from '@workspace/shared/data-access-models';
 
 @Injectable()
 export class SubcontractItemEffects {
-  init$ = createEffect(() =>
-    this.dataPersistence.fetch(SubcontractItemActions.loadSubcontractItems, {
-      run: (
-        action: ReturnType<typeof SubcontractItemActions.loadSubcontractItems>,
-        state: SubcontractItemFeature.SubcontractItemPartialState
-      ) => {
-        // Your custom service 'load' logic goes here. For now just return a success action...
-        const subcontractId = action.subcontractId;
-        return this.subcontractItemsService
-          .getContractItems(subcontractId)
-          .pipe(
-            map((subcontractItems) =>
-              SubcontractItemActions.loadSubcontractItemsSuccess({
-                subcontractItems,
-              })
-            )
-          );
-      },
-      onError: (
-        action: ReturnType<typeof SubcontractItemActions.loadSubcontractItems>,
-        error
-      ) => {
-        console.error('Error', error);
-        return SubcontractItemActions.loadSubcontractItemsFailure({ error });
-      },
-    })
-  );
+  // init$ = createEffect(() =>
+  //   this.dataPersistence.fetch(SubcontractItemActions.loadItemsForSubcontract, {
+  //     run: (
+  //       action: ReturnType<
+  //         typeof SubcontractItemActions.loadItemsForSubcontract
+  //       >,
+  //       // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  //       state: SubcontractItemFeature.SubcontractItemPartialState
+  //     ) => {
+  //       return this.returnItems(action.subcontract);
+  //     },
+  //     onError: (
+  //       action: ReturnType<
+  //         typeof SubcontractItemActions.loadItemsForSubcontract
+  //       >,
+  //       error
+  //     ) => {
+  //       console.error('Error', error);
+  //       return SubcontractItemActions.loadItemsForSubcontractFailure({ error });
+  //     },
+  //   })
+  // );
+
+//  createItem$ = createEffect(() =>
+//     this.dataPersistence.pessimisticUpdate(SubcontractItemActions.loadItemsForSubcontract, {
+//       run: (
+//         action: ReturnType<
+//           typeof SubcontractItemActions.loadItemsForSubcontract
+//         >,
+//         // eslint-disable-next-line @typescript-eslint/no-unused-vars
+//         state: SubcontractItemFeature.SubcontractItemPartialState
+//       ) => {
+//         return this.returnItems(action.subcontract);
+//       },
+//       onError: (
+//         action: ReturnType<
+//           typeof SubcontractItemActions.loadItemsForSubcontract
+//         >,
+//         error
+//       ) => {
+//         console.error('Error', error);
+//         return SubcontractItemActions.loadItemsForSubcontractFailure({ error });
+//       },
+//     })
+//   );
+
+  returnItems(subcontract: Subcontract) {
+    this.subcontractItemsService.getItemsForSubcontract(subcontract).pipe(
+      map((subcontractItems) =>
+        SubcontractItemActions.loadSubcontractItemsSuccess({
+          subcontractItems,
+        })
+      )
+    );
+  }
 
   constructor(
     private readonly actions$: Actions,
@@ -42,3 +73,4 @@ export class SubcontractItemEffects {
     private readonly dataPersistence: DataPersistence<SubcontractItemFeature.SubcontractItemPartialState>
   ) {}
 }
+

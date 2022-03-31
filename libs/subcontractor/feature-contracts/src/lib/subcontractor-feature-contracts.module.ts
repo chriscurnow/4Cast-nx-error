@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
 import { SharedDataAccessSubcontractModule } from '@workspace/shared/data-access-subcontract';
+import { SharedDataAccessSubcontractItemsModule } from '@workspace/shared/data-access-subcontract-items';
 import { MatTableModule } from '@angular/material/table';
 import { SharedUiDefaultModuleCollectionModule } from '@workspace/shared-ui-default-module-collection';
 import {
@@ -17,12 +18,14 @@ import {
   SubontractItemArrayComponent,
 } from './subcontract-detail';
 import { SharedUiSubcontractDetailModule } from '@workspace/shared/ui-subcontract-detail';
-
+import { SharedUiSubcontractItemsModule } from '@workspace/shared/ui-subcontract-items';
 
 @NgModule({
   imports: [
     CommonModule,
     SharedDataAccessSubcontractModule,
+    SharedDataAccessSubcontractItemsModule,
+    SharedUiSubcontractItemsModule,
     SharedUiDefaultModuleCollectionModule,
     MatTableModule,
     SharedUiSubcontractDetailModule,

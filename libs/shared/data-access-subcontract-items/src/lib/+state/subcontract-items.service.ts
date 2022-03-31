@@ -1,5 +1,5 @@
-/* eslint-disable @nrwl/nx/enforce-module-boundaries */
 /* eslint-disable no-prototype-builtins */
+
 import { Injectable } from '@angular/core';
 import {
   AngularFirestore,
@@ -10,9 +10,9 @@ import {
 import { FormGroup, AbstractControl } from '@angular/forms';
 import { SubcontractItem } from '@workspace/shared/data-access-models';
 import { Subcontract } from '@workspace/shared/data-access-models';
-
+import { CurrencyClass } from '@workspace/shared/util';
 import { Observable, Subject } from 'rxjs';
-// import { PaymentStatus } from '../payments';
+import { PaymentStatus } from '@workspace/shared/data-access-models';
 
 export type ContractItemDoc = AngularFirestoreDocument<SubcontractItem>;
 export type ContractItemsCollection =
@@ -62,10 +62,14 @@ export class SubcontractItemsService {
    *
    * Retrieves contract items for subcontract
    */
-  getContractItems(projectId: string, subcontractId: string): Observable<SubcontractItem[]> {
-    const path = `projects/${projectId}/subcontract/${subcontractId}/subcontractItems`; // TODO: [SL-16] implement method to get contract item path
+  getItemsForSubcontract(
+    subcontract: Subcontract
+  ): Observable<SubcontractItem[]> {
     // ContractItem.getCollectionPath(projectId, subcontractId);
     // this.contractItemsCollection =
+    const projectId = subcontract.project?.id;
+    const subcontractId = subcontract.id;
+    const path = `projects/${projectId}/subcontract/${subcontractId}/subcontractItems`; // TODO: [SL-16] implement method to get contract item path
     return this.afs
       .collection<SubcontractItem>(path, (ref) =>
         ref
@@ -167,5 +171,25 @@ export class SubcontractItemsService {
     console.log('CONTRACT ITEMS SERVICE saveItemFromForm', update);
 
     return contractItemDoc.update(update);
+  }
+
+createItemForApprovedContract(subcontract: Subcontract): SubcontractItem {
+    const contractItem: SubcontractItem = {};
+    if (subcontract.amounts) {
+      contractItem.contractAmount = subcontract.amounts.contractOriginal
+      contractItem.amountRemaining = contractItem.contractAmount;
+    }
+    const newDate = '';
+    contractItem.itemDate = newDate;
+    contractItem.title = 'Original Contract';
+    contractItem.itemNumber = 0;
+    contractItem.approvedPercent = 0;
+    contractItem.claimedPercent = 0;
+    contractItem.approvedToDate = CurrencyClass.createCurrency();
+    contractItem.claimedToDate = CurrencyClass.createCurrency();
+    contractItem.status = PaymentStatus.Approved;
+    contractItem.projectId = subcontract.project ? subcontract.project.id : undefined;
+    contractItem.subcontractId = subcontract.id;
+    return contractItem;
   }
 }
