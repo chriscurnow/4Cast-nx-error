@@ -20,7 +20,6 @@
     "shared-data-access-user": "libs/shared/data-access-user",
     "shared-feature-login": "libs/shared/feature-login",
     "shared-feature-toolbar-user": "libs/shared/feature-toolbar-user",
-    "shared-subcontract-items": "libs/shared/subcontract-items",
     "shared-ui-default-module-collection": "libs/shared/ui-default-module-collection",
     "shared-ui-main-layout": "libs/shared/ui-main-layout",
     "shared-ui-subcontract-detail": "libs/shared/ui-subcontract-detail",

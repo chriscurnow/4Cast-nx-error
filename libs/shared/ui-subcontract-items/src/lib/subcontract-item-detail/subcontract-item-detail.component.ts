@@ -5,12 +5,8 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { SubcontractItem } from '@workspace/shared/data-access-models';
-import {
-  loadItemsForSubcontract,
-  selectItemsForSubcontract,
-  SubcontractItemPartialState,
-} from '@workspace/shared/data-access-subcontract-items';
-import { Store } from '@ngrx/store';
+
+
 import { Observable } from 'rxjs';
 
 
@@ -32,7 +28,7 @@ export class SubcontractItemDetailComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
-    private store: Store<SubcontractItemPartialState>
+
   ) {
 
     // this.items$ = this.store.select(selectItemsForSubcontract);

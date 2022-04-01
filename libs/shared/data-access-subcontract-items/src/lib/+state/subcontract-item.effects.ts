@@ -9,6 +9,7 @@ import * as SubcontractItemActions from './subcontract-item.actions';
 import * as SubcontractItemFeature from './subcontract-item.reducer';
 import { Subcontract } from '@workspace/shared/data-access-models';
 
+
 @Injectable()
 export class SubcontractItemEffects {
   // init$ = createEffect(() =>
@@ -20,7 +21,15 @@ export class SubcontractItemEffects {
   //       // eslint-disable-next-line @typescript-eslint/no-unused-vars
   //       state: SubcontractItemFeature.SubcontractItemPartialState
   //     ) => {
-  //       return this.returnItems(action.subcontract);
+  //       return this.subcontractItemsService
+  //         .getItemsForSubcontract(action.subcontract)
+  //         .pipe(
+  //           map((subcontractItems) =>
+  //             SubcontractItemActions.loadSubcontractItemsSuccess({
+  //               subcontractItems,
+  //             })
+  //           )
+  //         );
   //     },
   //     onError: (
   //       action: ReturnType<
@@ -34,28 +43,36 @@ export class SubcontractItemEffects {
   //   })
   // );
 
-//  createItem$ = createEffect(() =>
-//     this.dataPersistence.pessimisticUpdate(SubcontractItemActions.loadItemsForSubcontract, {
-//       run: (
-//         action: ReturnType<
-//           typeof SubcontractItemActions.loadItemsForSubcontract
-//         >,
-//         // eslint-disable-next-line @typescript-eslint/no-unused-vars
-//         state: SubcontractItemFeature.SubcontractItemPartialState
-//       ) => {
-//         return this.returnItems(action.subcontract);
-//       },
-//       onError: (
-//         action: ReturnType<
-//           typeof SubcontractItemActions.loadItemsForSubcontract
-//         >,
-//         error
-//       ) => {
-//         console.error('Error', error);
-//         return SubcontractItemActions.loadItemsForSubcontractFailure({ error });
-//       },
-//     })
-//   );
+  loadItemsForSubcontract$ = createEffect(() =>
+    this.dataPersistence.fetch(SubcontractItemActions.loadItemsForSubcontract, {
+      run: (
+        action: ReturnType<
+          typeof SubcontractItemActions.loadItemsForSubcontract
+        >,
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        state: SubcontractItemFeature.SubcontractItemPartialState
+      ) => {
+        return this.subcontractItemsService
+          .getItemsForSubcontract(action.subcontract)
+          .pipe(
+            map((subcontractItems) =>
+              SubcontractItemActions.loadSubcontractItemsSuccess({
+                subcontractItems,
+              })
+            )
+          );
+      },
+      onError: (
+        action: ReturnType<
+          typeof SubcontractItemActions.loadItemsForSubcontract
+        >,
+        error
+      ) => {
+        console.error('Error', error);
+        return SubcontractItemActions.loadItemsForSubcontractFailure({ error });
+      },
+    })
+  );
 
   returnItems(subcontract: Subcontract) {
     this.subcontractItemsService.getItemsForSubcontract(subcontract).pipe(

@@ -26,7 +26,8 @@ export const loadSubcontractItemsFailure = createAction(
 // LOAD ITEMS FOR SUBCONTRACT
 //
 export const loadItemsForSubcontract = createAction(
-  '[Subcontract Items Detail Form] Load Items for Subcontract'
+  '[Subcontract Items Detail Form] Load Items for Subcontract',
+   props<{ subcontract: Subcontract}>()
 );
 
 export const loadItemsForSubcontractSuccess = createAction(
