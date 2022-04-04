@@ -1,9 +1,10 @@
 /* eslint-disable @nrwl/nx/enforce-module-boundaries */
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
 import { Store } from '@ngrx/store';
 import {
   loadItemsForSubcontract,
   selectItemsForSubcontract,
+  selectAllSubcontractItem,
   SubcontractItemPartialState,
 } from '@workspace/shared/data-access-subcontract-items';
 import { Observable } from 'rxjs';
@@ -18,10 +19,23 @@ import { Subcontract, SubcontractItem } from '@workspace/shared/data-access-mode
 export class SubcontractItemsContainerComponent implements OnInit {
   items$: Observable<SubcontractItem[]>;
   items: SubcontractItem[];
-  subcontract: Subcontract = {}
+
+  @Input() set subcontract(v: Subcontract | null | undefined){
+
+    if(v){
+      console.log(
+        'SUBCONTRACT ITEMS CONTAINER COMPONENT, input subcontract',
+        v
+      );
+       this.store.dispatch(loadItemsForSubcontract({ subcontract: v }));
+    }
+
+  }
+
+
 
   constructor(private store: Store<SubcontractItemPartialState>) {
-    this.items$ = this.store.select(selectItemsForSubcontract);
+    this.items$ = this.store.select(selectAllSubcontractItem);
     this.items$.subscribe((items) => {
       this.items = items;
       console.log("Items loaded", items)
@@ -30,6 +44,6 @@ export class SubcontractItemsContainerComponent implements OnInit {
 
   ngOnInit(): void {
     console.log();
-    this.store.dispatch(loadItemsForSubcontract({subcontract: this.subcontract}))
+    //  this.store.dispatch(loadItemsForSubcontract({ subcontract: {} }));
   }
 }

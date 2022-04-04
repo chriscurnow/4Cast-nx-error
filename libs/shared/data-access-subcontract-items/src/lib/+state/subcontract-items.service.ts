@@ -55,6 +55,20 @@ export class SubcontractItemsService {
     // }
   }
 
+  async createSubcontractItem(item: SubcontractItem): Promise<any> {
+    const projectId = item.projectId;
+    const subcontractId = item.subcontractId;
+    const path = `projects/${projectId}/subcontracts/${subcontractId}/subcontractItems`;
+    try {
+       const ref = await this.afs.collection(path).add(item);
+       console.log('SUBCONTRACT ITEMS SERVICE createSubcontractItem, ref', ref, item)
+       return ref;
+    } catch (err) {
+      return err;
+    }
+    }
+
+
   /**
    *
    * @param projectId
@@ -67,9 +81,11 @@ export class SubcontractItemsService {
   ): Observable<SubcontractItem[]> {
     // ContractItem.getCollectionPath(projectId, subcontractId);
     // this.contractItemsCollection =
+    console.log('getItemsForSubcontract, subcontract', subcontract);
     const projectId = subcontract.project?.id;
     const subcontractId = subcontract.id;
-    const path = `projects/${projectId}/subcontract/${subcontractId}/subcontractItems`; // TODO: [SL-16] implement method to get contract item path
+    const path = `projects/${projectId}/subcontracts/${subcontractId}/subcontractItems`; // TODO: [SL-16] implement method to get contract item path
+    console.log('getItemsForSubcontract, path', path);
     return this.afs
       .collection<SubcontractItem>(path, (ref) =>
         ref

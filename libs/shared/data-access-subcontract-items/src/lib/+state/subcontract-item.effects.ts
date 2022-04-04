@@ -3,7 +3,8 @@
 import { Injectable } from '@angular/core';
 import { createEffect, Actions, ofType } from '@ngrx/effects';
 import { DataPersistence } from '@nrwl/angular';
-import { map } from 'rxjs/operators';
+import { exhaustMap, map, mapTo, mergeMap } from 'rxjs/operators';
+import { from, Observable } from 'rxjs';
 import { SubcontractItemsService } from './subcontract-items.service';
 import * as SubcontractItemActions from './subcontract-item.actions';
 import * as SubcontractItemFeature from './subcontract-item.reducer';
@@ -56,9 +57,11 @@ export class SubcontractItemEffects {
           .getItemsForSubcontract(action.subcontract)
           .pipe(
             map((subcontractItems) =>
-              SubcontractItemActions.loadSubcontractItemsSuccess({
+             {
+              console.log('SUBCONTRACT ITEM EFFECTS load subcontract items success, items', subcontractItems)
+              return SubcontractItemActions.loadSubcontractItemsSuccess({
                 subcontractItems,
-              })
+              })}
             )
           );
       },
@@ -74,7 +77,31 @@ export class SubcontractItemEffects {
     })
   );
 
-  returnItems(subcontract: Subcontract) {
+  // createSubcontractItem$ = createEffect(() =>
+  //     this.dataPersistence.optimisticUpdate(SubcontractItemActions.createSubcontractItem, {
+  //       run: (
+  //         action: ReturnType<typeof SubcontractItemActions.createSubcontractItem>,
+  //         state: SubcontractItemFeature.SubcontractItemPartialState
+  //       ) => {
+
+  //       }
+  //     })
+  // )
+
+  createSubcontractItem$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(SubcontractItemActions.createSubcontractItem),
+        exhaustMap((action: any) =>{
+         const res = from(this.subcontractItemsService.createSubcontractItem(action.item));
+         console.log('res', res)
+         return res
+        })
+      ),
+    { dispatch: false }
+  );
+
+  private returnItems(subcontract: Subcontract) {
     this.subcontractItemsService.getItemsForSubcontract(subcontract).pipe(
       map((subcontractItems) =>
         SubcontractItemActions.loadSubcontractItemsSuccess({

@@ -17,7 +17,7 @@ import { SubcontractItemsService } from '@workspace/shared/data-access-subcontra
 export class SubcontractDetailComponent implements OnInit {
   contractId: string;
   detailForm: FormGroup;
-  _subcontract: Subcontract = {};
+  _subcontract: Subcontract;
   _items: SubcontractItem[] | undefined;
   item0: SubcontractItem = {};
 
@@ -45,8 +45,8 @@ export class SubcontractDetailComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
               private router: Router,
-              private route: ActivatedRoute,
-              private contractItemsService: SubcontractItemsService) {
+              private route: ActivatedRoute
+              ) {
     this.createForm();
   }
 
