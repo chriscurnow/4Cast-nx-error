@@ -4,7 +4,7 @@ import { DataPersistence } from '@nrwl/angular';
 
 import * as SubcontractActions from './subcontract.actions';
 import * as SubcontractFeature from './subcontract.reducer';
-import { SubcontractService } from './subcontract.service';
+import { SubcontractService } from './Subcontract.service';
 import { map } from 'rxjs/operators';
 import { Subcontract } from '@workspace/shared/data-access-models';
 import { ActivatedRouteSnapshot } from '@angular/router';
@@ -39,6 +39,7 @@ export class SubcontractEffects {
         action: ReturnType<typeof SubcontractActions.loadSubcontractsList>,
         state: SubcontractFeature.SubcontractPartialState
       ) => {
+        // console.log('SUBCONTRACT EFFECTS - load subcontract list')
         return this.subcontractService
           .getContractsList()
           .pipe(

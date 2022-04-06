@@ -1,15 +1,39 @@
-import { Currency } from '@workspace/shared/util';
+import { Currency, createCurrency } from '@workspace/shared/util';
+import { setTypeValues } from '@workspace/shared/util';
 
 export interface ContractAmounts {
-  contractOriginal: Currency | null | undefined;
-  contractRevised: Currency | null | undefined;
-  retentionBalance?: Currency | null | undefined;
-  toDateApproved?: Currency | null | undefined;
-  toDateClaimed?: Currency | null | undefined;
-  toDatePaid?: Currency | null | undefined;
-  toDateVariations?: Currency | null | undefined;
-  percentClaimed?: number | null | undefined;
-  percentApproved?: number | null | undefined;
-  amountRemaining?: Currency | null | undefined;
-  previouslyApproved?: Currency | null | undefined;
+  contractOriginal?: Currency;
+  contractRevised?: Currency;
+  retentionBalance?: Currency;
+  toDateApproved?: Currency;
+  toDateClaimed?: Currency;
+  toDatePaid?: Currency;
+  toDateVariations?: Currency;
+  percentClaimed?: number;
+  percentApproved?: number;
+  amountRemaining?: Currency;
+  previouslyApproved?: Currency;
+}
+
+export function createContractAmounts(amounts: ContractAmounts | undefined): ContractAmounts {
+  const newAmounts: ContractAmounts = {};
+  if(amounts){
+    newAmounts.contractOriginal = createCurrency(amounts.contractOriginal);
+  newAmounts.contractRevised = createCurrency(amounts.contractRevised );
+  newAmounts.retentionBalance = createCurrency(amounts.retentionBalance );
+  newAmounts.toDateApproved = createCurrency(amounts.toDateApproved );
+  newAmounts.toDateClaimed = createCurrency(amounts.toDateClaimed );
+  newAmounts.toDatePaid = createCurrency(amounts.toDateVariations );
+  newAmounts.toDateVariations = createCurrency(amounts.toDateVariations );
+  newAmounts.amountRemaining = createCurrency(amounts.amountRemaining );
+  newAmounts.previouslyApproved = createCurrency(amounts.previouslyApproved );
+
+  const properties = ['percentClaimed', 'percentApproved'];
+  setTypeValues(amounts, newAmounts, properties)
+
+  }
+
+  return newAmounts;
+
+
 }

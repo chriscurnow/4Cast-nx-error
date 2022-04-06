@@ -8,7 +8,7 @@ export class NumberUtilsService {
 
 
   public stringToLongNumber(val: string): number | null{
-    const longNumber = 0;
+    // const longNumber = 0;
     if (val) {
     val = val.replace(/[^0-9 .]/g, ''); // remove all non-numbers except the decimal point
 

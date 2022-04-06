@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CurrencyDirective } from './currency.directive';
-import { CurrencyInterface } from './currency';
+
 
 @NgModule({
   declarations: [CurrencyDirective],

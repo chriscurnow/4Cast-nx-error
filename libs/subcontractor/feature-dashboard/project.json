@@ -9,6 +9,7 @@
       "outputs": ["coverage/libs/subcontractor/feature-dashboard"],
       "options": {
         "jestConfig": "libs/subcontractor/feature-dashboard/jest.config.js",
+        "tsConfig": "libs/subcontractor/feature-dashboard/tsconfig.json",
         "passWithNoTests": true
       }
     },

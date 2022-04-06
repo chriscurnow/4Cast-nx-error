@@ -7,6 +7,7 @@ import { CurrencyUtilitiesModule } from './currency-utilities';
 
   imports: [CommonModule,
             CurrencyUtilitiesModule],
+            exports: [ CurrencyUtilitiesModule ]
 
 })
 export class SharedUtilModule {}
@@ -14,3 +15,5 @@ export class SharedUtilModule {}
 export * from './date-utils';
 export * from './number-utils/number-utils.service';
 export * from './currency-utilities';
+export * from './data-utils/data-utils';
+export * from './data-utils/data-utils.service';

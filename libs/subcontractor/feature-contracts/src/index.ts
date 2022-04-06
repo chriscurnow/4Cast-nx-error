@@ -1,3 +1,3 @@
 export * from './lib/subcontractor-feature-contracts.module';
-export * from './lib/contract-detail/contract-detail.component';
-export * from './lib/contract-list-page/contract-list-page.component'
+export * from './lib/subcontract-detail/subcontract-detail-container/subcontract-detail-container.component';
+export * from './lib/subcontract-list/subcontract-list-container.component'

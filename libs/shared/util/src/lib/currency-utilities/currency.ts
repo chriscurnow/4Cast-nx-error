@@ -1,32 +1,33 @@
 import Dinero from 'dinero.js';
+import { DataUtilsService as dataUtils } from '../data-utils/data-utils.service'
 
 Dinero.defaultCurrency = 'AUD';
 Dinero.defaultPrecision = 2;
 
-export interface CurrencyInterface {
+export interface Currency {
   amount: number;
   currency?: string;
   precision?: number;
 }
 
-export class Currency implements CurrencyInterface {
+export class CurrencyClass implements Currency {
   amount = 0;
   currency?: string;
   precision?: number;
   dinero?: Dinero.Dinero | undefined;
-  valuesOnly: CurrencyInterface;
+  valuesOnly: Currency;
 
-  static dineroToCurrency(dinero: Dinero.Dinero){
-    return new Currency({
+  static dineroToCurrency(dinero: Dinero.Dinero) {
+    return new CurrencyClass({
       amount: dinero.getAmount(),
       currency: dinero.getCurrency(),
-      precision: dinero.getPrecision()});
+      precision: dinero.getPrecision(),
+    });
   }
 
-  static interfaceToCurrency(iCurrency: CurrencyInterface) {
-    return iCurrency ? new Currency({amount: iCurrency.amount}) : null;
+  static interfaceToCurrency(iCurrency: Currency) {
+    return iCurrency ? new CurrencyClass({ amount: iCurrency.amount }) : null;
   }
-
 
   static objectToCurrency(obj: any) {
     switch (true) {
@@ -34,25 +35,39 @@ export class Currency implements CurrencyInterface {
         return null;
 
       // eslint-disable-next-line no-prototype-builtins
-      case (obj.hasOwnProperty('amount')):
+      case obj.hasOwnProperty('amount'):
         return obj;
 
-      case (typeof(obj) === 'number'):
-        return new Currency(obj);
+      case typeof obj === 'number':
+        return new CurrencyClass(obj);
 
-      case(typeof(obj) === 'string'):
-       return new Currency(obj);
+      case typeof obj === 'string':
+        return new CurrencyClass(obj);
 
       default:
-        return new Currency({amount: obj.amount, currency: obj.currency, precision: obj.precision});
+        return new CurrencyClass({
+          amount: obj.amount,
+          currency: obj.currency,
+          precision: obj.precision,
+        });
     }
   }
 
-  static currencyToPlain(amount: Currency | CurrencyInterface): CurrencyInterface {
+  static createCurrency(currency?: Currency | undefined): Currency {
+    const newCurrency = { amount: 0, currency: 'AUD', precision: 2 };
+    if (currency) {
+      const properties = ['amount', 'currency', 'precision'];
+      dataUtils.setValues<Currency>(currency, newCurrency, properties);
+    }
+
+    return newCurrency;
+  }
+
+  static currencyToPlain(amount: Currency | Currency): Currency {
     return {
       amount: amount.amount,
       currency: amount.currency,
-      precision: amount.precision
+      precision: amount.precision,
     };
   }
 
@@ -63,89 +78,88 @@ export class Currency implements CurrencyInterface {
    * Takes CurrencyInterface and returns a Currency instante
    * If no parameter provided returns a Currency instance with amount = 0;
    */
-  constructor(data?: CurrencyInterface) {
+  constructor(data?: Currency) {
+    if (data) {
+      this.amount = data.amount ? data.amount : 0;
+      // switch (true) {
+      //   case (!data.amount) :
+      //     // don't do anything, leave the value at zero
+      //     break;
+      //   case (typeof(data.amount) === 'string') :
+      //     if (typeof(data.amount) === 'string') {
+      //       const strVal: string = data.amount;
+      //       let num = parseFloat(data.amount);
+      //       if ( strVal.indexOf('.') > -1 ) {
+      //         num = num * 100;
+      //       }
+      //       this.amount = num;
+      //     }
+      //     break;
+      //   case (typeof(data.amount) === 'number' ):
+      //     // eslint-disable-next-line no-case-declarations
+      //     const str = data.amount.toString();
+      //     if ( str.indexOf('.') > -1 ) {
+      //       this.amount = data.amount * 100;
+      //     } else {
+      //       this.amount = data.amount;
+      //     }
+      // }
 
-      if (data) {
+      const curr: string | undefined = data.currency;
+      const prcsn: number | undefined = data.precision;
 
-        switch (true) {
-          case (!data.amount) :
-            // don't do anything, leave the value at zero
-            break;
-          case (typeof(data.amount) === 'string') :
-            if (typeof(data.amount) === 'string') {
-              const strVal: string = data.amount;
-              let num = parseFloat(data.amount);
-              if ( strVal.indexOf('.') > -1 ) {
-                num = num * 100;
-              }
-              this.amount = num;
-            }
-            break;
-          case (typeof(data.amount) === 'number' ):
-            // eslint-disable-next-line no-case-declarations
-            const str = data.amount.toString();
-            if ( str.indexOf('.') > -1 ) {
-              this.amount = data.amount * 100;
-            } else {
-              this.amount = data.amount;
-            }
-        }
+      const dineroData: any = { amount: this.amount };
+      if (curr) {
+        dineroData.currency = curr;
+      }
+      if (prcsn) {
+        dineroData.precision = prcsn;
+      }
+      this.dinero = Dinero(dineroData);
 
-        const curr: string | undefined = data.currency;
-        const prcsn: number | undefined = data.precision;
-
-        const dineroData: any = {amount: this.amount};
-        if (curr){dineroData.currency = curr; }
-        if (prcsn){dineroData.precision = prcsn; }
-        this.dinero = Dinero(dineroData);
-
-        // setting currency and precision from the dinero object
-        // allows us to use the dinero defaults.
-
-
+      // setting currency and precision from the dinero object
+      // allows us to use the dinero defaults.
     } else {
       this.amount = 0;
-      this.dinero = Dinero({amount: 0});
+      this.dinero = Dinero({ amount: 0 });
     }
 
-      this.currency = this.dinero.getCurrency();
-      this.precision = this.dinero.getPrecision();
-      this.valuesOnly = {
-        amount: this.amount,
-        currency: this.currency,
-        precision: this.precision
-      };
+    this.currency = this.dinero.getCurrency();
+    this.precision = this.dinero.getPrecision();
+    this.valuesOnly = {
+      amount: this.amount,
+      currency: this.currency,
+      precision: this.precision,
+    };
   }
 
   public getAmount() {
-      if (this.dinero){
-        return this.dinero.getAmount();
+    if (this.dinero) {
+      return this.dinero.getAmount();
     } else {
-        return null;
+      return null;
     }
   }
 
-public toPlainObject() {
-  console.log('CURRENCY overriding FourcastBase.toPlainObject');
-  if (this.dinero) {
-    return this.dinero.toObject();
-  } else {
+  public toPlainObject() {
+    console.log('CURRENCY overriding FourcastBase.toPlainObject');
+    if (this.dinero) {
+      return this.dinero.toObject();
+    } else {
       return null;
+    }
   }
 
-}
-
   public toFormat(format?: string) {
-      if (this.dinero){
-        if (format) {
-            return this.dinero.toFormat(format);
-          } else {
-            return this.dinero.toFormat();
-          }
+    if (this.dinero) {
+      if (format) {
+        return this.dinero.toFormat(format);
       } else {
-          return null;
+        return this.dinero.toFormat();
       }
-
+    } else {
+      return null;
+    }
   }
 
   public stringToInteger(amt: string): number {
@@ -153,8 +167,8 @@ public toPlainObject() {
     const length = amt.length;
     let numberStr = amt.replace('.', '');
 
-    if (decimalIndex === -1 ) {
-        numberStr = numberStr + '00';
+    if (decimalIndex === -1) {
+      numberStr = numberStr + '00';
     } else {
       const numDecimals = length - decimalIndex - 1;
       switch (numDecimals) {
@@ -167,35 +181,30 @@ public toPlainObject() {
           break;
 
         default:
-          // work out what to do here.
+        // work out what to do here.
       }
     }
 
     return parseInt(numberStr, 10);
-
-    }
-
-    public subtract(value: Currency) {
-      if(value && value.dinero && this.dinero) {
-        const newValue = this.dinero.subtract(value.dinero);
-        return Currency.dineroToCurrency(newValue);
-      }
-      else return new Currency();
-
-    }
-
-    public add(value: Currency): Currency {
-      if(this.dinero && value && value.dinero) {
-        const dineroValue = this.dinero
-        const newValue = dineroValue.add(value.dinero);
-        return Currency.dineroToCurrency(newValue);
-      } else {
-        return new Currency();
-      }
-
-    }
-
   }
+
+  public subtract(value: CurrencyClass) {
+    if (value && value.dinero && this.dinero) {
+      const newValue = this.dinero.subtract(value.dinero);
+      return CurrencyClass.dineroToCurrency(newValue);
+    } else return new CurrencyClass();
+  }
+
+  public add(value: CurrencyClass): CurrencyClass {
+    if (this.dinero && value && value.dinero) {
+      const dineroValue = this.dinero;
+      const newValue = dineroValue.add(value.dinero);
+      return CurrencyClass.dineroToCurrency(newValue);
+    } else {
+      return new CurrencyClass();
+    }
+  }
+}
 
 export function stringToDinero(x: any): Currency | null{
 
@@ -217,7 +226,7 @@ export function stringToDinero(x: any): Currency | null{
         const stringVal = x.replace(/[^\d-]/g, '');
         const numVal: number = parseInt(stringVal, 10);
 
-        const dVal = new Currency({amount: numVal});
+        const dVal = new CurrencyClass({amount: numVal});
     //  console.log('x', x);
     // console.log('decPos', decPos)
     // console.log('stringVal', stringVal)
@@ -234,4 +243,16 @@ export function stringToDinero(x: any): Currency | null{
       return result;
     }
 
+
+
+  }
+
+  export function createCurrency(currency?: Currency | undefined): Currency{
+    const newCurrency = {amount: 0, currency: 'AUD', precision: 2};
+    if(currency){
+      const properties = ['amount', 'currency', 'precision'];
+      dataUtils.setValues<Currency>(currency, newCurrency, properties)
+    }
+
+    return newCurrency;
   }

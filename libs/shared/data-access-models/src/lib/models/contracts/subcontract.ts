@@ -8,15 +8,24 @@ import {
   ContractAuthorisation,
   ContractDates,
   MostRecentPayment,
-  ContractDetails
+  ContractDetails,
+  createCostCode,
+  createSupplier,
+  createContractDetails,
+  createContractDates,
+  createContractAmounts,
+  createProject
 } from '..';
 
-import { EntityAdapter, EntityState, createEntityAdapter } from '@ngrx/entity';
+import { setTypeValues } from '@workspace/shared/util';
+
+import { EntityState } from '@ngrx/entity';
+import { createContractAuth, createMostRecentPayment } from '.';
 
 
 
 export interface Subcontract {
-  id: string;
+  id?: string;
   name?: string | undefined;
   description?: string | undefined;
   number?: number | undefined;
@@ -40,23 +49,23 @@ export interface SubcontractEntity extends EntityState<Subcontract> {
   selectedContractId: string | null;
 }
 
-export function selectContractId(a: Subcontract): string {
-  //In this case this would be optional since primary key is id
-  return a.id;
-}
-
-export function sortByName(a: Subcontract, b: Subcontract): number {
-  if(a.name && b.name ){
-  return a.name.localeCompare(b.name);
-  } else  {
-    return 0
+export function createSubcontract(subcontract: Subcontract | undefined){
+  const newSubcontract: Subcontract = {};
+  if (subcontract){
+    const properties = ['id', 'name', 'number', 'isNew', 'isDraft', 'nextItemnumber', 'nextPaymentNumber'];
+    setTypeValues<Subcontract>(subcontract, newSubcontract, properties);
+    newSubcontract.costCode = createCostCode(subcontract.costCode);
+    newSubcontract.supplier = createSupplier(subcontract.supplier);
+    newSubcontract.authorisation = createContractAuth(subcontract.authorisation);
+    newSubcontract.contractDetails = createContractDetails(subcontract.contractDetails);
+    newSubcontract.dates = createContractDates(subcontract.dates);
+    newSubcontract.amounts = createContractAmounts(subcontract.amounts);
+    newSubcontract.mostRecentPayment = createMostRecentPayment(subcontract.mostRecentPayment);
+    newSubcontract.project = createProject(subcontract.project);
   }
+  return newSubcontract;
 }
 
-export const subcontractAdapter: EntityAdapter<Subcontract> = createEntityAdapter<Subcontract>({
-  selectId: selectContractId,
-  sortComparer: sortByName,
-});
 
 
 

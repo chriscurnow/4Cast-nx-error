@@ -1,0 +1,66 @@
+.mat-form-field-infix {
+  border-top-width: 6px
+}
+
+body.theme-default .mat-form-field-appearance-outline.small {
+  font-size: 13px;
+}
+
+body.theme-default .mat-form-field-appearance-outline .mat-form-field-infix{
+  padding-top: 8px;
+  padding-bottom: 8px;
+  width: auto;
+}
+
+.small-label {
+  font-size: 14px;
+}
+
+.row {
+  flex-direction: row;
+  box-sizing: border-box;
+  display: flex;
+  height: 60px;
+}
+
+.dates {
+    font-size: 12px;
+}
+
+.col {
+    flex: 0;
+    margin-right: 20px;
+    height: 20px;
+    width: 40px;
+  }
+
+  .col:last-child {
+    margin-right: 0;
+  }
+
+  .col-5 {
+      width: 5%;
+  }
+
+  .title {
+      width: 40%;
+  }
+
+  .amount {
+      width: 15%;
+  }
+
+  .percent {
+      width: 5%;
+  }
+
+  .status {
+      height: unset;
+      width: unset;
+      max-height: 32px;
+      max-width: 32px;
+  }
+.icon {
+  color: limegreen;
+  font-size: 40px;
+}

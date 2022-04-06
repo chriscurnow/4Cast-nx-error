@@ -4,7 +4,7 @@
 // import { Company } from '@4cast/classes';
 // import { Project, HeadContractorEntity } from '@4cast/classes';
 
-
+import { Project } from '..';
 import { ContractAmounts } from './contract-amounts';
 import {
   ContractAuthorisation,
@@ -18,8 +18,8 @@ import {
 import {
   MostRecentPayment
 } from './most-recent-payment';
-import { Payment } from '../payments/payment.model';
-import { SubcontractHeadContractorEntity } from '.';
+
+
 
 export interface Supplier {
   id: string;
@@ -33,19 +33,19 @@ export interface Company {
   id: string;
 }
 
-export interface Project {
-  id: string;
-  headContractor: SubcontractHeadContractorEntity
-}
+// export interface Project {
+//   id: string;
+//   headContractor: SubcontractHeadContractorEntity
+// }
 
 
 
 
-export interface SubcontractProject {
-  id: string;
-  name: string;
-  projectNumber: string;
-}
+// export interface SubcontractProject {
+//   id: string;
+//   name: string;
+//   projectNumber: string;
+// }
 
 
 const subcontractCollectionName = 'subcontracts';
@@ -66,7 +66,7 @@ export interface SubcontractEntity {
   mostRecentPayment?: MostRecentPayment;
   nextItemNumber?: number | undefined;
   nextPaymentNumber?: number | undefined;
-  project?: SubcontractProject | undefined;
+  project?: Project | undefined;
 }
 
 import { EntityAdapter, EntityState, createEntityAdapter } from '@ngrx/entity';
@@ -94,24 +94,24 @@ export const adapter: EntityAdapter<SubcontractEntity> = createEntityAdapter<Sub
   sortComparer: sortByName,
 });
 
-export function createSubcontractWithSupplierId(supplierId: string): SubcontractEntity {
-    const supplier = { id: supplierId };
-    const subcontract: SubcontractEntity = {id: ''} // new SubcontractEntity({ supplier: supplier });
-    subcontract.supplier = supplier;
-    return subcontract;
-  }
+// export function createSubcontractWithSupplierId(supplierId: string): SubcontractEntity {
+//     const supplier = { id: supplierId };
+//     const subcontract: SubcontractEntity = {id: ''} // new SubcontractEntity({ supplier: supplier });
+//     subcontract.supplier = supplier;
+//     return subcontract;
+//   }
 
 
-  export function createNew(data: SubcontractEntity): SubcontractEntity {
-    // TODO: [NX-30] Create method to create subcontract from data
-    const newSubcontract: SubcontractEntity = {id:''};
-    // TODO: [NX-29] create method to create new ContractDates
-    newSubcontract.dates = {} //new ContractDates();
-    newSubcontract.dates.contract = new Date();
-    newSubcontract.isNew = true;
-    newSubcontract.isDraft = true;
-    return newSubcontract;
-  }
+//   export function createNew(data: SubcontractEntity): SubcontractEntity {
+//     // TODO: [NX-30] Create method to create subcontract from data
+//     const newSubcontract: SubcontractEntity = {id:''};
+//     // TODO: [NX-29] create method to create new ContractDates
+//     newSubcontract.dates = {} //new ContractDates();
+//     newSubcontract.dates.contract = new Date();
+//     newSubcontract.isNew = true;
+//     newSubcontract.isDraft = true;
+//     return newSubcontract;
+//   }
 
   export function collectionPath(companyId: string, projectId: string): string {
     const projectsCollectionName = 'projects'; // TODO: [FCSUB-378] get projects collection name from Project

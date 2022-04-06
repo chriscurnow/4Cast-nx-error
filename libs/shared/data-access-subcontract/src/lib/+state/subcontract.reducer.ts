@@ -18,14 +18,14 @@ export interface SubcontractPartialState {
 
 export function selectContractId(a: Subcontract): string {
   //In this case this would be optional since primary key is id
-  return a.id;
+  return a.id ? a.id : '';
 }
 
 
 // TODO: [NX-36] Work out how to sort subcontracts. Sort by name may not make much sense.
 export function sortByName(a: Subcontract, b: Subcontract): number {
-  if (a.name && b.name) {
-    return a.name.localeCompare(b.name);
+  if (a.project && b.project && a.project.name && b.project.name) {
+    return a.project.name.localeCompare(b.project.name);
   } else {
     return 0;
   }

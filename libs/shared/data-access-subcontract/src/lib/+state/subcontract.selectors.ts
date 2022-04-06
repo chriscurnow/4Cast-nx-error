@@ -25,30 +25,40 @@ export const selectSubcontractError = createSelector(
 
 export const selectAllSubcontracts = createSelector(
   selectSubcontractState,
-  (state: SubcontractEntityState) => selectAll(state)
+  (state: SubcontractEntityState) => {
+    const newState = selectAll(state);
+    console.log('Selector select all subcontracts, newState', newState);
+    return newState}
 );
 
 export const selectSubcontractEntities = createSelector(
   selectSubcontractState,
-  (state: SubcontractEntityState) => selectEntities(state)
+  (state: SubcontractEntityState) => {
+    const entities = selectEntities(state);
+    console.log('Select Subcontract Entities, entities', entities);
+    return entities;
+  }
 );
 
-export const selectSelectedId = createSelector(
+export const selectSelectedSubcontractId = createSelector(
   selectSubcontractState,
   (state: SubcontractEntityState) => state.selectedId
 );
 
 export const selectSelected = createSelector(
   selectSubcontractEntities,
-  selectSelectedId,
+  selectSelectedSubcontractId,
   (entities, selectedId) => (selectedId ? entities[selectedId] : undefined)
 );
 
 export const selectSubcontract = createSelector(
+
   selectSubcontractEntities,
   selectRouteParams,
-  (entities, { contractId }) =>
-    entities[contractId]
+  (entities, { contractId }) => {
+    console.log('Select Subcontract, contractId', contractId);
+    return entities[contractId];
+  }
   // as long as the param in the router is called 'contractId', this should select the correct subcontract
   // INTERESTING, note exmaple uses cars where our original used entities. Are they the same thing?
   // selectSelectedId,

@@ -1,19 +1,20 @@
-export interface PhoneNumberInterface {
+import { setTypeValues, setValuesArray } from "@workspace/shared/util";
+
+export interface PhoneNumber{
   format?: string | null;
   phoneNumber?: string | null;
   phoneName?: string | null;
 }
 
+const properties = ['format', 'phoneNumber', 'phoneName'];
+const newPhoneNumber: PhoneNumber = {};
 
-
-export class PhoneNumber implements PhoneNumberInterface {
-  format?: string | null;
-  phoneNumber?: string | null;
-  phoneName?: string | null;
-
-  constructor(data: PhoneNumberInterface) {
-    this.format = data.format ? data.format : null;
-    this.phoneNumber = data.phoneNumber ? data.phoneNumber : null;
-    this.phoneName = data.phoneName ? data.phoneName : null;
-  }
+export function createPhoneNumber(phoneNumber: PhoneNumber): PhoneNumber {
+  setTypeValues<PhoneNumber>(phoneNumber, newPhoneNumber, properties)
+  return newPhoneNumber
 }
+
+export function createPhoneNumbers(phoneNumbers: PhoneNumber[] | undefined): PhoneNumber[]{
+  return setValuesArray<PhoneNumber>(phoneNumbers, newPhoneNumber, properties)
+}
+

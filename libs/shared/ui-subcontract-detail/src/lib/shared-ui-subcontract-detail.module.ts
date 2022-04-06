@@ -2,27 +2,35 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SharedUiDefaultModuleCollectionModule } from '@workspace/shared-ui-default-module-collection';
-import { SubcontractDetailRoutingModule } from './subcontract-detail-routing.module';
-import { SubcontractDetailComponent } from './subcontract-detail/subcontract-detail/subcontract-detail.component';
-import { LineItemsComponent } from './subcontract-detail/line-items/line-items.component';
-import { ContractItemComponent } from './subcontract-detail/contract-item/contract-item.component';
-import { ContractItemArrayComponent } from './subcontract-detail/contract-item-array/contract-item-array.component';
-import { ContractHeaderComponent } from './contract-header/contract-header.component';
-import { SubcontractDetailContainerComponent } from './subcontract-detail/subcontract-detail-container/subcontract-detail-container.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { SubcontractDatesComponent } from './subcontract-dates/subcontract-dates.component';
+import { SubcontractHeaderComponent } from './contract-header/contract-header.component';
+import { SubcontractItemComponent } from './subcontract-item/subcontract-item.component';
+import { CurrencyUtilitiesModule } from '@workspace/shared/util';
 
 @NgModule({
   declarations: [
-    SubcontractDetailComponent,
-    LineItemsComponent,
-    ContractItemComponent,
-    ContractItemArrayComponent,
-    ContractHeaderComponent,
-    SubcontractDetailContainerComponent,
+    SubcontractHeaderComponent,
+    SubcontractDatesComponent,
+    SubcontractItemComponent,
+
   ],
   imports: [
     CommonModule,
-    SubcontractDetailRoutingModule,
     SharedUiDefaultModuleCollectionModule,
+    MatDatepickerModule,
+    MatInputModule,
+    MatFormFieldModule,
+    ReactiveFormsModule,
+    CurrencyUtilitiesModule
+  ],
+  exports: [
+    SubcontractHeaderComponent,
+    SubcontractDatesComponent,
+    SubcontractItemComponent,
   ],
 })
 export class SharedUiSubcontractDetailModule {}

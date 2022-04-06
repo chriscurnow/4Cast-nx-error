@@ -1,8 +1,12 @@
-/* eslint-disable no-prototype-builtins */
+
 import { Injectable } from '@angular/core';
 import { DateTime } from 'luxon';
 // import { default as _rollupMoment } from 'moment';
 
+// TODO: Refactor date-utils without moment
+// 'moment is not callable'
+// This problem only occurs when we try to build the 'functions' directory
+// Moment is deprecated anyway
 
 
 
