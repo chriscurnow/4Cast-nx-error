@@ -55,6 +55,11 @@ export const createSubcontractItemFailure = createAction(
   props<{ error: any }>()
 );
 
+export const createVariation = createAction(
+  '[Subcontract Detail Form] Create Variation',
+  props<{subcontract: Subcontract}>()
+)
+
 
 
 

@@ -3,8 +3,8 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
 import { Store } from '@ngrx/store';
 import {
   loadItemsForSubcontract,
-  selectItemsForSubcontract,
-  selectAllSubcontractItem,
+  selectOriginalItem,
+  selectVariationItems,
   SubcontractItemPartialState,
 } from '@workspace/shared/data-access-subcontract-items';
 import { Observable } from 'rxjs';
@@ -13,12 +13,14 @@ import { Subcontract, SubcontractItem } from '@workspace/shared/data-access-mode
 @Component({
   selector: 'fourcast-subcontract-items-container',
   templateUrl: './subcontract-items-container.component.html',
-  styleUrls: ['./subcontract-items-container.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  styleUrls: ['./subcontract-items-container.component.scss', './subcontract-detail.scss'],
+  // changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SubcontractItemsContainerComponent implements OnInit {
-  items$: Observable<SubcontractItem[]>;
-  items: SubcontractItem[];
+
+  variations: SubcontractItem[];
+  originalItem: SubcontractItem;
+
 
   @Input() set subcontract(v: Subcontract | null | undefined){
 
@@ -35,15 +37,26 @@ export class SubcontractItemsContainerComponent implements OnInit {
 
 
   constructor(private store: Store<SubcontractItemPartialState>) {
-    this.items$ = this.store.select(selectAllSubcontractItem);
-    this.items$.subscribe((items) => {
-      this.items = items;
-      console.log("Items loaded", items)
-    });
+
   }
 
   ngOnInit(): void {
     console.log();
     //  this.store.dispatch(loadItemsForSubcontract({ subcontract: {} }));
+     this.store.select(selectOriginalItem)
+     .subscribe((items: SubcontractItem[]) => {
+       if (items.length > 0) {
+         this.originalItem = items[0];
+         console.log('CONTAINER COMPONENT Original Item', this.originalItem)
+       }
+     });
+
+     this.store.select(selectVariationItems)
+     .subscribe((variations: SubcontractItem[]) => {
+      this.variations = variations;
+     })
+
   }
+
+
 }

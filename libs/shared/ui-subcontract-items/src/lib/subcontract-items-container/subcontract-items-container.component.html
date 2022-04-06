@@ -1,1 +1,7 @@
-<fourcast-subcontract-item></fourcast-subcontract-item>
+<h2>CONTRACT AMOUNTS</h2>
+<fourcast-subcontract-item-line [item]="originalItem"></fourcast-subcontract-item-line>
+
+<h2>VARIATIONS</h2>
+<div *ngFor="let variation of variations">
+  <fourcast-subcontract-item-line [item]="variation"></fourcast-subcontract-item-line>
+</div>

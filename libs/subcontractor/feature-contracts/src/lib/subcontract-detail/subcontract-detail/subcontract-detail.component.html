@@ -7,7 +7,7 @@
       <input matInput placeholder="Description of work" formControlName="description">
     </mat-form-field>
     <fourcast-subcontract-dates formControlName="dates"></fourcast-subcontract-dates>
-    <h2>AMOUNTS</h2>
+
 
       <!-- <fourcast-subcontract-item></fourcast-subcontract-item> -->
     <fourcast-subcontract-items-container [subcontract] = "_subcontract"></fourcast-subcontract-items-container>
@@ -16,6 +16,7 @@
     <mat-card-actions>
       <div fxLayout="row" fxLayoutAlign="end center" style="height:60px; padding-right:20px">
         <button mat-raised-button (click)="createItemZeroForContract()">Create Item 0</button>
+        <button mat-raised-button color="accent" (click)="newVariation()">NEW VARIATION</button>
         <button mat-raised-button color="accent" (click)="newClaim()">NEW CLAIM</button>
         <button mat-raised-button color="primary" (click)="onSubmit()">OK</button>
       </div>

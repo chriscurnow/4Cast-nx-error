@@ -55,19 +55,40 @@ export class SubcontractItemsService {
     // }
   }
 
+  async createVariation(subcontract: Subcontract): Promise<any> {
+    const projectId = subcontract.project ? subcontract.project.id : '';
+    const subcontractId = subcontract.id;
+    const variation = this.createItemForApprovedContract(subcontract, 'variation', 1);
+    const path = `projects/${projectId}/subcontracts/${subcontractId}/subcontractItems`;
+    try {
+      const ref = await this.afs.collection(path).add(variation);
+      console.log(
+        'SUBCONTRACT ITEMS SERVICE createSubcontractItem, ref',
+        ref,
+        variation
+      );
+      return ref;
+    } catch (err) {
+      return err;
+    }
+  }
+
   async createSubcontractItem(item: SubcontractItem): Promise<any> {
     const projectId = item.projectId;
     const subcontractId = item.subcontractId;
     const path = `projects/${projectId}/subcontracts/${subcontractId}/subcontractItems`;
     try {
-       const ref = await this.afs.collection(path).add(item);
-       console.log('SUBCONTRACT ITEMS SERVICE createSubcontractItem, ref', ref, item)
-       return ref;
+      const ref = await this.afs.collection(path).add(item);
+      console.log(
+        'SUBCONTRACT ITEMS SERVICE createSubcontractItem, ref',
+        ref,
+        item
+      );
+      return ref;
     } catch (err) {
       return err;
     }
-    }
-
+  }
 
   /**
    *
@@ -81,16 +102,12 @@ export class SubcontractItemsService {
   ): Observable<SubcontractItem[]> {
     // ContractItem.getCollectionPath(projectId, subcontractId);
     // this.contractItemsCollection =
-    console.log('getItemsForSubcontract, subcontract', subcontract);
     const projectId = subcontract.project?.id;
     const subcontractId = subcontract.id;
     const path = `projects/${projectId}/subcontracts/${subcontractId}/subcontractItems`; // TODO: [SL-16] implement method to get contract item path
-    console.log('getItemsForSubcontract, path', path);
     return this.afs
       .collection<SubcontractItem>(path, (ref) =>
-        ref
-          .where('itemNumber', '>=', 0)
-          .orderBy('itemNumber')
+        ref.where('itemNumber', '>=', 0).orderBy('itemNumber')
       )
       .valueChanges();
 
@@ -189,23 +206,27 @@ export class SubcontractItemsService {
     return contractItemDoc.update(update);
   }
 
-createItemForApprovedContract(subcontract: Subcontract): SubcontractItem {
+  createItemForApprovedContract(subcontract: Subcontract, title: string, itemNumber: number): SubcontractItem {
     const contractItem: SubcontractItem = {};
     if (subcontract.amounts) {
-      contractItem.contractAmount = subcontract.amounts.contractOriginal
+      contractItem.contractAmount = subcontract.amounts.contractOriginal;
       contractItem.amountRemaining = contractItem.contractAmount;
     }
     const newDate = '';
     contractItem.itemDate = newDate;
-    contractItem.title = 'Original Contract';
-    contractItem.itemNumber = 0;
+    contractItem.title = title;
+    contractItem.itemNumber = itemNumber;
     contractItem.approvedPercent = 0;
     contractItem.claimedPercent = 0;
     contractItem.approvedToDate = CurrencyClass.createCurrency();
     contractItem.claimedToDate = CurrencyClass.createCurrency();
     contractItem.status = PaymentStatus.Approved;
-    contractItem.projectId = subcontract.project ? subcontract.project.id : undefined;
+    contractItem.projectId = subcontract.project
+      ? subcontract.project.id
+      : undefined;
     contractItem.subcontractId = subcontract.id;
     return contractItem;
   }
+
+
 }

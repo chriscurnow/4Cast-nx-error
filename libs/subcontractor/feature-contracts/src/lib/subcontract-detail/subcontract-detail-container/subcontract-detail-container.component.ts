@@ -11,6 +11,7 @@ import { loadSubcontractsList } from '@workspace/shared/data-access-subcontract'
 import {
   selectAllSubcontractItem,
   createSubcontractItem,
+  createVariation,
   SubcontractItemsService,
 
 } from '@workspace/shared/data-access-subcontract-items';
@@ -52,8 +53,12 @@ export class SubcontractDetailContainerComponent implements OnInit {
 
 createItemZero(){
    const contractUpdate =
-     this.contractItemsService.createItemForApprovedContract(this.subcontract as Subcontract);
+     this.contractItemsService.createItemForApprovedContract(this.subcontract as Subcontract, 'ooriginalContract', 0);
    this.store.dispatch(createSubcontractItem({item: contractUpdate}))
+}
+
+createNewVariation(){
+  this.store.dispatch(createVariation({subcontract: this.subcontract as Subcontract}))
 }
 
   backToList(){

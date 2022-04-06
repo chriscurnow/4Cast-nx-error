@@ -7,6 +7,7 @@ import { CurrencyUtilitiesModule } from './currency-utilities';
 
   imports: [CommonModule,
             CurrencyUtilitiesModule],
+            exports: [ CurrencyUtilitiesModule ]
 
 })
 export class SharedUtilModule {}

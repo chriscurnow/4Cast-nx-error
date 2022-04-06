@@ -40,6 +40,17 @@ export const getSelectedId = createSelector(
   (state: SubcontractItemEntityState) => state.selectedId
 );
 
+export const selectOriginalItem = createSelector(
+  selectAllSubcontractItem,
+  (items: SubcontractItem[]) =>
+    items.filter((item) => item.itemNumber == 0)
+);
+
+export const selectVariationItems = createSelector(
+  selectAllSubcontractItem,
+  (items: SubcontractItem[]) => items.filter((item) => item.itemNumber as number > 0)
+);
+
 export const selectItemsForSubcontract = createSelector(
   selectAllSubcontractItem,
   selectSelectedSubcontractId,

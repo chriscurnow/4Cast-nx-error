@@ -42,6 +42,7 @@ export class SubcontractDetailComponent implements OnInit {
 
   @Output() navigateBack = new EventEmitter<null>();
   @Output() createItemZero = new EventEmitter<null>();
+  @Output() createNewVariation = new EventEmitter<null>();
 
   constructor(private fb: FormBuilder,
               private router: Router,
@@ -75,6 +76,10 @@ export class SubcontractDetailComponent implements OnInit {
     //   this._subcontract.project ? this._subcontract.project.id as string : '',
     //   this._subcontract.id as string
     // );
+  }
+
+  newVariation(): void {
+    this.createNewVariation.emit();
   }
 
   newClaim(): void {

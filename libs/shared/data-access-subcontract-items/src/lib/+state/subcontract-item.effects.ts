@@ -58,7 +58,6 @@ export class SubcontractItemEffects {
           .pipe(
             map((subcontractItems) =>
              {
-              console.log('SUBCONTRACT ITEM EFFECTS load subcontract items success, items', subcontractItems)
               return SubcontractItemActions.loadSubcontractItemsSuccess({
                 subcontractItems,
               })}
@@ -100,6 +99,17 @@ export class SubcontractItemEffects {
       ),
     { dispatch: false }
   );
+
+  createVariation = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(SubcontractItemActions.createVariation),
+        exhaustMap((action: any) => {
+          return from(this.subcontractItemsService.createVariation(action.subcontract))
+        })
+      ),
+      { dispatch: false }
+  )
 
   private returnItems(subcontract: Subcontract) {
     this.subcontractItemsService.getItemsForSubcontract(subcontract).pipe(
