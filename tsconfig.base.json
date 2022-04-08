@@ -65,6 +65,9 @@
       "@workspace/shared/styles-theming": [
         "libs/shared/styles-theming/src/index.ts"
       ],
+      "@workspace/shared/subcontract-group/feature-subcontract": [
+        "libs/shared/subcontract-group/feature-subcontract/src/index.ts"
+      ],
       "@workspace/shared/ui-main-layout": [
         "libs/shared/ui-main-layout/src/index.ts"
       ],
