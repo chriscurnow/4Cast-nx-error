@@ -21,6 +21,7 @@
     "shared-feature-login": "libs/shared/feature-login",
     "shared-feature-toolbar-user": "libs/shared/feature-toolbar-user",
     "shared-subcontract-group-feature-subcontract": "libs/shared/subcontract-group/feature-subcontract",
+    "shared-subcontract-group-feature-subcontract-item": "libs/shared/subcontract-group/feature-subcontract-item",
     "shared-ui-default-module-collection": "libs/shared/ui-default-module-collection",
     "shared-ui-main-layout": "libs/shared/ui-main-layout",
     "shared-ui-subcontract-detail": "libs/shared/ui-subcontract-detail",
