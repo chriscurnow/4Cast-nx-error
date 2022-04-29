@@ -24,10 +24,11 @@
     "shared-subcontract-group-data-access-subcontract-item": "libs/shared/subcontract-group/data-access-subcontract-item",
     "shared-subcontract-group-feature-subcontract": "libs/shared/subcontract-group/feature-subcontract",
     "shared-subcontract-group-feature-subcontract-item": "libs/shared/subcontract-group/feature-subcontract-item",
+    "shared-subcontract-group-ui-sub-detail": "libs/shared/subcontract-group/ui-sub-detail",
+    "shared-subcontract-group-ui-subcontract-detail": "libs/shared/subcontract-group/ui-subcontract-detail",
+    "shared-subcontract-group-ui-subcontract-items": "libs/shared/subcontract-group/ui-subcontract-items",
     "shared-ui-default-module-collection": "libs/shared/ui-default-module-collection",
     "shared-ui-main-layout": "libs/shared/ui-main-layout",
-    "shared-ui-subcontract-detail": "libs/shared/ui-subcontract-detail",
-    "shared-ui-subcontract-items": "libs/shared/ui-subcontract-items",
     "shared-ui-subcontracts": "libs/shared/ui-subcontracts",
     "shared-util": "libs/shared/util",
     "shared-util-local-storage": "libs/shared/util-local-storage",
@@ -36,7 +37,6 @@
     "signup-e2e": "apps/signup-e2e",
     "sub-contractor": "apps/sub-contractor",
     "sub-contractor-e2e": "apps/sub-contractor-e2e",
-    "subcontractor-feature-contracts": "libs/subcontractor/feature-contracts",
     "subcontractor-feature-dashboard": "libs/subcontractor/feature-dashboard"
   }
 }

@@ -33,6 +33,7 @@ export class SubcontractDetailContainerComponent implements OnInit {
     private store: Store<SubcontractPartialState>,
     private contractItemsService: SubcontractItemsService
   ) {
+    console.log('SUBCONTRACT DETAIL CONTAINER COMPONENT constructor')
      this.contract$ = this.store.select(selectSubcontract)
 
     this.contract$.subscribe(res => {

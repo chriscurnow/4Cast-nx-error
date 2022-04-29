@@ -42,7 +42,7 @@ export class SubcontractListComponent {
   @Output() subcontractSelected = new EventEmitter<Subcontract>();
 
   rowClicked(subcontract: Subcontract) {
-    // console.log('row clicked', subcontract);
+    console.log('row clicked', subcontract);
     this.subcontractSelected.emit(subcontract)
   }
 

@@ -3,11 +3,11 @@ import { Store } from '@ngrx/store';
 import { Subcontract } from '@workspace/shared/data-access-models';
 import { loadSubcontractsList } from '@workspace/shared/data-access-subcontract';
 import { Observable } from 'rxjs';
+import {
+  SubcontractPartialState,
+  selectAllSubcontracts,
+} from '@workspace/shared/data-access-subcontract';
 
-
-// export const selectAllContracts = createSelector(selectContractState, (state: State) =>
-
-import { selectAllSubcontracts } from '@workspace/shared/data-access-subcontract';
 
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -26,7 +26,7 @@ export class SubcontractListContainerComponent implements OnInit {
   // public subcontractor: SupplierInterface;
 
   constructor(
-    private store: Store,
+    private store: Store<SubcontractPartialState>,
     private router: Router,
     private route: ActivatedRoute
   ) {
@@ -50,7 +50,7 @@ export class SubcontractListContainerComponent implements OnInit {
     this.store.dispatch(loadSubcontractsList());
   }
   rowSelected(subcontract: Subcontract) {
-    // console.log('Row selected', subcontract);
+    console.log('SUBCONTRACT LIST COMPONENT Row selected', subcontract);
     this.router.navigate(['../contract-detail', subcontract.id], {relativeTo: this.route})
   }
 }
