@@ -1,20 +1,21 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  SubcontractPartialState,
-  selectSubcontract,
-} from '@workspace/shared/data-access-subcontract';
+
 import { Subcontract, SubcontractItem } from '@workspace/shared/data-access-models';
 import { Store } from '@ngrx/store';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { loadSubcontractsList } from '@workspace/shared/data-access-subcontract';
+import {
+  SubcontractPartialState,
+  selectSubcontract,
+  loadSubcontractsList,
+} from '@workspace/shared/subcontract-group/data-access-subcontract';
 import {
   selectAllSubcontractItem,
   createSubcontractItem,
   createVariation,
   SubcontractItemsService,
 
-} from '@workspace/shared/data-access-subcontract-items';
+} from '@workspace/shared/subcontract-group/data-access-subcontract-item';
 
 
 

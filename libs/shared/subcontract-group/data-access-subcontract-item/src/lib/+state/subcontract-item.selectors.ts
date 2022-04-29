@@ -5,7 +5,7 @@ import {
   SubcontractItemEntityState,
   subcontractItemAdapter,
 } from './subcontract-item.reducer';
-import { selectSelectedSubcontractId } from '@workspace/shared/data-access-subcontract';
+import { selectSelectedSubcontractId } from '@workspace/shared/subcontract-group/data-access-subcontract';
 
 // Lookup the 'SubcontractItem' feature state managed by NgRx
 export const getSubcontractItemState =

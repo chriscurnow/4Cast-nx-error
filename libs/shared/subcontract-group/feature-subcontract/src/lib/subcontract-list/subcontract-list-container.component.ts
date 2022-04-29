@@ -1,12 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Subcontract } from '@workspace/shared/data-access-models';
-import { loadSubcontractsList } from '@workspace/shared/data-access-subcontract';
-import { Observable } from 'rxjs';
 import {
+  loadSubcontractsList,
   SubcontractPartialState,
   selectAllSubcontracts,
-} from '@workspace/shared/data-access-subcontract';
+} from '@workspace/shared/subcontract-group/data-access-subcontract';
+import { Observable } from 'rxjs';
 
 
 import { ActivatedRoute, Router } from '@angular/router';

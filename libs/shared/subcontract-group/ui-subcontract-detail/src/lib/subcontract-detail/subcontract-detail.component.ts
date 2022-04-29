@@ -5,8 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
-import { Subcontract, SubcontractItem } from '@workspace/shared/data-access-models';
-import { SubcontractItemsService } from '@workspace/shared/data-access-subcontract-items';
+
 
 
 @Component({
@@ -17,28 +16,11 @@ import { SubcontractItemsService } from '@workspace/shared/data-access-subcontra
 export class SubcontractDetailComponent implements OnInit {
   contractId: string;
   detailForm: FormGroup;
-  _subcontract: Subcontract;
-  _items: SubcontractItem[] | undefined;
-  item0: SubcontractItem = {};
 
-  @Input() set subcontract(v: Subcontract | null | undefined) {
-    console.log('Subcontract Detail Component, set subcontract', v);
-    if (v) {
-      this._subcontract = v;
-      this._subcontract.description = 'Plumbing';
-      this.contractId = this._subcontract.id ? this._subcontract.id : '';
-    }
-    this.detailForm.reset(this._subcontract);
-  }
 
-  @Input() set items(v: SubcontractItem[] | undefined ) {
-    this._items = v;
-    if(this._items && this._items.length > 0 ){
-      this.item0 = this._items[0];
-    } else {
-      this.item0 = {};
-    }
-  }
+
+
+
 
   @Output() navigateBack = new EventEmitter<null>();
   @Output() createItemZero = new EventEmitter<null>();

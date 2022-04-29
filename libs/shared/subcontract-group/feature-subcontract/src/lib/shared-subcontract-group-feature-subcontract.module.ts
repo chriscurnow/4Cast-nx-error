@@ -7,8 +7,8 @@ import { SharedSubcontractGroupUiSubcontractDetailModule } from '@workspace/shar
 import { SharedSubcontractGroupUiSubcontractItemsModule } from '@workspace/shared-subcontract-group-ui-subcontract-items';
 import { SharedUiDefaultModuleCollectionModule } from '@workspace/shared-ui-default-module-collection';
 import { MatTableModule } from '@angular/material/table';
-import { SharedDataAccessSubcontractModule } from '@workspace/shared/data-access-subcontract';
-import { SharedDataAccessSubcontractItemsModule } from '@workspace/shared/data-access-subcontract-items';
+import { SharedSubcontractGroupDataAccessSubcontractModule } from '@workspace/shared/subcontract-group/data-access-subcontract';
+import { SharedSubcontractGroupDataAccessSubcontractItemModule } from '@workspace/shared/subcontract-group/data-access-subcontract-item';
 import { SubcontractListContainerComponent } from './subcontract-list';
 import { SubcontractDetailContainerComponent } from './subcontract-detail';
 import { SubcontractItemsContainerComponent } from './subcontract-detail/subcontract-items-container/subcontract-items-container.component';
@@ -23,8 +23,9 @@ import { SubcontractItemsComponent } from './subcontract-items/subcontract-items
     SharedUiDefaultModuleCollectionModule,
     SharedSubcontractGroupUiSubcontractItemsModule,
     SharedSubcontractGroupUiSubcontractDetailModule,
-    SharedDataAccessSubcontractModule,
-    SharedDataAccessSubcontractItemsModule,
+    SharedSubcontractGroupDataAccessSubcontractModule,
+    SharedSubcontractGroupDataAccessSubcontractItemModule,
+
     MatTableModule,
     RouterModule.forChild([
       {

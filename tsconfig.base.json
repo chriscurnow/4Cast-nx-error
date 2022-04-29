@@ -53,12 +53,6 @@
       "@workspace/shared/data-access-router": [
         "libs/shared/data-access-router/src/index.ts"
       ],
-      "@workspace/shared/data-access-subcontract": [
-        "libs/shared/data-access-subcontract/src/index.ts"
-      ],
-      "@workspace/shared/data-access-subcontract-items": [
-        "libs/shared/data-access-subcontract-items/src/index.ts"
-      ],
       "@workspace/shared/data-access-supplier": [
         "libs/shared/data-access-supplier/src/index.ts"
       ],

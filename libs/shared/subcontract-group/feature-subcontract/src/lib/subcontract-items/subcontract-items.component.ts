@@ -5,7 +5,7 @@ import {
   selectOriginalItem,
   selectVariationItems,
   SubcontractItemPartialState,
-} from '@workspace/shared/data-access-subcontract-items';
+} from '@workspace/shared/subcontract-group/data-access-subcontract-item';
 
 import {
   Subcontract,
