@@ -1,0 +1,99 @@
+<div [formGroup]="contractItemForm">
+  <div class="row">
+    <!-- <mat-form-field appearance="outline"  class="col col-5">
+        <mat-label>No</mat-label>
+        <input matInput
+                placeholder="#"
+                formControlName="itemNumber">
+      </mat-form-field>
+
+
+      <mat-form-field appearance="outline"  class="col title">
+        <mat-label>Title</mat-label>
+        <input matInput
+                placeholder="Title"
+                formControlName="title">
+      </mat-form-field> -->
+
+    <mat-form-field appearance="outline" class="col amount">
+      <mat-label>Contract Amount</mat-label>
+      <input
+        matInput
+        currencyDirective
+        placeholder="Contract Amount"
+        formControlName="contractAmount"
+      />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="col amount">
+      <mat-label>Claimed to Date</mat-label>
+      <input
+        matInput
+        currencyDirective
+        placeholder="Claimed To Date"
+        formControlName="claimedToDate"
+      />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="col percent">
+      <mat-label>%</mat-label>
+      <input
+        matInput
+        placeholder="Percent Claimed"
+        formControlName="claimedPercent"
+      />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="col amount">
+      <mat-label>Approved to Date</mat-label>
+      <input
+        matInput
+        currencyDirective
+        placeholder="Approved"
+        formControlName="approvedToDate"
+      />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="col percent">
+      <mat-label>%</mat-label>
+      <input
+        matInput
+        placeholder="Percent Approved"
+        formControlName="approvedPercent"
+      />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="col amount">
+      <mat-label>Amount Remaining</mat-label>
+      <input
+        matInput
+        currencyDirective
+        placeholder="Amount Remaining"
+        formControlName="amountRemaining"
+      />
+    </mat-form-field>
+
+    <div class="col">
+      <!-- <span>Status = {{status}}</span> -->
+      <div *ngIf="status === 0">
+        <mat-icon class="status" svgIcon="draft"></mat-icon>
+      </div>
+
+      <div *ngIf="status === 1">
+        <mat-icon class="status" svgIcon="in-progress"></mat-icon>
+      </div>
+
+      <div *ngIf="status === 2 && itemNumber > 0">
+        <!-- <mat-icon class="status" [svgIcon]="'approved'" style="width:40px; height: 40px;"></mat-icon> -->
+      </div>
+    </div>
+
+    <div class="col col-5">
+      <div *ngIf="itemNumber > 0">
+        <button mat-icon-button (click)="editItem()">
+          <mat-icon>menu</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

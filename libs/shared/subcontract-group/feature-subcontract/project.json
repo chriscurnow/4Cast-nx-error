@@ -1,0 +1,26 @@
+{
+  "projectType": "library",
+  "root": "libs/shared/subcontract-group/feature-subcontract",
+  "sourceRoot": "libs/shared/subcontract-group/feature-subcontract/src",
+  "prefix": "fourcast",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/shared/subcontract-group/feature-subcontract"],
+      "options": {
+        "jestConfig": "libs/shared/subcontract-group/feature-subcontract/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/shared/subcontract-group/feature-subcontract/src/**/*.ts",
+          "libs/shared/subcontract-group/feature-subcontract/src/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": ["scope:feature"]
+}

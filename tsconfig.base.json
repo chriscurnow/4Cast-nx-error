@@ -23,6 +23,15 @@
       "@workspace/contractor/feature-dashboard": [
         "libs/contractor/feature-dashboard/src/index.ts"
       ],
+      "@workspace/shared-subcontract-group-ui-sub-detail": [
+        "libs/shared/subcontract-group/ui-sub-detail/src/index.ts"
+      ],
+      "@workspace/shared-subcontract-group-ui-subcontract-detail": [
+        "libs/shared/subcontract-group/ui-subcontract-detail/src/index.ts"
+      ],
+      "@workspace/shared-subcontract-group-ui-subcontract-items": [
+        "libs/shared/subcontract-group/ui-subcontract-items/src/index.ts"
+      ],
       "@workspace/shared-subcontract-items": [
         "libs/shared/subcontract-items/src/index.ts"
       ],
@@ -65,14 +74,23 @@
       "@workspace/shared/styles-theming": [
         "libs/shared/styles-theming/src/index.ts"
       ],
+      "@workspace/shared/subcontract-group/data-access-subcontract": [
+        "libs/shared/subcontract-group/data-access-subcontract/src/index.ts"
+      ],
+      "@workspace/shared/subcontract-group/data-access-subcontract-item": [
+        "libs/shared/subcontract-group/data-access-subcontract-item/src/index.ts"
+      ],
+      "@workspace/shared/subcontract-group/feature-subcontract": [
+        "libs/shared/subcontract-group/feature-subcontract/src/index.ts"
+      ],
+      "@workspace/shared/subcontract-group/feature-subcontract-item": [
+        "libs/shared/subcontract-group/feature-subcontract-item/src/index.ts"
+      ],
       "@workspace/shared/ui-main-layout": [
         "libs/shared/ui-main-layout/src/index.ts"
       ],
-      "@workspace/shared/ui-subcontract-detail": [
-        "libs/shared/ui-subcontract-detail/src/index.ts"
-      ],
-      "@workspace/shared/ui-subcontract-items": [
-        "libs/shared/ui-subcontract-items/src/index.ts"
+      "@workspace/shared/ui-sub-detail": [
+        "libs/shared/ui-sub-detail/src/index.ts"
       ],
       "@workspace/shared/ui-subcontracts": [
         "libs/shared/ui-subcontracts/src/index.ts"
@@ -83,9 +101,6 @@
       ],
       "@workspace/shared/util-testing": [
         "libs/shared/util-testing/src/index.ts"
-      ],
-      "@workspace/subcontractor/feature-contracts": [
-        "libs/subcontractor/feature-contracts/src/index.ts"
       ],
       "@workspace/subcontractor/feature-dashboard": [
         "libs/subcontractor/feature-dashboard/src/index.ts"

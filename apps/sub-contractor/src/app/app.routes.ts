@@ -50,12 +50,15 @@ export const routingConfiguration: ExtraOptions = {
             {
               path: 'subcontractor-feature-contracts',
               loadChildren: () =>
-                import('@workspace/subcontractor/feature-contracts').then(
-                  (module) => module.SubcontractorFeatureContractsModule
+                import('@workspace/shared/subcontract-group/feature-subcontract').then(
+                  (module) => module.SharedSubcontractGroupFeatureSubcontractModule
                 ),
+              // loadChildren: () =>
+              //   import('@workspace/subcontractor/feature-contracts').then(
+              //     (module) => module.SubcontractorFeatureContractsModule
+              //   ),
             },
           ],
-
         },
         // [STARTER DOCS] catch all route, redirect to /app (and its default route)
         // possible to provide dedicated not found page instead
@@ -65,7 +68,6 @@ export const routingConfiguration: ExtraOptions = {
         },
       ],
       routingConfiguration
-
     ),
   ],
 })

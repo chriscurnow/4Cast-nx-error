@@ -1,0 +1,29 @@
+.mat-column-project,
+.mat-column-headContractor,
+.mat-column-date,
+.mat-column-original,
+.mat-column-revised,
+.mat-column-variations {
+  vertical-align: top;
+  padding-top: 6px;
+  padding-left: 10px;
+
+}
+
+.mat-column-project {
+    width: 300px;
+}
+
+.mat-column-date{
+  min-width: 100px;
+}
+
+.mat-column-original,
+.mat-column-revised,
+.mat-column-variations{
+  min-width: 100px;
+}
+
+#contract-list{
+  cursor: pointer;
+}
