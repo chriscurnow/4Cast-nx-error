@@ -4,6 +4,7 @@ import { SubcontractItemLineComponent } from './subcontract-item-line/subcontrac
 import { SubcontractItemListComponent } from './subcontract-item-list/subcontract-item-list.component';
 import { SharedUiDefaultModuleCollectionModule } from '@workspace/shared-ui-default-module-collection';
 import { SharedUtilModule } from '@workspace/shared/util';
+import { SubcontractItemDetailUiComponent } from './subcontract-item-detail-ui/subcontract-item-detail-ui.component';
 
 @NgModule({
   imports: [
@@ -14,6 +15,7 @@ import { SharedUtilModule } from '@workspace/shared/util';
   declarations: [
     SubcontractItemLineComponent,
     SubcontractItemListComponent,
+    SubcontractItemDetailUiComponent,
     // CurrencyDirective,
   ],
   exports: [
