@@ -8,13 +8,13 @@ import { SubcontractItemDetailContainerComponent } from './subcontract-item-deta
   imports: [
     CommonModule,
     RouterModule.forChild([
-      /* {path: '', pathMatch: 'full', component: InsertYourComponentHere} */
+      {path: 'detail/:subcontractId', pathMatch: 'full', component: SubcontractItemDetailContainerComponent}
     ]),
     SharedSubcontractGroupUiSubcontractItemsModule,
   ],
   declarations: [
     SubcontractItemDetailContainerComponent
   ],
-  
+
 })
 export class SharedSubcontractGroupFeatureSubcontractItemModule {}

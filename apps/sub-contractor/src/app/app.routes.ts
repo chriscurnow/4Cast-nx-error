@@ -50,8 +50,25 @@ export const routingConfiguration: ExtraOptions = {
             {
               path: 'subcontractor-feature-contracts',
               loadChildren: () =>
-                import('@workspace/shared/subcontract-group/feature-subcontract').then(
-                  (module) => module.SharedSubcontractGroupFeatureSubcontractModule
+                import(
+                  '@workspace/shared/subcontract-group/feature-subcontract'
+                ).then(
+                  (module) =>
+                    module.SharedSubcontractGroupFeatureSubcontractModule
+                ),
+              // loadChildren: () =>
+              //   import('@workspace/subcontractor/feature-contracts').then(
+              //     (module) => module.SubcontractorFeatureContractsModule
+              //   ),
+            },
+            {
+              path: 'subcontractor-feature-contract-items',
+              loadChildren: () =>
+                import(
+                  '@workspace/shared/subcontract-group/feature-subcontract-item'
+                ).then(
+                  (module) =>
+                    module.SharedSubcontractGroupFeatureSubcontractItemModule
                 ),
               // loadChildren: () =>
               //   import('@workspace/subcontractor/feature-contracts').then(
