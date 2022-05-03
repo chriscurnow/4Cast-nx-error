@@ -114,7 +114,10 @@ export class SubcontractItemEffects {
   loadSubcontractItem$ = createEffect(() =>
     this.dataPersistence.fetch(SubcontractItemActions.loadSubcontractItem, {
        run: (a: ReturnType<typeof SubcontractItemActions.loadSubcontractItem>, state) => {
-
+        console.log(
+          'SUBCONTRACT ITEM EFFECTS load subcontract item, id',
+          a.subcontractItemId
+        );
          return this.subcontractItemsService.getSubcontractItem(a.subcontractItemId)
          .pipe(
            map((subcontractItem: SubcontractItem) => {

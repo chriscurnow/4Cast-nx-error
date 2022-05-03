@@ -6,7 +6,7 @@ import {
   subcontractItemAdapter,
 } from './subcontract-item.reducer';
 import { selectSelectedSubcontractId } from '@workspace/shared/subcontract-group/data-access-subcontract';
-import { selectRouteParams } from './subcontract-item.router.selectors';
+import { selectRouteParams } from './subcontract.router.selectors';
 
 // Lookup the 'SubcontractItem' feature state managed by NgRx
 export const getSubcontractItemState =
@@ -75,9 +75,20 @@ export const selectSubcontractItem = createSelector(
   selectSubcontractItemEntities,
   selectRouteParams,
   (entities, { subcontractItemId }) => {
+     console.log(
+       'Select Subcontract Item, subcontractItemId, entities',
+       subcontractItemId, entities
+     );
     return entities[subcontractItemId];
   }
 );
+
+export const selectSubcontractItemId = createSelector(
+  selectRouteParams,
+  ({ subcontractId }) => {
+    return subcontractId
+  }
+)
 
 
 
