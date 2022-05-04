@@ -62,6 +62,9 @@
       "@workspace/shared/feature-login": [
         "libs/shared/feature-login/src/index.ts"
       ],
+      "@workspace/shared/feature-projects": [
+        "libs/shared/feature-projects/src/index.ts"
+      ],
       "@workspace/shared/feature-toolbar-user": [
         "libs/shared/feature-toolbar-user/src/index.ts"
       ],
