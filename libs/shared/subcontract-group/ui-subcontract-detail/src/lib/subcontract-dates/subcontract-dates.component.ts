@@ -79,7 +79,7 @@ export class SubcontractDatesComponent
 
   set value(value: ContractDates) {
     if (value) {
-      console.log('Dates component, set value', value);
+
       const newDates = {
         contract: value.contract ? value.contract : null,
         commencement: value.commencement ? value.commencement : null,

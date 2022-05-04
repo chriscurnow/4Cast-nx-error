@@ -22,7 +22,6 @@ export class SubcontractDetailComponent implements OnInit {
   item0: SubcontractItem = {};
 
   @Input() set subcontract(v: Subcontract | null | undefined) {
-    console.log('Subcontract Detail Component, set subcontract', v);
     if (v) {
       this._subcontract = v;
       this._subcontract.description = 'Plumbing';
@@ -66,7 +65,6 @@ export class SubcontractDetailComponent implements OnInit {
 
   createItemZeroForContract(): void {
     this.createItemZero.emit();
-    // console.log('Creating item for contract');
     // const contractUpdate = this.contractItemsService.createItemForApprovedContract(
     //   this._subcontract
     // );
@@ -83,7 +81,6 @@ export class SubcontractDetailComponent implements OnInit {
   }
 
   newClaim(): void {
-    // console.log(`${this.logText('new claim clicked')}`);
     // this.paymentCreateService
     //   .createSubcontractPayment(this.detail)
     //   .then((paymentId) => {

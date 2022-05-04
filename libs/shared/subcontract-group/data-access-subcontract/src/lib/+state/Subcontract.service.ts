@@ -20,7 +20,6 @@ export class SubcontractService {
       .valueChanges()
       .pipe(
         map((contracts) => {
-          // console.log('CONTRACT SERVICE', contracts);
           return contracts;
         })
       );
@@ -34,7 +33,6 @@ export class SubcontractService {
       .pipe(
         map((contract) => {
           if (contract) {
-            console.log('CONTRACT SERVICE get contract', contract);
             return contract;
           } else {
             return { id: '' };

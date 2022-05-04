@@ -8,7 +8,7 @@ import { from, Observable } from 'rxjs';
 import { SubcontractItemsService } from './subcontract-items.service';
 import * as SubcontractItemActions from './subcontract-item.actions';
 import * as SubcontractItemFeature from './subcontract-item.reducer';
-import { Subcontract } from '@workspace/shared/data-access-models';
+import { Subcontract, SubcontractItem } from '@workspace/shared/data-access-models';
 
 
 @Injectable()
@@ -93,7 +93,6 @@ export class SubcontractItemEffects {
         ofType(SubcontractItemActions.createSubcontractItem),
         exhaustMap((action: any) =>{
          const res = from(this.subcontractItemsService.createSubcontractItem(action.item));
-         console.log('res', res)
          return res
         })
       ),
@@ -110,6 +109,31 @@ export class SubcontractItemEffects {
       ),
       { dispatch: false }
   )
+
+  loadSubcontractItem$ = createEffect(() =>
+    this.dataPersistence.fetch(SubcontractItemActions.loadSubcontractItem, {
+       run: (a: ReturnType<typeof SubcontractItemActions.loadSubcontractItem>, state) => {
+         return this.subcontractItemsService.getSubcontractItem(a.subcontractItemId)
+         .pipe(
+           map((subcontractItem: SubcontractItem) => {
+             if(subcontractItem){
+               return SubcontractItemActions.loadSubcontractItemSuccess( {subcontractItem} )
+             } else {
+               return SubcontractItemActions.loadSubcontractItemFailure({ error: 'No subcontract found'})
+             }
+
+           })
+         );
+       },
+
+       onError: (action, error) => {
+        console.error('Error', error);
+        return SubcontractItemActions.loadSubcontractItemFailure({ error });
+      },
+
+    })
+  );
+
 
   private returnItems(subcontract: Subcontract) {
     this.subcontractItemsService.getItemsForSubcontract(subcontract).pipe(

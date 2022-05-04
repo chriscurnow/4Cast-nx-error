@@ -21,7 +21,6 @@ export const deleteTopLevelSubcontracts = functions.https.onCall((data, context)
   .get()
   .then(subcontracts => {
     subcontracts.forEach(subcontractSnapshot => {
-      console.log('Deleting subcontract id: ', subcontractSnapshot.id);
       promises.push(subcontractSnapshot.ref.delete());   });
   });
   return Promise.all(promises);
@@ -29,7 +28,6 @@ export const deleteTopLevelSubcontracts = functions.https.onCall((data, context)
 });
 export const updateSubcontractmostRecentPayment = functions.https.onCall((data, context) => {
 
-    console.log('Update Subcontract Previous Payment, expect data to be null:', data);
     initialize();
     let i = 0;
     const promises: any[] = [];
@@ -37,10 +35,8 @@ export const updateSubcontractmostRecentPayment = functions.https.onCall((data, 
 
     .get()
     .then(subcontracts => {
-        console.log('Got subcontracts, count', subcontracts.size);
         subcontracts.forEach(subcontractSnapshot => {
             const id = subcontractSnapshot.id;
-            console.log('Updating subcontract ', id, i++);
             return admin.firestore().collection('subcontractPayments')
             .where ('subcontract.id', '==', id)
             .orderBy('number', 'desc')
@@ -70,7 +66,6 @@ export const updateSubcontractmostRecentPayment = functions.https.onCall((data, 
         });
         Promise.all(promises)
         .then(result => {
-            console.log('All subcontracts updated', result);
         })
         .catch(err => {
             console.log('An error occurred', err);

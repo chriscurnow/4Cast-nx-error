@@ -39,7 +39,7 @@ export class SubcontractEffects {
         action: ReturnType<typeof SubcontractActions.loadSubcontractsList>,
         state: SubcontractFeature.SubcontractPartialState
       ) => {
-        console.log('SUBCONTRACT EFFECTS - load subcontract list')
+
         return this.subcontractService
           .getContractsList()
           .pipe(
@@ -58,7 +58,7 @@ export class SubcontractEffects {
   loadSubcontract$ = createEffect(() =>
     this.dataPersistence.fetch(SubcontractActions.loadSubcontract, {
        run: (a: ReturnType<typeof SubcontractActions.loadSubcontract>, state) => {
-         console.log('SUBCONTRACT EFFECTS - load subcontract detail', a);
+
          return this.subcontractService.getContract(a.subcontractId)
          .pipe(
            map((subcontract: Subcontract) => {

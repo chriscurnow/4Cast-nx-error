@@ -9,9 +9,9 @@ export class MainNavigationComponent {
   // implements OnInit
 
   // constructor() {
-  //   console.log('')
+
   // }
   // ngOnInit(): void {
-  //   console.log('')
+
   // }
 }

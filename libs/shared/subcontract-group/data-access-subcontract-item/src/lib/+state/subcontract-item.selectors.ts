@@ -6,6 +6,7 @@ import {
   subcontractItemAdapter,
 } from './subcontract-item.reducer';
 import { selectSelectedSubcontractId } from '@workspace/shared/subcontract-group/data-access-subcontract';
+import { selectRouteParams } from './subcontract.router.selectors';
 
 // Lookup the 'SubcontractItem' feature state managed by NgRx
 export const getSubcontractItemState =
@@ -56,6 +57,36 @@ export const selectItemsForSubcontract = createSelector(
   selectSelectedSubcontractId,
   ((items: SubcontractItem[], id: string | undefined) => items.filter(item => item.subcontractId == id))
 );
+
+// export const selectSubcontract = createSelector(
+//   selectSubcontractEntities,
+//   selectRouteParams,
+//   (entities, { contractId }) => {
+//     return entities[contractId];
+//   }
+//   // as long as the param in the router is called 'contractId', this should select the correct subcontract
+//   // INTERESTING, note exmaple uses cars where our original used entities. Are they the same thing?
+//   // selectSelectedId,
+//   // (entities, selectedId) => (selectedId ? entities[selectedId] : undefined)
+// );
+
+export const selectSubcontractItem = createSelector(
+  selectAllSubcontractItem,
+  selectRouteParams,
+  (entities, { subcontractItemId }) => {
+
+    return entities[subcontractItemId];
+  }
+);
+
+
+
+export const selectSubcontractItemId = createSelector(
+  selectRouteParams,
+  ({ subcontractId }) => {
+    return subcontractId
+  }
+)
 
 
 

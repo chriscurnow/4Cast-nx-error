@@ -7,6 +7,7 @@ import {
   AngularFirestoreDocument,
   AngularFirestoreCollection,
 } from '@angular/fire/compat/firestore';
+import { map } from 'rxjs/operators';
 import { FormGroup, AbstractControl } from '@angular/forms';
 import { SubcontractItem } from '@workspace/shared/data-access-models';
 import { Subcontract } from '@workspace/shared/data-access-models';
@@ -62,11 +63,7 @@ export class SubcontractItemsService {
     const path = `projects/${projectId}/subcontracts/${subcontractId}/subcontractItems`;
     try {
       const ref = await this.afs.collection(path).add(variation);
-      console.log(
-        'SUBCONTRACT ITEMS SERVICE createSubcontractItem, ref',
-        ref,
-        variation
-      );
+
       return ref;
     } catch (err) {
       return err;
@@ -79,11 +76,7 @@ export class SubcontractItemsService {
     const path = `projects/${projectId}/subcontracts/${subcontractId}/subcontractItems`;
     try {
       const ref = await this.afs.collection(path).add(item);
-      console.log(
-        'SUBCONTRACT ITEMS SERVICE createSubcontractItem, ref',
-        ref,
-        item
-      );
+
       return ref;
     } catch (err) {
       return err;
@@ -116,13 +109,28 @@ export class SubcontractItemsService {
     // rather than return the observable, return the collection reference so we can use it again.
   }
 
-  getContractItem(itemId: string): Observable<SubcontractItem | undefined> {
+  getSubcontractItem(itemId: string): Observable<SubcontractItem > {
     // TODO: [FCSUB-464] [FCSUB-463] Use generic getDocument from DataService
-    this.contractItemDoc = this.afs.doc<SubcontractItem>(
-      `contractItems/${itemId}`
-    );
-    const contractItem = this.contractItemDoc.valueChanges();
-    return contractItem;
+
+    const path = `contractItem/${itemId}`;
+    return this.afs
+    .doc<SubcontractItem>(path)
+    .valueChanges()
+    .pipe(
+      map((subcontractItem: SubcontractItem | undefined) => {
+        if(subcontractItem) {
+          return subcontractItem; } else {
+            return { id: ''};
+
+        }
+      })
+    )
+
+    // this.contractItemDoc = this.afs.doc<SubcontractItem>(
+    //   `contractItems/${itemId}`
+    // );
+    // const contractItem = this.contractItemDoc.valueChanges();
+    // return contractItem;
   }
 
   announceCollectionChange(collection: ContractItemsCollection): void {
@@ -201,7 +209,6 @@ export class SubcontractItemsService {
 
     update.isNew = false; // at least one value must change in order to fire the trigger;
     update.status = status;
-    console.log('CONTRACT ITEMS SERVICE saveItemFromForm', update);
 
     return contractItemDoc.update(update);
   }

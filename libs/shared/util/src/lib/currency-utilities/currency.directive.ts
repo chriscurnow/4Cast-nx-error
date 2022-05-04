@@ -55,17 +55,14 @@ export class CurrencyDirective {
 
     switch (true) {
       case (value === null):
-        // console.log('%cformatting value - case null', 'color:purple');
         displayValue = '';
         break;
 
       case (value === ''):
-        // console.log(`%cformatting value - case ''`, 'color:purple');
         displayValue = '';
         break;
 
       case (typeof(value) === 'number'):
-        // console.log(`%cformatting value - case 'number`, 'color:purple', value);
         dVal = Dinero({amount: value, currency: 'AUD', precision: 2});
         displayValue = dVal.toFormat('0,0.00');
         break;
@@ -81,7 +78,6 @@ export class CurrencyDirective {
         break;
 
       default :
-      // console.log('%cformatting value - case default', 'color:purple');
         dVal = Dinero(value);
         displayValue = dVal.toFormat('0,0.00');
     }
@@ -102,7 +98,6 @@ get readonly() {
 
   private unFormatValue() {
     const value = this.elementRef.nativeElement.value;
-    // console.log('unformat value', value)
     this.internalValue = stringToDinero(value);
     const displayValue = value.replace(/[^\d.-]/g, '');
     // this._value = value.replace(/[^\d.-]/g, '');
@@ -116,19 +111,15 @@ get readonly() {
   @HostListener('input', ['$event.target.value'])
   onInput(value: any) {
     this.internalValue = stringToDinero(value);
-    // console.log('%cHost Listener, onInput value, internalValue', 'color:purple', value, this.internalValue);
     // here we cut any non numerical symbols
-    // console.log('%cHost Listener, value', 'color:lightgreen', value)
     // this._value = stringToDinero(value);
     // stringToDinero(value);
-    // console.log('%cHost Listener, _value', 'color:lightgreen', this._value.getAmount())
     // value.replace(/[^\d.-]/g, '');
     this._onChange(this.internalValue);
   }
 
   @HostListener('blur')
   _onBlur() {
-    // console.log('%cHost Listener, blur _value', 'color:purple', this.internalValue);
     this.formatValue(this.internalValue); // add commas
   }
 

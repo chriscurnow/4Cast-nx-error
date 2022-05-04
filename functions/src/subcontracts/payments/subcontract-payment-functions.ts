@@ -25,7 +25,6 @@ if (!app){
   app = admin.initializeApp();
 }
 
-  // console.log('Initialised app', app);
 
 };
 
@@ -36,12 +35,10 @@ export const testCreateStatus = functions.https.onCall((data, context) => {
 });
 
 export const createSubcontractPayment = functions.https.onCall((data, context) => {
-  console.log('Data for new subcontract payment: ', data);
   initialize();
   const subcontractId = data.subcontractId;
   const path =  'subcontractPayments';
   const color = 'color: limegreen';
-  console.log('Subcontract payment path: ', path);
   // get a reference to the payments collection for this subcontract
 
   const contractPayments: FirebaseFirestore.CollectionReference<FirebaseFirestore.DocumentData> = admin.firestore().collection(path);
@@ -61,10 +58,8 @@ export const createSubcontractPayment = functions.https.onCall((data, context) =
 
 
       const docs = unapprovedPayments.docs;
-      console.log('%cCreate subcontract payment, unapprovedPayment.docs (with color)', 'color: #bada55', docs.length);
       // just for testing force it to create a new payment
       if (docs.length > 10 ) {
-        console.log('%cFound at least one unapproved payment', color);
           // we must have found at least one unapproved payment
           // we should have found no more than one, but there could always be some error somewhere
           // we should also never have more than one unapproved payment
@@ -72,14 +67,12 @@ export const createSubcontractPayment = functions.https.onCall((data, context) =
         return paymentSnapshot.data();
       } else {
 
-        console.log('%cDidnt find any unapproved payments, create one', color);
 
         return createNewPayment(contractPayments, subcontractId);
 
       }
   })
   .catch(err => {
-      console.log('Error ', err);
       return 'an error occurred ' + err;
   });
 });
@@ -88,7 +81,6 @@ export const createSubcontractPayment = functions.https.onCall((data, context) =
 function createNewPayment(
     contractPayments: FirebaseFirestore.CollectionReference<FirebaseFirestore.DocumentData>,
     subcontractId: string): Promise<FirebaseFirestore.DocumentData | undefined> {
-    console.log('Starting method createNewPayment');
     const subcontractPath = `subcontracts/${subcontractId}`;
     return admin.firestore().doc(subcontractPath).get()
   .then((subcontractDoc) => createPaymentForSubcontract (contractPayments, subcontractDoc));
@@ -98,7 +90,6 @@ function createNewPayment(
 function createPaymentForSubcontract(
     contractPayments: FirebaseFirestore.CollectionReference<FirebaseFirestore.DocumentData>,
     subcontractDoc: FirebaseFirestore.DocumentSnapshot<FirebaseFirestore.DocumentData>): Promise<FirebaseFirestore.DocumentData | undefined> {
-  // console.log('Starting method createPaymentForSubcontract');
   const methodName = 'createPaymentForSubcontract';
   log(methodName, 'Subcontract.mostRecentPayment as returned ', subcontractDoc.data()?.mostRecentPayment);
   const subcontract = subcontractDoc.data() as Subcontract;
@@ -126,7 +117,6 @@ function addPaymentToCollection(contractPayments: FirebaseFirestore.CollectionRe
            paymentData.id = id;
         }
 
-        console.log('Result of add document:', paymentData);
         return paymentData;
       }));
 }
@@ -145,12 +135,10 @@ export function createNewPaymentForSubcontract(subcontract: Subcontract): any{
   const payment: SubcontractPayment = {};
 
 
-  // console.log('Initialised new payment for subcontract:', subcontract);
 
   // let amounts: PaymentAmounts = new PaymentAmounts(null);
   const amounts: PaymentAmounts = payment.amounts ? payment.amounts : {};
 
-  // console.log('Creating amounts subcontract amounts', subcontract.amounts);
   if (subcontract && subcontract.amounts) {
 
     // amounts = new PaymentAmounts (subcontract.amounts);
@@ -185,23 +173,18 @@ export function createNewPaymentForSubcontract(subcontract: Subcontract): any{
 
       amounts.thisClaimed = amounts.previouslyClaimed; // default new amount claimed = previous amount claimed.
       amounts.thisApproved = amounts.previouslyApproved;
-  }
-  // console.log('Amounts set successfully', amounts);
-    payment.amounts = amounts;
+  }    payment.amounts = amounts;
     setPaymentDate(payment, new Date());
 
   // if (subcontract.project ){
   //     payment.paymentHeader. =  subcontract.project
   // }
-  // console.log('Payment project set')
     payment.status = PaymentStatus.Draft;
 
 
-  // console.log('Payment status set', payment.status)
     payment.subcontractId = subcontract.id;
 
     // const msg = 'SUBCONTRACT PAYMENT FUNCTIONS - CreateNewPaymentForSubcontract - plain object amounts previously claimed';
-    // console.log(msg, plainPayment.amounts.previouslyClaimed);
     return payment;
 
 
@@ -229,7 +212,6 @@ const log = function(method: string, info: string, data: any): void{
 
 //   return paymentRef.update(updateData)
 //   .then(res => {
-//     console.log('update successful');
 //     const mostRecentPayment: ImostRecentPayment = new mostRecentPayment
 //     const subcontractUpdate: SubcontractInterface = {
 //       mostRecentPayment,
@@ -248,7 +230,6 @@ const log = function(method: string, info: string, data: any): void{
 //     return updateSubcontractForApproved(subcontractId, subcontractUpdate);
 //   })
 //   .catch(err => {
-//     console.log('An error occurred attempting to update payment', err)
 //   })
 
 //   function updateSubcontractForApproved(id: string, contractUpdate: any) {

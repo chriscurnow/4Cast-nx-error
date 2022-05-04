@@ -21,7 +21,6 @@ export class SubcontractHeaderComponent {
 
   @Input() set subcontract(value: Subcontract) {
     this.localSubcontract = value;
-    // console.log('Setting local subcontract', this.localSubcontract);
 
     if (value) {
       // this.project = value.project;

@@ -80,16 +80,30 @@ export const initialState: SubcontractItemEntityState =
           })
       ),
 
-      on(SubcontractItemActions.createSubcontractItem, (state, { item }) =>
-        {
-
-          const res = subcontractItemAdapter.addOne(item, {
+      on(SubcontractItemActions.createSubcontractItem, (state, { item }) => {
+        const res = subcontractItemAdapter.addOne(item, {
           ...state,
           loaded: false,
-          })
-        console.log('create subcontract item');
+        });
         return res;
-      }
+      }),
+      on(SubcontractItemActions.loadSubcontractItem, (state) => ({
+        ...state,
+        loaded: false,
+        error: null,
+      })),
+      //      on(SubcontractActions.loadSubcontractSuccess, (state, { subcontract}) =>
+      //   subcontractAdapter.setOne(subcontract, { ...state, loaded: true})
+      // ),
+      on(
+        SubcontractItemActions.loadSubcontractItemSuccess,
+        (state, { subcontractItem }) =>
+          subcontractItemAdapter.setOne(subcontractItem, {
+            ...state,
+            selectedId: subcontractItem.id as string,
+            loaded: true,
+            error: null,
+          })
       )
     );
 

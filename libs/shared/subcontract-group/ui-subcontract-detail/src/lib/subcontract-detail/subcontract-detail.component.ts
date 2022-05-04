@@ -48,7 +48,6 @@ export class SubcontractDetailComponent implements OnInit {
 
   createItemZeroForContract(): void {
     this.createItemZero.emit();
-    // console.log('Creating item for contract');
     // const contractUpdate = this.contractItemsService.createItemForApprovedContract(
     //   this._subcontract
     // );
@@ -65,7 +64,6 @@ export class SubcontractDetailComponent implements OnInit {
   }
 
   newClaim(): void {
-    // console.log(`${this.logText('new claim clicked')}`);
     // this.paymentCreateService
     //   .createSubcontractPayment(this.detail)
     //   .then((paymentId) => {

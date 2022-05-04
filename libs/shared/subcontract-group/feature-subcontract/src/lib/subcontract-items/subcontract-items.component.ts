@@ -23,10 +23,7 @@ export class SubcontractItemsComponent implements OnInit {
 
   @Input() set subcontract(v: Subcontract | null | undefined) {
     if (v) {
-      console.log(
-        'SUBCONTRACT ITEMS CONTAINER COMPONENT, input subcontract',
-        v
-      );
+
       this.store.dispatch(loadItemsForSubcontract({ subcontract: v }));
     }
   }
@@ -39,7 +36,6 @@ export class SubcontractItemsComponent implements OnInit {
       .subscribe((items: SubcontractItem[]) => {
         if (items.length > 0) {
           this.originalItem = items[0];
-          console.log('CONTAINER COMPONENT Original Item', this.originalItem);
         } else {
           this.originalItem = null;
         }

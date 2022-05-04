@@ -55,6 +55,23 @@ export const createSubcontractItemFailure = createAction(
   props<{ error: any }>()
 );
 
+
+export const loadSubcontractItem = createAction(
+  '[Subcontract Item Detail Form] Load Subcontract Item',
+  props<{ subcontractItemId: string}>()
+)
+
+export const loadSubcontractItemSuccess = createAction(
+  '[API Subcontract Item] Load Subcontract Item Success',
+  props<{subcontractItem: SubcontractItem }>()
+)
+
+export const loadSubcontractItemFailure = createAction(
+  '[Subcontract Item Detail Form] Load Subcontract Item Failure',
+  props<{ error: any }>()
+)
+
+
 export const createVariation = createAction(
   '[Subcontract Detail Form] Create Variation',
   props<{subcontract: Subcontract}>()
