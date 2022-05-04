@@ -8,6 +8,7 @@
   "include": [
     "src/**/*.d.ts",
     "../../libs/subcontractor/feature-dashboard/src/index.ts",
-    "../../libs/subcontractor/feature-contracts/src/index.ts"
+    "../../libs/subcontractor/feature-contracts/src/index.ts",
+    "../../libs/shared-feature-projects/src/index.ts"
   ]
 }

@@ -16,7 +16,6 @@ interface ISequenceNumber{
  * Use this when calling from another function
  */
 export const getLocalProjectSequenceNumber = function(documentSnapshot: FirebaseFirestore.DocumentSnapshot, data: any, seqNumberName: string){
-    console.log('Started getLocalProjectSequenceNumber context, snapshot', data, documentSnapshot)
     const tenantId = data.params.tenantId;
     const projectId = data.params.projectId;
     const path = getOneSequenceNumberPath(tenantId, projectId, seqNumberName);
@@ -25,18 +24,14 @@ export const getLocalProjectSequenceNumber = function(documentSnapshot: Firebase
 
     const returnValue =  getSequenceNumber(seqNoRef, seqNumberName)
     .then(res => {
-        console.log('after get sequence number, then, res', res);
-        console.log('after get sequence number, then, snapshot', documentSnapshot);
         const docData: any = documentSnapshot.data();
         // const next = data.
-        console.log('get sequence number data', docData)
         if (docData ) {
             docData['number'] = res.number;
         }
 
         return documentSnapshot.ref.set(docData)
         .then((writeResult: any) => {
-            console.log('Updated document with sequence number', res.number)
         })
     })
 
@@ -57,7 +52,6 @@ export interface IParent {
  */
 export const getSequenceNumberForParent = function(collection: string, parent: IParent, sortField: string): Promise<number>{
     const path = collection;
-    console.log('sequenceNumbers.ts - getNumberForParent; path = ', path)
     try {
         admin.initializeApp()
     }
@@ -70,23 +64,17 @@ export const getSequenceNumberForParent = function(collection: string, parent: I
     }
 
     const collectionRef = admin.firestore().collection(path);
-    console.log('sequenceNumbers.ts - getNumberForParent; parentIdName = ', parentIdName);
-    console.log('sequenceNumbers.ts - getNumberForParent; parentId = ', parentId);
 
     return collectionRef
     .where(parentIdName, '==', parentId)
     .orderBy(sortField, 'desc')
     .get()
     .then(documentCollection => {
-        console.log('sequenceNumbers - document collection size', documentCollection.size)
         if(documentCollection.size > 0 ) {
 
         const lastDoc = documentCollection.docs[0];
-            console.log('Last doc = ', lastDoc)
         const nextNumber: number = lastDoc.get(sortField) + 1 // we are relying on the sequence being called 'number'
-        console.log('sequenceNumbers next number', nextNumber)
-        return nextNumber} else {
-            console.log('sequence numbers, nothing found returning "1"')
+         return nextNumber} else {
             return 1;
         }
     })
@@ -96,7 +84,6 @@ export const getSequenceNumberForParent = function(collection: string, parent: I
 
 
 export const testSeqNo = functions.https.onRequest((request,response) => {
-    console.log('Received request, query', request.query);
 
     const parent: IParent = {
         parentIdName: 'subcontract.id',
@@ -120,9 +107,7 @@ export const getProjectSequenceNumber = functions.https.onCall((data,context)=> 
 
 
     const path = getOneSequenceNumberPath(tenantId, projectId, seqNumberName);
-    console.log('getProjectSequenceNumber path', path)
     const seqNoRef: FirebaseFirestore.DocumentReference = admin.firestore().doc(path);
-    console.log('getProjectSequenceNumber, seqNoRef', seqNoRef)
     return getSequenceNumber(seqNoRef, seqNumberName)
 
 })
@@ -132,10 +117,8 @@ function getSequenceNumber(seqNoRef: FirebaseFirestore.DocumentReference, seqNum
     return seqNoRef.get()
         .then((seqNoSnapshot) => {
         if(seqNoSnapshot.exists ) {
-            console.log('getProjectSequenceNumber - snapshot exists')
             return getStoredSequenceNumber(seqNoSnapshot)
             .then((result: ISequenceNumber )=> {
-                console.log('Got result from get stored sequence number', result)
                 return result;
             })
         }
@@ -154,14 +137,12 @@ async function getSeqNoFromDocuments(seqNoRef: FirebaseFirestore.DocumentReferen
 
 function doGetSequenceNumberFromDocuments(seqNoRef: FirebaseFirestore.DocumentReference, seqNumberName: string){
                 const path = seqNumberName
-                console.log('doGetSequenceNumberFromDocuments path', path)
                 const collectionRef = admin.firestore().collection(path).orderBy('number', 'desc');
                 return collectionRef.get()
                 .then(querySnapshot => {
                     const documents = querySnapshot.docs;
                     const nextNumber = documents[0].get('number') + 1
                     const returnValue = {number: nextNumber};
-                    console.log('doGetSequenceNumberFromDocuments returnValue', returnValue)
                     storeNewSequenceNumber(seqNumberName, nextNumber)
                     return returnValue;
                 })

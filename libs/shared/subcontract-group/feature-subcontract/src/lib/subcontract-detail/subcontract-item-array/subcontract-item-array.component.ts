@@ -6,9 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./subcontract-item-array.component.scss'],
 })
 export class SubontractItemArrayComponent implements OnInit {
-  constructor() {
-    console.log('Constructor')
-  }
+  // constructor() {
+  // }
 
   ngOnInit(): void {
     console.log('OnInit')

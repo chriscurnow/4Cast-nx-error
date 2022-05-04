@@ -85,7 +85,6 @@ export const initialState: SubcontractItemEntityState =
           ...state,
           loaded: false,
         });
-        console.log('create subcontract item');
         return res;
       }),
       on(SubcontractItemActions.loadSubcontractItem, (state) => ({

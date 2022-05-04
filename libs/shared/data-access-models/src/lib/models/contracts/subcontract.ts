@@ -68,13 +68,3 @@ export function createSubcontract(subcontract: Subcontract | undefined){
 
 
 
-
-// function log(method: string, info: string, data: any){
-//     console.log('');
-//     console.log('============================================================');
-//     console.log(`SUBCONTRACT Class ${method}`);
-//     console.log(`${info}`, data);
-//     console.log(`End ${method}`);
-//     console.log('============================================================');
-//     console.log('\r\r');
-//   }

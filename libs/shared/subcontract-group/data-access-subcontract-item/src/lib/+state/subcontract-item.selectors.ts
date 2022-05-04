@@ -62,7 +62,6 @@ export const selectItemsForSubcontract = createSelector(
 //   selectSubcontractEntities,
 //   selectRouteParams,
 //   (entities, { contractId }) => {
-//     console.log('Select Subcontract, contractId', contractId);
 //     return entities[contractId];
 //   }
 //   // as long as the param in the router is called 'contractId', this should select the correct subcontract
@@ -72,16 +71,15 @@ export const selectItemsForSubcontract = createSelector(
 // );
 
 export const selectSubcontractItem = createSelector(
-  selectSubcontractItemEntities,
+  selectAllSubcontractItem,
   selectRouteParams,
   (entities, { subcontractItemId }) => {
-     console.log(
-       'Select Subcontract Item, subcontractItemId, entities',
-       subcontractItemId, entities
-     );
+
     return entities[subcontractItemId];
   }
 );
+
+
 
 export const selectSubcontractItemId = createSelector(
   selectRouteParams,

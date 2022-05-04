@@ -26,7 +26,6 @@ export const subcontractPaymentCreate = functions.firestore.document('subcontrac
 
 export const subcontractPaymentTest = functions.firestore.document('useers/{id}')
 .onCreate((snap, context) => {
-  console.log('trigger for new user');
 });
 
 /**
@@ -40,16 +39,13 @@ export const subcontractPaymentTest = functions.firestore.document('useers/{id}'
  * or they both fail.
  */
 function onCreateSubcontractPayment(snap: FirebaseFirestore.DocumentSnapshot, context: functions.EventContext): Promise<any[]>{
-  console.log('OnCreate trigger for subcontract payment');
   const paymentId = context.params.paymentId;
   const paymentRef = snap.ref;
   const payment: SubcontractPayment = snap.data() as SubcontractPayment;
   payment.id = paymentId;
   // const mostRecentPayment = MostRecentPayment.createFromPayment(payment.valuesOnly);
   const subcontractId: string = context.params.subcontractId;
-  console.log('Subcontract Id', subcontractId);
   // const updateData = {mostRecentPayment};
-  // console.log('ON CREATE TRIGGER FOR SUBCONTRACT PAYMENT, subcontract updateData', updateData);
   // const subcontractRef = db.doc(`subcontracts/${subcontractId}`);
 
   const promises: any[] = [];
@@ -75,15 +71,12 @@ function onCreateSubcontractPayment(snap: FirebaseFirestore.DocumentSnapshot, co
     // TODO: [FCSUB-383] Rewrite for Update Subcontract Payment for path
   // const contractItemCollectionName = ContractItem.collectionPath(subcontractId);
   // const paymentItemCollectionName = PaymentItem.collectionPath(subcontractId, paymentId);
-  // console.log('Contract Item collection name', contractItemCollectionName);
-  // console.log('Payment Item collection Name', paymentItemCollectionName);
   // const collectionRef = db.collection(contractItemCollectionName)
   //     .where('status', '==', PaymentStatus.Approved)
   //     .orderBy('itemNumber');
 
   // collectionRef.get()
   //     .then(contractItemsSnap => {
-  //       console.log('Number of contractItems found', contractItemsSnap.size);
   //       contractItemsSnap.forEach(contractItemSnap => {
 
   //         promises.push(createItem(contractItemSnap, subcontractId, paymentId, payment));
@@ -102,17 +95,13 @@ type f = FirebaseFirestore.DocumentReference<FirebaseFirestore.DocumentData>;
 //   const data = itemSnap.data() as unknown;
 //   const itemData = data as ContractItemInterface;
 //   const contractItem = new ContractItem(itemData);
-//   console.log('Creating payment item for paymentId', paymentId);
 //   const paymentItem = PaymentItem.createNewFromContractItem(contractItem, payment);
-//   console.log('PAYMENT ITEM READ TO CREATE ', paymentItem)
 //   const paymentItemCollectionName = PaymentItem.collectionPath(subcontractId, paymentId);
 //   try {
 //     const response = await db.collection(paymentItemCollectionName).add(paymentItem.valuesOnly);
-//     console.log('PAYMENT ITEM CREATED id', response.id);
 //     return response;
 //   }
 //   catch (err) {
-//     console.log('An error occurred attempting to create payment item', err)
 //     return err;
 //   }
 // }
@@ -120,10 +109,8 @@ type f = FirebaseFirestore.DocumentReference<FirebaseFirestore.DocumentData>;
 
 
 const updatePayment = async (paymentRef: f, updateData: any ) => {
-  console.log('SUBCONTRACT PAYMENT TRIGGER ON CREATE, updating payment id, updateData', updateData)
   try {
     const result = await paymentRef.update(updateData);
-    console.log('SUBCONTRACT PAYMENT TRIGGER ON CREATE, payment id updated, write result', result);
     return result;
   }
   catch (err) {
@@ -153,7 +140,6 @@ export const onWriteSubcontractPayment = functions.firestore.document('subcontra
         const res = await handleWrite(context);
         return res;
       } catch (err) {
-        console.log(err);
         return (err);
       }
     });
@@ -161,7 +147,6 @@ export const onWriteSubcontractPayment = functions.firestore.document('subcontra
 // tslint:disable-next-line: only-arrow-functions
 const handleWrite = async function(evtContext: functions.EventContext): Promise<any>{
       const projectId = evtContext.params.projectId;
-      // console.log('handle write, projectId', projectId);
       return projectId;
 
     };
@@ -171,11 +156,8 @@ const handleWrite = async function(evtContext: functions.EventContext): Promise<
 
     // const tenantId = context.params.tenantId;
     // const projectId = context.params.projectId;
-    // console.log('tenantId', tenantId);
-    // console.log('projectId', projectId)
 
 
-    // console.log('paymentRef', paymentRef)
 
     // const subcontractPath = `tenants/${tenantId}/projects/${projectId}/subcontracts/${subcontractId}`;
     // const subcontractRef: FirebaseFirestore.DocumentReference = db.doc(subcontractPath);
@@ -186,7 +168,6 @@ const handleWrite = async function(evtContext: functions.EventContext): Promise<
     //         const unknown = res as unknown;
     //         const subcontract = unknown as SubcontractInterface;
     //         // const paymentData: SubcontractPaymentInterface = new SubcontractPayment(paymentId, subcontract);
-    //         // console.log('Payment data', paymentData)
 
     //         return paymentRef.set(paymentData)
     //     })

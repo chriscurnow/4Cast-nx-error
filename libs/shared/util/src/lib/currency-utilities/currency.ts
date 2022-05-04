@@ -142,7 +142,6 @@ export class CurrencyClass implements Currency {
   }
 
   public toPlainObject() {
-    console.log('CURRENCY overriding FourcastBase.toPlainObject');
     if (this.dinero) {
       return this.dinero.toObject();
     } else {
@@ -209,7 +208,6 @@ export class CurrencyClass implements Currency {
 export function stringToDinero(x: any): Currency | null{
 
     if (x) {
-      // console.log('Helpers stringToDinero, x', x)
       if (typeof(x) === 'string') {
         const decPos = x.indexOf('.');
     // const numDecimals = x.length
@@ -227,11 +225,7 @@ export function stringToDinero(x: any): Currency | null{
         const numVal: number = parseInt(stringVal, 10);
 
         const dVal = new CurrencyClass({amount: numVal});
-    //  console.log('x', x);
-    // console.log('decPos', decPos)
-    // console.log('stringVal', stringVal)
-    // console.log('numVal', numVal)
-    // console.log('dVal', dVal)
+
 
         return dVal;
       } else {

@@ -38,7 +38,6 @@ export class DateUtilsService {
       return dt.toLocaleString()
 
     } catch (error) {
-      console.log('Error in date-utils formatDate - value provided', date);
       return '#DATE-ERROR';
     }
 

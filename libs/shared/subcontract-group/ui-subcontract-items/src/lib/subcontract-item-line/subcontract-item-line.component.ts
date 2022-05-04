@@ -9,6 +9,7 @@ import {
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 
+// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
 import { SubcontractItem } from '@workspace/shared/data-access-models';
 
 import { Observable } from 'rxjs';
@@ -19,7 +20,7 @@ import { Store } from '@ngrx/store';
   templateUrl: './subcontract-item-line.component.html',
   styleUrls: ['./subcontract-item-line.component.scss'],
 })
-export class SubcontractItemLineComponent implements OnInit, OnChanges {
+export class SubcontractItemLineComponent implements OnInit {
   contractItemForm: FormGroup;
   _item: SubcontractItem;
   status: number;
@@ -47,7 +48,7 @@ export class SubcontractItemLineComponent implements OnInit, OnChanges {
   }
 
   @Input() set item(value: SubcontractItem) {
-    console.log('CONTRACT ITEM COMPONENT, set item - value', value);
+
     if (value) {
       this._item = value;
       this.status = this._item.status as number;
@@ -57,17 +58,10 @@ export class SubcontractItemLineComponent implements OnInit, OnChanges {
     }
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log('item', this._item);
-    console.log('changes', changes);
-    //Called before any other lifecycle hook. Use it to inject dependencies, but avoid any serious work here.
-    //Add '${implements OnChanges}' to the class.
-  }
   // eslint-disable-next-line @angular-eslint/no-empty-lifecycle-method
   ngOnInit(): void {
     // this.store.dispatch(loadItemsForSubcontract());
     // this.route.paramMap.subscribe((params) => {
-    //   console.log('Params', params);
     //   const idName = 'subcontractId';
     //   this.subcontractId = params.get(idName);
     //   this.projectId = params.get('projectId');
@@ -75,7 +69,6 @@ export class SubcontractItemLineComponent implements OnInit, OnChanges {
   }
 
   editItem(): void {
-    console.log('Edit item', this._item);
     // TODO: Implement following line once we fix 'routeToItem'
     // this.routeToItem(this.localItem);
     // const variationId = this.localItem.id;

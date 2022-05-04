@@ -12,7 +12,7 @@ if(!admin.apps.length) {
  * We are moving subcontracts from top level to be aq sub-collection of projects
  */
 export const moveSubcontracts = functions.https.onCall((data, context) => {
-    console.log('Move subcontracts, expect data to be null:', data);
+
 
     const promises: any[] = [];
 
@@ -22,17 +22,17 @@ export const moveSubcontracts = functions.https.onCall((data, context) => {
     .where('supplier.id', '==', '246A06AEBC2345478A6301D3A6490B0E')
     .get()
     .then(contracts => {
-        console.log('Subcontracts, number found', contracts.size);
+
         contracts.forEach((contractSnapshot => {
             const subcontract = contractSnapshot.data();
             const projectId = subcontract.project.id;
-            console.log('Moving subcontract, subcontractId, projectId', subcontract.id, projectId);
+
             promises.push(admin.firestore().doc(`projects/${projectId}/subcontracts/${subcontract.id}`).set(subcontract));
         }));
 
         return Promise.all(promises)
         .then(result => {
-            console.log('Completed OK');
+
             return 'Completed OK';
         })
         .catch(err => {
@@ -43,12 +43,12 @@ export const moveSubcontracts = functions.https.onCall((data, context) => {
 });
 
 export const oldMoveSubcontracts = functions.https.onCall((data, context) => {
-    console.log('Move subcontracts, expect data to be null:', data);
+
 
     const promises: any[] = [];
     return getProjects()
     .then(projects => {
-        console.log('got projects, number = ', projects.size);
+
 
         projects.forEach((projectSnapshot: any )=> {
             const projectId = projectSnapshot.id;
@@ -57,7 +57,7 @@ export const oldMoveSubcontracts = functions.https.onCall((data, context) => {
             .where ('project.id', '==', projectId)
             .get()
             .then((subcontracts: FirebaseFirestore.QuerySnapshot) => {
-                console.log('Subcontracts for project', subcontracts.size);
+
                 subcontracts.forEach((subcontractSnapshot: FirebaseFirestore.QueryDocumentSnapshot) => {
                     promises.push( doMove(subcontractSnapshot));
 
@@ -80,13 +80,10 @@ export const oldMoveSubcontracts = functions.https.onCall((data, context) => {
 
 
 function logProjectProgress(projectId: string) {
-    console.log('');
-    console.log('Moving subcontracts for project', projectId);
-    console.log('==========================================================');
-}
+
 
 // function moveContractsForProject(subcontracts: FirebaseFirestore.QuerySnapshot){
-//     console.log('Subcontracts for project', subcontracts.size);
+
 
 //                 subcontracts.forEach((subcontractSnapshot: any) => {
 //                 doMove(subcontractSnapshot)
@@ -110,7 +107,6 @@ function doMove(contractSnapshot: FirebaseFirestore.QueryDocumentSnapshot){
       const subcontractId = contractSnapshot.id;
       const subcontract: Subcontract = contractSnapshot.data() as Subcontract;
       const projectId = subcontract?.project?.id;
-      console.log('Moving subcontract, projectId, subcontractId', projectId, subcontractId);
       return admin.firestore().doc(`projects/${projectId}/subcontracts/${subcontractId}`).set(subcontract);
 
 }
@@ -119,7 +115,6 @@ function doMove(contractSnapshot: FirebaseFirestore.QueryDocumentSnapshot){
  * (No parameters required.)
  */
 export const updateSubcontractCurrency = functions.https.onCall((data, context) => {
-    console.log('Update Subcontract Currency, expect data to be null:', data);
 
     let i = 0;
     const promises: any[] = [];
@@ -127,11 +122,9 @@ export const updateSubcontractCurrency = functions.https.onCall((data, context) 
 
     .get()
     .then(subcontracts => {
-      console.log('got subcontracts', subcontracts.size);
 
       subcontracts.forEach(subcontractSnapshot => {
         const id = subcontractSnapshot.id;
-        console.log('Updating subcontract ', id, i++);
         const subcontractRef = subcontractSnapshot.ref;
         const subcontractData = subcontractSnapshot.data();
         const tempAmounts = subcontractData['amounts'];
@@ -142,7 +135,6 @@ export const updateSubcontractCurrency = functions.https.onCall((data, context) 
 
         ) {
           if ( Object.prototype.hasOwnProperty.call(tempAmounts.contractOriginal, 'amount')) {
-            console.log('Skipping subcontract – already updated');
           } else {
             const oldAmounts = setupOldAmounts(tempAmounts);
             const amounts = setupNewAmounts(oldAmounts);
@@ -171,16 +163,13 @@ export const updateSubcontractCurrency = functions.https.onCall((data, context) 
 
 // export const createSubcontractForSupplier = functions.https.onCall((data, context) => {
 //   const id = data.supplierId;
-//   console.log('Started createSubcontractForSupplier, supplier id', id)
 //   initialize();
 //   return admin.firestore().doc(`suppliers/${id}`)
 //   .get()
 //   .then(supplier => {
 //     const subcontract = new Subcontract(supplier);
-//     console.log('Retreived supplier', supplier.data())
 //     return admin.firestore().collection('subcontracts').add(subcontract.toPlainObject())
 //     .then((docRef: FirebaseFirestore.DocumentReference) => {
-//       console.log ('created new subcontract', docRef.id)
 //       return docRef.id;
 //     })
 //     .catch(err => { return "An error occurred attempting to save new subcontract"})

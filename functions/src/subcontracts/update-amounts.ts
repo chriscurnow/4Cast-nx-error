@@ -23,12 +23,10 @@ export const updateVariations = function(subcontractId: string): Promise<any> {
       .then(variationsSnapshot => {
         // const toDateVariations = createCurrency();
 
-        // console.log(` Update Variation, toDateVariations`, toDateVariations.valuesOnly);
         return Promise.resolve(null);
 
       })
       .catch(err => {
-        // console.log(`${moduleName} An error occurred.`, err);
         return err;
       });
   });

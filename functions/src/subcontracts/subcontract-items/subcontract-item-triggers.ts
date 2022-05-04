@@ -15,10 +15,8 @@ if (!admin.apps.length) {
 export const subcontractItemCreate = functions.firestore.document('projects/{projectId}/subcontracts/{subcontractId}/subcontractItems/{itemId}')
 .onCreate((snap, context) => {
 
-    console.log('Subcontract Item Trigger subcontractItemCreate, snapshot', snap);
     const id = snap.id;
     const data = {id};
-    console.log('Subcontract Trigger subcontract create data', data);
     return snap.ref.set(data, {merge: true});
 
 });
@@ -27,14 +25,10 @@ export const subcontractItemCreate = functions.firestore.document('projects/{pro
 // .onUpdate((change, context) => {
 
 //   // const subcontractId =  context.params.subcontractId;
-//   // console.log('Subcontract new value raw', change.after.data())
-//   // console.log('Subcontract old value raw', change.before.data());
 //   const newValue = change.after.data();
 //   const oldValue = change.before.data();
 //   // const newValue = new Subcontract (change.after.data());
 //   // const oldValue = new Subcontract (change.before.data());
-//   console.log('Subcontract update started');
-//   console.log('old value isDraft', oldValue.isDraft);
 
 //   // Wwe are watching for when the subcontract is sent to us
 //   // with the 'isDraft' value changing from TRUE to FALSE
@@ -42,7 +36,6 @@ export const subcontractItemCreate = functions.firestore.document('projects/{pro
 //   // to create the ContractItem representing the contract amounts.
 
 //   if (oldValue.isDraft && !newValue.isDraft) {
-//     console.log('SUBCONTRACT ON UPDATE TRIGER, isDraft has changed');
 
 //     // TODO:
 //     // const contractUpdate = SubcontractService.createItemForApprovedContract(newValue);
@@ -63,7 +56,6 @@ export const subcontractItemCreate = functions.firestore.document('projects/{pro
 // const createContractItem = async (collectionPath: string, itemData: any) => {
 //   try {
 //     const res = await admin.firestore().collection(`${collectionPath}`).add(itemData);
-//     console.log('Contract item created');
 //     return res;
 //   }
 //   catch (err){
@@ -94,7 +86,6 @@ export const subcontractItemCreate = functions.firestore.document('projects/{pro
 //         claimedToDate = claimedToDate.add(amountClaimed);
 //         approvedToDate = approvedToDate.add(amountApproved);
 //       })
-//       console.log('Subcontract Trigger Update, claimed to date', claimedToDate.valuesOnly)
 //       subcontract.amounts.toDateClaimed = claimedToDate
 //       subcontract.amounts.toDateApproved = approvedToDate;
 //       subcontract.amounts.percentApproved = Math.round((approvedToDate.amount / subcontract.amounts.contractOriginal.amount)*100);
@@ -112,7 +103,6 @@ export const subcontractItemCreate = functions.firestore.document('projects/{pro
 //     //       const variation: SubcontractVariation = new SubcontractVariation(variationDoc.data());
 //     //       toDateVariations = toDateVariations.add(variation.variationAmount)
 //     //     })
-//     //     console.log('Subcontract Update, toDateVariations', toDateVariations)
 //     //     subcontract.amounts.toDateVariations = toDateVariations;
 //     //     subcontract.amounts.contractRevised = subcontract.amounts.contractOriginal.add(toDateVariations);
 //     //   })
@@ -122,14 +112,11 @@ export const subcontractItemCreate = functions.firestore.document('projects/{pro
 //       return Promise.all(promises)
 //       .then(res => {
 //         const update = subcontract.amounts.valuesOnly
-//         console.log('Subcontract trigger onUpdate, update', update)
 //         return ref.set(update, {merge: true})
 //         .then(updateResponse => {
-//           console.log('Subcontract trigger onUpdate – completed successfully')
 //           return updateResponse;
 //         })
 //         .catch(err => {
-//           console.log('Subcontract trigger onUpdate - an error occurred', err);
 //           return err;
 //         })
 //       })

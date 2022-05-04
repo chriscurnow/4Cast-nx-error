@@ -32,17 +32,14 @@ export class SubcontractListComponent {
   ];
 
   @Input() set subcontracts(value: Subcontract[]) {
-    // console.log('set subcontracts', value);
     this.dataSource = new MatTableDataSource(value);
     this.dataSource.sort = this.sort;
-    // console.log('Table from contracts list', this.table);
 
   }
 
   @Output() subcontractSelected = new EventEmitter<Subcontract>();
 
   rowClicked(subcontract: Subcontract) {
-    console.log('row clicked', subcontract);
     this.subcontractSelected.emit(subcontract)
   }
 
@@ -61,7 +58,6 @@ export class SubcontractListComponent {
   formatDate(date: any): string {
     // const returnValue = this.dateUtils.setDate(date);
     // return returnValue;
-    // console.log('Format Date');
     if (date) {
       return DateUtilsService.formatDate(date);
     } else {

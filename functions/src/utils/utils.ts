@@ -8,7 +8,6 @@ export const collectionBase = options.collectionBase;
 export const projectId = ''
 
 export const updateCounter = function (path: string, collectionName: string,  state: any): Promise<any> {
-    console.log(`UPDATE COUNTER starting`)
         // Select a shard of the counter at random:
         const num_shards = 10;
         // const docRef = admin.firestore().doc('collectionCounts/'+collectionName);
@@ -17,15 +16,12 @@ export const updateCounter = function (path: string, collectionName: string,  st
         const docRef = admin.firestore().doc(path + '/collectionCounts/' + collectionName);
 
         const shard_id = Math.floor(Math.random() * num_shards).toString();
-        // console.log('UPDATE COUNTER shardId', shard_id);
         const shard_ref = docRef.collection('shards').doc(shard_id);
 
 
 
         const isDelete = state.isDelete;
         const isCreate = state.isCreate;
-        console.log(`UPDATE COUNTER, isDelete`, isDelete);
-        console.log('UPDATE COUNTER isCreate', isCreate);
 
         if( isDelete || isCreate ){
 
@@ -51,7 +47,6 @@ export const updateCounter = function (path: string, collectionName: string,  st
                             // new_count = new_count<0 ? 0 : new_count;
                         }
                     }
-                    console.log('UPDATE COUNTER old count, new count',new_count, old_count);
                     t.update(shard_ref, { count: new_count });
                 });
             });
@@ -71,7 +66,6 @@ export const updateCounter = function (path: string, collectionName: string,  st
      * URL: https://us-central1-fourcastpro.cloudfunctions.net/initShards
      */
     export const initShards = functions.https.onRequest((request,response)=> {
-        // console.log('Received request to init shards');
         const docRef = admin.firestore().doc('tenants/3pbviiPlIkpp0mPBhypQ/collectionCounts/'+'suppliers');
         createCounter(docRef, 10, function(){
             response.send('Updated shards successfully')
@@ -92,7 +86,6 @@ export const updateCounter = function (path: string, collectionName: string,  st
     // we are not going to count project sub collections at the moment.
 
     // export const initProjectShards = functions.https.onRequest((request,response)=> {
-    //     console.log('Received request to init shards');
     //     const docRef = admin.firestore().doc('projects/8A81DC4523F6437F97AA951081842219/collectionCounts/'+'reallocations');
     //     createCounter(docRef, 10)
     //     response.send('Updated shards successfully');
@@ -103,31 +96,25 @@ export const updateCounter = function (path: string, collectionName: string,  st
         const batch = admin.firestore().batch();
 
         // Initialize the counter document
-        console.log('CREATE COUNTER initialise the counter')
         batch.set(ref, { num_shards: num_shards });
 
         // Initialize each shard with count=0
         for (let i = 0; i < num_shards; i++) {
-            console.log('CREATE COUNTER setting counter for shard: ',i)
             const shardRef = ref.collection('shards').doc(i.toString());
             batch.set(shardRef, { count: 0 });
         }
 
         // Commit the write batch
-        console.log('CREATE COUNTER now commit the batch')
         batch.commit()
               .then(res => {
-                  console.log(`CREATE COUNTER, commit ok, now calling callback`)
                   callback()
                 })
               .catch(error => {
-                  console.log(`CREATE COUNTER commit error`, error);
                   callback()
                 });
     }
 
     export const initializeCount = functions.https.onRequest((request,response)=> {
-        // console.log('Received request to initialize counter');
         // const docRef = admin.firestore().doc('collectionCounts/'+'projects');
         getAndSetCount('projects', function(){
             response.send('Initialised counter for projects')
@@ -171,14 +158,11 @@ export const updateCounter = function (path: string, collectionName: string,  st
      }
 
      export const getTotals = functions.https.onRequest((request,response)=> {
-        // console.log('GET TOTALS');
 
         // doAsyncTask().then (res => {
-        //     console.log('task completed')
         //     response.send('completed')
         // })
         // .catch((error) => {
-        //     console.log(error);
         //     response.send(error);
         // });
         return getTotalCount('suppliers')
@@ -193,11 +177,9 @@ export const updateCounter = function (path: string, collectionName: string,  st
 })
 
 export const getTotal = functions.https.onCall((data,context) => {
-    // console.log('GET TOTAL data, context', data, context);
     const collectionName = 'suppliers' //data.collectionName;
     return getTotalCount(collectionName)
        .then(res => {
-        //    console.log('GET TOTAL result:', res)
            return res;
        })
        .catch((error) => {
@@ -213,9 +195,7 @@ function getTotalCount(collectionName: string): Promise<any>{
         .get()
         .then(function(querySnapshot) {
             querySnapshot.forEach(function(doc) {
-                // console.log('for each ',doc, doc.data()['count']);
                 count += doc.data()['count'];
-                // console.log('count', count);
             });
             return {grand_total: count};
 

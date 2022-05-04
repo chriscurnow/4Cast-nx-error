@@ -15,12 +15,10 @@ if (!app){
   app = admin.initializeApp();
 }
 
-  // console.log('Initialised app', app);
 
 };
 
 export const updatePaymentStatus = functions.https.onCall((data, context) => {
-    console.log('Update Payment Status, expect data to be null:', data);
     initialize();
     let i = 0;
     const promises: any[] = [];
@@ -28,11 +26,9 @@ export const updatePaymentStatus = functions.https.onCall((data, context) => {
     .where('status.id', '==', 0)
     .get()
     .then(payments => {
-      console.log('got payments', payments.size);
 
       payments.forEach(paymentSnapshot => {
         const id = paymentSnapshot.id;
-        console.log('Updating payment ', id, i++);
         const paymentRef = paymentSnapshot.ref;
         const status = PaymentStatus.Approved;
         // tslint:disable-next-line: no-void-expression
@@ -43,12 +39,10 @@ export const updatePaymentStatus = functions.https.onCall((data, context) => {
       });
       return Promise.all(promises)
       .then(result => {
-        console.log('result of promise.all', result);
         return result;
       });
     })
     .catch(err => {
-      console.log('an error occurred', err);
       return 'An error occurred.';
     });
   });
@@ -56,7 +50,6 @@ export const updatePaymentStatus = functions.https.onCall((data, context) => {
   // previously we had 'contractOriginal' in subcontract and 'contractAmount' in payment
   // now convert all payments to use 'contractOriginal`
 export const updateContractOriginal = functions.https.onCall((data, context) => {
-    console.log('Update Contract Original, :', data);
     const startAfter = data.startAfter;
     initialize();
     let i = 0;
@@ -68,11 +61,9 @@ export const updateContractOriginal = functions.https.onCall((data, context) => 
     .limit(1500)
     .get()
     .then(payments => {
-      console.log('got payments', payments.size);
 
       payments.forEach(paymentSnapshot => {
         const id = paymentSnapshot.id;
-        console.log('Updating payment ', id, i++);
 
         let amounts = paymentSnapshot.get('amounts');
         if (amounts.hasOwnProperty('contractAmount')) {
@@ -95,12 +86,10 @@ export const updateContractOriginal = functions.https.onCall((data, context) => 
       });
       return Promise.all(promises)
       .then(result => {
-        console.log('result of promise.all', result);
         return result;
       });
     })
     .catch(err => {
-      console.log('an error occurred', err);
       return 'An error occurred.';
     });
   });
@@ -110,24 +99,20 @@ export const updateContractOriginal = functions.https.onCall((data, context) => 
  * (No parameters required.)
  */
 export const updatePaymentCurrency = functions.https.onCall((data, context) => {
-    console.log('Update Payment Currency, expect data to be null:', data);
     initialize();
     let i = 0;
     const promises: any[] = [];
     return admin.firestore().collection('subcontractPayments')
     .get()
     .then(payments => {
-      console.log('got payments', payments.size);
 
       payments.forEach(paymentSnapshot => {
         const id = paymentSnapshot.id;
-        console.log('Updating payment ', id, i++);
         const paymentRef = paymentSnapshot.ref;
         const paymentData = paymentSnapshot.data();
         const tempAmounts = paymentData.amounts;
 
         if (tempAmounts?.contractAmount.hasOwnProperty('amount')) {
-          console.log('Skipping payment – already updated');
         } else {
 
         try{
@@ -142,7 +127,6 @@ export const updatePaymentCurrency = functions.https.onCall((data, context) => {
           promises.push(promise);
         }
         catch (err) {
-          console.log('An error occured', err);
         }
 
       }

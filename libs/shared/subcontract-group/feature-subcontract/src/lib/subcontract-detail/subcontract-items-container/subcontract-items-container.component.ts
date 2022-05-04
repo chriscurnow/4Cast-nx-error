@@ -31,10 +31,7 @@ export class SubcontractItemsContainerComponent implements OnInit {
 
   @Input() set subcontract(v: Subcontract | null | undefined) {
     if (v) {
-      console.log(
-        'SUBCONTRACT ITEMS CONTAINER COMPONENT, input subcontract',
-        v
-      );
+
       this.store.dispatch(loadItemsForSubcontract({ subcontract: v }));
     }
   }
@@ -42,14 +39,12 @@ export class SubcontractItemsContainerComponent implements OnInit {
   constructor(private store: Store<SubcontractItemPartialState>) {}
 
   ngOnInit(): void {
-    console.log();
     //  this.store.dispatch(loadItemsForSubcontract({ subcontract: {} }));
     this.store
       .select(selectOriginalItem)
       .subscribe((items: SubcontractItem[]) => {
         if (items.length > 0) {
           this.originalItem = items[0];
-          console.log('CONTAINER COMPONENT Original Item', this.originalItem);
         }
       });
 

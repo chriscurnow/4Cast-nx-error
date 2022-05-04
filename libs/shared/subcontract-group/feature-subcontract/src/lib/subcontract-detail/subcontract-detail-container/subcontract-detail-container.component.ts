@@ -14,6 +14,8 @@ import {
   createSubcontractItem,
   createVariation,
   SubcontractItemsService,
+  loadItemsForSubcontract,
+  SubcontractItemPartialState
 
 } from '@workspace/shared/subcontract-group/data-access-subcontract-item';
 
@@ -32,25 +34,24 @@ export class SubcontractDetailContainerComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private store: Store<SubcontractPartialState>,
+    private itemsStore: Store<SubcontractItemPartialState>,
     private contractItemsService: SubcontractItemsService
   ) {
-    console.log('SUBCONTRACT DETAIL CONTAINER COMPONENT constructor')
+
      this.contract$ = this.store.select(selectSubcontract)
 
     this.contract$.subscribe(res => {
-      console.log('Result of select subcontract', res)
-      this.subcontract = res;
-      this.items$ = this.store.select(selectAllSubcontractItem);
 
-      this.items$.subscribe((itemResult: SubcontractItem[] | undefined) => {
-        this.subcontractItems = itemResult;
-      })
+      this.subcontract = res;
+
+
     })
 }
 
   ngOnInit(): void {
     this.store.dispatch(loadSubcontractsList());
-    console.log('')
+
+
   }
 
 createItemZero(){

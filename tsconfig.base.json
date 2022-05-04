@@ -23,6 +23,9 @@
       "@workspace/contractor/feature-dashboard": [
         "libs/contractor/feature-dashboard/src/index.ts"
       ],
+      "@workspace/shared-feature-projects": [
+        "libs/shared-feature-projects/src/index.ts"
+      ],
       "@workspace/shared-subcontract-group-ui-sub-detail": [
         "libs/shared/subcontract-group/ui-sub-detail/src/index.ts"
       ],

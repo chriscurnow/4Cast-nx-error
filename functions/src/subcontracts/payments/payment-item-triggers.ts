@@ -11,7 +11,6 @@ export const triggerValue = 'trigger';
 // })
 
 // function onCreatePaymentItem(snap: FirebaseFirestore.DocumentSnapshot, context: functions.EventContext){
-//   console.log('OnCreate trigger for subcontract payment')
 //     const paymentItemId = snap.id;
 //     const paymentItemRef = snap.ref;
 //     const paymentItem: PaymentItem = new PaymentItem(snap.data());

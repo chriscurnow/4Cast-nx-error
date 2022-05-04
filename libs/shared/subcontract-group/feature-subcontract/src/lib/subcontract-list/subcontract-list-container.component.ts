@@ -42,15 +42,12 @@ export class SubcontractListContainerComponent implements OnInit {
   ngOnInit(): void {
 
     this.loadSubcontracts();
-    // console.log('ngOnInit')
   }
 
   loadSubcontracts(){
-    // console.log('CONTRACTS LIST dispatch load subcontracts list action')
     this.store.dispatch(loadSubcontractsList());
   }
   rowSelected(subcontract: Subcontract) {
-    console.log('SUBCONTRACT LIST COMPONENT Row selected', subcontract);
     this.router.navigate(['../contract-detail', subcontract.id], {relativeTo: this.route})
   }
 }

@@ -31,6 +31,10 @@ export function sortByName(a: Subcontract, b: Subcontract): number {
   }
 }
 
+//=============================================================================
+// NOW USE ADAPTER
+//=============================================================================
+
 export const subcontractAdapter: EntityAdapter<Subcontract> =
   createEntityAdapter<Subcontract>({
     selectId: selectContractId,
@@ -39,7 +43,7 @@ export const subcontractAdapter: EntityAdapter<Subcontract> =
 
 
 
-
+// initial state is just an empty state object
 export const initialSubcontractState: SubcontractEntityState = subcontractAdapter.getInitialState({
   // set initial required properties
   selectedId: '',

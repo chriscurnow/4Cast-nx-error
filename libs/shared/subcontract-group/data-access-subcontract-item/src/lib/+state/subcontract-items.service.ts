@@ -63,11 +63,7 @@ export class SubcontractItemsService {
     const path = `projects/${projectId}/subcontracts/${subcontractId}/subcontractItems`;
     try {
       const ref = await this.afs.collection(path).add(variation);
-      console.log(
-        'SUBCONTRACT ITEMS SERVICE createSubcontractItem, ref',
-        ref,
-        variation
-      );
+
       return ref;
     } catch (err) {
       return err;
@@ -80,11 +76,7 @@ export class SubcontractItemsService {
     const path = `projects/${projectId}/subcontracts/${subcontractId}/subcontractItems`;
     try {
       const ref = await this.afs.collection(path).add(item);
-      console.log(
-        'SUBCONTRACT ITEMS SERVICE createSubcontractItem, ref',
-        ref,
-        item
-      );
+
       return ref;
     } catch (err) {
       return err;
@@ -217,7 +209,6 @@ export class SubcontractItemsService {
 
     update.isNew = false; // at least one value must change in order to fire the trigger;
     update.status = status;
-    console.log('CONTRACT ITEMS SERVICE saveItemFromForm', update);
 
     return contractItemDoc.update(update);
   }

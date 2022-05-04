@@ -34,7 +34,6 @@ this.store.select(selectSubcontractItemId)
     this.subcontractItem$ = this.store.select(selectSubcontractItem);
 
     this.subcontractItem$.subscribe((item: SubcontractItem | undefined) => {
-      console.log('Result of subcontract item select', item);
       this.subcontractItem = item;
     })
   }
