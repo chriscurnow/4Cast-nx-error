@@ -53,14 +53,15 @@ export class SubcontractItemEffects {
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         state: SubcontractItemFeature.SubcontractItemPartialState
       ) => {
+
         return this.subcontractItemsService
-          .getItemsForSubcontract(action.subcontract)
+          .getItemsForSubcontract(action.subcontractId)
           .pipe(
             map((subcontractItems) =>
              {
-              return SubcontractItemActions.loadSubcontractItemsSuccess({
+              return SubcontractItemActions.loadItemsForSubcontractSuccess({
                 subcontractItems,
-              })}
+              });}
             )
           );
       },
@@ -135,8 +136,8 @@ export class SubcontractItemEffects {
   );
 
 
-  private returnItems(subcontract: Subcontract) {
-    this.subcontractItemsService.getItemsForSubcontract(subcontract).pipe(
+  private returnItems(subcontractId: string) {
+    this.subcontractItemsService.getItemsForSubcontract(subcontractId).pipe(
       map((subcontractItems) =>
         SubcontractItemActions.loadSubcontractItemsSuccess({
           subcontractItems,

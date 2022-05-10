@@ -30,9 +30,9 @@ export class SubcontractItemsContainerComponent implements OnInit {
   originalItem: SubcontractItem;
 
   @Input() set subcontract(v: Subcontract | null | undefined) {
-    if (v) {
-      this.store.dispatch(loadItemsForSubcontract({ subcontract: v }));
-    }
+    // if (v) {
+    //   this.store.dispatch(loadItemsForSubcontract({ subcontract: v }));
+    // }
   }
 
   constructor(private store: Store<SubcontractItemPartialState>) {}

@@ -1,0 +1,16 @@
+.mat-column-contractAmount,
+.mat-column-claimedToDate,
+.mat-column-approvedToDate,
+.mat-column-amountRemaining{
+  min-width: 200px;
+}
+
+.mat-column-claimedPercent,
+.mat-column-approvedPercent,
+.mat-column-variationNumber{
+  min-width:50px;
+}
+
+.mat-column-title {
+  min-width: 300px;
+}

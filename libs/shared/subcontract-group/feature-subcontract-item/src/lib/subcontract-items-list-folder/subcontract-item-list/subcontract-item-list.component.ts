@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { SubcontractItemPartialState, loadSubcontractItems} from '@workspace/shared/subcontract-group/data-access-subcontract-item';
+import { SubcontractItemPartialState, loadSubcontractItems, loadItemsForSubcontract} from '@workspace/shared/subcontract-group/data-access-subcontract-item';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import { of } from 'rxjs';
 
 @Component({
-  selector: 'fourcast-subcontract-item-list',
+  selector: 'fourcast-subcontract-item-list-shared',
   templateUrl: './subcontract-item-list.component.html',
   styleUrls: ['./subcontract-item-list.component.scss']
 })
@@ -22,10 +22,10 @@ export class SubcontractItemListComponent implements OnInit {
       switchMap((params: ParamMap ) => {
         const id = params.get('contractId');
         console.log('Id from Params', id);
-        return of(params);
+        return of(id);
       })
-    ).subscribe(params => {
-      console.log('Params', params)
+    ).subscribe((contractId: string | null) => {
+      this.store.dispatch(loadItemsForSubcontract({subcontractId: contractId as string}))
     })
 
   }

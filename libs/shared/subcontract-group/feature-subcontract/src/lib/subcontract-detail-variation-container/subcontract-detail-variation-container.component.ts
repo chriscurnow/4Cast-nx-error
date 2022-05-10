@@ -20,11 +20,11 @@ export class SubcontractDetailVariationContainerComponent implements OnInit {
   constructor(private subcontractStore: Store<SubcontractPartialState>,
               private itemsStore: Store<SubcontractItemPartialState>) {
 
-    this.subcontractStore.select(selectSubcontract)
-    .subscribe((s: Subcontract | undefined) => {
-      if(s)
-      { this.subcontractStore.dispatch(loadItemsForSubcontract({subcontract: s as Subcontract}))}
-    })
+    // this.subcontractStore.select(selectSubcontract)
+    // .subscribe((s: Subcontract | undefined) => {
+    //   if(s)
+    //   { this.subcontractStore.dispatch(loadItemsForSubcontract({subcontract: s as Subcontract}))}
+    // })
 
     // this.itemsStore
     //   .select(selectSubcontractItem)

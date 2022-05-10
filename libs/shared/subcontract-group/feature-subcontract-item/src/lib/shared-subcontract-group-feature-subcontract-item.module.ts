@@ -4,7 +4,8 @@ import { RouterModule } from '@angular/router';
 import { SharedSubcontractGroupUiSubcontractItemsModule } from '@workspace/shared-subcontract-group-ui-subcontract-items';
 import { SubcontractItemDetailContainerComponent } from './subcontract-item-detail-container/subcontract-item-detail-container.component';
 import { SharedSubcontractGroupDataAccessSubcontractItemModule } from '@workspace/shared/subcontract-group/data-access-subcontract-item';
-import { SubcontractItemListComponent } from './subcontract-item-list/subcontract-item-list.component';
+import { SubcontractItemListComponent } from './subcontract-items-list-folder/subcontract-item-list/subcontract-item-list.component';
+import { SubcontractItemsListContainerComponent } from './subcontract-items-list-folder/subcontract-items-list-container/subcontract-items-list-container.component';
 
 
 @NgModule({
@@ -15,7 +16,7 @@ import { SubcontractItemListComponent } from './subcontract-item-list/subcontrac
       {
         path: 'items-list',
         pathMatch: 'full',
-        component: SubcontractItemListComponent,
+        component: SubcontractItemsListContainerComponent,
       },
       {
         path: 'detail/:subcontractItemId',
@@ -29,6 +30,7 @@ import { SubcontractItemListComponent } from './subcontract-item-list/subcontrac
   declarations: [
     SubcontractItemDetailContainerComponent,
     SubcontractItemListComponent,
+    SubcontractItemsListContainerComponent,
   ],
 })
 export class SharedSubcontractGroupFeatureSubcontractItemModule {}

@@ -15,13 +15,16 @@ export class ContractGeneralDetailComponent implements OnInit {
 
   @Input() set subcontract(v: Subcontract | undefined) {
     this._subcontract = v;
+    console.log('CONTRACT GENERAL DETAIL COMPONENT, subcontract', this._subcontract)
     if (this._subcontract) {
       this.subcontractId = this._subcontract.id as string;
     }
     this.detailForm.reset(this._subcontract);
   }
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder) {
+    this.createForm();
+   }
 
   ngOnInit(): void {
     console.log();

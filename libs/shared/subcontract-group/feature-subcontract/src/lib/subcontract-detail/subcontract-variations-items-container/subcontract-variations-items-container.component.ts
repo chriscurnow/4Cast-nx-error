@@ -25,6 +25,7 @@ export class SubcontractVariationsItemsContainerComponent implements OnInit {
       .select(selectVariationItems)
       .subscribe((variations: SubcontractItem[]) => {
         this.variations = variations;
+        console.log('Variations', variations)
       });
   }
 }

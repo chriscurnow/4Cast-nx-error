@@ -91,16 +91,19 @@ export class SubcontractItemsService {
    * Retrieves contract items for subcontract
    */
   getItemsForSubcontract(
-    subcontract: Subcontract
+    subcontractId: string
   ): Observable<SubcontractItem[]> {
     // ContractItem.getCollectionPath(projectId, subcontractId);
     // this.contractItemsCollection =
-    const projectId = subcontract.project?.id;
-    const subcontractId = subcontract.id;
-    const path = `projects/${projectId}/subcontracts/${subcontractId}/subcontractItems`; // TODO: [SL-16] implement method to get contract item path
+    // const projectId = subcontract.project?.id;
+    // const subcontractId = subcontract.id;
+    // const path = `projects/${projectId}/subcontracts/${subcontractId}/subcontractItems`; // TODO: [SL-16] implement method to get contract item path
     return this.afs
-      .collection<SubcontractItem>(path, (ref) =>
-        ref.where('itemNumber', '>=', 0).orderBy('itemNumber')
+      .collectionGroup<SubcontractItem>('subcontractItems', (ref) =>
+        ref
+          .where('subcontractId', '==', subcontractId)
+          .where('itemNumber', '>=', 0)
+          .orderBy('itemNumber')
       )
       .valueChanges();
 

@@ -1,1 +1,64 @@
-<p>subcontract-item-list works!</p>
+<div id="variations-list" class="page-layout simple fullwidth">
+
+
+  <table mat-table class="full-width-table" #table matSort aria-label="Elements" [dataSource]="dataSource" style="margin: 20px;">
+
+
+     <ng-container matColumnDef="variationNumber">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>#</th>
+      <td mat-cell *matCellDef="let row">{{row.itemNumber}}</td>
+    </ng-container>
+
+     <ng-container matColumnDef="title">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Title</th>
+      <td mat-cell *matCellDef="let row">{{row.title}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="contractAmount">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Contract Amount</th>
+      <td mat-cell *matCellDef="let row"> {{formatCurrency(row.contractAmount)}}</td>
+    </ng-container>
+<!-- -->
+    <ng-container matColumnDef="claimedToDate">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Claimed to Date</th>
+      <td mat-cell *matCellDef="let row">{{formatCurrency(row.claimedToDate)}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="claimedPercent">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>%</th>
+      <td mat-cell *matCellDef="let row">{{row.claimedPercent}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="approvedToDate">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Approved to Date</th>
+      <td mat-cell *matCellDef="let row">{{formatCurrency(row.approvedToDate)}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="approvedPercent">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>%</th>
+      <td mat-cell *matCellDef="let row">{{row.approvedPercent}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="amountRemaining">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Amount Remaining</th>
+      <td mat-cell *matCellDef="let row">{{formatCurrency(row.amountRemaining)}}</td>
+    </ng-container>
+
+    <!-- <ng-container matColumnDef="revised">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Approved to Date</th>
+      <td mat-cell *matCellDef="let row">{{formatCurrency(row.amounts.contractRevised.amount)}}</td>
+    </ng-container> -->
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="rowClicked(row)"></tr>
+  </table>
+
+  <!-- <mat-paginator #paginator
+      [length]="dataSource?.data.length"
+      [pageIndex]="0"
+      [pageSize]="50"
+      [pageSizeOptions]="[25, 50, 100, 250]">
+  </mat-paginator> -->
+</div>
+
+

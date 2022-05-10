@@ -9,7 +9,7 @@ export const init = createAction('[SubcontractItem Page] Init');
 //
 export const loadSubcontractItems = createAction(
   '[SubcontractItem/API] Load SubcontractItems',
-  props<{ subcontract: Subcontract }>()
+  props<{ subcontractId: string }>()
 );
 
 export const loadSubcontractItemsSuccess = createAction(
@@ -27,7 +27,7 @@ export const loadSubcontractItemsFailure = createAction(
 //
 export const loadItemsForSubcontract = createAction(
   '[Subcontract Items Detail Form] Load Items for Subcontract',
-   props<{ subcontract: Subcontract}>()
+   props<{ subcontractId: string}>()
 );
 
 export const loadItemsForSubcontractSuccess = createAction(

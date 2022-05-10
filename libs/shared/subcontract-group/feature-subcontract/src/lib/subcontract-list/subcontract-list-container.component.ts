@@ -48,6 +48,7 @@ export class SubcontractListContainerComponent implements OnInit {
     this.store.dispatch(loadSubcontractsList());
   }
   rowSelected(subcontract: Subcontract) {
-    this.router.navigate(['../contract-detail', subcontract.id], {relativeTo: this.route})
+    const projectId = subcontract.project ? subcontract.project.id : '';
+    this.router.navigate(['../project', projectId, 'contract-detail', subcontract.id], {relativeTo: this.route})
   }
 }
