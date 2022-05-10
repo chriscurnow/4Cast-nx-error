@@ -6,7 +6,20 @@ import { RouterModule } from '@angular/router';
   imports: [
     CommonModule,
     RouterModule.forChild([
-      /* {path: '', pathMatch: 'full', component: InsertYourComponentHere} */
+       {path: '', pathMatch: 'full', redirectTo: 'list'} ,
+       {path: 'list'},
+       { path: 'detail/:projectId',
+        children: [
+          { path: 'subcontracts',
+            loadChildren: () =>
+                import(
+                  '@workspace/shared/subcontract-group/feature-subcontract'
+                ).then(
+                  (module) =>
+                    module.SharedSubcontractGroupFeatureSubcontractModule
+                )
+            }
+        ]}
     ]),
   ],
 })

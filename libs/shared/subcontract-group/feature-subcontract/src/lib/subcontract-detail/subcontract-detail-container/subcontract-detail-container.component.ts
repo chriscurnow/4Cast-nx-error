@@ -49,6 +49,8 @@ export class SubcontractDetailContainerComponent implements OnInit {
 }
 
   ngOnInit(): void {
+    // after we've loaded the subcontract list, selectSubcontract will select the entity we want
+    // using the router selecter.
     this.store.dispatch(loadSubcontractsList());
 
 

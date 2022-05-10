@@ -31,7 +31,6 @@ export class SubcontractItemsContainerComponent implements OnInit {
 
   @Input() set subcontract(v: Subcontract | null | undefined) {
     if (v) {
-
       this.store.dispatch(loadItemsForSubcontract({ subcontract: v }));
     }
   }
