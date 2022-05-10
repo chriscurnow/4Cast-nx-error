@@ -17,7 +17,7 @@
     "shared-data-access-supplier": "libs/shared/data-access-supplier",
     "shared-data-access-user": "libs/shared/data-access-user",
     "shared-feature-login": "libs/shared/feature-login",
-    "shared-feature-projects": "libs/shared-feature-projects",
+    "shared-feature-projects": "libs/shared/feature-projects",
     "shared-feature-toolbar-user": "libs/shared/feature-toolbar-user",
     "shared-subcontract-group-data-access-subcontract": "libs/shared/subcontract-group/data-access-subcontract",
     "shared-subcontract-group-data-access-subcontract-item": "libs/shared/subcontract-group/data-access-subcontract-item",

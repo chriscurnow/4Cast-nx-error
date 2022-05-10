@@ -61,8 +61,17 @@ export const routingConfiguration: ExtraOptions = {
               //     (module) => module.SubcontractorFeatureContractsModule
               //   ),
             },
-            {
-              path: 'subcontractor-feature-contract-items',
+
+            { path: 'projects',
+              loadChildren: () =>
+              import(
+                `@workspace/shared/feature-projects`
+              ).then(
+                (module) => module.SharedFeatureProjectsModule
+              )
+              },
+
+            { path: 'subcontract-items',
               loadChildren: () =>
                 import(
                   '@workspace/shared/subcontract-group/feature-subcontract-item'

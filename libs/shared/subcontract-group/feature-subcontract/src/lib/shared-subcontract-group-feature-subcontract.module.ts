@@ -41,14 +41,20 @@ import { SubcontractDetailVariationContainerComponent } from './subcontract-deta
         component: SubcontractListContainerComponent,
       },
       {
-        path: 'contract-detail/:contractId',
-        children: [
-          { path: '', component: SubcontractDetailContainerComponent },
-          { path: 'item-detail/:subcontractItemId', component: SubcontractDetailVariationContainerComponent}
-        ],
-      },
-    ]),
-  ],
+        path: 'contract-detail/:contractId',  component: SubcontractDetailContainerComponent,
+        children:[
+          { path: 'contract-item',
+
+        loadChildren: () =>
+              import(
+                `@workspace/shared/subcontract-group/feature-subcontract-item`
+              ).then(
+                (module) => module.SharedSubcontractGroupFeatureSubcontractItemModule
+              )
+              }
+    ]}
+  ])
+],
   declarations: [
     SubcontractListContainerComponent,
     SubcontractDetailContainerComponent,

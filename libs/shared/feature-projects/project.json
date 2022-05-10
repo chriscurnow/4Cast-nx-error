@@ -1,14 +1,14 @@
 {
   "projectType": "library",
-  "root": "libs/shared-feature-projects",
-  "sourceRoot": "libs/shared-feature-projects/src",
+  "root": "libs/shared/feature-projects",
+  "sourceRoot": "libs/shared/feature-projects/src",
   "prefix": "fourcast",
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/shared-feature-projects"],
+      "outputs": ["coverage/libs/shared/feature-projects"],
       "options": {
-        "jestConfig": "libs/shared-feature-projects/jest.config.js",
+        "jestConfig": "libs/shared/feature-projects/jest.config.js",
         "passWithNoTests": true
       }
     },
@@ -16,8 +16,8 @@
       "executor": "@nrwl/linter:eslint",
       "options": {
         "lintFilePatterns": [
-          "libs/shared-feature-projects/src/**/*.ts",
-          "libs/shared-feature-projects/src/**/*.html"
+          "libs/shared/feature-projects/src/**/*.ts",
+          "libs/shared/feature-projects/src/**/*.html"
         ]
       }
     }

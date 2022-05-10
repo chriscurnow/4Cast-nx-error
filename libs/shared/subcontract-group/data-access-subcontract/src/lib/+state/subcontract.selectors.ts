@@ -11,7 +11,7 @@ export const selectSubcontractState = createFeatureSelector<SubcontractEntitySta
   SUBCONTRACT_FEATURE_KEY
 );
 
-const { selectAll, selectEntities } = subcontractAdapter.getSelectors();
+const { selectAll, selectEntities, selectIds, selectTotal } = subcontractAdapter.getSelectors();
 
 export const selectSubcontractLoaded = createSelector(
   selectSubcontractState,
@@ -61,3 +61,5 @@ export const selectSubcontract = createSelector(
   // selectSelectedId,
   // (entities, selectedId) => (selectedId ? entities[selectedId] : undefined)
 );
+
+
