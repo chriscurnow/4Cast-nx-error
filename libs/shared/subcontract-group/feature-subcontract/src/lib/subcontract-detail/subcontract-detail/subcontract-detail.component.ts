@@ -7,7 +7,11 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { Subcontract, SubcontractItem } from '@workspace/shared/data-access-models';
 
-
+interface Link {
+  title: string;
+  route: string;
+  disabled?: boolean
+}
 
 @Component({
   selector: 'fourcast-subcontract-detail',
@@ -20,6 +24,12 @@ export class SubcontractDetailComponent implements OnInit {
   _subcontract: Subcontract;
   _items: SubcontractItem[] | undefined;
   item0: SubcontractItem = {};
+
+  links: Link[] = [
+    {title: 'General Details', route: 'general-details'},
+    {title: 'Variations', route: 'variations'},
+    {title: 'Payments', route: 'payments', disabled: true}];
+  activeLink = this.links[0]
 
   @Input() set subcontract(v: Subcontract | null | undefined) {
     if (v) {
@@ -61,6 +71,11 @@ export class SubcontractDetailComponent implements OnInit {
       dates: new FormControl([]),
       description: null,
     });
+  }
+
+  setActiveTab(link: Link){
+    this.activeLink = link;
+    this.router.navigate([this.activeLink.route], {relativeTo: this.route})
   }
 
   createItemZeroForContract(): void {

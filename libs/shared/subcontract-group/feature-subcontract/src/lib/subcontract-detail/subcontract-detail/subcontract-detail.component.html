@@ -1,29 +1,19 @@
-<form [formGroup]="detailForm" novalidate >
+
   <mat-card class="mat-card mat-elevation-z4 p-24 mr-24">
    <fourcast-subcontract-header [subcontract]="_subcontract"></fourcast-subcontract-header>
-  <mat-card-content style="margin-left:16px">
-    <mat-form-field appearance="outline" class="full-width">
-      <mat-label>Description of work</mat-label>
-      <input matInput placeholder="Description of work" formControlName="description">
-    </mat-form-field>
-    <fourcast-subcontract-dates formControlName="dates"></fourcast-subcontract-dates>
-    <!-- <fourcast-subcontract-original-item-container [subcontract]="_subcontract"></fourcast-subcontract-original-item-container>
-    <fourcast-subcontract-variations-items-container></fourcast-subcontract-variations-items-container> -->
-      <!-- <fourcast-subcontract-item></fourcast-subcontract-item> -->
-    <fourcast-subcontract-items-container [subcontract] = "_subcontract"></fourcast-subcontract-items-container>
 
-    </mat-card-content>
-    <mat-card-actions>
-      <div fxLayout="row" fxLayoutAlign="end center" style="height:60px; padding-right:20px">
-        <button mat-raised-button (click)="createItemZeroForContract()">Create Item 0</button>
-        <button mat-raised-button color="accent" (click)="newVariation()">NEW VARIATION</button>
-        <button mat-raised-button color="accent" (click)="newClaim()">NEW CLAIM</button>
-        <button mat-raised-button color="primary" (click)="onSubmit()">OK</button>
-      </div>
+    <nav mat-tab-nav-bar [tabPanel]="tabPanel">
+     <a mat-tab-link *ngFor="let link of links"
+      (click)="setActiveTab(link)"
+      [active]="activeLink === link" [disabled]="link.disabled"> {{link.title}} </a>
 
-    </mat-card-actions>
+      </nav>
+      <mat-tab-nav-panel #tabPanel>
+        <router-outlet></router-outlet>
+      </mat-tab-nav-panel>
+
     </mat-card>
-    </form>
+
 
 
 <div>{{contractId}}</div>

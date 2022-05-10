@@ -11,6 +11,7 @@ import { MatTableModule } from '@angular/material/table'
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { MatTabsModule } from '@angular/material/tabs';
 
 const STANDARD_MATERIAL_COLLECTION = [
   // collection of lightweight material modules which are used by most apps
@@ -21,6 +22,7 @@ const STANDARD_MATERIAL_COLLECTION = [
   MatButtonModule,
   MatFormFieldModule,
   MatTableModule,
+  MatTabsModule,
 ];
 
 @NgModule({

@@ -3,6 +3,7 @@ import { Store } from '@ngrx/store';
 import { SubcontractItemPartialState, loadSubcontractItems} from '@workspace/shared/subcontract-group/data-access-subcontract-item';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'fourcast-subcontract-item-list',
@@ -16,16 +17,17 @@ export class SubcontractItemListComponent implements OnInit {
               private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    // this.route.paramMap.pipe(
+   this.route.paramMap.pipe(
 
-    //   switchMap((params: ParamMap ) => {
-    //     console.log(params.get('id')!));
+      switchMap((params: ParamMap ) => {
+        const id = params.get('contractId');
+        console.log('Id from Params', id);
+        return of(params);
+      })
+    ).subscribe(params => {
+      console.log('Params', params)
+    })
 
-
-    //   })
-
-    // )
-    console.log('SUBCONTRACT ITEMS LIST COMPONENT')
   }
 
 }
