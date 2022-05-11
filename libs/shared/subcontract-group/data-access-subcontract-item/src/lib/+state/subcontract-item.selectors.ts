@@ -71,11 +71,16 @@ export const selectItemsForSubcontract = createSelector(
 // );
 
 export const selectSubcontractItem = createSelector(
-  selectAllSubcontractItem,
+  selectSubcontractItemEntities,
   selectRouteParams,
   (entities, { subcontractItemId }) => {
-
-    return entities[subcontractItemId];
+    const item = entities[subcontractItemId];
+    console.log(
+      'SELECTORS, selectSubcontractItem, entities, item',
+      entities,
+      item
+    );
+    return item;
   }
 );
 

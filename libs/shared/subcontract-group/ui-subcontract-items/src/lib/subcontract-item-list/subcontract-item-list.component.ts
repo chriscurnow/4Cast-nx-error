@@ -4,6 +4,8 @@ import {
   OnInit,
   ChangeDetectionStrategy,
   Input,
+  Output,
+  EventEmitter,
   ViewChild
 } from '@angular/core';
 import { SelectionModel } from '@angular/cdk/collections';
@@ -53,6 +55,8 @@ export class SubcontractItemListComponent implements OnInit {
     console.log('data source', this.dataSource);
   }
 
+  @Output() itemSelected = new EventEmitter<string>();
+
   ngOnInit(): void {
     console.log('SUBCONTRACT ITEMS LIST COMPONENT');
   }
@@ -70,7 +74,8 @@ export class SubcontractItemListComponent implements OnInit {
     }
   }
 
-  rowClicked(row: any) {
+  rowClicked(row: SubcontractItem) {
     console.log('row clicked', row);
+    this.itemSelected.emit(row.id)
   }
 }

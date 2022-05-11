@@ -20,25 +20,22 @@ import { Observable } from 'rxjs';
 })
 export class SubcontractItemDetailContainerComponent implements OnInit {
   subcontractItemId$: Observable<string>;
-  subcontractItemId: string;
+  subcontractItemId: string | undefined;
   subcontractItem$: Observable<SubcontractItem | undefined>;
   subcontractItem: SubcontractItem | undefined;
 
   constructor(private store: Store<SubcontractItemPartialState>) {
-this.store.select(selectSubcontractItemId)
-.subscribe((id: string) => {
-  this.subcontractItemId = id;
-  this.store.dispatch(loadSubcontractItem({subcontractItemId: id}))
-})
-
     this.subcontractItem$ = this.store.select(selectSubcontractItem);
 
     this.subcontractItem$.subscribe((item: SubcontractItem | undefined) => {
+      console.log('SUBCONTRACT ITEM DETAIL CONTAINER constructor, subcontract item', item )
       this.subcontractItem = item;
-    })
+      this.subcontractItemId = item ? item.id : '';
+    });
+
   }
 
   ngOnInit(): void {
-    console.log();
+   console.log()
   }
 }

@@ -45,4 +45,8 @@ export class SubcontractItemsListContainerComponent implements OnInit {
         );
       });
   }
+
+  itemSelected(id: string){
+    this.router.navigate(['../detail', id], {relativeTo: this.route})
+  }
 }
