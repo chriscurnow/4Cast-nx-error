@@ -47,7 +47,7 @@ export class SubcontractItemLineComponent implements OnInit {
     });
   }
 
-  @Input() set item(value: SubcontractItem) {
+  @Input() set item(value: SubcontractItem | undefined) {
 
     if (value) {
       this._item = value;

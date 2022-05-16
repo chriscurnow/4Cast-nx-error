@@ -12,26 +12,34 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 })
 export class SubcontractItemDetailUiComponent implements OnInit {
   subcontractItem: SubcontractItem | undefined;
-  detailForm: FormGroup;
+  subcontractItemDetailForm: FormGroup;
 
   @Input() set item(v: SubcontractItem | undefined) {
     this.subcontractItem = v;
+    this.subcontractItemDetailForm.reset(v);
   }
 
+  @Output() navigateBack = new EventEmitter<null>();
 
-
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder) {
+    this.createForm();
+  }
 
   ngOnInit(): void {
     console.log();
-
   }
   createForm() {
-    this.detailForm = this.fb.group({
+    this.subcontractItemDetailForm = this.fb.group({
       id: null,
+      itemDate: null,
+      itemNumber: null,
       title: null,
       details: null,
       description: null,
     });
+  }
+
+  clickOk() {
+    this.navigateBack.emit();
   }
 }

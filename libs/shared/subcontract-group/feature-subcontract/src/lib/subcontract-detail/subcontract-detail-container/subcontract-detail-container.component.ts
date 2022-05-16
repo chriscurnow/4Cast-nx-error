@@ -59,15 +59,24 @@ export class SubcontractDetailContainerComponent
   ngAfterViewInit() {
     this.store
       .select(selectItemDetailDisplayed)
-      .pipe(
-        startWith(undefined),
-        delay(0)
-      )
+      .pipe(startWith(undefined), delay(0))
       .subscribe((displayed: boolean | undefined) => {
-        console.log('Item detail displayed', displayed);
         this.itemDetailDisplayed = displayed;
       });
   }
+
+  // ngAfterViewInit() {
+  //   this.store
+  //     .select(selectItemDetailDisplayed)
+  //     .pipe(
+  //       startWith(undefined),
+  //       delay(0)
+  //     )
+  //     .subscribe((displayed: boolean | undefined) => {
+  //       console.log('Item detail displayed', displayed);
+  //       this.itemDetailDisplayed = displayed;
+  //     });
+  // }
 
   createItemZero() {
     const contractUpdate =

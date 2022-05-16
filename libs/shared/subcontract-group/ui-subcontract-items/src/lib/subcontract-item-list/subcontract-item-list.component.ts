@@ -47,6 +47,8 @@ export class SubcontractItemListComponent implements OnInit {
     'amountRemaining',
   ];
 
+
+
   @Input() set subcontractItems(v: SubcontractItem[]) {
     console.log('SUBCONTRACT ITEMS LIST COMPONENT Subcontract Items', v);
     this._subcontractItems = v;
@@ -72,6 +74,10 @@ export class SubcontractItemListComponent implements OnInit {
     } else {
       return '';
     }
+  }
+
+  getDefTitle(def: any){
+    return def.title;
   }
 
   rowClicked(row: SubcontractItem) {

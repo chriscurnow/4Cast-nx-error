@@ -17,3 +17,4 @@ export * from './number-utils/number-utils.service';
 export * from './currency-utilities';
 export * from './data-utils/data-utils';
 export * from './data-utils/data-utils.service';
+export * from './navigation.service';

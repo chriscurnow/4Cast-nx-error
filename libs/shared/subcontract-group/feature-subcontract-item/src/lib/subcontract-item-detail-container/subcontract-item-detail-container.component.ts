@@ -13,6 +13,8 @@ import {
 } from '@workspace/shared/subcontract-group/data-access-subcontract-item';
 import { SubcontractPartialState, displayItemDetail, hideItemDetail } from '@workspace/shared/subcontract-group/data-access-subcontract';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
+import { NavigationService } from '@workspace/shared/util';
 
 @Component({
   selector: 'fourcast-subcontract-item-detail-container',
@@ -26,7 +28,9 @@ export class SubcontractItemDetailContainerComponent implements OnInit, OnDestro
   subcontractItem: SubcontractItem | undefined;
 
   constructor(private store: Store<SubcontractItemPartialState>,
-              private subcontractStore: Store<SubcontractPartialState>) {
+              private subcontractStore: Store<SubcontractPartialState>,
+              private navigationService: NavigationService
+              ) {
     this.subcontractItem$ = this.store.select(selectSubcontractItem);
 
     this.subcontractItem$.subscribe((item: SubcontractItem | undefined) => {
@@ -45,6 +49,9 @@ export class SubcontractItemDetailContainerComponent implements OnInit, OnDestro
     this.subcontractStore.dispatch(displayItemDetail())
   }
 
+  navigateBack(){
+    this.navigationService.back();
+  }
 
   ngOnDestroy(): void {
       this.subcontractStore.dispatch(hideItemDetail())
