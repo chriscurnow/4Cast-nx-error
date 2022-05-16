@@ -22,6 +22,7 @@ import { SubcontractItemDetailUiComponent } from './subcontract-item-detail-ui/s
     SharedUtilModule,
     SubcontractItemLineComponent,
     SubcontractItemListComponent,
+    SubcontractItemDetailUiComponent,
     // CurrencyDirective,
   ],
 })

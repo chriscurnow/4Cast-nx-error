@@ -55,7 +55,7 @@ export class SubcontractItemListComponent implements OnInit {
     console.log('data source', this.dataSource);
   }
 
-  @Output() itemSelected = new EventEmitter<string>();
+  @Output() itemSelected = new EventEmitter<SubcontractItem>();
 
   ngOnInit(): void {
     console.log('SUBCONTRACT ITEMS LIST COMPONENT');
@@ -76,6 +76,6 @@ export class SubcontractItemListComponent implements OnInit {
 
   rowClicked(row: SubcontractItem) {
     console.log('row clicked', row);
-    this.itemSelected.emit(row.id)
+    this.itemSelected.emit(row)
   }
 }

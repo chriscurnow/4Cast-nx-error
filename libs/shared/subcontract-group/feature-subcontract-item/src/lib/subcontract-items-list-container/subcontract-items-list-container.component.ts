@@ -31,22 +31,24 @@ export class SubcontractItemsListContainerComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.route.paramMap
-      .pipe(
-        switchMap((params: ParamMap) => {
-          const id = params.get('contractId');
-          console.log('Id from Params', id);
-          return of(id);
-        })
-      )
-      .subscribe((contractId: string | null) => {
-        this.store.dispatch(
-          loadItemsForSubcontract({ subcontractId: contractId as string })
-        );
-      });
+    console.log();
+    // this.route.paramMap
+    //   .pipe(
+    //     switchMap((params: ParamMap) => {
+    //       const id = params.get('contractId');
+    //       console.log('Id from Params', id);
+    //       return of(id);
+    //     })
+    //   )
+    //   .subscribe((contractId: string | null) => {
+    //     this.store.dispatch(
+    //       loadItemsForSubcontract({ subcontractId: contractId as string })
+    //     );
+    //   });
   }
 
-  itemSelected(id: string){
-    this.router.navigate(['../detail', id], {relativeTo: this.route})
+  itemSelected(item: SubcontractItem){
+    if ( item !== this.variationItems[0])
+    this.router.navigate(['../detail', item.id], {relativeTo: this.route})
   }
 }

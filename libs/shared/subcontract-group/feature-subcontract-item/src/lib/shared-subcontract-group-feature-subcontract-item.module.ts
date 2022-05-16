@@ -6,22 +6,30 @@ import { SubcontractItemDetailContainerComponent } from './subcontract-item-deta
 import { SharedSubcontractGroupDataAccessSubcontractItemModule } from '@workspace/shared/subcontract-group/data-access-subcontract-item';
 import { SubcontractItemListComponent } from './subcontract-item-list/subcontract-item-list.component';
 import { SubcontractItemsListContainerComponent } from './subcontract-items-list-container/subcontract-items-list-container.component';
+import { VariationsContainerComponent } from './variations-container/variations-container.component';
 
 
 @NgModule({
   imports: [
     CommonModule,
     RouterModule.forChild([
-      { path: '', pathMatch: 'full', redirectTo: 'items-list' },
       {
-        path: 'items-list',
-        pathMatch: 'full',
-        component: SubcontractItemsListContainerComponent,
-      },
-      {
-        path: 'detail/:subcontractItemId',
-        pathMatch: 'full',
-        component: SubcontractItemDetailContainerComponent,
+        path: '',
+        component: VariationsContainerComponent,
+        children: [
+          {
+            path: '',
+            pathMatch: 'full',
+            redirectTo:'items-list'},
+          {
+            path: 'items-list',
+            component: SubcontractItemsListContainerComponent,
+          },
+          {
+            path: 'detail/:subcontractItemId',
+            component: SubcontractItemDetailContainerComponent,
+          },
+        ],
       },
     ]),
     SharedSubcontractGroupDataAccessSubcontractItemModule,
@@ -31,6 +39,7 @@ import { SubcontractItemsListContainerComponent } from './subcontract-items-list
     SubcontractItemDetailContainerComponent,
     SubcontractItemListComponent,
     SubcontractItemsListContainerComponent,
+    VariationsContainerComponent,
   ],
 })
 export class SharedSubcontractGroupFeatureSubcontractItemModule {}

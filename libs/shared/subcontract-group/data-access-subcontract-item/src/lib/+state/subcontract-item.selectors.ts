@@ -49,7 +49,7 @@ export const selectOriginalItem = createSelector(
 
 export const selectVariationItems = createSelector(
   selectAllSubcontractItem,
-  (items: SubcontractItem[]) => items.filter((item) => item.itemNumber as number > 0)
+  (items: SubcontractItem[]) => items.filter((item) => item.itemNumber as number >= 0)
 );
 
 export const selectItemsForSubcontract = createSelector(

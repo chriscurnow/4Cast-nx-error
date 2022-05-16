@@ -10,6 +10,7 @@ export interface SubcontractEntityState extends EntityState<Subcontract> {
   selectedId?: string; // which Subcontract record has been selected
   loaded: boolean; // has the Subcontract list been loaded
   error?: string | null; // last known error (if any)
+  itemDetailDisplayed?: boolean;
 }
 
 export interface SubcontractPartialState {
@@ -78,16 +79,26 @@ const subcontractReducer = createReducer(
   on(SubcontractActions.loadSubcontract, (state) => ({
     ...state,
     loaded: false,
-    error: null
+    error: null,
   })),
 
-  on(SubcontractActions.loadSubcontractSuccess, (state, { subcontract}) =>
-    subcontractAdapter.setOne(subcontract, { ...state, loaded: true})
+  on(SubcontractActions.loadSubcontractSuccess, (state, { subcontract }) =>
+    subcontractAdapter.setOne(subcontract, { ...state, loaded: true })
   ),
 
   on(SubcontractActions.loadSubcontractFailure, (state, { error }) => ({
     ...state,
     error,
+  })),
+
+  on(SubcontractActions.displayItemDetail, (state) => ({
+    ...state,
+    itemDetailDisplayed: true,
+  })),
+
+  on(SubcontractActions.hideItemDetail, (state) => ({
+    ...state,
+    itemDetailDisplayed: false,
   }))
 );
 

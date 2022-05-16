@@ -1,5 +1,5 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy} from '@angular/core';
+import { Router, ActivatedRoute, UrlTree, UrlSegment } from '@angular/router';
 // TODO: [NX-19] resolve circular dependency
 
 
@@ -17,6 +17,7 @@ interface Link {
   selector: 'fourcast-subcontract-detail',
   templateUrl: './subcontract-detail.component.html',
   styleUrls: ['./subcontract-detail.component.scss'],
+  // changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SubcontractDetailComponent implements OnInit {
   contractId: string;
@@ -24,12 +25,14 @@ export class SubcontractDetailComponent implements OnInit {
   _subcontract: Subcontract;
   _items: SubcontractItem[] | undefined;
   item0: SubcontractItem = {};
+  _itemDetailDisplayed: boolean | undefined = false;
 
   links: Link[] = [
-    {title: 'General Details', route: 'general-details'},
-    {title: 'Variations', route: 'variations'},
-    {title: 'Payments', route: 'payments', disabled: true}];
-  activeLink = this.links[0]
+    { title: 'Contract Details', route: 'general-details' },
+    { title: 'Amounts', route: 'variations' },
+    { title: 'Payments', route: 'payments', disabled: true },
+  ];
+  activeLink = this.links[0];
 
   @Input() set subcontract(v: Subcontract | null | undefined) {
     if (v) {
@@ -40,9 +43,15 @@ export class SubcontractDetailComponent implements OnInit {
     this.detailForm.reset(this._subcontract);
   }
 
-  @Input() set items(v: SubcontractItem[] | undefined ) {
+  @Input() set itemDetailDisplayed(v: boolean | undefined) {
+    if(v) {this._itemDetailDisplayed = v;} else {
+      this._itemDetailDisplayed = false;
+    }
+  };
+
+  @Input() set items(v: SubcontractItem[] | undefined) {
     this._items = v;
-    if(this._items && this._items.length > 0 ){
+    if (this._items && this._items.length > 0) {
       this.item0 = this._items[0];
     } else {
       this.item0 = {};
@@ -53,15 +62,38 @@ export class SubcontractDetailComponent implements OnInit {
   @Output() createItemZero = new EventEmitter<null>();
   @Output() createNewVariation = new EventEmitter<null>();
 
-  constructor(private fb: FormBuilder,
-              private router: Router,
-              private route: ActivatedRoute
-              ) {
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {
     this.createForm();
   }
 
   ngOnInit() {
-    console.log();
+    //  const tree: UrlTree = this.router.parseUrl(this.router.url)
+    //  const segments: UrlSegment[] = tree.root.children.primary.segments;
+
+    //  const paths: string[] = [];
+    //  segments.forEach((segment: UrlSegment) => {
+    //    paths.push(segment.path)
+    //  })
+
+    const childPath = this.route.children[0].snapshot.url[0].path;
+
+    switch (childPath) {
+      case 'general-details':
+        this.activeLink = this.links[0];
+        break;
+      case 'variations':
+        this.activeLink = this.links[1];
+        break;
+    }
+
+    // console.log('route', this.route)
+    //   this.route.url.subscribe(url => {
+    //       console.log('Subscribed url', url)
+    //   })
   }
 
   createForm() {
@@ -73,9 +105,9 @@ export class SubcontractDetailComponent implements OnInit {
     });
   }
 
-  setActiveTab(link: Link){
+  setActiveTab(link: Link) {
     this.activeLink = link;
-    this.router.navigate([this.activeLink.route], {relativeTo: this.route})
+    this.router.navigate([this.activeLink.route], { relativeTo: this.route });
   }
 
   createItemZeroForContract(): void {
