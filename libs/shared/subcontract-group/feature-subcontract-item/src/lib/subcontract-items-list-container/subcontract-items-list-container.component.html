@@ -1,7 +1,6 @@
-<fourcast-subcontract-item-list [subcontractItems]="variationItems" (itemSelected)="itemSelected($event)"></fourcast-subcontract-item-list>
-<div fxLayout="row" fxLayoutAlign="end center" style="height:60px; padding-right:20px">
-        <!-- <button mat-raised-button (click)="createItemZeroForContract()">Create Item 0</button>
-        <button mat-raised-button color="accent" (click)="newVariation()">NEW VARIATION</button>
-        <button mat-raised-button color="accent" (click)="newClaim()">NEW CLAIM</button> -->
-        <button mat-raised-button color="primary" >New Variation</button>
-      </div>
+<fourcast-subcontract-item-list
+  [subcontractItems]="variationItems"
+  (itemSelected)="itemSelected($event)"
+  (createNewVariation)="createVariation()">
+</fourcast-subcontract-item-list>
+

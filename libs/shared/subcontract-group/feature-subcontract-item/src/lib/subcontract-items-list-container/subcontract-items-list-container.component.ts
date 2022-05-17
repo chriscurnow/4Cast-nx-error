@@ -2,12 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import {
   SubcontractItemPartialState,
-  loadSubcontractItems,
   selectVariationItems,
-  loadItemsForSubcontract,
-  subcontractItemAdapter,
 } from '@workspace/shared/subcontract-group/data-access-subcontract-item';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { SubcontractItem } from '@workspace/shared/data-access-models';
@@ -32,23 +29,15 @@ export class SubcontractItemsListContainerComponent implements OnInit {
 
   ngOnInit(): void {
     console.log();
-    // this.route.paramMap
-    //   .pipe(
-    //     switchMap((params: ParamMap) => {
-    //       const id = params.get('contractId');
-    //       console.log('Id from Params', id);
-    //       return of(id);
-    //     })
-    //   )
-    //   .subscribe((contractId: string | null) => {
-    //     this.store.dispatch(
-    //       loadItemsForSubcontract({ subcontractId: contractId as string })
-    //     );
-    //   });
+
   }
 
   itemSelected(item: SubcontractItem){
     if ( item !== this.variationItems[0])
     this.router.navigate(['../detail', item.id], {relativeTo: this.route})
+  }
+
+  createVariation(){
+    console.log();
   }
 }

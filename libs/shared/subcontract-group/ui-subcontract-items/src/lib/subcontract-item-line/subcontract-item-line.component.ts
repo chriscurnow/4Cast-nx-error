@@ -60,12 +60,7 @@ export class SubcontractItemLineComponent implements OnInit {
 
   // eslint-disable-next-line @angular-eslint/no-empty-lifecycle-method
   ngOnInit(): void {
-    // this.store.dispatch(loadItemsForSubcontract());
-    // this.route.paramMap.subscribe((params) => {
-    //   const idName = 'subcontractId';
-    //   this.subcontractId = params.get(idName);
-    //   this.projectId = params.get('projectId');
-    // });
+ //
   }
 
   editItem(): void {

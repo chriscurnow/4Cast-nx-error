@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { SubcontractItemPartialState, loadSubcontractItems, loadItemsForSubcontract} from '@workspace/shared/subcontract-group/data-access-subcontract-item';
+import { SubcontractItemPartialState,  loadItemsForSubcontract} from '@workspace/shared/subcontract-group/data-access-subcontract-item';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import { of } from 'rxjs';

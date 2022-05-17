@@ -58,7 +58,7 @@ export class SubcontractItemListComponent implements OnInit {
   }
 
   @Output() itemSelected = new EventEmitter<SubcontractItem>();
-
+  @Output() createNewVariation = new EventEmitter<null>();
   ngOnInit(): void {
     console.log('SUBCONTRACT ITEMS LIST COMPONENT');
   }
@@ -78,6 +78,10 @@ export class SubcontractItemListComponent implements OnInit {
 
   getDefTitle(def: any){
     return def.title;
+  }
+
+  createVariation(){
+    this.createNewVariation.emit();
   }
 
   rowClicked(row: SubcontractItem) {

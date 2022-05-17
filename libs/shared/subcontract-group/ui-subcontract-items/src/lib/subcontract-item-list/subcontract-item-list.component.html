@@ -55,6 +55,12 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="rowClicked(row)"></tr>
   </table>
 
+  <div fxLayout="row" fxLayoutAlign="end center" style="height:60px; padding-right:20px">
+        <!-- <button mat-raised-button (click)="createItemZeroForContract()">Create Item 0</button>
+        <button mat-raised-button color="accent" (click)="newVariation()">NEW VARIATION</button>
+        <button mat-raised-button color="accent" (click)="newClaim()">NEW CLAIM</button> -->
+        <button mat-raised-button color="primary" (click)="createVariation()" >New Variation</button>
+      </div>
   <!-- <mat-paginator #paginator
       [length]="dataSource?.data.length"
       [pageIndex]="0"

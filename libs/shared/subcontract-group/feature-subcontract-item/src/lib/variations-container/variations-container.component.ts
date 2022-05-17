@@ -38,17 +38,6 @@ export class VariationsContainerComponent implements OnInit {
           loadItemsForSubcontract({ subcontractId: id as string })
         );
     })
-      // .pipe(
-      //   switchMap((params: ParamMap) => {
-      //     const id = params.get('contractId');
-      //     console.log('Id from Params', id);
-      //     return of(id);
-      //   })
-      // )
-      // .subscribe((contractId: string | null) => {
-      //   this.store.dispatch(
-      //     loadItemsForSubcontract({ subcontractId: contractId as string })
-      //   );
-      // });
+
   }
 }
