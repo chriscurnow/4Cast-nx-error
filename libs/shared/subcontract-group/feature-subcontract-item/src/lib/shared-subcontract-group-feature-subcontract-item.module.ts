@@ -5,7 +5,6 @@ import { SharedUiDefaultModuleCollectionModule } from '@workspace/shared-ui-defa
 import { SharedSubcontractGroupUiSubcontractItemsModule } from '@workspace/shared-subcontract-group-ui-subcontract-items';
 import { SubcontractItemDetailContainerComponent } from './subcontract-item-detail-container/subcontract-item-detail-container.component';
 import { SharedSubcontractGroupDataAccessSubcontractItemModule } from '@workspace/shared/subcontract-group/data-access-subcontract-item';
-import { SubcontractItemListComponent } from './subcontract-item-list/subcontract-item-list.component';
 import { SubcontractItemsListContainerComponent } from './subcontract-items-list-container/subcontract-items-list-container.component';
 import { VariationsContainerComponent } from './variations-container/variations-container.component';
 
@@ -40,7 +39,6 @@ import { VariationsContainerComponent } from './variations-container/variations-
   ],
   declarations: [
     SubcontractItemDetailContainerComponent,
-    SubcontractItemListComponent,
     SubcontractItemsListContainerComponent,
     VariationsContainerComponent,
   ],
