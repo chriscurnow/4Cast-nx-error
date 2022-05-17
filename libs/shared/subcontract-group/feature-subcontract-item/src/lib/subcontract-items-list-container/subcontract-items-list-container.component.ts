@@ -3,8 +3,12 @@ import { Store } from '@ngrx/store';
 import {
   SubcontractItemPartialState,
   selectVariationItems,
+  loadItemsForSubcontract,
+  createNewSubcontractItem,
+  selectSubcontractItemId,
+  getSelectedId,
 } from '@workspace/shared/subcontract-group/data-access-subcontract-item';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { SubcontractItem } from '@workspace/shared/data-access-models';
@@ -16,6 +20,8 @@ import { SubcontractItem } from '@workspace/shared/data-access-models';
 })
 export class SubcontractItemsListContainerComponent implements OnInit {
   variationItems: SubcontractItem[];
+  subcontractId = '';
+  projectId = '';
   constructor(
     private store: Store<SubcontractItemPartialState>,
     private router: Router,
@@ -28,6 +34,15 @@ export class SubcontractItemsListContainerComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.route.paramMap.subscribe((params: ParamMap) => {
+     const contractId = params.get('contractId');
+     const projectId = params.get('projectId');
+     this.subcontractId = contractId ? contractId : '';
+     this.projectId = projectId ? projectId : '';
+      this.store.dispatch(
+        loadItemsForSubcontract({ subcontractId: this.subcontractId as string })
+      );
+    });
     console.log();
 
   }
@@ -38,6 +53,15 @@ export class SubcontractItemsListContainerComponent implements OnInit {
   }
 
   createVariation(){
-    console.log();
+    console.log('CREATE VARIATION');
+    const idSubscription = this.store.select(getSelectedId)
+    .subscribe((id: string) => {
+      if(id && id !==''){
+         this.router.navigate(['../detail', id], { relativeTo: this.route });
+        idSubscription.unsubscribe();
+      }
+
+    })
+    this.store.dispatch(createNewSubcontractItem({projectId: this.projectId, subcontractId: this.subcontractId}))
   }
 }

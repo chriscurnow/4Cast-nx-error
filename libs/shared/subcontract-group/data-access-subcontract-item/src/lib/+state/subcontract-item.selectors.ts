@@ -83,6 +83,10 @@ export const selectSubcontractItem = createSelector(
     return item;
   }
 );
+export const selectSubcontractId = createSelector(
+  getSubcontractItemState,
+  (state: SubcontractItemEntityState) => state.selectedId
+);
 
 
 

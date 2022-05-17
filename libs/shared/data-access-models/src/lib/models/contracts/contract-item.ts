@@ -9,8 +9,8 @@ import { PaymentStatus } from '../payments';
 
 export interface SubcontractItem {
   id?: string;
-  isNew?: undefined;
-  isDraft?: undefined;
+  isNew?: boolean;
+  isDraft?: boolean;
   itemDate?: Date | string;
   itemNumber?: number;
   title?: string;

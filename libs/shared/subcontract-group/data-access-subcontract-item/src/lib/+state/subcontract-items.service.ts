@@ -6,14 +6,17 @@ import {
   DocumentReference,
   AngularFirestoreDocument,
   AngularFirestoreCollection,
+  fromDocRef,
 } from '@angular/fire/compat/firestore';
-import { map } from 'rxjs/operators';
+import { map, mergeAll } from 'rxjs/operators';
 import { FormGroup, AbstractControl } from '@angular/forms';
 import { SubcontractItem } from '@workspace/shared/data-access-models';
 import { Subcontract } from '@workspace/shared/data-access-models';
 import { CurrencyClass } from '@workspace/shared/util';
-import { Observable, Subject } from 'rxjs';
+import { Observable, Subject, of, from} from 'rxjs';
+
 import { PaymentStatus } from '@workspace/shared/data-access-models';
+import { INPUT_MODALITY_DETECTOR_DEFAULT_OPTIONS } from '@angular/cdk/a11y';
 
 export type ContractItemDoc = AngularFirestoreDocument<SubcontractItem>;
 export type ContractItemsCollection =
@@ -59,7 +62,11 @@ export class SubcontractItemsService {
   async createVariation(subcontract: Subcontract): Promise<any> {
     const projectId = subcontract.project ? subcontract.project.id : '';
     const subcontractId = subcontract.id;
-    const variation = this.createItemForApprovedContract(subcontract, 'variation', 1);
+    const variation = this.createItemForApprovedContract(
+      subcontract,
+      'variation',
+      1
+    );
     const path = `projects/${projectId}/subcontracts/${subcontractId}/subcontractItems`;
     try {
       const ref = await this.afs.collection(path).add(variation);
@@ -83,6 +90,40 @@ export class SubcontractItemsService {
     }
   }
 
+ createNewSubcontractItem(projectId: string, subcontractId: string): Observable<any> {
+    const item: SubcontractItem = {
+      isNew: true,
+      isDraft: true,
+      projectId,
+      subcontractId
+    }
+    const path = `projects/${projectId}/subcontracts/${subcontractId}/subcontractItems`;
+    try {
+      const ref = this.afs.collection<SubcontractItem>(path).add(item);
+      const thenPromise = ref.then((itemDoc: DocumentReference) => {
+        const itemPromise = itemDoc.get()
+        return itemPromise;
+      })
+      const item$ = from (thenPromise);
+      return item$
+      // const obs = from(ref);
+
+      // obs.pipe(
+      //   map ((itemRef: DocumentReference<SubcontractItem>) => {
+      //   const itemObs = from(itemRef.get())
+      //   itemObs.pipe(map((item: SubcontractItem) => item))
+      // } ))
+      // return obs.pipe(mergeAll());
+    } catch (err : any) {
+      return err;
+    }
+  }
+
+  test(){
+    function myPromise (val: string) {
+     return new Promise((resolve) => resolve(`${val} World From Promise!`));}
+  }
+
   /**
    *
    * @param projectId
@@ -90,9 +131,7 @@ export class SubcontractItemsService {
    *
    * Retrieves contract items for subcontract
    */
-  getItemsForSubcontract(
-    subcontractId: string
-  ): Observable<SubcontractItem[]> {
+  getItemsForSubcontract(subcontractId: string): Observable<SubcontractItem[]> {
     // ContractItem.getCollectionPath(projectId, subcontractId);
     // this.contractItemsCollection =
     // const projectId = subcontract.project?.id;
@@ -112,22 +151,22 @@ export class SubcontractItemsService {
     // rather than return the observable, return the collection reference so we can use it again.
   }
 
-  getSubcontractItem(itemId: string): Observable<SubcontractItem > {
+  getSubcontractItem(itemId: string): Observable<SubcontractItem> {
     // TODO: [FCSUB-464] [FCSUB-463] Use generic getDocument from DataService
 
     const path = `contractItem/${itemId}`;
     return this.afs
-    .doc<SubcontractItem>(path)
-    .valueChanges()
-    .pipe(
-      map((subcontractItem: SubcontractItem | undefined) => {
-        if(subcontractItem) {
-          return subcontractItem; } else {
-            return { id: ''};
-
-        }
-      })
-    )
+      .doc<SubcontractItem>(path)
+      .valueChanges()
+      .pipe(
+        map((subcontractItem: SubcontractItem | undefined) => {
+          if (subcontractItem) {
+            return subcontractItem;
+          } else {
+            return { id: '' };
+          }
+        })
+      );
 
     // this.contractItemDoc = this.afs.doc<SubcontractItem>(
     //   `contractItems/${itemId}`
@@ -216,7 +255,11 @@ export class SubcontractItemsService {
     return contractItemDoc.update(update);
   }
 
-  createItemForApprovedContract(subcontract: Subcontract, title: string, itemNumber: number): SubcontractItem {
+  createItemForApprovedContract(
+    subcontract: Subcontract,
+    title: string,
+    itemNumber: number
+  ): SubcontractItem {
     const contractItem: SubcontractItem = {};
     if (subcontract.amounts) {
       contractItem.contractAmount = subcontract.amounts.contractOriginal;
@@ -237,6 +280,4 @@ export class SubcontractItemsService {
     contractItem.subcontractId = subcontract.id;
     return contractItem;
   }
-
-
 }

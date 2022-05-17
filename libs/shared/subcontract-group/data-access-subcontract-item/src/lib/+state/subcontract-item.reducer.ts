@@ -87,6 +87,14 @@ export const initialState: SubcontractItemEntityState =
         });
         return res;
       }),
+      on(SubcontractItemActions.createNewItemSuccess, (state, { itemId }) => ({
+
+          ...state,
+          selectedId: itemId as string,
+          loaded: true,
+        })),
+
+
       on(SubcontractItemActions.loadSubcontractItem, (state) => ({
         ...state,
         loaded: false,

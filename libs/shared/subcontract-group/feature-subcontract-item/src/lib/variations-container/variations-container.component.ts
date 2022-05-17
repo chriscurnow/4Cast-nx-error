@@ -2,15 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import {
   SubcontractItemPartialState,
-  loadSubcontractItems,
-  selectVariationItems,
   loadItemsForSubcontract,
-  subcontractItemAdapter,
 } from '@workspace/shared/subcontract-group/data-access-subcontract-item';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import { switchMap } from 'rxjs/operators';
-import { of } from 'rxjs';
-import { SubcontractItem } from '@workspace/shared/data-access-models';
+
 
 @Component({
   selector: 'fourcast-variations-container',
@@ -30,14 +25,9 @@ export class VariationsContainerComponent implements OnInit {
     //   });
   }
 
+  // eslint-disable-next-line @angular-eslint/no-empty-lifecycle-method
   ngOnInit(): void {
-    this.route.paramMap.subscribe((params: ParamMap) => {
-       const id = params.get('contractId');
-       console.log('VARIATIONS CONTAINER COMPONENT contractId from params', id)
-        this.store.dispatch(
-          loadItemsForSubcontract({ subcontractId: id as string })
-        );
-    })
+    //
 
   }
 }
