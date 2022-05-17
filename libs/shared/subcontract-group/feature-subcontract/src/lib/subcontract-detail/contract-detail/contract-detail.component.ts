@@ -1,3 +1,4 @@
+/* eslint-disable @angular-eslint/no-empty-lifecycle-method */
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
@@ -8,8 +9,10 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 })
 export class ContractDetailComponent implements OnInit {
 
-  constructor() { }
+  // constructor() { }
 
+
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   ngOnInit(): void {
   }
 
