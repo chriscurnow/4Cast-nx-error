@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable no-empty */
 /* eslint-disable no-prototype-builtins */
 import * as admin from 'firebase-admin';
 import * as functions from 'firebase-functions';
@@ -20,7 +23,7 @@ if (!app){
 
 export const updatePaymentStatus = functions.https.onCall((data, context) => {
     initialize();
-    let i = 0;
+    // let i = 0;
     const promises: any[] = [];
     return admin.firestore().collection('subcontractPayments')
     .where('status.id', '==', 0)
@@ -28,7 +31,7 @@ export const updatePaymentStatus = functions.https.onCall((data, context) => {
     .then(payments => {
 
       payments.forEach(paymentSnapshot => {
-        const id = paymentSnapshot.id;
+        // const id = paymentSnapshot.id;
         const paymentRef = paymentSnapshot.ref;
         const status = PaymentStatus.Approved;
         // tslint:disable-next-line: no-void-expression
@@ -43,6 +46,7 @@ export const updatePaymentStatus = functions.https.onCall((data, context) => {
       });
     })
     .catch(err => {
+      console.log('An error occurred', err)
       return 'An error occurred.';
     });
   });
@@ -52,7 +56,7 @@ export const updatePaymentStatus = functions.https.onCall((data, context) => {
 export const updateContractOriginal = functions.https.onCall((data, context) => {
     const startAfter = data.startAfter;
     initialize();
-    let i = 0;
+    // let i = 0;
     const promises: any[] = [];
     return admin.firestore().collection('subcontractPayments')
     .orderBy('id')
@@ -63,7 +67,7 @@ export const updateContractOriginal = functions.https.onCall((data, context) => 
     .then(payments => {
 
       payments.forEach(paymentSnapshot => {
-        const id = paymentSnapshot.id;
+        // const id = paymentSnapshot.id;
 
         let amounts = paymentSnapshot.get('amounts');
         if (amounts.hasOwnProperty('contractAmount')) {
@@ -100,14 +104,14 @@ export const updateContractOriginal = functions.https.onCall((data, context) => 
  */
 export const updatePaymentCurrency = functions.https.onCall((data, context) => {
     initialize();
-    let i = 0;
+    // let i = 0;
     const promises: any[] = [];
     return admin.firestore().collection('subcontractPayments')
     .get()
     .then(payments => {
 
       payments.forEach(paymentSnapshot => {
-        const id = paymentSnapshot.id;
+        // const id = paymentSnapshot.id;
         const paymentRef = paymentSnapshot.ref;
         const paymentData = paymentSnapshot.data();
         const tempAmounts = paymentData.amounts;
@@ -192,7 +196,7 @@ function setupOldAmounts(tempAmounts: any): any{
   }
 
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
+
 function setupNewAmounts(oldAmounts: any): PaymentAmounts {
     // return {
     //   contractAmount: convertOldFormat(oldAmounts.contractAmount),

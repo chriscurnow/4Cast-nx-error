@@ -1,3 +1,5 @@
+
+import { SubcontractItem } from '@workspace/shared/data-access-models';
 import * as admin from 'firebase-admin';
 import * as functions from 'firebase-functions';
 // import { SubcontractService, ContractItem } from '@4cast/subcontract';
@@ -8,18 +10,47 @@ if (!admin.apps.length) {
 }
 
 
-
 // [LS-12] we set the payment number in the payment create method
 // so right now we don't have to do anything on create new payment
 
 export const subcontractItemCreate = functions.firestore.document('projects/{projectId}/subcontracts/{subcontractId}/subcontractItems/{itemId}')
 .onCreate((snap, context) => {
 
-    const id = snap.id;
-    const data = {id};
-    return snap.ref.set(data, {merge: true});
-
+  return onCreteSubcontractItem(snap, context);
 });
+
+
+function onCreteSubcontractItem(snap: FirebaseFirestore.DocumentSnapshot, context: functions.EventContext){
+  const projectId = context.params.projectId;
+  const subcontractId = context.params.subcontractId;
+  console.log('onCreateSubcontractItem, projectId, subcontractId', projectId, subcontractId)
+  const item: SubcontractItem = { ...snap.data() };
+  item.id = snap.id;
+  item.itemDate = new Date();
+  item.isNew = false;
+  const ref = admin
+    .firestore()
+    .collection(
+      `projects/${projectId}/subcontracts/${subcontractId}/subcontractItems`
+    )
+    .orderBy('itenNumber', 'desc');
+
+  return ref.get().then((querySnapshot) => {
+    console.log('Got collection', querySnapshot.docs)
+    let nextNumber = 1;
+    if (querySnapshot.docs.length > 0) {
+      const lastItemDoc = querySnapshot.docs[0];
+      console.log('snapshot docs length', querySnapshot.docs.length)
+      const lastItem: SubcontractItem = lastItemDoc.data();
+      nextNumber = lastItem.itemNumber + 1;
+    }
+    item.itemNumber = nextNumber;
+    console.log('Item ready to set', item)
+    const writeResult = snap.ref.set(item, { merge: true });
+    console.log('Write new item, write result', writeResult)
+    return writeResult;
+  });
+}
 
 // export const subcontractUpdate = functions.firestore.document('subcontracts/{subcontractId}')
 // .onUpdate((change, context) => {
