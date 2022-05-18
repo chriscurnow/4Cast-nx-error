@@ -76,7 +76,8 @@ export const selectSubcontractItem = createSelector(
   (entities, { subcontractItemId }) => {
     const item = entities[subcontractItemId];
     console.log(
-      'SELECTORS, selectSubcontractItem, entities, item',
+      'SELECTORS, selectSubcontractItem, item, id, entities, item',
+      subcontractItemId,
       entities,
       item
     );

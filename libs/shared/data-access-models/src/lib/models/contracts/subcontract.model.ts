@@ -66,6 +66,7 @@ export interface SubcontractEntity {
   mostRecentPayment?: MostRecentPayment;
   nextItemNumber?: number | undefined;
   nextPaymentNumber?: number | undefined;
+  nextVariationNumber?: number | undefined;
   project?: Project | undefined;
 }
 

@@ -1,5 +1,5 @@
 
-import { SubcontractItem } from '@workspace/shared/data-access-models';
+import { Subcontract, SubcontractItem } from '@workspace/shared/data-access-models';
 import * as admin from 'firebase-admin';
 import * as functions from 'firebase-functions';
 // import { SubcontractService, ContractItem } from '@4cast/subcontract';
@@ -30,25 +30,32 @@ function onCreteSubcontractItem(snap: FirebaseFirestore.DocumentSnapshot, contex
   item.isNew = false;
   const ref = admin
     .firestore()
-    .collection(
-      `projects/${projectId}/subcontracts/${subcontractId}/subcontractItems`
+    .doc(
+      `projects/${projectId}/subcontracts/${subcontractId}`
     )
-    .orderBy('itenNumber', 'desc');
 
-  return ref.get().then((querySnapshot) => {
-    console.log('Got collection', querySnapshot.docs)
+  return ref.get().then((subcontractDocumentSnapshot) => {
+    console.log('Got subcontract', subcontractDocumentSnapshot.data());
     let nextNumber = 1;
-    if (querySnapshot.docs.length > 0) {
-      const lastItemDoc = querySnapshot.docs[0];
-      console.log('snapshot docs length', querySnapshot.docs.length)
-      const lastItem: SubcontractItem = lastItemDoc.data();
-      nextNumber = lastItem.itemNumber + 1;
-    }
+      const subcontract: Subcontract = { ...subcontractDocumentSnapshot.data() };
+      console.log('Subcontract retrieved', subcontract)
+      const subcontractVariationNumber = subcontract.nextItemNumber;
+      if (subcontractVariationNumber && subcontractVariationNumber > 0) {
+        nextNumber = subcontractVariationNumber;
+      }
+      console.log('Next number form subcontract', subcontractVariationNumber)
     item.itemNumber = nextNumber;
-    console.log('Item ready to set', item)
-    const writeResult = snap.ref.set(item, { merge: true });
-    console.log('Write new item, write result', writeResult)
-    return writeResult;
+    // now increment nextItemNumber in the subcontract
+    nextNumber++;
+    const contractUpdate = {nextItemNumber: nextNumber};
+    return subcontractDocumentSnapshot.ref.set(contractUpdate, {merge: true})
+    .then(contractWriteResult => {
+       console.log('Item ready to set', item);
+       const writeResult = snap.ref.set(item, { merge: true });
+       console.log('Write new item, write result', writeResult);
+       return writeResult;
+    })
+
   });
 }
 
