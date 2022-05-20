@@ -67,7 +67,7 @@ export const createNewSubcontractItem = createAction(
 
 export const createNewItemSuccess = createAction(
   '[SubcontractItem/API] Create New Item Success',
-  props<{itemId: string }>()
+  props<{item: SubcontractItem }>()
 );
 export const createNewItemFailure = createAction(
   '[SubcontractItem/API] Create New Item Failure',

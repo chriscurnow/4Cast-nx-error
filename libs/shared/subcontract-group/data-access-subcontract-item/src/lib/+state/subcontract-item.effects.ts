@@ -133,10 +133,9 @@ export class SubcontractItemEffects {
           const res = this.subcontractItemsService.createNewSubcontractItem(a.projectId, a.subcontractId)
           return res
             .pipe(
-              map((item ) => {
-                console.log('About to return sub item', item.id)
-                const subItem = ItemActions.createNewItemSuccess({ itemId: item.id});
-                return subItem;
+              map((item: SubcontractItem ) => {
+                console.log('About to return sub item', item)
+                return ItemActions.createNewItemSuccess({ item: item});
               })
             );
         },

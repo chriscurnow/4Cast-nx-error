@@ -6,7 +6,7 @@ import {
   DocumentReference,
   AngularFirestoreDocument,
   AngularFirestoreCollection,
-  fromDocRef,
+
 } from '@angular/fire/compat/firestore';
 import { map, mergeAll } from 'rxjs/operators';
 import { FormGroup, AbstractControl } from '@angular/forms';
@@ -14,7 +14,7 @@ import { SubcontractItem } from '@workspace/shared/data-access-models';
 import { Subcontract } from '@workspace/shared/data-access-models';
 import { CurrencyClass } from '@workspace/shared/util';
 import { Observable, Subject, of, from} from 'rxjs';
-
+import { switchMap } from 'rxjs/operators';
 import { PaymentStatus } from '@workspace/shared/data-access-models';
 import { INPUT_MODALITY_DETECTOR_DEFAULT_OPTIONS } from '@angular/cdk/a11y';
 
@@ -69,7 +69,9 @@ export class SubcontractItemsService {
     );
     const path = `projects/${projectId}/subcontracts/${subcontractId}/subcontractItems`;
     try {
-      const ref = await this.afs.collection(path).add(variation);
+      const ref = await this.afs
+        .collection<SubcontractItem>(path)
+        .add(variation);
 
       return ref;
     } catch (err) {
@@ -90,38 +92,77 @@ export class SubcontractItemsService {
     }
   }
 
- createNewSubcontractItem(projectId: string, subcontractId: string): Observable<any> {
+  getContract(id: string | null) {
+    const path = `subcontracts/${id}`;
+    return this.afs
+      .doc<Subcontract>(path)
+      .valueChanges()
+      .pipe(
+        map((contract) => {
+          if (contract) {
+            return contract;
+          } else {
+            return { id: '' };
+          }
+        })
+      );
+  }
+
+  createNewSubcontractItem(
+    projectId: string,
+    subcontractId: string
+  ): Observable<SubcontractItem > {
     const item: SubcontractItem = {
       isNew: true,
       isDraft: true,
       projectId,
-      subcontractId
-    }
+      subcontractId,
+    };
     const path = `projects/${projectId}/subcontracts/${subcontractId}/subcontractItems`;
     try {
-      const ref = this.afs.collection<SubcontractItem>(path).add(item);
-      const thenPromise = ref.then((itemDoc: DocumentReference) => {
-        const itemPromise = itemDoc.get()
-        return itemPromise;
-      })
-      const item$ = from (thenPromise);
-      return item$
-      // const obs = from(ref);
+      const docRef$ = from( this.afs.collection<SubcontractItem>(path).add(item));
+    const result = docRef$
+        .pipe(switchMap ((docRef) => {
+        return this.afs.doc<SubcontractItem>(docRef)
+        .valueChanges()
+        .pipe(map((item) => {
+          if (item) {
+            return  {...item, itemDate: null};
+          } else {
+            return {};
+          }
+        }))
+        }
+        ))
+        // console.log('Item result', itemResult)
+        // return itemResult
+        return result;
 
-      // obs.pipe(
-      //   map ((itemRef: DocumentReference<SubcontractItem>) => {
-      //   const itemObs = from(itemRef.get())
-      //   itemObs.pipe(map((item: SubcontractItem) => item))
-      // } ))
-      // return obs.pipe(mergeAll());
-    } catch (err : any) {
+      // return from (ref.then((itemDoc: DocumentReference) => {
+      //   return this.afs.doc<SubcontractItem>(itemDoc)
+      //   .valueChanges().toPromise()
+      //   // return itemDoc.get().then((itemSnapshot) => {
+      //   //   const data = itemSnapshot.data()
+      //   //   if (data){
+      //   //    return data.then((item: SubcontractItem) => {
+      //   //      return item
+      //   //     })
+      //   //   } else {
+      //   //     return {}
+      //   //   }
+      //   // });
+      // }));
+
+
+    } catch (err: any) {
       return err;
     }
   }
 
-  test(){
-    function myPromise (val: string) {
-     return new Promise((resolve) => resolve(`${val} World From Promise!`));}
+  test() {
+    function myPromise(val: string) {
+      return new Promise((resolve) => resolve(`${val} World From Promise!`));
+    }
   }
 
   /**

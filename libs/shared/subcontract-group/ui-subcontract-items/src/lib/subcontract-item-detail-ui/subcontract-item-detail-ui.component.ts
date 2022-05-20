@@ -13,9 +13,10 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 export class SubcontractItemDetailUiComponent implements OnInit {
   subcontractItem: SubcontractItem | undefined;
   subcontractItemDetailForm: FormGroup;
-
+  itemId = '';
   @Input() set item(v: SubcontractItem | undefined) {
     this.subcontractItem = v;
+    this.itemId = v ? v.id as string : '';
     this.subcontractItemDetailForm.reset(v);
   }
 

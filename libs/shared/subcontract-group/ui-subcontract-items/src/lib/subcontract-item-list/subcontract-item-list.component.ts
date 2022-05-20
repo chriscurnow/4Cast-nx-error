@@ -64,7 +64,7 @@ export class SubcontractItemListComponent implements OnInit {
   }
 
   formatCurrency(value: any): string {
-    console.log('formatCurrency value', value);
+
     if (value) {
       const currencyObject: Currency = { amount: value.amount };
 
