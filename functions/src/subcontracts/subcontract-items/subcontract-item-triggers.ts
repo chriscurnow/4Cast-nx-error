@@ -2,6 +2,7 @@
 import { Subcontract, SubcontractItem } from '@workspace/shared/data-access-models';
 import * as admin from 'firebase-admin';
 import * as functions from 'firebase-functions';
+import { DateTime } from 'luxon';
 // import { SubcontractService, ContractItem } from '@4cast/subcontract';
 
 
@@ -26,7 +27,7 @@ function onCreteSubcontractItem(snap: FirebaseFirestore.DocumentSnapshot, contex
   console.log('onCreateSubcontractItem, projectId, subcontractId', projectId, subcontractId)
   const item: SubcontractItem = { ...snap.data() };
   item.id = snap.id;
-  item.itemDate = new Date();
+  item.itemDate = DateTime.now();
   item.isNew = false;
   const ref = admin
     .firestore()

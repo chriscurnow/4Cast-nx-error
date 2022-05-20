@@ -9,6 +9,7 @@ import {
 
 } from '@angular/fire/compat/firestore';
 import { map, mergeAll } from 'rxjs/operators';
+import { DateTime } from 'luxon';
 import { FormGroup, AbstractControl } from '@angular/forms';
 import { SubcontractItem } from '@workspace/shared/data-access-models';
 import { Subcontract } from '@workspace/shared/data-access-models';
@@ -306,8 +307,8 @@ export class SubcontractItemsService {
       contractItem.contractAmount = subcontract.amounts.contractOriginal;
       contractItem.amountRemaining = contractItem.contractAmount;
     }
-    const newDate = '';
-    contractItem.itemDate = newDate;
+
+    contractItem.itemDate = DateTime.now();
     contractItem.title = title;
     contractItem.itemNumber = itemNumber;
     contractItem.approvedPercent = 0;
