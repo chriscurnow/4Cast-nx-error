@@ -12,14 +12,23 @@
 
      <div class="flex-row">
        <div class="flex-col w200">
-          <mat-form-field appearance="outline">
+          <mat-form-field appearance="outline" style="width:200px">
             <mat-label>Date</mat-label>
-            <input matInput placeholder="Date" formControlName="itemDate">
+            <input
+              matInput
+              [matDatepicker]="itemDatePicker"
+              placeholder="Date"
+              formControlName="itemDate"/>
+              <mat-datepicker-toggle
+                  matSuffix
+                  [for]="itemDatePicker"
+              ></mat-datepicker-toggle>
           </mat-form-field>
+           <mat-datepicker #itemDatePicker></mat-datepicker>
       </div>
       <div class="flex-col">
         <mat-form-field appearance="outline" class="full-width">
-          <mat-label>Decription of work</mat-label>
+          <mat-label>Description of work</mat-label>
           <input matInput placeholder="Description of work" formControlName="title">
         </mat-form-field>
       </div>
