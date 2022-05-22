@@ -1,4 +1,4 @@
-import { createCurrency, Currency } from '@workspace/shared/util'
+import { createCurrency, Currency, DateTimestamp } from '@workspace/shared/util'
 import { DateTime } from 'luxon';
 
 // import * as moment from 'moment';
@@ -11,7 +11,10 @@ export interface SubcontractItem {
   id?: string;
   isNew?: boolean;
   isDraft?: boolean;
-  itemDate?: DateTime;
+  itemDate?: number; // milliseconds
+  itemDateTime?: DateTime;
+  itemTimestamp?: DateTimestamp;
+  itemDateISO?: string;
   itemNumber?: number;
   title?: string;
   details?: string;
@@ -90,7 +93,7 @@ export function createItemForApprovedContract(subcontract: Subcontract): any {
       contractItem.amountRemaining = contractItem.contractAmount;
     }
 
-    contractItem.itemDate = DateTime.now();
+    // contractItem.itemDate = DateTime.now();
     contractItem.title = 'Original Contract';
     contractItem.itemNumber = 0;
     contractItem.approvedPercent = 0;

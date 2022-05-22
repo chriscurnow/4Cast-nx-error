@@ -1,17 +1,18 @@
 /* eslint-disable @nrwl/nx/enforce-module-boundaries */
 import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 import { SubcontractItem } from '@workspace/shared/data-access-models';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import {
   DateAdapter,
   MAT_DATE_FORMATS,
-  MAT_DATE_LOCALE,
+  MAT_DATE_LOCALE
 } from '@angular/material/core';
 import {
   LuxonDateAdapter,
   MAT_LUXON_DATE_FORMATS,
 } from '@angular/material-luxon-adapter';
 import { DateUtilsService } from '@workspace/shared/util';
+import { DateTime } from 'luxon';
 
 
 @Component({
@@ -35,7 +36,15 @@ export class SubcontractItemDetailUiComponent implements OnInit {
   itemId = '';
   @Input() set item(v: SubcontractItem | undefined) {
     this.subcontractItem = v;
-    this.itemId = v ? (v.id as string) : '';
+    if(v){
+      this.itemId = v.id as string;
+      if(v.itemDateISO){
+         v.itemDateTime = DateTime.fromISO(v.itemDateISO);
+      }
+
+
+    }
+    console.log('Subcontract Item', v)
     this.subcontractItemDetailForm.reset(v);
   }
 
@@ -51,7 +60,7 @@ export class SubcontractItemDetailUiComponent implements OnInit {
   createForm() {
     this.subcontractItemDetailForm = this.fb.group({
       id: null,
-      itemDate: null,
+      itemDateTime: [null, Validators.required],
       itemNumber: null,
       title: null,
       details: null,

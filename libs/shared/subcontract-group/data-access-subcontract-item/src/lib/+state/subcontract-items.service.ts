@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable no-prototype-builtins */
 
 import { Injectable } from '@angular/core';
@@ -10,6 +11,7 @@ import {
 } from '@angular/fire/compat/firestore';
 import { map, mergeAll } from 'rxjs/operators';
 import { DateTime } from 'luxon';
+import { DateUtilsService } from '@workspace/shared/util';
 import { FormGroup, AbstractControl } from '@angular/forms';
 import { SubcontractItem } from '@workspace/shared/data-access-models';
 import { Subcontract } from '@workspace/shared/data-access-models';
@@ -17,11 +19,15 @@ import { CurrencyClass } from '@workspace/shared/util';
 import { Observable, Subject, of, from} from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { PaymentStatus } from '@workspace/shared/data-access-models';
-import { INPUT_MODALITY_DETECTOR_DEFAULT_OPTIONS } from '@angular/cdk/a11y';
 
 export type ContractItemDoc = AngularFirestoreDocument<SubcontractItem>;
 export type ContractItemsCollection =
   AngularFirestoreCollection<SubcontractItem>;
+
+interface DateTimestamp {
+  seconds: number;
+  nanoseconds: number;
+}
 
 @Injectable({
   providedIn: 'root',
@@ -36,7 +42,8 @@ export class SubcontractItemsService {
   collectionChangedSource = new Subject<ContractItemsCollection>();
   collectionChanged$ = this.collectionChangedSource.asObservable();
 
-  constructor(private afs: AngularFirestore) {}
+  constructor(private afs: AngularFirestore,
+              private dateUtils: DateUtilsService) {}
 
   getCollectionPath(projectId: string, subcontractId: string): string {
     const projectPath = `projects/${projectId}`;
@@ -112,7 +119,7 @@ export class SubcontractItemsService {
   createNewSubcontractItem(
     projectId: string,
     subcontractId: string
-  ): Observable<SubcontractItem > {
+  ): Observable<SubcontractItem | undefined > {
     const item: SubcontractItem = {
       isNew: true,
       isDraft: true,
@@ -121,44 +128,29 @@ export class SubcontractItemsService {
     };
     const path = `projects/${projectId}/subcontracts/${subcontractId}/subcontractItems`;
     try {
+      // create the item on the backend and wait for the result
       const docRef$ = from( this.afs.collection<SubcontractItem>(path).add(item));
-    const result = docRef$
+
+      // process return result from backend
+      return docRef$
         .pipe(switchMap ((docRef) => {
-        return this.afs.doc<SubcontractItem>(docRef)
-        .valueChanges()
-        .pipe(map((item) => {
-          if (item) {
-            return  {...item, itemDate: null};
-          } else {
-            return {};
+          return this.afs.doc<SubcontractItem>(docRef)
+          .valueChanges()
+            .pipe(map((item: SubcontractItem | undefined) => {
+              if(item){
+                // item.itemDate = this.dateUtils.setDateFromTimestamp(item.itemTimestamp);
+                // item.itemTimestamp = undefined;
+              }
+              //  console.log('SUBCONTRACT ITEMS SERVICE returning new item after date', item)
+              return item;
+            }))
           }
-        }))
-        }
         ))
-        // console.log('Item result', itemResult)
-        // return itemResult
-        return result;
-
-      // return from (ref.then((itemDoc: DocumentReference) => {
-      //   return this.afs.doc<SubcontractItem>(itemDoc)
-      //   .valueChanges().toPromise()
-      //   // return itemDoc.get().then((itemSnapshot) => {
-      //   //   const data = itemSnapshot.data()
-      //   //   if (data){
-      //   //    return data.then((item: SubcontractItem) => {
-      //   //      return item
-      //   //     })
-      //   //   } else {
-      //   //     return {}
-      //   //   }
-      //   // });
-      // }));
-
-
     } catch (err: any) {
       return err;
     }
   }
+
 
   test() {
     function myPromise(val: string) {
@@ -308,7 +300,7 @@ export class SubcontractItemsService {
       contractItem.amountRemaining = contractItem.contractAmount;
     }
 
-    contractItem.itemDate = DateTime.now();
+    // contractItem.itemDate = DateTime.now();
     contractItem.title = title;
     contractItem.itemNumber = itemNumber;
     contractItem.approvedPercent = 0;

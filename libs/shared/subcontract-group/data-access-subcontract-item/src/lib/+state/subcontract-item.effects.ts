@@ -133,9 +133,14 @@ export class SubcontractItemEffects {
           const res = this.subcontractItemsService.createNewSubcontractItem(a.projectId, a.subcontractId)
           return res
             .pipe(
-              map((item: SubcontractItem ) => {
+              map((item: SubcontractItem | undefined ) => {
                 console.log('About to return sub item', item)
-                return ItemActions.createNewItemSuccess({ item: item});
+                if(item){
+                  return ItemActions.createNewItemSuccess({ item: item });
+                } else {
+                  return ItemActions.createNewItemFailure({error: 'Undefined result returned from server'})
+                }
+
               })
             );
         },
