@@ -79,7 +79,7 @@ export const createNewItemFailure = createAction(
  */
 export const loadSubcontractItem = createAction(
   '[Subcontract Item Detail Form] Load Subcontract Item',
-  props<{ subcontractItemId: string}>()
+  props<{ projectId: string, subcontractId: string, subcontractItemId: string}>()
 )
 
 export const loadSubcontractItemSuccess = createAction(

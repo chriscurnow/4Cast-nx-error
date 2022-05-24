@@ -185,15 +185,20 @@ export class SubcontractItemsService {
     // rather than return the observable, return the collection reference so we can use it again.
   }
 
-  getSubcontractItem(itemId: string): Observable<SubcontractItem> {
+  getSubcontractItem(
+    projectId: string,
+    subcontractId: string,
+    itemId: string,
+    ): Observable<SubcontractItem> {
     // TODO: [FCSUB-464] [FCSUB-463] Use generic getDocument from DataService
-
-    const path = `contractItem/${itemId}`;
+    const path = `projects/${projectId}/subcontracts/${subcontractId}/subcontractItems/${itemId}`;
+    console.log('path: ', path);
     return this.afs
       .doc<SubcontractItem>(path)
       .valueChanges()
       .pipe(
         map((subcontractItem: SubcontractItem | undefined) => {
+          console.log('subcontract item from service', subcontractItem)
           if (subcontractItem) {
             return subcontractItem;
           } else {

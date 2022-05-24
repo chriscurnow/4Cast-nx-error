@@ -3,17 +3,12 @@ import { Store } from '@ngrx/store';
 import { SubcontractItem } from '@workspace/shared/data-access-models';
 import {
   SubcontractItemPartialState,
-  selectAllSubcontractItem,
   selectSubcontractItem,
-  createSubcontractItem,
-  createVariation,
-  SubcontractItemsService,
-  selectSubcontractItemId,
   loadSubcontractItem,
 } from '@workspace/shared/subcontract-group/data-access-subcontract-item';
 import { SubcontractPartialState, displayItemDetail, hideItemDetail } from '@workspace/shared/subcontract-group/data-access-subcontract';
 import { Observable } from 'rxjs';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { NavigationService } from '@workspace/shared/util';
 
 @Component({
@@ -29,7 +24,9 @@ export class SubcontractItemDetailContainerComponent implements OnInit, OnDestro
 
   constructor(private store: Store<SubcontractItemPartialState>,
               private subcontractStore: Store<SubcontractPartialState>,
-              private navigationService: NavigationService
+              private navigationService: NavigationService,
+              private router: Router,
+              private route: ActivatedRoute
               ) {
     this.subcontractItem$ = this.store.select(selectSubcontractItem);
 
@@ -46,7 +43,23 @@ export class SubcontractItemDetailContainerComponent implements OnInit, OnDestro
 
   ngOnInit(): void {
     console.log();
+    this.route.paramMap.subscribe((params: ParamMap) => {
+      const itemId = params.get('subcontractItemId');
+      const subcontractId = params.get('contractId');
+      const projectId = params.get('projectId')
+      console.log('params projectId', projectId);
+      console.log('params subcontractId', subcontractId);
+      console.log('params itemId', itemId);
+      this.store.dispatch(loadSubcontractItem({
+        projectId: projectId as string,
+        subcontractId: subcontractId as string,
+        subcontractItemId: itemId as string}))
+    })
     this.subcontractStore.dispatch(displayItemDetail())
+  }
+
+  saveItem(item: SubcontractItem){
+    console.log('SAVE ITEM, value to save', item)
   }
 
   navigateBack(){
