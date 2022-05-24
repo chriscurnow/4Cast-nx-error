@@ -1,6 +1,5 @@
 {
   "projectType": "library",
-  "root": "libs/shared/ui-default-module-collection",
   "sourceRoot": "libs/shared/ui-default-module-collection/src",
   "prefix": "fourcast",
   "targets": {
@@ -8,7 +7,7 @@
       "executor": "@nrwl/jest:jest",
       "outputs": ["coverage/libs/shared/ui-default-module-collection"],
       "options": {
-        "jestConfig": "libs/shared/ui-default-module-collection/jest.config.js",
+        "jestConfig": "libs/shared/ui-default-module-collection/jest.config.ts",
         "passWithNoTests": true
       }
     },

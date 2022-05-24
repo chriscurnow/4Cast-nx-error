@@ -1,6 +1,5 @@
 {
   "projectType": "library",
-  "root": "libs/shared/data-access-ngrx-default-module-collection",
   "sourceRoot": "libs/shared/data-access-ngrx-default-module-collection/src",
   "prefix": "fourcast",
   "targets": {
@@ -10,7 +9,7 @@
         "coverage/libs/shared/data-access-ngrx-default-module-collection"
       ],
       "options": {
-        "jestConfig": "libs/shared/data-access-ngrx-default-module-collection/jest.config.js",
+        "jestConfig": "libs/shared/data-access-ngrx-default-module-collection/jest.config.ts",
         "passWithNoTests": true
       }
     },

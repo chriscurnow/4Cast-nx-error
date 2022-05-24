@@ -1,6 +1,5 @@
 {
   "projectType": "library",
-  "root": "libs/shared/data-access-actions",
   "sourceRoot": "libs/shared/data-access-actions/src",
   "prefix": "fourcast",
   "targets": {
@@ -8,7 +7,7 @@
       "executor": "@nrwl/jest:jest",
       "outputs": ["coverage/libs/shared/data-access-actions"],
       "options": {
-        "jestConfig": "libs/shared/data-access-actions/jest.config.js",
+        "jestConfig": "libs/shared/data-access-actions/jest.config.ts",
         "passWithNoTests": true
       }
     },

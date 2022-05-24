@@ -1,6 +1,5 @@
 {
   "projectType": "library",
-  "root": "libs/contractor/feature-dashboard",
   "sourceRoot": "libs/contractor/feature-dashboard/src",
   "prefix": "fourcast",
   "targets": {
@@ -8,7 +7,7 @@
       "executor": "@nrwl/jest:jest",
       "outputs": ["coverage/libs/contractor/feature-dashboard"],
       "options": {
-        "jestConfig": "libs/contractor/feature-dashboard/jest.config.js",
+        "jestConfig": "libs/contractor/feature-dashboard/jest.config.ts",
         "passWithNoTests": true
       }
     },

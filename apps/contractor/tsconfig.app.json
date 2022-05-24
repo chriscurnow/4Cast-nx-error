@@ -10,5 +10,6 @@
     "../../libs/shared/feature-login/src/index.ts",
     "../../libs/contractor/feature-dashboard/src/index.ts",
     "../../libs/contractor/feature-costing/src/index.ts"
-  ]
+  ],
+  "exclude": ["jest.config.ts"]
 }

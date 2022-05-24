@@ -1,6 +1,5 @@
 {
   "projectType": "application",
-  "root": "apps/signup",
   "sourceRoot": "apps/signup/src",
   "prefix": "fourcast",
   "targets": {
@@ -85,7 +84,7 @@
       "executor": "@nrwl/jest:jest",
       "outputs": ["coverage/apps/signup"],
       "options": {
-        "jestConfig": "apps/signup/jest.config.js",
+        "jestConfig": "apps/signup/jest.config.ts",
         "passWithNoTests": true
       }
     }

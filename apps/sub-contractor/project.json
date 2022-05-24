@@ -1,6 +1,5 @@
 {
   "projectType": "application",
-  "root": "apps/sub-contractor",
   "sourceRoot": "apps/sub-contractor/src",
   "prefix": "fourcast",
   "targets": {
@@ -88,7 +87,7 @@
       "executor": "@nrwl/jest:jest",
       "outputs": ["coverage/apps/sub-contractor"],
       "options": {
-        "jestConfig": "apps/sub-contractor/jest.config.js",
+        "jestConfig": "apps/sub-contractor/jest.config.ts",
         "passWithNoTests": true
       }
     }

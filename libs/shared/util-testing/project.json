@@ -1,6 +1,5 @@
 {
   "projectType": "library",
-  "root": "libs/shared/util-testing",
   "sourceRoot": "libs/shared/util-testing/src",
   "prefix": "fourcast",
   "targets": {
@@ -8,7 +7,7 @@
       "executor": "@nrwl/jest:jest",
       "outputs": ["coverage/libs/shared/util-testing"],
       "options": {
-        "jestConfig": "libs/shared/util-testing/jest.config.js",
+        "jestConfig": "libs/shared/util-testing/jest.config.ts",
         "passWithNoTests": true
       }
     },

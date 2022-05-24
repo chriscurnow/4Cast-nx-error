@@ -1,6 +1,5 @@
 {
   "projectType": "library",
-  "root": "libs/shared/util-local-storage",
   "sourceRoot": "libs/shared/util-local-storage/src",
   "prefix": "fourcast",
   "targets": {
@@ -8,7 +7,7 @@
       "executor": "@nrwl/jest:jest",
       "outputs": ["coverage/libs/shared/util-local-storage"],
       "options": {
-        "jestConfig": "libs/shared/util-local-storage/jest.config.js",
+        "jestConfig": "libs/shared/util-local-storage/jest.config.ts",
         "passWithNoTests": true
       }
     },

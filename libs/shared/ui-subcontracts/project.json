@@ -1,6 +1,5 @@
 {
   "projectType": "library",
-  "root": "libs/shared/ui-subcontracts",
   "sourceRoot": "libs/shared/ui-subcontracts/src",
   "prefix": "fourcast",
   "targets": {
@@ -8,7 +7,7 @@
       "executor": "@nrwl/jest:jest",
       "outputs": ["coverage/libs/shared/ui-subcontracts"],
       "options": {
-        "jestConfig": "libs/shared/ui-subcontracts/jest.config.js",
+        "jestConfig": "libs/shared/ui-subcontracts/jest.config.ts",
         "passWithNoTests": true
       }
     },

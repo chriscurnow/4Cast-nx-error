@@ -1,6 +1,5 @@
 {
   "projectType": "application",
-  "root": "apps/books",
   "sourceRoot": "apps/books/src",
   "prefix": "fourcast",
   "targets": {
@@ -82,7 +81,7 @@
       "executor": "@nrwl/jest:jest",
       "outputs": ["coverage/apps/books"],
       "options": {
-        "jestConfig": "apps/books/jest.config.js",
+        "jestConfig": "apps/books/jest.config.ts",
         "passWithNoTests": true
       }
     }
