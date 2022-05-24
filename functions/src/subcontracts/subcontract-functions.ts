@@ -1,3 +1,4 @@
+/* eslint-disable no-empty */
 import * as admin from 'firebase-admin';
 // import { firestore } from 'firebase-admin';
 import * as functions from 'firebase-functions';
@@ -94,6 +95,7 @@ function logProjectProgress(projectId: string) {
 
 //                 })
 // }
+}
 
 
 function getProjects()  {
@@ -116,7 +118,7 @@ function doMove(contractSnapshot: FirebaseFirestore.QueryDocumentSnapshot){
  */
 export const updateSubcontractCurrency = functions.https.onCall((data, context) => {
 
-    let i = 0;
+    // let i = 0;
     const promises: any[] = [];
     return admin.firestore().collection('subcontracts')
 
@@ -124,7 +126,7 @@ export const updateSubcontractCurrency = functions.https.onCall((data, context) 
     .then(subcontracts => {
 
       subcontracts.forEach(subcontractSnapshot => {
-        const id = subcontractSnapshot.id;
+        // const id = subcontractSnapshot.id;
         const subcontractRef = subcontractSnapshot.ref;
         const subcontractData = subcontractSnapshot.data();
         const tempAmounts = subcontractData['amounts'];

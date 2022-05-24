@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import * as admin from 'firebase-admin';
 import * as functions from 'firebase-functions';
@@ -44,7 +45,7 @@ function onCreateSubcontractPayment(snap: FirebaseFirestore.DocumentSnapshot, co
   const payment: SubcontractPayment = snap.data() as SubcontractPayment;
   payment.id = paymentId;
   // const mostRecentPayment = MostRecentPayment.createFromPayment(payment.valuesOnly);
-  const subcontractId: string = context.params.subcontractId;
+  // const subcontractId: string = context.params.subcontractId;
   // const updateData = {mostRecentPayment};
   // const subcontractRef = db.doc(`subcontracts/${subcontractId}`);
 

@@ -38,7 +38,7 @@ export const createSubcontractPayment = functions.https.onCall((data, context) =
   initialize();
   const subcontractId = data.subcontractId;
   const path =  'subcontractPayments';
-  const color = 'color: limegreen';
+  // const color = 'color: limegreen';
   // get a reference to the payments collection for this subcontract
 
   const contractPayments: FirebaseFirestore.CollectionReference<FirebaseFirestore.DocumentData> = admin.firestore().collection(path);

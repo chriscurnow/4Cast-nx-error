@@ -1,7 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Store } from '@ngrx/store';
 import {
-  loadItemsForSubcontract,
   selectOriginalItem,
   selectVariationItems,
   SubcontractItemPartialState,
@@ -22,10 +21,9 @@ export class SubcontractItemsComponent implements OnInit {
   originalItem: SubcontractItem | null;
 
   @Input() set subcontract(v: Subcontract | null | undefined) {
-    if (v) {
+    // if (v) {
 
-      this.store.dispatch(loadItemsForSubcontract({ subcontract: v }));
-    }
+    // }
   }
 
   constructor(private store: Store<SubcontractItemPartialState>) {}

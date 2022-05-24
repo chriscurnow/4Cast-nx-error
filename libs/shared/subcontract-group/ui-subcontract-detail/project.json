@@ -1,6 +1,5 @@
 {
   "projectType": "library",
-  "root": "libs/shared/subcontract-group/ui-subcontract-detail",
   "sourceRoot": "libs/shared/subcontract-group/ui-subcontract-detail/src",
   "prefix": "fourcast",
   "targets": {
@@ -10,7 +9,7 @@
         "coverage/libs/shared/subcontract-group/ui-subcontract-detail"
       ],
       "options": {
-        "jestConfig": "libs/shared/subcontract-group/ui-subcontract-detail/jest.config.js",
+        "jestConfig": "libs/shared/subcontract-group/ui-subcontract-detail/jest.config.ts",
         "passWithNoTests": true
       }
     },

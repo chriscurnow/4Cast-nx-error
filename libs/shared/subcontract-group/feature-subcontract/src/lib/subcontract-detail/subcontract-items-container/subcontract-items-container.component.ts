@@ -5,7 +5,6 @@ import {
 } from '@angular/core';
 import { Store } from '@ngrx/store';
 import {
-  loadItemsForSubcontract,
   selectOriginalItem,
   selectVariationItems,
   SubcontractItemPartialState,
@@ -30,15 +29,13 @@ export class SubcontractItemsContainerComponent implements OnInit {
   originalItem: SubcontractItem;
 
   @Input() set subcontract(v: Subcontract | null | undefined) {
-    if (v) {
-      this.store.dispatch(loadItemsForSubcontract({ subcontract: v }));
-    }
+    console.log();
   }
 
   constructor(private store: Store<SubcontractItemPartialState>) {}
 
   ngOnInit(): void {
-    //  this.store.dispatch(loadItemsForSubcontract({ subcontract: {} }));
+
     this.store
       .select(selectOriginalItem)
       .subscribe((items: SubcontractItem[]) => {

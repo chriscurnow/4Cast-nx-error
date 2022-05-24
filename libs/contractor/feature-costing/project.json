@@ -1,6 +1,5 @@
 {
   "projectType": "library",
-  "root": "libs/contractor/feature-costing",
   "sourceRoot": "libs/contractor/feature-costing/src",
   "prefix": "fourcast",
   "targets": {
@@ -8,7 +7,7 @@
       "executor": "@nrwl/jest:jest",
       "outputs": ["coverage/libs/contractor/feature-costing"],
       "options": {
-        "jestConfig": "libs/contractor/feature-costing/jest.config.js",
+        "jestConfig": "libs/contractor/feature-costing/jest.config.ts",
         "passWithNoTests": true
       }
     },

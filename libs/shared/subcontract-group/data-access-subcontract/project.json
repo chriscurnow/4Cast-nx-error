@@ -1,6 +1,5 @@
 {
   "projectType": "library",
-  "root": "libs/shared/subcontract-group/data-access-subcontract",
   "sourceRoot": "libs/shared/subcontract-group/data-access-subcontract/src",
   "prefix": "fourcast",
   "targets": {
@@ -10,7 +9,7 @@
         "coverage/libs/shared/subcontract-group/data-access-subcontract"
       ],
       "options": {
-        "jestConfig": "libs/shared/subcontract-group/data-access-subcontract/jest.config.js",
+        "jestConfig": "libs/shared/subcontract-group/data-access-subcontract/jest.config.ts",
         "passWithNoTests": true
       }
     },

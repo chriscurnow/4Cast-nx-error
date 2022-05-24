@@ -19,12 +19,13 @@ export class SubcontractVariationsItemsContainerComponent implements OnInit {
   constructor(private store: Store<SubcontractItemPartialState>) {}
 
   ngOnInit(): void {
-    //  this.store.dispatch(loadItemsForSubcontract({ subcontract: {} }));
+
 
     this.store
       .select(selectVariationItems)
       .subscribe((variations: SubcontractItem[]) => {
         this.variations = variations;
+        console.log('Variations', variations)
       });
   }
 }

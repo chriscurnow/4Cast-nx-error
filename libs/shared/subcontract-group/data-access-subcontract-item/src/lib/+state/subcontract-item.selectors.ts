@@ -49,7 +49,7 @@ export const selectOriginalItem = createSelector(
 
 export const selectVariationItems = createSelector(
   selectAllSubcontractItem,
-  (items: SubcontractItem[]) => items.filter((item) => item.itemNumber as number > 0)
+  (items: SubcontractItem[]) => items.filter((item) => item.itemNumber as number >= 0)
 );
 
 export const selectItemsForSubcontract = createSelector(
@@ -71,12 +71,22 @@ export const selectItemsForSubcontract = createSelector(
 // );
 
 export const selectSubcontractItem = createSelector(
-  selectAllSubcontractItem,
+  selectSubcontractItemEntities,
   selectRouteParams,
   (entities, { subcontractItemId }) => {
-
-    return entities[subcontractItemId];
+    const item = entities[subcontractItemId];
+    console.log(
+      'SELECTORS, selectSubcontractItem, item, id, entities, item',
+      subcontractItemId,
+      entities,
+      item
+    );
+    return item;
   }
+);
+export const selectSubcontractId = createSelector(
+  getSubcontractItemState,
+  (state: SubcontractItemEntityState) => state.selectedId
 );
 
 

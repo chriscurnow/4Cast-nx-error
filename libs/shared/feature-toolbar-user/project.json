@@ -1,6 +1,5 @@
 {
   "projectType": "library",
-  "root": "libs/shared/feature-toolbar-user",
   "sourceRoot": "libs/shared/feature-toolbar-user/src",
   "prefix": "fourcast",
   "targets": {
@@ -8,7 +7,7 @@
       "executor": "@nrwl/jest:jest",
       "outputs": ["coverage/libs/shared/feature-toolbar-user"],
       "options": {
-        "jestConfig": "libs/shared/feature-toolbar-user/jest.config.js",
+        "jestConfig": "libs/shared/feature-toolbar-user/jest.config.ts",
         "passWithNoTests": true
       }
     },

@@ -62,4 +62,9 @@ export const selectSubcontract = createSelector(
   // (entities, selectedId) => (selectedId ? entities[selectedId] : undefined)
 );
 
+export const selectItemDetailDisplayed = createSelector(
+  selectSubcontractState,
+  (state: SubcontractEntityState) => state.itemDetailDisplayed
+)
+
 

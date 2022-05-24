@@ -1,6 +1,5 @@
 {
   "projectType": "library",
-  "root": "libs/shared/feature-projects",
   "sourceRoot": "libs/shared/feature-projects/src",
   "prefix": "fourcast",
   "targets": {
@@ -8,7 +7,7 @@
       "executor": "@nrwl/jest:jest",
       "outputs": ["coverage/libs/shared/feature-projects"],
       "options": {
-        "jestConfig": "libs/shared/feature-projects/jest.config.js",
+        "jestConfig": "libs/shared/feature-projects/jest.config.ts",
         "passWithNoTests": true
       }
     },

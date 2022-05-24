@@ -1,5 +1,4 @@
 {
-  "root": "apps/books-e2e",
   "sourceRoot": "apps/books-e2e/src",
   "projectType": "application",
   "targets": {

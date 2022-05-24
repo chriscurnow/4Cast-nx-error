@@ -1,1 +1,11 @@
-<fourcast-subcontract-detail [subcontract]="subcontract"  (createItemZero)="createItemZero()" (createNewVariation)="createNewVariation()" (navigateBack) = "backToList()"></fourcast-subcontract-detail>
+<fourcast-subcontract-detail
+[subcontract]="subcontract"
+[itemDetailDisplayed]="itemDetailDisplayed"
+ (createItemZero)="createItemZero()"
+ (createNewVariation)="createNewVariation()"
+ (navigateBack) = "backToList()">
+</fourcast-subcontract-detail>
+<button (click)="itemDetailDisplayed=true">Set Display</button>
+
+<!-- [itemDetailDisplayed]="itemDetailDisplayed" -->
+

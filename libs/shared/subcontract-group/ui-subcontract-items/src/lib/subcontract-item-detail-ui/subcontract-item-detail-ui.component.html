@@ -1,1 +1,48 @@
-<p>subcontract-item-detail-ui works!</p>
+<form [formGroup]="subcontractItemDetailForm">
+  <mat-card>
+    <div class="flex-row">
+
+      <div class="flex-col">
+          <mat-form-field appearance="outline" >
+            <mat-label>Variation Number</mat-label>
+            <input matInput placeholder="Variation Number" formControlName="itemNumber">
+          </mat-form-field>
+      </div>
+    </div>
+
+     <div class="flex-row">
+       <div class="flex-col w200">
+          <mat-form-field appearance="outline" style="width:200px">
+            <mat-label>Date</mat-label>
+            <input
+              matInput
+              [matDatepicker]="itemDatePicker"
+              placeholder="Date"
+              formControlName="itemDateTime"/>
+              <mat-datepicker-toggle
+                  matSuffix
+                  [for]="itemDatePicker"
+              ></mat-datepicker-toggle>
+          </mat-form-field>
+           <mat-datepicker #itemDatePicker></mat-datepicker>
+      </div>
+      <div class="flex-col">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Description of work</mat-label>
+          <input matInput placeholder="Description of work" formControlName="title">
+        </mat-form-field>
+      </div>
+      </div>
+      <h2>Amounts</h2>
+      <div class="flex-row">
+        <fourcast-subcontract-item-line
+          [item]="subcontractItem">
+        </fourcast-subcontract-item-line>
+      </div>
+      <mat-card-actions>
+         <button mat-raised-button color="primary" (click)="clickOk()">OK</button>
+      </mat-card-actions>
+
+    </mat-card>
+    {{itemId}}
+</form>

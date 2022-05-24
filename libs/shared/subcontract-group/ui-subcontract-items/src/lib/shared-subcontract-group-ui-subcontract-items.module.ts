@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { SubcontractItemLineComponent } from './subcontract-item-line/subcontract-item-line.component';
 import { SubcontractItemListComponent } from './subcontract-item-list/subcontract-item-list.component';
 import { SharedUiDefaultModuleCollectionModule } from '@workspace/shared-ui-default-module-collection';
@@ -11,6 +12,7 @@ import { SubcontractItemDetailUiComponent } from './subcontract-item-detail-ui/s
     CommonModule,
     SharedUiDefaultModuleCollectionModule,
     SharedUtilModule,
+    MatDatepickerModule,
   ],
   declarations: [
     SubcontractItemLineComponent,
@@ -22,6 +24,7 @@ import { SubcontractItemDetailUiComponent } from './subcontract-item-detail-ui/s
     SharedUtilModule,
     SubcontractItemLineComponent,
     SubcontractItemListComponent,
+    SubcontractItemDetailUiComponent,
     // CurrencyDirective,
   ],
 })

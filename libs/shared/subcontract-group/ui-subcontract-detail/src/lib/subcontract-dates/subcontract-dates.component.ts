@@ -10,10 +10,13 @@ import {
   NG_VALIDATORS,
 } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import {
-  MAT_MOMENT_DATE_FORMATS,
-  MomentDateAdapter,
-} from '@angular/material-moment-adapter';
+// import {
+//   MAT_MOMENT_DATE_FORMATS,
+//   MomentDateAdapter,
+// } from '@angular/material-moment-adapter';
+import { LuxonDateAdapter, MAT_LUXON_DATE_FORMATS } from '@angular/material-luxon-adapter';
+import { DateTime } from 'luxon';
+
 import {
   DateAdapter,
   MAT_DATE_FORMATS,
@@ -43,12 +46,18 @@ import { ContractDates } from '@workspace/shared/data-access-models';
       multi: true,
     },
     { provide: MAT_DATE_LOCALE, useValue: 'en-AU' },
+    // {
+    //   provide: DateAdapter,
+    //   useClass: MomentDateAdapter,
+    //   deps: [MAT_DATE_LOCALE],
+    // },
+    // { provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS },
     {
       provide: DateAdapter,
-      useClass: MomentDateAdapter,
+      useClass: LuxonDateAdapter,
       deps: [MAT_DATE_LOCALE],
     },
-    { provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS },
+    { provide: MAT_DATE_FORMATS, useValue: MAT_LUXON_DATE_FORMATS },
   ],
 })
 export class SubcontractDatesComponent
@@ -79,7 +88,6 @@ export class SubcontractDatesComponent
 
   set value(value: ContractDates) {
     if (value) {
-
       const newDates = {
         contract: value.contract ? value.contract : null,
         commencement: value.commencement ? value.commencement : null,
@@ -93,6 +101,7 @@ export class SubcontractDatesComponent
 
   onChange: any = () => {};
   onTouched: any = () => {};
+
 
   registerOnChange(fn: any): void {
     this.onChange = fn;

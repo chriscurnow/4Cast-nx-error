@@ -1,5 +1,4 @@
 {
-  "root": "apps/contractor-e2e",
   "sourceRoot": "apps/contractor-e2e/src",
   "projectType": "application",
   "targets": {

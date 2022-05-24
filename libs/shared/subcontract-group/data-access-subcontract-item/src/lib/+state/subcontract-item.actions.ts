@@ -9,7 +9,7 @@ export const init = createAction('[SubcontractItem Page] Init');
 //
 export const loadSubcontractItems = createAction(
   '[SubcontractItem/API] Load SubcontractItems',
-  props<{ subcontract: Subcontract }>()
+  props<{ subcontractId: string }>()
 );
 
 export const loadSubcontractItemsSuccess = createAction(
@@ -26,8 +26,8 @@ export const loadSubcontractItemsFailure = createAction(
 // LOAD ITEMS FOR SUBCONTRACT
 //
 export const loadItemsForSubcontract = createAction(
-  '[Subcontract Items Detail Form] Load Items for Subcontract',
-   props<{ subcontract: Subcontract}>()
+  '[Subcontract Items List Container Form] Load Items for Subcontract',
+   props<{ subcontractId: string}>()
 );
 
 export const loadItemsForSubcontractSuccess = createAction(
@@ -43,7 +43,9 @@ export const loadItemsForSubcontractFailure = createAction(
 export const createSubcontractItem = createAction(
   '[SubcontractItem/API] Create Subcontract Item',
   props<{ item: SubcontractItem }>()
-)
+);
+
+
 
 export const createSubcontractItemSuccess = createAction(
   '[SubcontractItem/API] Create Subcontract Item Success',
@@ -55,7 +57,26 @@ export const createSubcontractItemFailure = createAction(
   props<{ error: any }>()
 );
 
+/**
+ * CREATE NEW SUBCONTRACT ITEM
+ */
+export const createNewSubcontractItem = createAction(
+  '[SubcontractItem/API] Create New Subcontract Item',
+  props<{ projectId: string; subcontractId: string }>()
+);
 
+export const createNewItemSuccess = createAction(
+  '[SubcontractItem/API] Create New Item Success',
+  props<{item: SubcontractItem }>()
+);
+export const createNewItemFailure = createAction(
+  '[SubcontractItem/API] Create New Item Failure',
+  props<{ error: any }>()
+);
+
+/**
+ * LOAD SUBCONTRACT ITEM
+ */
 export const loadSubcontractItem = createAction(
   '[Subcontract Item Detail Form] Load Subcontract Item',
   props<{ subcontractItemId: string}>()

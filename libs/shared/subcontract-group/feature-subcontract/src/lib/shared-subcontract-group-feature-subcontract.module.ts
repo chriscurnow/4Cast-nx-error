@@ -19,6 +19,9 @@ import { SubcontractItemsComponent } from './subcontract-items/subcontract-items
 import { SubcontractOriginalItemContainerComponent } from './subcontract-detail/subcontract-original-item-container/subcontract-original-item-container.component';
 import { SubcontractVariationsItemsContainerComponent } from './subcontract-detail/subcontract-variations-items-container/subcontract-variations-items-container.component';
 import { SubcontractDetailVariationContainerComponent } from './subcontract-detail-variation-container/subcontract-detail-variation-container.component';
+import { ContractDetailComponent } from './subcontract-detail/contract-detail/contract-detail.component';
+import { ContractGeneralDetailComponent } from './subcontract-detail/contract-general-detail/contract-general-detail.component';
+import { ContractGeneralDetailContainerComponent } from './subcontract-detail/contract-general-detail-container/contract-general-detail-container.component';
 
 @NgModule({
   imports: [
@@ -41,9 +44,11 @@ import { SubcontractDetailVariationContainerComponent } from './subcontract-deta
         component: SubcontractListContainerComponent,
       },
       {
-        path: 'contract-detail/:contractId',  component: SubcontractDetailContainerComponent,
+        path: 'project/:projectId/contract-detail/:contractId',  component: SubcontractDetailContainerComponent,
         children:[
-          { path: 'contract-item',
+          { path: '', redirectTo: 'general-details'},
+          { path: 'general-details', component: ContractGeneralDetailContainerComponent },
+          { path: 'variations',
 
         loadChildren: () =>
               import(
@@ -65,6 +70,9 @@ import { SubcontractDetailVariationContainerComponent } from './subcontract-deta
     SubcontractOriginalItemContainerComponent,
     SubcontractVariationsItemsContainerComponent,
     SubcontractDetailVariationContainerComponent,
+    ContractDetailComponent,
+    ContractGeneralDetailComponent,
+    ContractGeneralDetailContainerComponent,
   ],
 })
 export class SharedSubcontractGroupFeatureSubcontractModule {}

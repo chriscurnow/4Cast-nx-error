@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
 import * as admin from 'firebase-admin';
 import * as functions from 'firebase-functions';
 
@@ -29,7 +30,7 @@ export const deleteTopLevelSubcontracts = functions.https.onCall((data, context)
 export const updateSubcontractmostRecentPayment = functions.https.onCall((data, context) => {
 
     initialize();
-    let i = 0;
+    // let i = 0;
     const promises: any[] = [];
     return admin.firestore().collection('subcontracts')
 

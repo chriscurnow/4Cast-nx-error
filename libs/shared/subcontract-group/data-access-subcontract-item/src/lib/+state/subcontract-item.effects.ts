@@ -3,10 +3,10 @@
 import { Injectable } from '@angular/core';
 import { createEffect, Actions, ofType } from '@ngrx/effects';
 import { DataPersistence } from '@nrwl/angular';
-import { exhaustMap, map, mapTo, mergeMap } from 'rxjs/operators';
+import { exhaustMap, map, mapTo, mergeMap, retryWhen } from 'rxjs/operators';
 import { from, Observable } from 'rxjs';
 import { SubcontractItemsService } from './subcontract-items.service';
-import * as SubcontractItemActions from './subcontract-item.actions';
+import * as ItemActions from './subcontract-item.actions';
 import * as SubcontractItemFeature from './subcontract-item.reducer';
 import { Subcontract, SubcontractItem } from '@workspace/shared/data-access-models';
 
@@ -45,55 +45,42 @@ export class SubcontractItemEffects {
   // );
 
   loadItemsForSubcontract$ = createEffect(() =>
-    this.dataPersistence.fetch(SubcontractItemActions.loadItemsForSubcontract, {
+    this.dataPersistence.fetch(ItemActions.loadItemsForSubcontract, {
       run: (
-        action: ReturnType<
-          typeof SubcontractItemActions.loadItemsForSubcontract
-        >,
+        action: ReturnType<typeof ItemActions.loadItemsForSubcontract>,
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         state: SubcontractItemFeature.SubcontractItemPartialState
       ) => {
         return this.subcontractItemsService
-          .getItemsForSubcontract(action.subcontract)
+          .getItemsForSubcontract(action.subcontractId)
           .pipe(
-            map((subcontractItems) =>
-             {
-              return SubcontractItemActions.loadSubcontractItemsSuccess({
+            map((subcontractItems) => {
+              return ItemActions.loadItemsForSubcontractSuccess({
                 subcontractItems,
-              })}
-            )
+              });
+            })
           );
       },
       onError: (
-        action: ReturnType<
-          typeof SubcontractItemActions.loadItemsForSubcontract
-        >,
+        action: ReturnType<typeof ItemActions.loadItemsForSubcontract>,
         error
       ) => {
         console.error('Error', error);
-        return SubcontractItemActions.loadItemsForSubcontractFailure({ error });
+        return ItemActions.loadItemsForSubcontractFailure({ error });
       },
     })
   );
 
-  // createSubcontractItem$ = createEffect(() =>
-  //     this.dataPersistence.optimisticUpdate(SubcontractItemActions.createSubcontractItem, {
-  //       run: (
-  //         action: ReturnType<typeof SubcontractItemActions.createSubcontractItem>,
-  //         state: SubcontractItemFeature.SubcontractItemPartialState
-  //       ) => {
-
-  //       }
-  //     })
-  // )
 
   createSubcontractItem$ = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(SubcontractItemActions.createSubcontractItem),
-        exhaustMap((action: any) =>{
-         const res = from(this.subcontractItemsService.createSubcontractItem(action.item));
-         return res
+        ofType(ItemActions.createSubcontractItem),
+        exhaustMap((action: any) => {
+          const res = from(
+            this.subcontractItemsService.createSubcontractItem(action.item)
+          );
+          return res;
         })
       ),
     { dispatch: false }
@@ -102,43 +89,73 @@ export class SubcontractItemEffects {
   createVariation = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(SubcontractItemActions.createVariation),
+        ofType(ItemActions.createVariation),
         exhaustMap((action: any) => {
-          return from(this.subcontractItemsService.createVariation(action.subcontract))
+          return from(
+            this.subcontractItemsService.createVariation(action.subcontract)
+          );
         })
       ),
-      { dispatch: false }
-  )
+    { dispatch: false }
+  );
 
   loadSubcontractItem$ = createEffect(() =>
-    this.dataPersistence.fetch(SubcontractItemActions.loadSubcontractItem, {
-       run: (a: ReturnType<typeof SubcontractItemActions.loadSubcontractItem>, state) => {
-         return this.subcontractItemsService.getSubcontractItem(a.subcontractItemId)
-         .pipe(
-           map((subcontractItem: SubcontractItem) => {
-             if(subcontractItem){
-               return SubcontractItemActions.loadSubcontractItemSuccess( {subcontractItem} )
-             } else {
-               return SubcontractItemActions.loadSubcontractItemFailure({ error: 'No subcontract found'})
-             }
-
-           })
-         );
-       },
-
-       onError: (action, error) => {
-        console.error('Error', error);
-        return SubcontractItemActions.loadSubcontractItemFailure({ error });
+    this.dataPersistence.fetch(ItemActions.loadSubcontractItem, {
+      run: (a: ReturnType<typeof ItemActions.loadSubcontractItem>, state) => {
+        return this.subcontractItemsService
+          .getSubcontractItem(a.subcontractItemId)
+          .pipe(
+            map((subcontractItem: SubcontractItem) => {
+              return ItemActions.loadSubcontractItemSuccess({
+                subcontractItem,
+              });
+            })
+          );
       },
 
+      onError: (action, error) => {
+        console.error('Error', error);
+        return ItemActions.loadSubcontractItemFailure({ error });
+      },
     })
   );
 
+  createNewSubcontractItem$ = createEffect(() =>
+    this.dataPersistence.pessimisticUpdate(
+      ItemActions.createNewSubcontractItem,
+      {
+        run: (
+          a: ReturnType<typeof ItemActions.createNewSubcontractItem>,
+          state
+        ) => {
+          console.log('SUBCONTRACT ITEM EFFECTS - create new subcontract item')
+          // convert return promise to observable
+          const res = this.subcontractItemsService.createNewSubcontractItem(a.projectId, a.subcontractId)
+          return res
+            .pipe(
+              map((item: SubcontractItem | undefined ) => {
+                console.log('About to return sub item', item)
+                if(item){
+                  return ItemActions.createNewItemSuccess({ item: item });
+                } else {
+                  return ItemActions.createNewItemFailure({error: 'Undefined result returned from server'})
+                }
 
-  private returnItems(subcontract: Subcontract) {
-    this.subcontractItemsService.getItemsForSubcontract(subcontract).pipe(
+              })
+            );
+        },
+        onError: (action, error) => {
+          console.error('Error', error);
+          return ItemActions.createNewItemFailure({ error });
+        },
+      }
+    )
+  );
+
+  private returnItems(subcontractId: string) {
+    this.subcontractItemsService.getItemsForSubcontract(subcontractId).pipe(
       map((subcontractItems) =>
-        SubcontractItemActions.loadSubcontractItemsSuccess({
+        ItemActions.loadSubcontractItemsSuccess({
           subcontractItems,
         })
       )
@@ -151,4 +168,3 @@ export class SubcontractItemEffects {
     private readonly dataPersistence: DataPersistence<SubcontractItemFeature.SubcontractItemPartialState>
   ) {}
 }
-

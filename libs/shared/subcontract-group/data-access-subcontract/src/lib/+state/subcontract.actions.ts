@@ -31,4 +31,12 @@ export const loadSubcontractsListFailure = createAction(
   props<{ error: any }>()
 );
 
+export const displayItemDetail = createAction(
+  '[Subcontract Detail Form] Display Item Detail'
+)
+
+export const hideItemDetail = createAction(
+  '[Subcontract Detail Form] Hide Item Detail'
+);
+
 
