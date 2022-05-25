@@ -116,6 +116,10 @@ export class SubcontractItemsService {
       );
   }
 
+getItemsPath(projectId: string, subcontractId: string ) {
+  return `projects/${projectId}/subcontracts/${subcontractId}/subcontractItems`;
+}
+
   createNewSubcontractItem(
     projectId: string,
     subcontractId: string
@@ -126,7 +130,7 @@ export class SubcontractItemsService {
       projectId,
       subcontractId,
     };
-    const path = `projects/${projectId}/subcontracts/${subcontractId}/subcontractItems`;
+    const path = this.getItemsPath(projectId, subcontractId);
     try {
       // create the item on the backend and wait for the result
       const docRef$ = from( this.afs.collection<SubcontractItem>(path).add(item));
@@ -151,6 +155,19 @@ export class SubcontractItemsService {
     }
   }
 
+  updateSubcontractItem(item: SubcontractItem): Observable<void>{
+    const projectId = item.projectId as string;
+    const subcontractId = item.subcontractId as string;
+    const itemsPath = this.getItemsPath(projectId, subcontractId);
+    const path = `${itemsPath}/${item.id}`
+
+    try {
+      const itemDoc = this.afs.doc<SubcontractItem>(path)
+      return from (itemDoc.update(item)) // return observable rather than promise.
+    } catch (err: any ) {
+      return err;
+    }
+  }
 
   test() {
     function myPromise(val: string) {
@@ -185,15 +202,20 @@ export class SubcontractItemsService {
     // rather than return the observable, return the collection reference so we can use it again.
   }
 
-  getSubcontractItem(itemId: string): Observable<SubcontractItem> {
+  getSubcontractItem(
+    projectId: string,
+    subcontractId: string,
+    itemId: string,
+    ): Observable<SubcontractItem> {
     // TODO: [FCSUB-464] [FCSUB-463] Use generic getDocument from DataService
-
-    const path = `contractItem/${itemId}`;
+    const path = `projects/${projectId}/subcontracts/${subcontractId}/subcontractItems/${itemId}`;
+    console.log('path: ', path);
     return this.afs
       .doc<SubcontractItem>(path)
       .valueChanges()
       .pipe(
         map((subcontractItem: SubcontractItem | undefined) => {
+          console.log('subcontract item from service', subcontractItem)
           if (subcontractItem) {
             return subcontractItem;
           } else {

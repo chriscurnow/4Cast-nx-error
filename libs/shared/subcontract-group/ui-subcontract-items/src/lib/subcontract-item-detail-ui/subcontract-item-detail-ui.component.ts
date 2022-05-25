@@ -48,6 +48,7 @@ export class SubcontractItemDetailUiComponent implements OnInit {
     this.subcontractItemDetailForm.reset(v);
   }
 
+  @Output() saveItem = new EventEmitter<SubcontractItem>();
   @Output() navigateBack = new EventEmitter<null>();
 
   constructor(private fb: FormBuilder) {
@@ -69,6 +70,10 @@ export class SubcontractItemDetailUiComponent implements OnInit {
   }
 
   clickOk() {
-    this.navigateBack.emit();
+   const formValue = this.subcontractItemDetailForm.value;
+   this.saveItem.emit(formValue);
+  }
+  clickCancel() {
+     this.navigateBack.emit();
   }
 }

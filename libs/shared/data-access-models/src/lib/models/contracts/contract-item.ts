@@ -12,7 +12,7 @@ export interface SubcontractItem {
   isNew?: boolean;
   isDraft?: boolean;
   itemDate?: number; // milliseconds
-  itemDateTime?: DateTime;
+  itemDateTime?: DateTime | null;
   itemTimestamp?: DateTimestamp;
   itemDateISO?: string;
   itemNumber?: number;

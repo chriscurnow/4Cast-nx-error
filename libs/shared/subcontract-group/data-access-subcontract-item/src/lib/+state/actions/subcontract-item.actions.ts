@@ -3,7 +3,8 @@ import { createAction, props } from '@ngrx/store';
 import { Subcontract, SubcontractItem } from '@workspace/shared/data-access-models';
 
 export const init = createAction('[SubcontractItem Page] Init');
-
+export * from './load-subcontract-item'
+export * from './update-subcontract-item';
 //
 // LOAD SUBCONTRACT ITEMS
 //
@@ -57,9 +58,9 @@ export const createSubcontractItemFailure = createAction(
   props<{ error: any }>()
 );
 
-/**
+/******************************************************************
  * CREATE NEW SUBCONTRACT ITEM
- */
+ *******************************************************************/
 export const createNewSubcontractItem = createAction(
   '[SubcontractItem/API] Create New Subcontract Item',
   props<{ projectId: string; subcontractId: string }>()
@@ -74,29 +75,8 @@ export const createNewItemFailure = createAction(
   props<{ error: any }>()
 );
 
-/**
- * LOAD SUBCONTRACT ITEM
- */
-export const loadSubcontractItem = createAction(
-  '[Subcontract Item Detail Form] Load Subcontract Item',
-  props<{ subcontractItemId: string}>()
-)
-
-export const loadSubcontractItemSuccess = createAction(
-  '[API Subcontract Item] Load Subcontract Item Success',
-  props<{subcontractItem: SubcontractItem }>()
-)
-
-export const loadSubcontractItemFailure = createAction(
-  '[Subcontract Item Detail Form] Load Subcontract Item Failure',
-  props<{ error: any }>()
-)
 
 
-export const createVariation = createAction(
-  '[Subcontract Detail Form] Create Variation',
-  props<{subcontract: Subcontract}>()
-)
 
 
 
