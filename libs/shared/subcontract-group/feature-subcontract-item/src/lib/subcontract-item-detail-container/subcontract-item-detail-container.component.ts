@@ -5,11 +5,13 @@ import {
   SubcontractItemPartialState,
   selectSubcontractItem,
   loadSubcontractItem,
+  updateSubcontractItem,
 } from '@workspace/shared/subcontract-group/data-access-subcontract-item';
 import { SubcontractPartialState, displayItemDetail, hideItemDetail } from '@workspace/shared/subcontract-group/data-access-subcontract';
 import { Observable } from 'rxjs';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { NavigationService } from '@workspace/shared/util';
+import { DateTime } from 'luxon';
 
 @Component({
   selector: 'fourcast-subcontract-item-detail-container',
@@ -21,6 +23,8 @@ export class SubcontractItemDetailContainerComponent implements OnInit, OnDestro
   subcontractItemId: string | undefined;
   subcontractItem$: Observable<SubcontractItem | undefined>;
   subcontractItem: SubcontractItem | undefined;
+  projectId: string;
+  subcontractId: string;
 
   constructor(private store: Store<SubcontractItemPartialState>,
               private subcontractStore: Store<SubcontractPartialState>,
@@ -45,14 +49,14 @@ export class SubcontractItemDetailContainerComponent implements OnInit, OnDestro
     console.log();
     this.route.paramMap.subscribe((params: ParamMap) => {
       const itemId = params.get('subcontractItemId');
-      const subcontractId = params.get('contractId');
-      const projectId = params.get('projectId')
-      console.log('params projectId', projectId);
-      console.log('params subcontractId', subcontractId);
+      this.subcontractId = params.get('contractId') as string;
+      this.projectId = params.get('projectId') as string;
+      console.log('params projectId', this.projectId);
+      console.log('params subcontractId', this.subcontractId);
       console.log('params itemId', itemId);
       this.store.dispatch(loadSubcontractItem({
-        projectId: projectId as string,
-        subcontractId: subcontractId as string,
+        projectId: this.projectId as string,
+        subcontractId: this.subcontractId as string,
         subcontractItemId: itemId as string}))
     })
     this.subcontractStore.dispatch(displayItemDetail())
@@ -60,6 +64,11 @@ export class SubcontractItemDetailContainerComponent implements OnInit, OnDestro
 
   saveItem(item: SubcontractItem){
     console.log('SAVE ITEM, value to save', item)
+    item.itemDateISO = item.itemDateTime?.toISO();
+    item.itemDateTime = null;
+    item.projectId = this.projectId;
+    item.subcontractId = this.subcontractId;
+    this.store.dispatch(updateSubcontractItem({subcontractItem: item}))
   }
 
   navigateBack(){

@@ -1,7 +1,7 @@
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 import { createFeature, createReducer, on, Action, createSelector } from '@ngrx/store';
 
-import * as SubcontractItemActions from './subcontract-item.actions';
+import * as SubcontractItemActions from './actions/subcontract-item.actions';
 import { SubcontractItem } from '@workspace/shared/data-access-models';
 import { state } from '@angular/animations';
 

@@ -116,6 +116,10 @@ export class SubcontractItemsService {
       );
   }
 
+getItemsPath(projectId: string, subcontractId: string ) {
+  return `projects/${projectId}/subcontracts/${subcontractId}/subcontractItems`;
+}
+
   createNewSubcontractItem(
     projectId: string,
     subcontractId: string
@@ -126,7 +130,7 @@ export class SubcontractItemsService {
       projectId,
       subcontractId,
     };
-    const path = `projects/${projectId}/subcontracts/${subcontractId}/subcontractItems`;
+    const path = this.getItemsPath(projectId, subcontractId);
     try {
       // create the item on the backend and wait for the result
       const docRef$ = from( this.afs.collection<SubcontractItem>(path).add(item));
@@ -151,6 +155,19 @@ export class SubcontractItemsService {
     }
   }
 
+  updateSubcontractItem(item: SubcontractItem): Observable<void>{
+    const projectId = item.projectId as string;
+    const subcontractId = item.subcontractId as string;
+    const itemsPath = this.getItemsPath(projectId, subcontractId);
+    const path = `${itemsPath}/${item.id}`
+
+    try {
+      const itemDoc = this.afs.doc<SubcontractItem>(path)
+      return from (itemDoc.update(item)) // return observable rather than promise.
+    } catch (err: any ) {
+      return err;
+    }
+  }
 
   test() {
     function myPromise(val: string) {

@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import * as fromSubcontractItem from './+state/subcontract-item.reducer';
-import { SubcontractItemEffects } from './+state/subcontract-item.effects';
+import { SubcontractItemEffects } from './+state/effects/subcontract-item.effects';
 
 @NgModule({
   imports: [
