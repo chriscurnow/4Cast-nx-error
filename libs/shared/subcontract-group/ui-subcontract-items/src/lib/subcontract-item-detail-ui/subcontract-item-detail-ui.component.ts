@@ -60,12 +60,13 @@ export class SubcontractItemDetailUiComponent implements OnInit {
   }
   createForm() {
     this.subcontractItemDetailForm = this.fb.group({
-      id: null,
+      id: '',
       itemDateTime: [null, Validators.required],
       itemNumber: null,
       title: null,
       details: null,
       description: null,
+      contractAmount: [null, Validators.required]
     });
   }
 

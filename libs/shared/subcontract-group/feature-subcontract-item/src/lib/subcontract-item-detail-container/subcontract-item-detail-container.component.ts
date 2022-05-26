@@ -10,7 +10,7 @@ import {
 import { SubcontractPartialState, displayItemDetail, hideItemDetail } from '@workspace/shared/subcontract-group/data-access-subcontract';
 import { Observable } from 'rxjs';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import { NavigationService } from '@workspace/shared/util';
+import { CurrencyClass, NavigationService } from '@workspace/shared/util';
 import { DateTime } from 'luxon';
 
 @Component({
@@ -68,6 +68,8 @@ export class SubcontractItemDetailContainerComponent implements OnInit, OnDestro
     item.itemDateTime = null;
     item.projectId = this.projectId;
     item.subcontractId = this.subcontractId;
+    const currencyAmount = item.contractAmount as CurrencyClass
+    item.contractAmount = currencyAmount.valuesOnly;
     this.store.dispatch(updateSubcontractItem({subcontractItem: item}))
   }
 
