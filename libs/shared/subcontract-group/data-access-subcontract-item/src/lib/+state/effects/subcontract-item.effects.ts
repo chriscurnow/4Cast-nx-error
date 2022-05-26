@@ -81,8 +81,6 @@ export class SubcontractItemEffects {
           .getSubcontractItem(a.projectId, a.subcontractId, a.subcontractItemId)
           .pipe(
             map((subcontractItem: SubcontractItem) => {
-              subcontractItem.projectId = a.projectId;
-              subcontractItem.subcontractId = a.subcontractId;
               console.log(
                 'SUBCONTRACT ITEM EFFECTS subcontract Item',
                 subcontractItem

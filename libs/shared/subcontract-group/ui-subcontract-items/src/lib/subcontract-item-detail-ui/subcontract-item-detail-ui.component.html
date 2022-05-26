@@ -35,10 +35,21 @@
       </div>
       <h2>Amounts</h2>
       <div class="flex-row">
-        <fourcast-subcontract-item-line
+        <div class="flex-col">
+        <mat-form-field appearance="outline" >
+          <mat-label>Contract Amount</mat-label>
+          <input matInput
+            currencyDirective
+            placeholder="Contract Amount"
+            formControlName="contractAmount">
+        </mat-form-field>
+        </div>
+        </div>
+
+        <!-- <fourcast-subcontract-item-line
           [item]="subcontractItem">
-        </fourcast-subcontract-item-line>
-      </div>
+        </fourcast-subcontract-item-line> -->
+
       <mat-card-actions>
          <button mat-raised-button color="primary" (click)="clickOk()">OK</button>
       </mat-card-actions>
