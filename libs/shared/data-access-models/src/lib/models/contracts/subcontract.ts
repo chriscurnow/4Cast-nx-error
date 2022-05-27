@@ -13,7 +13,6 @@ import {
   createSupplier,
   createContractDetails,
   createContractDates,
-  createContractAmounts,
   createProject
 } from '..';
 
@@ -59,7 +58,7 @@ export function createSubcontract(subcontract: Subcontract | undefined){
     newSubcontract.authorisation = createContractAuth(subcontract.authorisation);
     newSubcontract.contractDetails = createContractDetails(subcontract.contractDetails);
     newSubcontract.dates = createContractDates(subcontract.dates);
-    newSubcontract.amounts = createContractAmounts(subcontract.amounts);
+    newSubcontract.amounts = subcontract.amounts;
     newSubcontract.mostRecentPayment = createMostRecentPayment(subcontract.mostRecentPayment);
     newSubcontract.project = createProject(subcontract.project);
   }

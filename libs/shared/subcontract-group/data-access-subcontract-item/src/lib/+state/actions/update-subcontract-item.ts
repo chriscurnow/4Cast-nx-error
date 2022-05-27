@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-
+import { Update } from '@ngrx/entity';
 import { SubcontractItem, Subcontract } from '@workspace/shared/data-access-models';
 
 /******************************************************************
@@ -11,7 +11,8 @@ export const updateSubcontractItem = createAction(
 );
 
 export const updateSubcontractItemSuccess = createAction(
-  '[SubcontractItem/API] Update Subcontract Item Success'
+  '[SubcontractItem/API] Update Subcontract Item Success',
+  props<{ update: Update<SubcontractItem> }>()
 );
 
 export const updateSubcontractItemFailure = createAction(

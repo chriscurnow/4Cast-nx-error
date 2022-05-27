@@ -1,6 +1,6 @@
 
 
-import { Injectable } from '@angular/core';
+import { Injectable, PLATFORM_INITIALIZER } from '@angular/core';
 import { createEffect, Actions, ofType } from '@ngrx/effects';
 import { DataPersistence } from '@nrwl/angular';
 import { exhaustMap, map, mapTo, mergeMap, retryWhen } from 'rxjs/operators';
@@ -10,6 +10,9 @@ import * as ItemActions from '../actions/subcontract-item.actions';
 import * as SubcontractItemFeature from '../subcontract-item.reducer';
 import { Subcontract, SubcontractItem } from '@workspace/shared/data-access-models';
 import { LoadSubcontractItemsService } from './load-subcontract-items.effects';
+import { Update } from '@ngrx/entity';
+import { UpdateStr } from '@ngrx/entity/src/models';
+
 
 @Injectable()
 export class SubcontractItemEffects {
@@ -144,17 +147,20 @@ export class SubcontractItemEffects {
         ) => {
           console.log('SUBCONTRACT ITEM EFFECTS - update subcontract item');
           // convert return promise to observable
-          const res = this.subcontractItemsService.updateSubcontractItem(
+          return this.subcontractItemsService.updateSubcontractItem(
             a.subcontractItem,
-          );
-          return res.pipe(
+          )
+          .pipe(
             map(() => {
-              return ItemActions.updateSubcontractItemSuccess()
+              const update: Update<SubcontractItem> = {
+                id: a.subcontractItem.id as string,
+                changes: a.subcontractItem
+              }
+              return ItemActions.updateSubcontractItemSuccess(  { update } )
             })
           );
         },
         onError: (action, error) => {
-          console.error('Error', error);
           return ItemActions.updateSubcontractItemFailure({ error });
         },
       }

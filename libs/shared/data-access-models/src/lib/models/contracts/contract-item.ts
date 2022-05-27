@@ -86,9 +86,7 @@ export function createItemForApprovedContract(subcontract: Subcontract): any {
     };
     if (subcontract.amounts) {
       if (subcontract.amounts.contractOriginal) {
-        contractItem.contractAmount = createCurrency(
-          subcontract.amounts.contractOriginal
-        );
+        contractItem.contractAmount = subcontract.amounts.contractOriginal;
       }
       contractItem.amountRemaining = contractItem.contractAmount;
     }

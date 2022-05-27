@@ -98,6 +98,11 @@ export const selectSubcontractItemId = createSelector(
   }
 )
 
+export const selectUpdateComplete = createSelector(
+  getSubcontractItemState,
+  (state: SubcontractItemEntityState) => state.updateComplete
+)
+
 
 
 export const getSelected = createSelector(

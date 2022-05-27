@@ -38,10 +38,11 @@
         <div class="flex-col">
         <mat-form-field appearance="outline" >
           <mat-label>Contract Amount</mat-label>
-          <input matInput
+          <input
+            matInput
             currencyDirective
             placeholder="Contract Amount"
-            formControlName="contractAmount">
+            formControlName="contractAmount"/>
         </mat-form-field>
         </div>
         </div>
@@ -55,5 +56,5 @@
       </mat-card-actions>
 
     </mat-card>
-    {{itemId}}
+    {{subcontractItemDetailForm.value | json}}
 </form>

@@ -4,101 +4,69 @@ import {Directive, ElementRef, forwardRef, HostListener, Input, Output, EventEmi
 import {MAT_INPUT_VALUE_ACCESSOR} from '@angular/material/input';
 import {NG_VALUE_ACCESSOR} from '@angular/forms';
 import Dinero from 'dinero.js';
-import { Currency, createCurrency, stringToDinero} from './currency';
+import { Currency, CurrencyClass, createCurrency, stringToDinero} from './currency';
+
 
 
 @Directive({
   // tslint:disable-next-line: directive-selector
   selector: 'input[currencyDirective]',
   providers: [
-    {provide: MAT_INPUT_VALUE_ACCESSOR, useExisting: CurrencyDirective},
-     {
+    { provide: MAT_INPUT_VALUE_ACCESSOR, useExisting: CurrencyDirective },
+    {
       provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() => CurrencyDirective),
       multi: true,
-    }
-    ],
-
+    },
+  ],
 })
 export class CurrencyDirective {
-
-  private internalValue: Currency | null;
+  private _value: CurrencyClass | null;
   private internalReadOnly = false;
 
   // tslint:disable-next-line: no-output-on-prefix
   // eslint-disable-next-line @angular-eslint/no-output-on-prefix
   @Output() onChange = new EventEmitter<Currency>();
 
+  constructor(private elementRef: ElementRef<HTMLInputElement>) {}
 
-  constructor(private elementRef: ElementRef<HTMLInputElement>,
-  ) {}
-
-
-  get value(): Currency | null {
+  get value(): Currency | null | undefined {
     this.unFormatValue();
-    return this.internalValue;
+    return this._value?.valuesOnly;
   }
 
   // eslint-disable-next-line @angular-eslint/no-input-rename
   @Input('value')
-  set value(value: Currency | null) {
-    this.internalValue = value;
-    this.formatValue(value);
+  set value(value: Currency | null | undefined) {
+    const temp = new CurrencyClass(value);
+    this.setValue(temp);
+    this.formatValue(this._value);
   }
 
+  private formatValue(value: CurrencyClass| null) {
+    console.log('CURRENCY DIRECTIVE formatValue', value);
+    let displayValue: string | null = '';
 
-
-  private formatValue(value: any) {
-    let dVal: Dinero.Dinero | null = null;
-    let displayValue = '';
-
-
-    switch (true) {
-      case (value === null):
-        displayValue = '';
-        break;
-
-      case (value === ''):
-        displayValue = '';
-        break;
-
-      case (typeof(value) === 'number'):
-        dVal = Dinero({amount: value, currency: 'AUD', precision: 2});
-        displayValue = dVal.toFormat('0,0.00');
-        break;
-
-      case (value.hasOwnProperty('getAmount')):
-        dVal = value;
-        if(dVal) {
-          displayValue = dVal.toFormat('0,0.00');
-        } else {
-          displayValue = '';
-        }
-
-        break;
-
-      default :
-        dVal = Dinero(value);
-        displayValue = dVal.toFormat('0,0.00');
-    }
-
-    this.elementRef.nativeElement.value = displayValue;
-
+  if( value === null || value === undefined){
+     displayValue = '';
+  } else {
+     displayValue = value.toFormat('0,0.00');
   }
 
-@Input() set readonly(value: boolean) {
+    this.elementRef.nativeElement.value = displayValue as string;
+  }
 
-  this.internalReadOnly = value;
-}
+  @Input() set readonly(value: boolean) {
+    this.internalReadOnly = value;
+  }
 
-get readonly() {
-  return this.internalReadOnly;
-}
-
+  get readonly() {
+    return this.internalReadOnly;
+  }
 
   private unFormatValue() {
     const value = this.elementRef.nativeElement.value;
-    this.internalValue = stringToDinero(value);
+    this.value = stringToDinero(value);
     const displayValue = value.replace(/[^\d.-]/g, '');
     // this._value = value.replace(/[^\d.-]/g, '');
     if (value) {
@@ -110,28 +78,30 @@ get readonly() {
 
   @HostListener('input', ['$event.target.value'])
   onInput(value: any) {
-    this.internalValue = stringToDinero(value);
+    this.setValue(stringToDinero(value));
     // here we cut any non numerical symbols
     // this._value = stringToDinero(value);
     // stringToDinero(value);
     // value.replace(/[^\d.-]/g, '');
-    this._onChange(this.internalValue);
+    const returnValue = this._value ? this._value.valuesOnly : null
+    this._onChange(returnValue);
   }
 
   @HostListener('blur')
   _onBlur() {
-    this.formatValue(this.internalValue); // add commas
+    this.formatValue(this._value); // add commas
   }
 
   @HostListener('change')
   _onHostChange() {
     const value = this.elementRef.nativeElement.value;
 
-    this.internalValue = stringToDinero(value);
-    if (!this.internalValue){
-      this.internalValue = createCurrency();
+    this.setValue(stringToDinero(value));
+    if (!this._value) {
+      this.setValue(new CurrencyClass());
     }
-    this.onChange.emit(this.internalValue);
+    console.log('CURRENCY DIRECTIVE host listern on change, value', this._value?.valuesOnly)
+    this.onChange.emit(this._value?.valuesOnly);
   }
 
   @HostListener('focus')
@@ -139,18 +109,20 @@ get readonly() {
     if (!this.internalReadOnly) {
       this.unFormatValue(); // remove commas for editing purpose
     }
+  }
 
+  setValue(value: any) {
+    console.log('CURRENCY DIRECTIVE set value, input value', value);
+    this._value = value;
   }
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  _onChange(value: any): void {
-
-  }
+  _onChange(value: any): void {}
 
   writeValue(value: any) {
-
-    this.internalValue = stringToDinero(value);
-    this.formatValue(this.internalValue); // format Value
+    const currency = new CurrencyClass(value)
+    this.setValue(currency);
+    this.formatValue(this._value); // format Value
   }
 
   registerOnChange(fn: (value: any) => void) {
@@ -158,8 +130,5 @@ get readonly() {
   }
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  registerOnTouched() {
-  }
-
-
+  registerOnTouched() {}
 }
