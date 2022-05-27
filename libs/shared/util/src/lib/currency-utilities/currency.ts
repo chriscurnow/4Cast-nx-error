@@ -1,4 +1,4 @@
-import Dinero, { defaultCurrency, defaultPrecision } from 'dinero.js';
+import Dinero from 'dinero.js';
 import { DataUtilsService as dataUtils } from '../data-utils/data-utils.service'
 
 Dinero.defaultCurrency = 'AUD';

@@ -3,8 +3,8 @@
 import {Directive, ElementRef, forwardRef, HostListener, Input, Output, EventEmitter} from '@angular/core';
 import {MAT_INPUT_VALUE_ACCESSOR} from '@angular/material/input';
 import {NG_VALUE_ACCESSOR} from '@angular/forms';
-import Dinero from 'dinero.js';
-import { Currency, CurrencyClass, createCurrency, stringToDinero} from './currency';
+
+import { Currency, CurrencyClass,  stringToDinero} from './currency';
 
 
 

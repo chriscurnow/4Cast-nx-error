@@ -1,5 +1,5 @@
-import { Currency, createCurrency } from '@workspace/shared/util';
-import { setTypeValues } from '@workspace/shared/util';
+import { Currency } from '@workspace/shared/util';
+
 
 export interface ContractAmounts {
   contractOriginal?: Currency;
