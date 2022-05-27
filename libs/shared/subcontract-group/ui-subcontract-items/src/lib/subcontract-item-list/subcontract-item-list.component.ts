@@ -18,6 +18,7 @@ import { SubcontractItem } from '@workspace/shared/data-access-models';
 
 import { Observable } from 'rxjs';
 import { CurrencyClass, Currency } from '@workspace/shared/util';
+import { DateTime } from 'luxon';
 
 @Component({
   selector: 'fourcast-subcontract-item-list',
@@ -38,6 +39,7 @@ export class SubcontractItemListComponent implements OnInit {
 
   displayedColumns = [
     'variationNumber',
+    'itemDate',
     'title',
     'contractAmount',
     'claimedToDate',
@@ -75,6 +77,15 @@ export class SubcontractItemListComponent implements OnInit {
       return '';
     }
   }
+
+  formatDate(value: any): string {
+     const dateTime = DateTime.fromISO(value);
+     console.log('Format Date, value', value)
+     console.log('format date, dateTime', dateTime);
+     return dateTime.toLocaleString()
+
+  }
+
 
   getDefTitle(def: any){
     return def.title;
