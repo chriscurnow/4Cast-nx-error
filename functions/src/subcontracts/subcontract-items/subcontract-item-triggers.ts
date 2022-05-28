@@ -4,6 +4,7 @@ import * as admin from 'firebase-admin';
 import * as functions from 'firebase-functions';
 
 import { DateTime } from 'luxon';
+import { of } from 'rxjs';
 // import { SubcontractService, ContractItem } from '@4cast/subcontract';
 
 
@@ -87,23 +88,27 @@ function onUpdateSubcontractItem(
     const item: SubcontractItem = changes.after.data();
     const oldItem: SubcontractItem = changes.before.data();
 
-
-     if (oldItem.contractAmount !== item.contractAmount) {
-       item.amountRemaining = item.contractAmount;
-       item.approvedPercent = 0;
-       item.claimedPercent = 0;
-     }
-
-    if (item.itemNumber < 0) {
-      return setItemNumber(item)
-      .then(() => {
-        return setSubcontractItem(item, snap)
-      });
+    if(oldItem.isNew){
+      // don't do anything here this update was triggered by the onCreate triger
+      return of(null);
     } else {
-      return setSubcontractItem(item, snap);
+
+      if (oldItem.contractAmount !== item.contractAmount) {
+        item.amountRemaining = item.contractAmount;
+        item.approvedPercent = 0;
+        item.claimedPercent = 0;
+      }
+
+      if (item.itemNumber < 0) {
+        return setItemNumber(item)
+        .then(() => {
+          return setSubcontractItem(item, snap)
+        });
+      } else {
+        return setSubcontractItem(item, snap);
+      }
+
     }
-
-
   }
 
   function setSubcontractItem(item, snap: functions.firestore.QueryDocumentSnapshot){
