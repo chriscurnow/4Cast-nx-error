@@ -63,7 +63,7 @@ export class SubcontractItemDetailUiComponent implements OnInit {
       id: '',
       itemDateTime: [null, Validators.required],
       itemNumber: null,
-      title: null,
+      title: [null, Validators.required],
       details: null,
       description: null,
       contractAmount: [null, Validators.required]

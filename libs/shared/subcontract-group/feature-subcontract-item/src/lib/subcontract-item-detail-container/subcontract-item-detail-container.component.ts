@@ -80,12 +80,16 @@ export class SubcontractItemDetailContainerComponent implements OnInit, OnDestro
   }
 
   navigateBack(){
+    console.log('NAVIGATE BACK, route', this.route)
     this.router.navigate(['../../items-list'], {relativeTo: this.route})
     // this.navigationService.back();
   }
 
   ngOnDestroy(): void {
       this.subcontractStore.dispatch(hideItemDetail())
-      this.updateCompleteSubscription.unsubscribe();
+      if (this.updateCompleteSubscription){
+         this.updateCompleteSubscription.unsubscribe();
+      }
+
   }
 }

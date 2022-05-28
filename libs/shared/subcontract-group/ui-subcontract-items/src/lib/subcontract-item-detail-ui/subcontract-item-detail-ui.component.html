@@ -52,9 +52,13 @@
         </fourcast-subcontract-item-line> -->
 
       <mat-card-actions>
-         <button mat-raised-button color="primary" (click)="clickOk()">OK</button>
+        <div class="flex-row flex-end">
+        <button mat-raised-button (click)="clickCancel()">CANCEL</button>
+         <button mat-raised-button color="accent" [disabled]="!subcontractItemDetailForm.valid" >APPROVE</button>
+         <button mat-raised-button color="primary" [disabled]="!subcontractItemDetailForm.valid" (click)="clickOk()">OK</button>
+        </div>
       </mat-card-actions>
 
     </mat-card>
-    {{subcontractItemDetailForm.value | json}}
+    <!-- {{subcontractItemDetailForm.value | json}} -->
 </form>

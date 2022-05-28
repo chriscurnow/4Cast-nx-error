@@ -3,6 +3,11 @@
 .flex-row {
   display: flex;
   flex-direction: row;
+
+}
+
+.flex-end {
+  justify-content: flex-end;
 }
 
 .flex-col {
