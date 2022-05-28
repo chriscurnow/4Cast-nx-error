@@ -1,8 +1,10 @@
 
-import { Subcontract } from '@workspace/shared/data-access-models';
+import { Subcontract, SubcontractItem } from '@workspace/shared/data-access-models';
 import * as admin from 'firebase-admin';
 import * as functions from 'firebase-functions';
+
 import { DateTime } from 'luxon';
+import { of } from 'rxjs';
 // import { SubcontractService, ContractItem } from '@4cast/subcontract';
 
 
@@ -19,6 +21,14 @@ export const subcontractItemCreate = functions.firestore.document('projects/{pro
 
   return onCreteSubcontractItem(snap, context);
 });
+
+export const subcontractItemUpdate = functions.firestore
+  .document(
+    'projects/{projectId}/subcontracts/{subcontractId}/subcontractItems/{itemId}'
+  )
+  .onUpdate((changes, context) => {
+    return onUpdateSubcontractItem(changes, context);
+  });
 
 
 function onCreteSubcontractItem(snap: FirebaseFirestore.DocumentSnapshot, context: functions.EventContext){
@@ -71,6 +81,77 @@ function onCreteSubcontractItem(snap: FirebaseFirestore.DocumentSnapshot, contex
   // });
 }
 
+function onUpdateSubcontractItem(
+  changes: functions.Change<functions.firestore.QueryDocumentSnapshot>,
+  context: functions.EventContext){
+    const snap = changes.after;
+    const item: SubcontractItem = changes.after.data();
+    const oldItem: SubcontractItem = changes.before.data();
+
+    if(oldItem.isNew){
+      // don't do anything here this update was triggered by the onCreate triger
+      return of(null);
+    } else {
+
+      if (oldItem.contractAmount !== item.contractAmount) {
+        item.amountRemaining = item.contractAmount;
+        item.approvedPercent = 0;
+        item.claimedPercent = 0;
+      }
+
+      if (item.itemNumber < 0) {
+        return setItemNumber(item)
+        .then(() => {
+          return setSubcontractItem(item, snap)
+        });
+      } else {
+        return setSubcontractItem(item, snap);
+      }
+
+    }
+  }
+
+  function setSubcontractItem(item, snap: functions.firestore.QueryDocumentSnapshot){
+
+    console.log('Item ready to set', item);
+    const writeResult = snap.ref.set(item, { merge: true });
+    console.log('Write new item, write result', writeResult);
+    return writeResult;
+
+  }
+
+  function setItemNumber(item: SubcontractItem){
+    const projectId = item.projectId;
+    const subcontractId = item.subcontractId;
+
+     const ref = admin
+       .firestore()
+       .doc(`projects/${projectId}/subcontracts/${subcontractId}`);
+
+       return ref.get().then((subcontractDocumentSnapshot) => {
+         console.log('Got subcontract', subcontractDocumentSnapshot.data());
+         let nextNumber = 1;
+         const subcontract: Subcontract = {
+           ...subcontractDocumentSnapshot.data(),
+         };
+         console.log('Subcontract retrieved', subcontract);
+         const subcontractVariationNumber = subcontract.nextItemNumber;
+         if (subcontractVariationNumber && subcontractVariationNumber > 0) {
+           nextNumber = subcontractVariationNumber;
+         }
+         console.log(
+           'Next number form subcontract',
+           subcontractVariationNumber
+         );
+         item.itemNumber = nextNumber;
+         // now increment nextItemNumber in the subcontract
+         nextNumber++;
+         const contractUpdate = { nextItemNumber: nextNumber };
+         return subcontractDocumentSnapshot.ref
+           .set(contractUpdate, { merge: true })
+
+       });
+  }
 
 
 // export const subcontractUpdate = functions.firestore.document('subcontracts/{subcontractId}')

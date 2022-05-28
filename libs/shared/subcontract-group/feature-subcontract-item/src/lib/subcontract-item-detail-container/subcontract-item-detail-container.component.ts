@@ -6,11 +6,12 @@ import {
   selectSubcontractItem,
   loadSubcontractItem,
   updateSubcontractItem,
+  selectUpdateComplete,
 } from '@workspace/shared/subcontract-group/data-access-subcontract-item';
 import { SubcontractPartialState, displayItemDetail, hideItemDetail } from '@workspace/shared/subcontract-group/data-access-subcontract';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import { NavigationService } from '@workspace/shared/util';
+import { CurrencyClass, NavigationService } from '@workspace/shared/util';
 import { DateTime } from 'luxon';
 
 @Component({
@@ -25,6 +26,7 @@ export class SubcontractItemDetailContainerComponent implements OnInit, OnDestro
   subcontractItem: SubcontractItem | undefined;
   projectId: string;
   subcontractId: string;
+  updateCompleteSubscription: Subscription;
 
   constructor(private store: Store<SubcontractItemPartialState>,
               private subcontractStore: Store<SubcontractPartialState>,
@@ -40,7 +42,7 @@ export class SubcontractItemDetailContainerComponent implements OnInit, OnDestro
         item
       );
       this.subcontractItem = item;
-      this.subcontractItemId = item ? item.id : '';
+      this.subcontractItemId = item?.id;
     });
   }
 
@@ -68,14 +70,26 @@ export class SubcontractItemDetailContainerComponent implements OnInit, OnDestro
     item.itemDateTime = null;
     item.projectId = this.projectId;
     item.subcontractId = this.subcontractId;
-    this.store.dispatch(updateSubcontractItem({subcontractItem: item}))
+    this.store.dispatch(updateSubcontractItem({subcontractItem: item}));
+    this.updateCompleteSubscription = this.store.select(selectUpdateComplete)
+      .subscribe((complete: boolean) => {
+        if (complete){
+          this.navigateBack();
+        }
+    })
   }
 
   navigateBack(){
-    this.navigationService.back();
+    console.log('NAVIGATE BACK, route', this.route)
+    this.router.navigate(['../../items-list'], {relativeTo: this.route})
+    // this.navigationService.back();
   }
 
   ngOnDestroy(): void {
       this.subcontractStore.dispatch(hideItemDetail())
+      if (this.updateCompleteSubscription){
+         this.updateCompleteSubscription.unsubscribe();
+      }
+
   }
 }

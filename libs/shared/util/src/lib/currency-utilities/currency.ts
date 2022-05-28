@@ -78,7 +78,7 @@ export class CurrencyClass implements Currency {
    * Takes CurrencyInterface and returns a Currency instante
    * If no parameter provided returns a Currency instance with amount = 0;
    */
-  constructor(data?: Currency) {
+  constructor(data?: Currency | null) {
     if (data) {
       this.amount = data.amount ? data.amount : 0;
       // switch (true) {
@@ -205,7 +205,7 @@ export class CurrencyClass implements Currency {
   }
 }
 
-export function stringToDinero(x: any): Currency | null{
+export function stringToDinero(x: any): CurrencyClass| null{
 
     if (x) {
       if (typeof(x) === 'string') {
@@ -233,7 +233,7 @@ export function stringToDinero(x: any): Currency | null{
       }
 
     } else {
-      const result: Currency | null = null;
+      const result: CurrencyClass | null = null;
       return result;
     }
 
@@ -242,7 +242,7 @@ export function stringToDinero(x: any): Currency | null{
   }
 
   export function createCurrency(currency?: Currency | undefined): Currency{
-    const newCurrency = {amount: 0, currency: 'AUD', precision: 2};
+    const newCurrency = new CurrencyClass({amount: 0, currency: Dinero.defaultCurrency, precision: Dinero.defaultPrecision});
     if(currency){
       const properties = ['amount', 'currency', 'precision'];
       dataUtils.setValues<Currency>(currency, newCurrency, properties)

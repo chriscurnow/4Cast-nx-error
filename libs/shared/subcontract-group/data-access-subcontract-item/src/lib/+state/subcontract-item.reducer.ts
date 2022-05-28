@@ -12,6 +12,7 @@ export interface SubcontractItemEntityState
   selectedId: string; // which SubcontractItem record has been selected
   loaded: boolean; // has the SubcontractItem list been loaded
   error: string | null; // last known error (if any)
+  updateComplete: boolean;
 }
 
 export interface SubcontractItemPartialState {
@@ -34,7 +35,8 @@ export const initialState: SubcontractItemEntityState =
     // set initial required properties
     selectedId: '',
     loaded: false,
-    error: null
+    error: null,
+    updateComplete: false,
   });
 
 
@@ -117,9 +119,22 @@ export const initialState: SubcontractItemEntityState =
             loaded: true,
             error: null,
           })
-      )
-    );
-
+      ),
+      on(SubcontractItemActions.updateSubcontractItem, (state ) => ({
+          ...state,
+          loaded: false,
+          updateComplete: false,
+          error: null
+        })
+      ),
+      on(SubcontractItemActions.updateSubcontractItemSuccess, (state, { update }) =>
+      subcontractItemAdapter.updateOne(update, {
+          ...state,
+          loaded: true,
+          updateComplete: true
+      })
+    )
+    )
 
 
 export function reducer(

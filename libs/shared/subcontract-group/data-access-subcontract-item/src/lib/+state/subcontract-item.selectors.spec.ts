@@ -1,4 +1,4 @@
-import { SubcontractItemEntity } from './subcontract-item.models';
+import { SubcontractItem } from '@workspace/shared/data-access-models';
 import {
   subcontractItemAdapter,
   SubcontractItemPartialState,
@@ -8,12 +8,12 @@ import * as SubcontractItemSelectors from './subcontract-item.selectors';
 
 describe('SubcontractItem Selectors', () => {
   const ERROR_MSG = 'No Error Available';
-  const getSubcontractItemId = (it: SubcontractItemEntity) => it.id;
+  const getSubcontractItemId = (it: SubcontractItem) => it.id;
   const createSubcontractItemEntity = (id: string, name = '') =>
     ({
       id,
       name: name || `name-${id}`,
-    } as SubcontractItemEntity);
+    } as SubcontractItem);
 
   let state: SubcontractItemPartialState;
 
@@ -37,7 +37,7 @@ describe('SubcontractItem Selectors', () => {
 
   describe('SubcontractItem Selectors', () => {
     it('getAllSubcontractItem() should return the list of SubcontractItem', () => {
-      const results = SubcontractItemSelectors.getAllSubcontractItem(state);
+      const results = SubcontractItemSelectors.selectAllSubcontractItem(state);
       const selId = getSubcontractItemId(results[1]);
 
       expect(results.length).toBe(3);
@@ -47,7 +47,7 @@ describe('SubcontractItem Selectors', () => {
     it('getSelected() should return the selected Entity', () => {
       const result = SubcontractItemSelectors.getSelected(
         state
-      ) as SubcontractItemEntity;
+      ) as SubcontractItem;
       const selId = getSubcontractItemId(result);
 
       expect(selId).toBe('PRODUCT-BBB');

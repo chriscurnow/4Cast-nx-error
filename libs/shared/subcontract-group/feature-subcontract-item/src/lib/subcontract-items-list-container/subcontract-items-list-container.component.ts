@@ -54,14 +54,16 @@ export class SubcontractItemsListContainerComponent implements OnInit {
 
   createVariation(){
     console.log('CREATE VARIATION');
+    let subscriptionInitialised = false
     const idSubscription = this.store.select(getSelectedId)
     .subscribe((id: string) => {
-      if(id && id !==''){
+      if(subscriptionInitialised && id && id !==''){
          this.router.navigate(['../detail', id], { relativeTo: this.route });
         idSubscription.unsubscribe();
       }
 
     })
+    subscriptionInitialised = true;
     this.store.dispatch(createNewSubcontractItem({projectId: this.projectId, subcontractId: this.subcontractId}))
   }
 }
