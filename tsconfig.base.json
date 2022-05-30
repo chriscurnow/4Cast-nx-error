@@ -83,6 +83,9 @@
       "@workspace/shared/subcontract-group/feature-subcontract-item": [
         "libs/shared/subcontract-group/feature-subcontract-item/src/index.ts"
       ],
+      "@workspace/shared/subcontract-group/ui-subcontract": [
+        "libs/shared/subcontract-group/ui-subcontract/src/index.ts"
+      ],
       "@workspace/shared/ui-main-layout": [
         "libs/shared/ui-main-layout/src/index.ts"
       ],
