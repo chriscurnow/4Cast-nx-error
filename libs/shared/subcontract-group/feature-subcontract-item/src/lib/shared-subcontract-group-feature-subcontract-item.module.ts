@@ -2,12 +2,11 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { SharedUiDefaultModuleCollectionModule } from '@workspace/shared-ui-default-module-collection';
-import { SharedSubcontractGroupUiSubcontractItemsModule } from '@workspace/shared-subcontract-group-ui-subcontract-items';
+import { SharedTempUiSubcontractItemsModule } from '@workspace/shared-subcontract-group-ui-subcontract-items';
 import { SubcontractItemDetailContainerComponent } from './subcontract-item-detail-container/subcontract-item-detail-container.component';
 import { SharedSubcontractGroupDataAccessSubcontractItemModule } from '@workspace/shared/subcontract-group/data-access-subcontract-item';
 import { SubcontractItemsListContainerComponent } from './subcontract-items-list-container/subcontract-items-list-container.component';
 import { VariationsContainerComponent } from './variations-container/variations-container.component';
-
 
 @NgModule({
   imports: [
@@ -34,7 +33,7 @@ import { VariationsContainerComponent } from './variations-container/variations-
       },
     ]),
     SharedSubcontractGroupDataAccessSubcontractItemModule,
-    SharedSubcontractGroupUiSubcontractItemsModule,
+    SharedTempUiSubcontractItemsModule,
     SharedUiDefaultModuleCollectionModule,
   ],
   declarations: [

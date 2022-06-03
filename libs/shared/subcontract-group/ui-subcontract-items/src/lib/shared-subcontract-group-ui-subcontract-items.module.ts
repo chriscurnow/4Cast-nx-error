@@ -28,4 +28,4 @@ import { SubcontractItemDetailUiComponent } from './subcontract-item-detail-ui/s
     // CurrencyDirective,
   ],
 })
-export class SharedSubcontractGroupUiSubcontractItemsModule {}
+export class SharedTempUiSubcontractItemsModule {}

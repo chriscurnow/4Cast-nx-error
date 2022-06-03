@@ -8,9 +8,8 @@ describe('SubcontractListUiComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SubcontractListUiComponent ]
-    })
-    .compileComponents();
+      declarations: [SubcontractListUiComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

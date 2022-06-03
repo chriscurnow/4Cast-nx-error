@@ -27,6 +27,7 @@
     "shared-subcontract-group-ui-subcontract": "libs/shared/subcontract-group/ui-subcontract",
     "shared-subcontract-group-ui-subcontract-detail": "libs/shared/subcontract-group/ui-subcontract-detail",
     "shared-subcontract-group-ui-subcontract-items": "libs/shared/subcontract-group/ui-subcontract-items",
+    "shared-temp-ui-subcontract": "libs/shared/temp/ui-subcontract",
     "shared-ui-default-module-collection": "libs/shared/ui-default-module-collection",
     "shared-ui-main-layout": "libs/shared/ui-main-layout",
     "shared-ui-subcontracts": "libs/shared/ui-subcontracts",

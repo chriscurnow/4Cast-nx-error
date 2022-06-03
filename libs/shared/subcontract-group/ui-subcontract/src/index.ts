@@ -1,1 +1,1 @@
-export * from './lib/shared-subcontract-group-ui-subcontract';
+export * from './lib/shared-subcontract-group-ui-subcontract.module';
