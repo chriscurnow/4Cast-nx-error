@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Location } from '@angular/common';
 import { Store } from '@ngrx/store';
 import { SubcontractItem } from '@workspace/shared/data-access-models';
 import {
@@ -32,7 +33,8 @@ export class SubcontractItemDetailContainerComponent implements OnInit, OnDestro
               private subcontractStore: Store<SubcontractPartialState>,
               private navigationService: NavigationService,
               private router: Router,
-              private route: ActivatedRoute
+              private route: ActivatedRoute,
+              private location: Location
               ) {
     this.subcontractItem$ = this.store.select(selectSubcontractItem);
 
@@ -81,7 +83,8 @@ export class SubcontractItemDetailContainerComponent implements OnInit, OnDestro
 
   navigateBack(){
     // console-log('NAVIGATE BACK, route', this.route)
-    this.router.navigate(['../../items-list'], {relativeTo: this.route})
+    this.location.back();
+    // this.router.navigate(['../../items-list'], {relativeTo: this.route})
     // this.navigationService.back();
   }
 
