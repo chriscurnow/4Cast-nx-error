@@ -1,4 +1,5 @@
 {
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
   "sourceRoot": "libs/shared/data-access-ngrx-default-module-collection/src",
   "prefix": "fourcast",
@@ -9,6 +10,7 @@
         "coverage/libs/shared/data-access-ngrx-default-module-collection"
       ],
       "options": {
+        "tsConfig": "libs/shared/data-access-ngrx-default-module-collection/tsconfig.json",
         "jestConfig": "libs/shared/data-access-ngrx-default-module-collection/jest.config.ts",
         "passWithNoTests": true
       }
@@ -23,5 +25,7 @@
       }
     }
   },
-  "tags": ["scope:data-access"]
+  "tags": [
+    "scope:data-access"
+  ]
 }

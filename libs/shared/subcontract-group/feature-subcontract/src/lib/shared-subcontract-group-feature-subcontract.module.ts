@@ -46,7 +46,7 @@ import { ContractGeneralDetailContainerComponent } from './subcontract-detail/co
       {
         path: 'project/:projectId/contract-detail/:contractId',  component: SubcontractDetailContainerComponent,
         children:[
-          { path: '', redirectTo: 'general-details'},
+          { path: '', redirectTo: 'general-details', pathMatch: 'full'},
           { path: 'general-details', component: ContractGeneralDetailContainerComponent },
           { path: 'variations',
 

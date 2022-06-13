@@ -1,12 +1,16 @@
 {
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
   "sourceRoot": "libs/shared/feature-toolbar-user/src",
   "prefix": "fourcast",
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/shared/feature-toolbar-user"],
+      "outputs": [
+        "coverage/libs/shared/feature-toolbar-user"
+      ],
       "options": {
+        "tsConfig": "libs/shared/feature-toolbar-user/tsconfig.json",
         "jestConfig": "libs/shared/feature-toolbar-user/jest.config.ts",
         "passWithNoTests": true
       }
@@ -21,5 +25,7 @@
       }
     }
   },
-  "tags": ["scope:feature"]
+  "tags": [
+    "scope:feature"
+  ]
 }

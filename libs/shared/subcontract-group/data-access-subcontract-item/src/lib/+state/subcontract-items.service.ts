@@ -12,7 +12,7 @@ import {
 import { map, mergeAll } from 'rxjs/operators';
 import { DateTime } from 'luxon';
 import { DateUtilsService } from '@workspace/shared/util';
-import { FormGroup, AbstractControl } from '@angular/forms';
+import { UntypedFormGroup, AbstractControl } from '@angular/forms';
 import { SubcontractItem } from '@workspace/shared/data-access-models';
 import { Subcontract } from '@workspace/shared/data-access-models';
 import { CurrencyClass } from '@workspace/shared/util';
@@ -274,7 +274,7 @@ getItemsPath(projectId: string, subcontractId: string ) {
   }
 
   saveItemFromForm(
-    contractItemForm: FormGroup,
+    contractItemForm: UntypedFormGroup,
     contractItemDoc: ContractItemDoc,
     status: number
   ): any {

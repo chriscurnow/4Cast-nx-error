@@ -1,11 +1,14 @@
 {
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
   "sourceRoot": "libs/shared/util/src",
   "prefix": "fourcast",
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/shared/util"],
+      "outputs": [
+        "coverage/libs/shared/util"
+      ],
       "options": {
         "jestConfig": "libs/shared/util/jest.config.ts",
         "passWithNoTests": true,
@@ -22,5 +25,7 @@
       }
     }
   },
-  "tags": ["scope:util"]
+  "tags": [
+    "scope:util"
+  ]
 }
