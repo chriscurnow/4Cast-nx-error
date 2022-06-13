@@ -14,7 +14,12 @@ const routes: Routes = [
       { path: 'general-details', component: GeneralDetailsContainerComponent },
       {
         path: 'items',
-        component: SubcontractItemsContainerComponent,
+        loadChildren: () =>
+          // eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+          import(
+            '@workspace/shared/subcontract-group/feature-subcontract-item'
+          ).then((m) => m.SharedSubcontractGroupFeatureSubcontractItemModule),
+        // component: SubcontractItemsContainerComponent,
       },
     ],
   },

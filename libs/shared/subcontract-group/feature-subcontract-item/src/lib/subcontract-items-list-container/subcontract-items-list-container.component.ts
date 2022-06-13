@@ -35,9 +35,10 @@ export class SubcontractItemsListContainerComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((params: ParamMap) => {
-     const contractId = params.get('contractId');
+     const subcontractId = params.get('subcontractId');
      const projectId = params.get('projectId');
-     this.subcontractId = contractId ? contractId : '';
+     this.subcontractId = subcontractId ? subcontractId : '';
+     console.log('SUBCONTRACT ITEMS LIST subcontractId from params', this.subcontractId)
      this.projectId = projectId ? projectId : '';
       this.store.dispatch(
         loadItemsForSubcontract({ subcontractId: this.subcontractId as string })

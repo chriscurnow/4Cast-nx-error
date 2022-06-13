@@ -29,7 +29,7 @@ export class SubcontractDetailUIComponent implements OnInit {
 
   links: Link[] = [
     { title: 'Contract Details', route: 'general-details' },
-    { title: 'Amounts', route: 'items' },
+    { title: 'Amounts', route: 'items/list/for-subcontract' },
     { title: 'Payments', route: 'payments', disabled: true },
   ];
   activeLink = this.links[0];

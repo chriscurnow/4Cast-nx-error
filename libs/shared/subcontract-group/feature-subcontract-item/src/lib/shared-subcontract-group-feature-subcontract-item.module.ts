@@ -19,10 +19,14 @@ import { VariationsContainerComponent } from './variations-container/variations-
           {
             path: '',
             pathMatch: 'full',
-            redirectTo: 'items-list',
+            redirectTo: 'list',
           },
           {
-            path: 'items-list',
+            path: 'list/for-subcontract',
+            component: SubcontractItemsListContainerComponent
+          },
+          {
+            path: 'list',
             component: SubcontractItemsListContainerComponent,
           },
           {

@@ -32,10 +32,10 @@ export class GeneralDetailsUIComponent implements OnInit {
 
   createForm() {
     this.detailForm = this.fb.group({
-      id: null,
-      name: null,
+      id: '',
+      name: '',
       dates: new FormControl([]),
-      description: null,
+      description: '',
     });
   }
 }
