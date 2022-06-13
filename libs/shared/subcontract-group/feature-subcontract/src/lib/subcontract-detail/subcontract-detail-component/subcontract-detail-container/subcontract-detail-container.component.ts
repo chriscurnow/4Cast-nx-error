@@ -45,6 +45,7 @@ export class SubcontractDetailContainerComponent
 
     this.contract$.subscribe((res) => {
       this.subcontract = res;
+      console.log('SUBCONTRACT DETAIL CONTAINER subcontrasct from select subcontract', this.subcontract)
     });
   }
 
@@ -90,6 +91,11 @@ export class SubcontractDetailContainerComponent
     this.store.dispatch(
       createVariation({ subcontract: this.subcontract as Subcontract })
     );
+  }
+
+  navigate(path: string){
+    console.log('SUBCONTRACT DETAIL CONTAINER, navigate, path', path);
+    this.router.navigate([ path ], { relativeTo: this.route });
   }
 
   backToList() {

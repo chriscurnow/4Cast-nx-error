@@ -14,7 +14,7 @@ import { of } from 'rxjs';
 import { SubcontractItem } from '@workspace/shared/data-access-models';
 
 @Component({
-  selector: 'fourcast-subcontract-items-list-container',
+  selector: 'fourcast-subcontract-items-list',
   templateUrl: './subcontract-items-list-container.component.html',
   styleUrls: ['./subcontract-items-list-container.component.scss'],
 })

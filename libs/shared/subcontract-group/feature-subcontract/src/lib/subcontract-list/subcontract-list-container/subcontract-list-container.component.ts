@@ -13,7 +13,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 
 @Component({
-  selector: 'fourcast-contract-list-page',
   templateUrl: './subcontract-list-container.component.html',
   styleUrls: ['./subcontract-list-container.component.scss'],
 })
@@ -49,6 +48,6 @@ export class SubcontractListContainerComponent implements OnInit {
   }
   rowSelected(subcontract: Subcontract) {
     const projectId = subcontract.project ? subcontract.project.id : '';
-    this.router.navigate(['../project', projectId, 'contract-detail', subcontract.id], {relativeTo: this.route})
+    this.router.navigate([ '../detail', subcontract.id], {queryParams: {projectId: projectId}, relativeTo: this.route})
   }
 }

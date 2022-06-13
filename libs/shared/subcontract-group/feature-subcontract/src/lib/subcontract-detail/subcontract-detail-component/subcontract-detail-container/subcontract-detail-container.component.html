@@ -1,10 +1,11 @@
-<fourcast-subcontract-detail
+<fourcast-subcontract-detail-ui
 [subcontract]="subcontract"
 [itemDetailDisplayed]="itemDetailDisplayed"
  (createItemZero)="createItemZero()"
  (createNewVariation)="createNewVariation()"
- (navigateBack) = "backToList()">
-</fourcast-subcontract-detail>
+ (navigateBack) = "backToList()"
+ (activatedLink)="navigate($event)">
+</fourcast-subcontract-detail-ui>
 <button (click)="itemDetailDisplayed=true">Set Display</button>
 
 <!-- [itemDetailDisplayed]="itemDetailDisplayed" -->

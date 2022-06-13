@@ -9,12 +9,12 @@ import { createCurrency, DateUtilsService } from '@workspace/shared/util';
 import { Currency, CurrencyClass } from '@workspace/shared/util';
 
 @Component({
-  selector: 'fourcast-contract-list-view',
-  templateUrl: './subcontract-list.component.html',
-  styleUrls: ['./subcontract-list.component.scss'],
+  selector: 'fourcast-subcontract-list-ui',
+  templateUrl: './subcontract-list-ui.component.html',
+  styleUrls: ['./subcontract-list-ui.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SubcontractListComponent {
+export class SubcontractListUIComponent {
   public selection: SelectionModel<any>;
   public dataSource: MatTableDataSource<any>;
 

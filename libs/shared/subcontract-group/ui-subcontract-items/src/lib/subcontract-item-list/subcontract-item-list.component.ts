@@ -21,12 +21,12 @@ import { CurrencyClass, Currency } from '@workspace/shared/util';
 import { DateTime } from 'luxon';
 
 @Component({
-  selector: 'fourcast-subcontract-item-list',
+  selector: 'fourcast-subcontract-item-list-ui',
   templateUrl: './subcontract-item-list.component.html',
   styleUrls: ['./subcontract-item-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SubcontractItemListComponent implements OnInit {
+export class SubcontractItemListUIComponent implements OnInit {
   public selection: SelectionModel<any>;
   public dataSource: MatTableDataSource<any>;
 

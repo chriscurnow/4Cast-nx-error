@@ -1,10 +1,10 @@
 import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy} from '@angular/core';
-import { Router, ActivatedRoute, UrlTree, UrlSegment } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 // TODO: [NX-19] resolve circular dependency
 
 
 
-import { UntypedFormGroup, UntypedFormBuilder, UntypedFormControl } from '@angular/forms';
+import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { Subcontract, SubcontractItem } from '@workspace/shared/data-access-models';
 
 interface Link {
@@ -14,14 +14,14 @@ interface Link {
 }
 
 @Component({
-  selector: 'fourcast-subcontract-detail',
-  templateUrl: './subcontract-detail.component.html',
-  styleUrls: ['./subcontract-detail.component.scss'],
+  selector: 'fourcast-subcontract-detail-ui',
+  templateUrl: './subcontract-detail-ui.component.html',
+  styleUrls: ['./subcontract-detail-ui.component.scss'],
   // changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SubcontractDetailComponent implements OnInit {
+export class SubcontractDetailUIComponent implements OnInit {
   contractId: string;
-  detailForm: UntypedFormGroup;
+  detailForm: FormGroup;
   _subcontract: Subcontract;
   _items: SubcontractItem[] | undefined;
   item0: SubcontractItem = {};
@@ -29,7 +29,7 @@ export class SubcontractDetailComponent implements OnInit {
 
   links: Link[] = [
     { title: 'Contract Details', route: 'general-details' },
-    { title: 'Amounts', route: 'variations' },
+    { title: 'Amounts', route: 'items' },
     { title: 'Payments', route: 'payments', disabled: true },
   ];
   activeLink = this.links[0];
@@ -61,9 +61,10 @@ export class SubcontractDetailComponent implements OnInit {
   @Output() navigateBack = new EventEmitter<null>();
   @Output() createItemZero = new EventEmitter<null>();
   @Output() createNewVariation = new EventEmitter<null>();
+  @Output() activatedLink = new EventEmitter<string>();
 
   constructor(
-    private fb: UntypedFormBuilder,
+    private fb: FormBuilder,
     private router: Router,
     private route: ActivatedRoute
   ) {
@@ -100,14 +101,15 @@ export class SubcontractDetailComponent implements OnInit {
     this.detailForm = this.fb.group({
       id: null,
       name: null,
-      dates: new UntypedFormControl([]),
+      dates: new FormControl([]),
       description: null,
     });
   }
 
   setActiveTab(link: Link) {
     this.activeLink = link;
-    this.router.navigate([this.activeLink.route], { relativeTo: this.route });
+    this.activatedLink.emit(link.route);
+    // this.router.navigate([this.activeLink.route], { relativeTo: this.route });
   }
 
   createItemZeroForContract(): void {

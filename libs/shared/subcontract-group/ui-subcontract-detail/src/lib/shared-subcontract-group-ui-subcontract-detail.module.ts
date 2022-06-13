@@ -31,4 +31,4 @@ import { CurrencyUtilitiesModule } from '@workspace/shared/util';
     SubcontractItemComponent,
   ],
 })
-export class SharedTempUiSubcontractDetailModule {}
+export class SharedUiSubcontractDetailModule {}
