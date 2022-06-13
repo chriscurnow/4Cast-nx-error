@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
-import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormControl, UntypedFormBuilder } from '@angular/forms';
 import { Subcontract } from '@workspace/shared/data-access-models';
 
 @Component({
@@ -11,7 +11,7 @@ import { Subcontract } from '@workspace/shared/data-access-models';
 export class ContractGeneralDetailComponent implements OnInit {
   _subcontract: Subcontract | undefined;
   subcontractId = '';
-  detailForm: FormGroup;
+  detailForm: UntypedFormGroup;
 
   @Input() set subcontract(v: Subcontract | undefined) {
     this._subcontract = v;
@@ -22,7 +22,7 @@ export class ContractGeneralDetailComponent implements OnInit {
     this.detailForm.reset(this._subcontract);
   }
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: UntypedFormBuilder) {
     this.createForm();
    }
 
@@ -34,7 +34,7 @@ export class ContractGeneralDetailComponent implements OnInit {
     this.detailForm = this.fb.group({
       id: null,
       name: null,
-      dates: new FormControl([]),
+      dates: new UntypedFormControl([]),
       description: null,
     });
   }

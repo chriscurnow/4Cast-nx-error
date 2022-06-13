@@ -4,7 +4,7 @@ import { Router, ActivatedRoute, UrlTree, UrlSegment } from '@angular/router';
 
 
 
-import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder, UntypedFormControl } from '@angular/forms';
 import { Subcontract, SubcontractItem } from '@workspace/shared/data-access-models';
 
 interface Link {
@@ -21,7 +21,7 @@ interface Link {
 })
 export class SubcontractDetailComponent implements OnInit {
   contractId: string;
-  detailForm: FormGroup;
+  detailForm: UntypedFormGroup;
   _subcontract: Subcontract;
   _items: SubcontractItem[] | undefined;
   item0: SubcontractItem = {};
@@ -63,7 +63,7 @@ export class SubcontractDetailComponent implements OnInit {
   @Output() createNewVariation = new EventEmitter<null>();
 
   constructor(
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private router: Router,
     private route: ActivatedRoute
   ) {
@@ -100,7 +100,7 @@ export class SubcontractDetailComponent implements OnInit {
     this.detailForm = this.fb.group({
       id: null,
       name: null,
-      dates: new FormControl([]),
+      dates: new UntypedFormControl([]),
       description: null,
     });
   }
