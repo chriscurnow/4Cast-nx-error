@@ -51,7 +51,7 @@ export class SubcontractItemsContainerComponent implements OnInit {
     this.store
       .select(selectVariationItems)
       .subscribe((items: SubcontractItem[]) => {
-        console.log('SUBCONTRACT ITEMS CONTAINER subscription to items', items)
+        // console-log('SUBCONTRACT ITEMS CONTAINER subscription to items', items)
         this.items = items;
       });
 

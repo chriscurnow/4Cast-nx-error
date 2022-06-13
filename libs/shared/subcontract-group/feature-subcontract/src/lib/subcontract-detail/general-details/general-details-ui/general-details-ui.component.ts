@@ -15,7 +15,7 @@ export class GeneralDetailsUIComponent implements OnInit {
 
   @Input() set subcontract(v: Subcontract | undefined) {
     this._subcontract = v;
-    console.log('GENERAL DETAILS COMPONENT, subcontract', this._subcontract)
+    // console-log('GENERAL DETAILS COMPONENT, subcontract', this._subcontract)
     if (this._subcontract) {
       this.subcontractId = this._subcontract.id as string;
     }

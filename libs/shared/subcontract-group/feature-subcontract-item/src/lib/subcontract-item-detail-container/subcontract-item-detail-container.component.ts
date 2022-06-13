@@ -37,10 +37,10 @@ export class SubcontractItemDetailContainerComponent implements OnInit, OnDestro
     this.subcontractItem$ = this.store.select(selectSubcontractItem);
 
     this.subcontractItem$.subscribe((item: SubcontractItem | undefined) => {
-      console.log(
-        'SUBCONTRACT ITEM DETAIL CONTAINER constructor, subcontract item',
-        item
-      );
+      // console-log(
+      //   'SUBCONTRACT ITEM DETAIL CONTAINER constructor, subcontract item',
+      //   item
+      // );
       this.subcontractItem = item;
       this.subcontractItemId = item?.id;
     });
@@ -48,14 +48,14 @@ export class SubcontractItemDetailContainerComponent implements OnInit, OnDestro
 
 
   ngOnInit(): void {
-    console.log();
+
     this.route.paramMap.subscribe((params: ParamMap) => {
       const itemId = params.get('subcontractItemId');
       this.subcontractId = params.get('contractId') as string;
       this.projectId = params.get('projectId') as string;
-      console.log('params projectId', this.projectId);
-      console.log('params subcontractId', this.subcontractId);
-      console.log('params itemId', itemId);
+      // console-log('params projectId', this.projectId);
+      // console-log('params subcontractId', this.subcontractId);
+      // console-log('params itemId', itemId);
       this.store.dispatch(loadSubcontractItem({
         projectId: this.projectId as string,
         subcontractId: this.subcontractId as string,
@@ -65,7 +65,7 @@ export class SubcontractItemDetailContainerComponent implements OnInit, OnDestro
   }
 
   saveItem(item: SubcontractItem){
-    console.log('SAVE ITEM, value to save', item)
+    // console-log('SAVE ITEM, value to save', item)
     item.itemDateISO = item.itemDateTime?.toISO();
     item.itemDateTime = null;
     item.projectId = this.projectId;
@@ -80,7 +80,7 @@ export class SubcontractItemDetailContainerComponent implements OnInit, OnDestro
   }
 
   navigateBack(){
-    console.log('NAVIGATE BACK, route', this.route)
+    // console-log('NAVIGATE BACK, route', this.route)
     this.router.navigate(['../../items-list'], {relativeTo: this.route})
     // this.navigationService.back();
   }

@@ -91,9 +91,9 @@ export class SubcontractDetailUIComponent implements OnInit {
         break;
     }
 
-    // console.log('route', this.route)
+    // console-log('route', this.route)
     //   this.route.url.subscribe(url => {
-    //       console.log('Subscribed url', url)
+    //       console-log('Subscribed url', url)
     //   })
   }
 

@@ -44,7 +44,7 @@ export class SubcontractItemDetailUiComponent implements OnInit {
 
 
     }
-    console.log('Subcontract Item', v)
+    // console-log('Subcontract Item', v)
     this.subcontractItemDetailForm.reset(v);
   }
 

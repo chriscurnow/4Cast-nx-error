@@ -84,10 +84,10 @@ export class SubcontractItemEffects {
           .getSubcontractItem(a.projectId, a.subcontractId, a.subcontractItemId)
           .pipe(
             map((subcontractItem: SubcontractItem) => {
-              console.log(
-                'SUBCONTRACT ITEM EFFECTS subcontract Item',
-                subcontractItem
-              );
+              // console-log(
+              //   'SUBCONTRACT ITEM EFFECTS subcontract Item',
+              //   subcontractItem
+              // );
               return ItemActions.loadSubcontractItemSuccess({
                 subcontractItem,
               });
@@ -110,7 +110,7 @@ export class SubcontractItemEffects {
           a: ReturnType<typeof ItemActions.createNewSubcontractItem>,
           state
         ) => {
-          console.log('SUBCONTRACT ITEM EFFECTS - create new subcontract item');
+          // console-log('SUBCONTRACT ITEM EFFECTS - create new subcontract item');
           // convert return promise to observable
           const res = this.subcontractItemsService.createNewSubcontractItem(
             a.projectId,
@@ -118,7 +118,7 @@ export class SubcontractItemEffects {
           );
           return res.pipe(
             map((item: SubcontractItem | undefined) => {
-              console.log('About to return sub item', item);
+              // console-log('About to return sub item', item);
               if (item) {
                 return ItemActions.createNewItemSuccess({ item: item });
               } else {
@@ -145,7 +145,7 @@ export class SubcontractItemEffects {
           a: ReturnType<typeof ItemActions.updateSubcontractItem>,
           state
         ) => {
-          console.log('SUBCONTRACT ITEM EFFECTS - update subcontract item');
+          // console-log('SUBCONTRACT ITEM EFFECTS - update subcontract item');
           // convert return promise to observable
           return this.subcontractItemsService.updateSubcontractItem(
             a.subcontractItem,

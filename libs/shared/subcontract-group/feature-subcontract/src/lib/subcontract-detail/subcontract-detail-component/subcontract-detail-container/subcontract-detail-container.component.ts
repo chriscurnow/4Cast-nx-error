@@ -45,7 +45,7 @@ export class SubcontractDetailContainerComponent
 
     this.contract$.subscribe((res) => {
       this.subcontract = res;
-      console.log('SUBCONTRACT DETAIL CONTAINER subcontrasct from select subcontract', this.subcontract)
+      // console-log('SUBCONTRACT DETAIL CONTAINER subcontrasct from select subcontract', this.subcontract)
     });
   }
 
@@ -72,7 +72,7 @@ export class SubcontractDetailContainerComponent
   //       delay(0)
   //     )
   //     .subscribe((displayed: boolean | undefined) => {
-  //       console.log('Item detail displayed', displayed);
+  //       console-log('Item detail displayed', displayed);
   //       this.itemDetailDisplayed = displayed;
   //     });
   // }
@@ -94,7 +94,7 @@ export class SubcontractDetailContainerComponent
   }
 
   navigate(path: string){
-    console.log('SUBCONTRACT DETAIL CONTAINER, navigate, path', path);
+    // console-log('SUBCONTRACT DETAIL CONTAINER, navigate, path', path);
     this.router.navigate([ path ], { relativeTo: this.route });
   }
 

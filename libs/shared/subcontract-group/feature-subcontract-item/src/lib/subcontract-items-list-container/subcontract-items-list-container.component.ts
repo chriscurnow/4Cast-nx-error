@@ -38,23 +38,23 @@ export class SubcontractItemsListContainerComponent implements OnInit {
      const subcontractId = params.get('subcontractId');
      const projectId = params.get('projectId');
      this.subcontractId = subcontractId ? subcontractId : '';
-     console.log('SUBCONTRACT ITEMS LIST subcontractId from params', this.subcontractId)
+    //  console-log('SUBCONTRACT ITEMS LIST subcontractId from params', this.subcontractId)
      this.projectId = projectId ? projectId : '';
       this.store.dispatch(
         loadItemsForSubcontract({ subcontractId: this.subcontractId as string })
       );
     });
-    console.log();
+    // console-log();
 
   }
 
   itemSelected(item: SubcontractItem){
-    if ( item !== this.variationItems[0])
-    this.router.navigate(['../detail', item.id], {relativeTo: this.route})
+    // if ( item !== this.variationItems[0])
+    this.router.navigate(['../../detail', item.id], {relativeTo: this.route})
   }
 
   createVariation(){
-    console.log('CREATE VARIATION');
+    // console-log('CREATE VARIATION');
     let subscriptionInitialised = false
     const idSubscription = this.store.select(getSelectedId)
     .subscribe((id: string) => {
