@@ -1,11 +1,14 @@
 {
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
   "sourceRoot": "apps/books/src",
   "prefix": "fourcast",
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
         "outputPath": "dist/apps/books",
         "index": "apps/books/src/index.html",
@@ -13,8 +16,13 @@
         "polyfills": "apps/books/src/polyfills.ts",
         "tsConfig": "apps/books/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
-        "assets": ["apps/books/src/favicon.ico", "apps/books/src/assets"],
-        "styles": ["apps/books/src/styles.scss"],
+        "assets": [
+          "apps/books/src/favicon.ico",
+          "apps/books/src/assets"
+        ],
+        "styles": [
+          "apps/books/src/styles.scss"
+        ],
         "scripts": []
       },
       "configurations": {
@@ -79,7 +87,9 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/books"],
+      "outputs": [
+        "coverage/apps/books"
+      ],
       "options": {
         "jestConfig": "apps/books/jest.config.ts",
         "passWithNoTests": true

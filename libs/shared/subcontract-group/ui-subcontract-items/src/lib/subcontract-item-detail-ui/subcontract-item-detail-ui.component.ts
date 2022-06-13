@@ -1,7 +1,7 @@
 /* eslint-disable @nrwl/nx/enforce-module-boundaries */
 import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 import { SubcontractItem } from '@workspace/shared/data-access-models';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
 import {
   DateAdapter,
   MAT_DATE_FORMATS,
@@ -32,7 +32,7 @@ import { DateTime } from 'luxon';
 })
 export class SubcontractItemDetailUiComponent implements OnInit {
   subcontractItem: SubcontractItem | undefined;
-  subcontractItemDetailForm: FormGroup;
+  subcontractItemDetailForm: UntypedFormGroup;
   itemId = '';
   @Input() set item(v: SubcontractItem | undefined) {
     this.subcontractItem = v;
@@ -51,7 +51,7 @@ export class SubcontractItemDetailUiComponent implements OnInit {
   @Output() saveItem = new EventEmitter<SubcontractItem>();
   @Output() navigateBack = new EventEmitter<null>();
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: UntypedFormBuilder) {
     this.createForm();
   }
 

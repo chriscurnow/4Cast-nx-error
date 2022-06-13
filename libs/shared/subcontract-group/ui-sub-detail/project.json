@@ -1,12 +1,16 @@
 {
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
   "sourceRoot": "libs/shared/subcontract-group/ui-sub-detail/src",
   "prefix": "fourcast",
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/shared/subcontract-group/ui-sub-detail"],
+      "outputs": [
+        "coverage/libs/shared/subcontract-group/ui-sub-detail"
+      ],
       "options": {
+        "tsConfig": "libs/shared/subcontract-group/ui-sub-detail/tsconfig.json",
         "jestConfig": "libs/shared/subcontract-group/ui-sub-detail/jest.config.ts",
         "passWithNoTests": true
       }
@@ -21,5 +25,7 @@
       }
     }
   },
-  "tags": ["scope:ui:shared"]
+  "tags": [
+    "scope:ui:shared"
+  ]
 }

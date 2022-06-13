@@ -16,6 +16,7 @@
       "executor": "@nrwl/jest:jest",
       "outputs": ["coverage/libs/shared/subcontract-group/ui-subcontract"],
       "options": {
+        "tsConfig": "libs/shared/subcontract-group/ui-subcontract/tsconfig.json",
         "jestConfig": "libs/shared/subcontract-group/ui-subcontract/jest.config.ts",
         "passWithNoTests": true
       }

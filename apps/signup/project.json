@@ -1,11 +1,14 @@
 {
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
   "sourceRoot": "apps/signup/src",
   "prefix": "fourcast",
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
         "outputPath": "dist/apps/signup",
         "index": "apps/signup/src/index.html",
@@ -13,7 +16,10 @@
         "polyfills": "apps/signup/src/polyfills.ts",
         "tsConfig": "apps/signup/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
-        "assets": ["apps/signup/src/favicon.ico", "apps/signup/src/assets"],
+        "assets": [
+          "apps/signup/src/favicon.ico",
+          "apps/signup/src/assets"
+        ],
         "styles": [
           "libs/shared/styles-theming/src/lib/styles.scss",
           "apps/signup/src/styles.scss"
@@ -82,12 +88,16 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/signup"],
+      "outputs": [
+        "coverage/apps/signup"
+      ],
       "options": {
         "jestConfig": "apps/signup/jest.config.ts",
         "passWithNoTests": true
       }
     }
   },
-  "tags": ["scope:app"]
+  "tags": [
+    "scope:app"
+  ]
 }

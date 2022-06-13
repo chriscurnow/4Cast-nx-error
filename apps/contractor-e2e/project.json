@@ -1,10 +1,12 @@
 {
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "apps/contractor-e2e/src",
   "projectType": "application",
   "targets": {
     "e2e": {
       "executor": "@nrwl/cypress:cypress",
       "options": {
+        "tsConfig": "apps/contractor-e2e/tsconfig.json",
         "cypressConfig": "apps/contractor-e2e/cypress.json",
         "devServerTarget": "contractor:serve:development"
       },
@@ -16,12 +18,18 @@
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
-      "outputs": ["{options.outputFile}"],
+      "outputs": [
+        "{options.outputFile}"
+      ],
       "options": {
-        "lintFilePatterns": ["apps/contractor-e2e/**/*.{js,ts}"]
+        "lintFilePatterns": [
+          "apps/contractor-e2e/**/*.{js,ts}"
+        ]
       }
     }
   },
   "tags": [],
-  "implicitDependencies": ["contractor"]
+  "implicitDependencies": [
+    "contractor"
+  ]
 }

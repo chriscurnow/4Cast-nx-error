@@ -1,11 +1,14 @@
 {
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
   "sourceRoot": "libs/subcontractor/feature-dashboard/src",
   "prefix": "fourcast",
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/subcontractor/feature-dashboard"],
+      "outputs": [
+        "coverage/libs/subcontractor/feature-dashboard"
+      ],
       "options": {
         "jestConfig": "libs/subcontractor/feature-dashboard/jest.config.ts",
         "tsConfig": "libs/subcontractor/feature-dashboard/tsconfig.json",
@@ -22,5 +25,7 @@
       }
     }
   },
-  "tags": ["scope:feature"]
+  "tags": [
+    "scope:feature"
+  ]
 }

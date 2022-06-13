@@ -6,7 +6,7 @@ import {
   OnChanges,
   SimpleChanges,
 } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 
 // eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
@@ -21,7 +21,7 @@ import { Store } from '@ngrx/store';
   styleUrls: ['./subcontract-item-line.component.scss'],
 })
 export class SubcontractItemLineComponent implements OnInit {
-  contractItemForm: FormGroup;
+  contractItemForm: UntypedFormGroup;
   _item: SubcontractItem;
   status: number;
   itemNumber: number;
@@ -30,7 +30,7 @@ export class SubcontractItemLineComponent implements OnInit {
   items$: Observable<SubcontractItem[]>;
 
   constructor(
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private router: Router,
     private route: ActivatedRoute,
     private store: Store

@@ -3,10 +3,10 @@ import { Component, OnDestroy, forwardRef } from '@angular/core';
 import {
   ControlValueAccessor,
   NG_VALUE_ACCESSOR,
-  FormBuilder,
-  FormGroup,
+  UntypedFormBuilder,
+  UntypedFormGroup,
   Validators,
-  FormControl,
+  UntypedFormControl,
   NG_VALIDATORS,
 } from '@angular/forms';
 import { Subscription } from 'rxjs';
@@ -63,10 +63,10 @@ import { ContractDates } from '@workspace/shared/data-access-models';
 export class SubcontractDatesComponent
   implements ControlValueAccessor, OnDestroy
 {
-  datesForm: FormGroup;
+  datesForm: UntypedFormGroup;
   subscriptions: Subscription[] = [];
 
-  constructor(private fb: FormBuilder, private dateUtils: DateUtilsService) {
+  constructor(private fb: UntypedFormBuilder, private dateUtils: DateUtilsService) {
     this.datesForm = this.fb.group({
       contract: [null, Validators.required],
       commencement: [null, Validators.required],
@@ -123,7 +123,7 @@ export class SubcontractDatesComponent
 
   // communicate the inner form validation to the parent form
 
-  validate(_: FormControl) {
+  validate(_: UntypedFormControl) {
     return this.datesForm.valid ? null : { project: { valid: false } };
   }
 
