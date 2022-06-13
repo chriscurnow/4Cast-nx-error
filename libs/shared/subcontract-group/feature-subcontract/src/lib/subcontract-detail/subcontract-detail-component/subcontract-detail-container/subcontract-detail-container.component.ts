@@ -34,6 +34,8 @@ export class SubcontractDetailContainerComponent
   subcontract: Subcontract | undefined | null;
   subcontractItems: SubcontractItem[] | undefined;
   itemDetailDisplayed: boolean | undefined;
+  projectId: string | undefined;
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -45,6 +47,7 @@ export class SubcontractDetailContainerComponent
 
     this.contract$.subscribe((res) => {
       this.subcontract = res;
+      this.projectId = this.subcontract?.project?.id;
       // console-log('SUBCONTRACT DETAIL CONTAINER subcontrasct from select subcontract', this.subcontract)
     });
   }
@@ -95,7 +98,7 @@ export class SubcontractDetailContainerComponent
 
   navigate(path: string){
     // console-log('SUBCONTRACT DETAIL CONTAINER, navigate, path', path);
-    this.router.navigate([ path ], { relativeTo: this.route });
+    this.router.navigate([ path ], {queryParams: {projectId: this.projectId}, relativeTo: this.route });
   }
 
   backToList() {

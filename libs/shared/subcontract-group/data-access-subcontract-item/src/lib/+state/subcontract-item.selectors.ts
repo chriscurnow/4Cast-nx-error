@@ -89,7 +89,10 @@ export const selectSubcontractId = createSelector(
   (state: SubcontractItemEntityState) => state.selectedId
 );
 
-
+export const selectCreateComplete = createSelector(
+  getSubcontractItemState,
+  (state: SubcontractItemEntityState, ) => state.createComplete
+);
 
 export const selectSubcontractItemId = createSelector(
   selectRouteParams,
@@ -100,7 +103,8 @@ export const selectSubcontractItemId = createSelector(
 
 export const selectUpdateComplete = createSelector(
   getSubcontractItemState,
-  (state: SubcontractItemEntityState) => state.updateComplete
+  getSelectedId,
+  (state: SubcontractItemEntityState, selectedId) => {state.updateComplete, selectedId}
 )
 
 

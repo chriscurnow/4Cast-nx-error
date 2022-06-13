@@ -74,7 +74,7 @@ export class SubcontractItemDetailContainerComponent implements OnInit, OnDestro
     item.subcontractId = this.subcontractId;
     this.store.dispatch(updateSubcontractItem({subcontractItem: item}));
     this.updateCompleteSubscription = this.store.select(selectUpdateComplete)
-      .subscribe((complete: boolean) => {
+      .subscribe((complete: boolean | void) => {
         if (complete){
           this.navigateBack();
         }

@@ -145,12 +145,13 @@ getItemsPath(projectId: string, subcontractId: string ) {
                 // item.itemDate = this.dateUtils.setDateFromTimestamp(item.itemTimestamp);
                 // item.itemTimestamp = undefined;
               }
-              //  console-log('SUBCONTRACT ITEMS SERVICE returning new item after date', item)
+               console.log('SUBCONTRACT ITEMS SERVICE returning new item after date', item)
               return item;
             }))
           }
         ))
     } catch (err: any) {
+      console.log('SUBCONTRACT ITEMS SERVICE an error occurred', err)
       return err;
     }
   }

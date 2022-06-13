@@ -30,7 +30,7 @@ import { DateTime } from 'luxon';
     { provide: MAT_DATE_FORMATS, useValue: MAT_LUXON_DATE_FORMATS },
   ],
 })
-export class SubcontractItemDetailUiComponent implements OnInit {
+export class SubcontractItemDetailUiComponent  {
   subcontractItem: SubcontractItem | undefined;
   subcontractItemDetailForm: UntypedFormGroup;
   itemId = '';
@@ -55,9 +55,7 @@ export class SubcontractItemDetailUiComponent implements OnInit {
     this.createForm();
   }
 
-  ngOnInit(): void {
-    console.log();
-  }
+
   createForm() {
     this.subcontractItemDetailForm = this.fb.group({
       id: '',
