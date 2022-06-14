@@ -92,6 +92,7 @@ export const initialState: SubcontractItemEntityState =
         });
         return res;
       }),
+
       on(SubcontractItemActions.createNewItemSuccess, (state, { item }) => {
         const res =subcontractItemAdapter.addOne(item, {
           ...state,

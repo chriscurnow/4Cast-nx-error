@@ -62,7 +62,7 @@ export class SubcontractItemsListContainerComponent implements OnInit {
   }
 
   createVariation(){
-  this.router.navigate(['../../detail', 'new'], { relativeTo: this.route });
+  this.router.navigate(['../../detail', 'new'], {queryParamsHandling: 'preserve', relativeTo: this.route });
 
     // this.store.dispatch(
     //   createNewSubcontractItem({

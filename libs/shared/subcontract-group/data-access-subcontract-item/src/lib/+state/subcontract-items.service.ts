@@ -156,18 +156,25 @@ getItemsPath(projectId: string, subcontractId: string ) {
     }
   }
 
-  updateSubcontractItem(item: SubcontractItem): Observable<void>{
+  updateSubcontractItem(item: SubcontractItem): Observable<void | DocumentReference<SubcontractItem>>{
     const projectId = item.projectId as string;
     const subcontractId = item.subcontractId as string;
     const itemsPath = this.getItemsPath(projectId, subcontractId);
-    const path = `${itemsPath}/${item.id}`
 
-    try {
-      const itemDoc = this.afs.doc<SubcontractItem>(path)
-      return from (itemDoc.update(item)) // return observable rather than promise.
-    } catch (err: any ) {
-      return err;
+    if(item.id){
+      const path = `${itemsPath}/${item.id}`;
+
+      try {
+        const itemDoc = this.afs.doc<SubcontractItem>(path);
+        return from(itemDoc.update(item)); // return observable rather than promise.
+      } catch (err: any) {
+        return err;
+      }
+    } else {
+      const collection = this.afs.collection<SubcontractItem>(itemsPath);
+      return from (collection.add(item))
     }
+
   }
 
   test() {

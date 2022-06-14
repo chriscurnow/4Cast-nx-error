@@ -2,6 +2,8 @@
 
 import { Injectable, PLATFORM_INITIALIZER } from '@angular/core';
 import { createEffect, Actions, ofType } from '@ngrx/effects';
+import { Location } from '@angular/common';
+import { Router } from '@angular/router';
 import { DataPersistence } from '@nrwl/angular';
 import { exhaustMap, map, mapTo, mergeMap, retryWhen } from 'rxjs/operators';
 import { from, Observable } from 'rxjs';
@@ -145,7 +147,7 @@ export class SubcontractItemEffects {
           a: ReturnType<typeof ItemActions.updateSubcontractItem>,
           state
         ) => {
-          // console-log('SUBCONTRACT ITEM EFFECTS - update subcontract item');
+          console.log('SUBCONTRACT ITEM EFFECTS - update subcontract item');
           // convert return promise to observable
           return this.subcontractItemsService.updateSubcontractItem(
             a.subcontractItem,
@@ -156,6 +158,7 @@ export class SubcontractItemEffects {
                 id: a.subcontractItem.id as string,
                 changes: a.subcontractItem
               }
+              this.location.back();
               return ItemActions.updateSubcontractItemSuccess(  { update } )
             })
           );
@@ -165,6 +168,8 @@ export class SubcontractItemEffects {
         },
       }
     )
+
+
   );
 
   private returnItems(subcontractId: string) {
@@ -181,6 +186,8 @@ export class SubcontractItemEffects {
     private readonly actions$: Actions,
     private readonly subcontractItemsService: SubcontractItemsService,
     private readonly dataPersistence: DataPersistence<SubcontractItemFeature.SubcontractItemPartialState>,
-    private loadSubcontractItemsService: LoadSubcontractItemsService
+    private loadSubcontractItemsService: LoadSubcontractItemsService,
+    private location: Location,
+    private router: Router
   ) {}
 }
