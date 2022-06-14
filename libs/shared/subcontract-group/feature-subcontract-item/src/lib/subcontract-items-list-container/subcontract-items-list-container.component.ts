@@ -58,27 +58,29 @@ export class SubcontractItemsListContainerComponent implements OnInit {
 
   itemSelected(item: SubcontractItem){
     // if ( item !== this.variationItems[0])
-    this.router.navigate(['../../detail', item.id], {relativeTo: this.route})
+    this.router.navigate(['../../detail', item.id], {queryParams: {'projectId': item.projectId}, relativeTo: this.route})
   }
 
   createVariation(){
-    this.store.dispatch(
-      createNewSubcontractItem({
-        projectId: this.projectId,
-        subcontractId: this.subcontractId,
-      })
-    );
+  this.router.navigate(['../../detail', 'new'], { relativeTo: this.route });
 
-    this.store.select(selectCreateComplete)
-    .subscribe((res: any) => {
-      console.log('SUBCONTRACT ITEMS LIST CONTAINER result of selectCreateComplete', res)
-      // const complete = res.createComplete;
-      // const id = res.selectedId;
-      const id = 'new';
-      if(res){
-        this.router.navigate(['../../detail', id], { relativeTo: this.route})
-      }
-    })
+    // this.store.dispatch(
+    //   createNewSubcontractItem({
+    //     projectId: this.projectId,
+    //     subcontractId: this.subcontractId,
+    //   })
+    // );
+
+    // this.store.select(selectCreateComplete)
+    // .subscribe((res: any) => {
+    //   console.log('SUBCONTRACT ITEMS LIST CONTAINER result of selectCreateComplete', res)
+    //   // const complete = res.createComplete;
+    //   // const id = res.selectedId;
+    //   const id = 'new';
+    //   if(res){
+    //     this.router.navigate(['../../detail', id], { relativeTo: this.route})
+    //   }
+    // })
 
     // console-log('CREATE VARIATION');
     // let subscriptionInitialised = false

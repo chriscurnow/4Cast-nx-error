@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Location } from '@angular/common';
 import { Store } from '@ngrx/store';
-import { SubcontractItem } from '@workspace/shared/data-access-models';
+import { SubcontractItem, SubcontractItemClass } from '@workspace/shared/data-access-models';
 import {
   SubcontractItemPartialState,
   selectSubcontractItem,
@@ -13,7 +13,7 @@ import { SubcontractPartialState, displayItemDetail, hideItemDetail } from '@wor
 import { Observable, Subscription } from 'rxjs';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { CurrencyClass, NavigationService } from '@workspace/shared/util';
-import { DateTime } from 'luxon';
+
 
 @Component({
   selector: 'fourcast-subcontract-item-detail-container',
@@ -53,17 +53,33 @@ export class SubcontractItemDetailContainerComponent implements OnInit, OnDestro
 
     this.route.paramMap.subscribe((params: ParamMap) => {
       const itemId = params.get('subcontractItemId');
-      this.subcontractId = params.get('contractId') as string;
-      this.projectId = params.get('projectId') as string;
-      // console-log('params projectId', this.projectId);
-      // console-log('params subcontractId', this.subcontractId);
-      // console-log('params itemId', itemId);
-      this.store.dispatch(loadSubcontractItem({
-        projectId: this.projectId as string,
-        subcontractId: this.subcontractId as string,
-        subcontractItemId: itemId as string}))
+      this.subcontractId = params.get('subcontractId') as string;
+
+
+      this.route.queryParamMap.subscribe((params: ParamMap) => {
+        this.projectId = params.get('projectId') as string;
+        // console.log('params projectId', this.projectId);
+        // console.log('params subcontractId', this.subcontractId);
+        // console.log('params itemId', itemId);
+        if (itemId === 'new') {
+          this.subcontractItem = SubcontractItemClass.createNew(
+            this.subcontractId,
+            this.projectId
+          );
+        } else {
+          this.store.dispatch(
+            loadSubcontractItem({
+              projectId: this.projectId as string,
+              subcontractId: this.subcontractId as string,
+              subcontractItemId: itemId as string,
+            })
+          );
+        }
+      })
+
+
     })
-    this.subcontractStore.dispatch(displayItemDetail())
+    // this.subcontractStore.dispatch(displayItemDetail())
   }
 
   saveItem(item: SubcontractItem){
