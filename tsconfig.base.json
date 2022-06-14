@@ -35,6 +35,9 @@
       "@workspace/shared-subcontract-items": [
         "libs/shared/subcontract-items/src/index.ts"
       ],
+      "@workspace/shared-temp-ui-subcontract": [
+        "libs/shared/temp/ui-subcontract/src/index.ts"
+      ],
       "@workspace/shared-ui-default-module-collection": [
         "libs/shared/ui-default-module-collection/src/index.ts"
       ],

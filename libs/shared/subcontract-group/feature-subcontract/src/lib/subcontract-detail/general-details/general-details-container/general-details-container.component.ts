@@ -12,11 +12,11 @@ import { Observable } from 'rxjs';
 
 
 @Component({
-  selector: 'fourcast-contract-general-detail-container',
-  templateUrl: './contract-general-detail-container.component.html',
-  styleUrls: ['./contract-general-detail-container.component.scss'],
+  selector: 'fourcast-general-details-container',
+  templateUrl: './general-details-container.component.html',
+  styleUrls: ['./general-details-container.component.scss'],
 })
-export class ContractGeneralDetailContainerComponent implements OnInit {
+export class GeneralDetailsContainerComponent implements OnInit {
   contract$: Observable<Subcontract | undefined>;
   subcontract: Subcontract | undefined;
 

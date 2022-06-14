@@ -13,6 +13,7 @@ export interface SubcontractItemEntityState
   loaded: boolean; // has the SubcontractItem list been loaded
   error: string | null; // last known error (if any)
   updateComplete: boolean;
+  createComplete: boolean;
 }
 
 export interface SubcontractItemPartialState {
@@ -37,6 +38,7 @@ export const initialState: SubcontractItemEntityState =
     loaded: false,
     error: null,
     updateComplete: false,
+    createComplete: false,
   });
 
 
@@ -86,14 +88,17 @@ export const initialState: SubcontractItemEntityState =
         const res = subcontractItemAdapter.addOne(item, {
           ...state,
           loaded: false,
+          createComplete: false,
         });
         return res;
       }),
+
       on(SubcontractItemActions.createNewItemSuccess, (state, { item }) => {
         const res =subcontractItemAdapter.addOne(item, {
           ...state,
           loaded: true,
           selectedId: item.id as string,
+          createComplete: true
         });
         return res;
           // ...state,

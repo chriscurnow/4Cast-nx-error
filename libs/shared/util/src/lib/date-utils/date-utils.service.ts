@@ -49,12 +49,12 @@ export class DateUtilsService {
    * Takes a timesamp returned from Firestore and converts to milliseconds
    */
   setDateFromTimestamp(timestamp: DateTimestamp | undefined): number | undefined {
-    console.log('SUBCONTRACT ITEM SERVICE setDateFromTimestamp, timestamp', timestamp)
+    // console-log('SUBCONTRACT ITEM SERVICE setDateFromTimestamp, timestamp', timestamp)
     if (timestamp) {
       const seconds: number =
         timestamp.seconds + timestamp.nanoseconds / 1000000;
       const m: number = seconds * 1000;
-      console.log('SUBCONTRACT ITEM SERVICE return value', m);
+      // console-log('SUBCONTRACT ITEM SERVICE return value', m);
       return m;
     } else {
       return undefined;

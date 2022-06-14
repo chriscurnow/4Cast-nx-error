@@ -1,17 +1,8 @@
 {
-  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "libs/shared/subcontract-group/ui-subcontract/src",
   "projectType": "library",
+  "sourceRoot": "libs/shared/subcontract-group/ui-subcontract/src",
+  "prefix": "fourcast",
   "targets": {
-    "lint": {
-      "executor": "@nrwl/linter:eslint",
-      "outputs": ["{options.outputFile}"],
-      "options": {
-        "lintFilePatterns": [
-          "libs/shared/subcontract-group/ui-subcontract/**/*.ts"
-        ]
-      }
-    },
     "test": {
       "executor": "@nrwl/jest:jest",
       "outputs": ["coverage/libs/shared/subcontract-group/ui-subcontract"],
@@ -19,6 +10,15 @@
         "tsConfig": "libs/shared/subcontract-group/ui-subcontract/tsconfig.json",
         "jestConfig": "libs/shared/subcontract-group/ui-subcontract/jest.config.ts",
         "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/shared/subcontract-group/ui-subcontract/**/*.ts",
+          "libs/shared/subcontract-group/ui-subcontract/**/*.html"
+        ]
       }
     }
   },

@@ -34,6 +34,8 @@ export class SubcontractDetailContainerComponent
   subcontract: Subcontract | undefined | null;
   subcontractItems: SubcontractItem[] | undefined;
   itemDetailDisplayed: boolean | undefined;
+  projectId: string | undefined;
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -45,6 +47,8 @@ export class SubcontractDetailContainerComponent
 
     this.contract$.subscribe((res) => {
       this.subcontract = res;
+      this.projectId = this.subcontract?.project?.id;
+      // console-log('SUBCONTRACT DETAIL CONTAINER subcontrasct from select subcontract', this.subcontract)
     });
   }
 
@@ -71,7 +75,7 @@ export class SubcontractDetailContainerComponent
   //       delay(0)
   //     )
   //     .subscribe((displayed: boolean | undefined) => {
-  //       console.log('Item detail displayed', displayed);
+  //       console-log('Item detail displayed', displayed);
   //       this.itemDetailDisplayed = displayed;
   //     });
   // }
@@ -90,6 +94,11 @@ export class SubcontractDetailContainerComponent
     this.store.dispatch(
       createVariation({ subcontract: this.subcontract as Subcontract })
     );
+  }
+
+  navigate(path: string){
+    // console-log('SUBCONTRACT DETAIL CONTAINER, navigate, path', path);
+    this.router.navigate([ path ], {queryParams: {projectId: this.projectId}, relativeTo: this.route });
   }
 
   backToList() {

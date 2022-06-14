@@ -53,8 +53,8 @@ export const selectSubcontract = createSelector(
 
   selectSubcontractEntities,
   selectRouteParams,
-  (entities, { contractId }) => {
-    return entities[contractId];
+  (entities, { subcontractId }) => {
+    return entities[subcontractId];
   }
   // as long as the param in the router is called 'contractId', this should select the correct subcontract
   // INTERESTING, note exmaple uses cars where our original used entities. Are they the same thing?

@@ -4,6 +4,8 @@
 </div> -->
 <button (click)="loadSubcontracts()">Reload</button>
 <!-- <div>{{ filteredSubcontracts | json }}</div> -->
-<fourcast-contract-list-view [subcontracts]="filteredSubcontracts" (subcontractSelected)="rowSelected($event)"></fourcast-contract-list-view>
-
+<fourcast-subcontract-list-ui
+  [subcontracts]="subcontracts"
+  (subcontractSelected)="rowSelected($event)">
+</fourcast-subcontract-list-ui>
 

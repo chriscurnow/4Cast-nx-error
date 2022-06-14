@@ -145,28 +145,36 @@ getItemsPath(projectId: string, subcontractId: string ) {
                 // item.itemDate = this.dateUtils.setDateFromTimestamp(item.itemTimestamp);
                 // item.itemTimestamp = undefined;
               }
-              //  console.log('SUBCONTRACT ITEMS SERVICE returning new item after date', item)
+               console.log('SUBCONTRACT ITEMS SERVICE returning new item after date', item)
               return item;
             }))
           }
         ))
     } catch (err: any) {
+      console.log('SUBCONTRACT ITEMS SERVICE an error occurred', err)
       return err;
     }
   }
 
-  updateSubcontractItem(item: SubcontractItem): Observable<void>{
+  updateSubcontractItem(item: SubcontractItem): Observable<void | DocumentReference<SubcontractItem>>{
     const projectId = item.projectId as string;
     const subcontractId = item.subcontractId as string;
     const itemsPath = this.getItemsPath(projectId, subcontractId);
-    const path = `${itemsPath}/${item.id}`
 
-    try {
-      const itemDoc = this.afs.doc<SubcontractItem>(path)
-      return from (itemDoc.update(item)) // return observable rather than promise.
-    } catch (err: any ) {
-      return err;
+    if(item.id){
+      const path = `${itemsPath}/${item.id}`;
+
+      try {
+        const itemDoc = this.afs.doc<SubcontractItem>(path);
+        return from(itemDoc.update(item)); // return observable rather than promise.
+      } catch (err: any) {
+        return err;
+      }
+    } else {
+      const collection = this.afs.collection<SubcontractItem>(itemsPath);
+      return from (collection.add(item))
     }
+
   }
 
   test() {
@@ -209,13 +217,13 @@ getItemsPath(projectId: string, subcontractId: string ) {
     ): Observable<SubcontractItem> {
     // TODO: [FCSUB-464] [FCSUB-463] Use generic getDocument from DataService
     const path = `projects/${projectId}/subcontracts/${subcontractId}/subcontractItems/${itemId}`;
-    console.log('path: ', path);
+    // console-log('path: ', path);
     return this.afs
       .doc<SubcontractItem>(path)
       .valueChanges()
       .pipe(
         map((subcontractItem: SubcontractItem | undefined) => {
-          console.log('subcontract item from service', subcontractItem)
+          // console-log('subcontract item from service', subcontractItem)
           if (subcontractItem) {
             return subcontractItem;
           } else {

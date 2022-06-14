@@ -2,12 +2,11 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { SharedUiDefaultModuleCollectionModule } from '@workspace/shared-ui-default-module-collection';
-import { SharedSubcontractGroupUiSubcontractItemsModule } from '@workspace/shared-subcontract-group-ui-subcontract-items';
+import { SharedUiSubcontractItemsModule } from '@workspace/shared-subcontract-group-ui-subcontract-items';
 import { SubcontractItemDetailContainerComponent } from './subcontract-item-detail-container/subcontract-item-detail-container.component';
 import { SharedSubcontractGroupDataAccessSubcontractItemModule } from '@workspace/shared/subcontract-group/data-access-subcontract-item';
 import { SubcontractItemsListContainerComponent } from './subcontract-items-list-container/subcontract-items-list-container.component';
 import { VariationsContainerComponent } from './variations-container/variations-container.component';
-
 
 @NgModule({
   imports: [
@@ -20,10 +19,14 @@ import { VariationsContainerComponent } from './variations-container/variations-
           {
             path: '',
             pathMatch: 'full',
-            redirectTo: 'items-list',
+            redirectTo: 'list',
           },
           {
-            path: 'items-list',
+            path: 'list/for-subcontract',
+            component: SubcontractItemsListContainerComponent
+          },
+          {
+            path: 'list',
             component: SubcontractItemsListContainerComponent,
           },
           {
@@ -34,7 +37,7 @@ import { VariationsContainerComponent } from './variations-container/variations-
       },
     ]),
     SharedSubcontractGroupDataAccessSubcontractItemModule,
-    SharedSubcontractGroupUiSubcontractItemsModule,
+    SharedUiSubcontractItemsModule,
     SharedUiDefaultModuleCollectionModule,
   ],
   declarations: [
@@ -42,5 +45,6 @@ import { VariationsContainerComponent } from './variations-container/variations-
     SubcontractItemsListContainerComponent,
     VariationsContainerComponent,
   ],
+  exports: [SubcontractItemsListContainerComponent],
 })
 export class SharedSubcontractGroupFeatureSubcontractItemModule {}

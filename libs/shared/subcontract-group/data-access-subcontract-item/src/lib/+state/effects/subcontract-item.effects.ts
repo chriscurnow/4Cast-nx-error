@@ -2,6 +2,8 @@
 
 import { Injectable, PLATFORM_INITIALIZER } from '@angular/core';
 import { createEffect, Actions, ofType } from '@ngrx/effects';
+import { Location } from '@angular/common';
+import { Router } from '@angular/router';
 import { DataPersistence } from '@nrwl/angular';
 import { exhaustMap, map, mapTo, mergeMap, retryWhen } from 'rxjs/operators';
 import { from, Observable } from 'rxjs';
@@ -84,10 +86,10 @@ export class SubcontractItemEffects {
           .getSubcontractItem(a.projectId, a.subcontractId, a.subcontractItemId)
           .pipe(
             map((subcontractItem: SubcontractItem) => {
-              console.log(
-                'SUBCONTRACT ITEM EFFECTS subcontract Item',
-                subcontractItem
-              );
+              // console-log(
+              //   'SUBCONTRACT ITEM EFFECTS subcontract Item',
+              //   subcontractItem
+              // );
               return ItemActions.loadSubcontractItemSuccess({
                 subcontractItem,
               });
@@ -110,7 +112,7 @@ export class SubcontractItemEffects {
           a: ReturnType<typeof ItemActions.createNewSubcontractItem>,
           state
         ) => {
-          console.log('SUBCONTRACT ITEM EFFECTS - create new subcontract item');
+          // console-log('SUBCONTRACT ITEM EFFECTS - create new subcontract item');
           // convert return promise to observable
           const res = this.subcontractItemsService.createNewSubcontractItem(
             a.projectId,
@@ -118,7 +120,7 @@ export class SubcontractItemEffects {
           );
           return res.pipe(
             map((item: SubcontractItem | undefined) => {
-              console.log('About to return sub item', item);
+              // console-log('About to return sub item', item);
               if (item) {
                 return ItemActions.createNewItemSuccess({ item: item });
               } else {
@@ -156,6 +158,7 @@ export class SubcontractItemEffects {
                 id: a.subcontractItem.id as string,
                 changes: a.subcontractItem
               }
+              this.location.back();
               return ItemActions.updateSubcontractItemSuccess(  { update } )
             })
           );
@@ -165,6 +168,8 @@ export class SubcontractItemEffects {
         },
       }
     )
+
+
   );
 
   private returnItems(subcontractId: string) {
@@ -181,6 +186,8 @@ export class SubcontractItemEffects {
     private readonly actions$: Actions,
     private readonly subcontractItemsService: SubcontractItemsService,
     private readonly dataPersistence: DataPersistence<SubcontractItemFeature.SubcontractItemPartialState>,
-    private loadSubcontractItemsService: LoadSubcontractItemsService
+    private loadSubcontractItemsService: LoadSubcontractItemsService,
+    private location: Location,
+    private router: Router
   ) {}
 }

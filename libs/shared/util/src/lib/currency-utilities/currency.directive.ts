@@ -44,7 +44,7 @@ export class CurrencyDirective {
   }
 
   private formatValue(value: CurrencyClass| null) {
-    console.log('CURRENCY DIRECTIVE formatValue', value);
+    // console-log('CURRENCY DIRECTIVE formatValue', value);
     let displayValue: string | null = '';
 
   if( value === null || value === undefined){
@@ -100,7 +100,7 @@ export class CurrencyDirective {
     if (!this._value) {
       this.setValue(new CurrencyClass());
     }
-    console.log('CURRENCY DIRECTIVE host listern on change, value', this._value?.valuesOnly)
+    // console-log('CURRENCY DIRECTIVE host listern on change, value', this._value?.valuesOnly)
     this.onChange.emit(this._value?.valuesOnly);
   }
 
@@ -112,7 +112,7 @@ export class CurrencyDirective {
   }
 
   setValue(value: any) {
-    console.log('CURRENCY DIRECTIVE set value, input value', value);
+    // console-log('CURRENCY DIRECTIVE set value, input value', value);
     this._value = value;
   }
 

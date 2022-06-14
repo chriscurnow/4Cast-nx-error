@@ -21,12 +21,12 @@ import { CurrencyClass, Currency } from '@workspace/shared/util';
 import { DateTime } from 'luxon';
 
 @Component({
-  selector: 'fourcast-subcontract-item-list',
+  selector: 'fourcast-subcontract-item-list-ui',
   templateUrl: './subcontract-item-list.component.html',
   styleUrls: ['./subcontract-item-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SubcontractItemListComponent implements OnInit {
+export class SubcontractItemListUIComponent implements OnInit {
   public selection: SelectionModel<any>;
   public dataSource: MatTableDataSource<any>;
 
@@ -52,11 +52,11 @@ export class SubcontractItemListComponent implements OnInit {
 
 
   @Input() set subcontractItems(v: SubcontractItem[]) {
-    console.log('SUBCONTRACT ITEMS LIST COMPONENT Subcontract Items', v);
+    // console-log('SUBCONTRACT ITEMS LIST COMPONENT Subcontract Items', v);
     this._subcontractItems = v;
     this.dataSource = new MatTableDataSource(v);
     this.dataSource.sort = this.sort;
-    console.log('data source', this.dataSource);
+    // console-log('data source', this.dataSource);
   }
 
   @Output() itemSelected = new EventEmitter<SubcontractItem>();
@@ -80,8 +80,8 @@ export class SubcontractItemListComponent implements OnInit {
 
   formatDate(value: any): string {
      const dateTime = DateTime.fromISO(value);
-     console.log('Format Date, value', value)
-     console.log('format date, dateTime', dateTime);
+    //  console-log('Format Date, value', value)
+    //  console-log('format date, dateTime', dateTime);
      return dateTime.toLocaleString()
 
   }

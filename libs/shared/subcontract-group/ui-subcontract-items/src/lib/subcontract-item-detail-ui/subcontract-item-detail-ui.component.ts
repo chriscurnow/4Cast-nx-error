@@ -1,7 +1,7 @@
 /* eslint-disable @nrwl/nx/enforce-module-boundaries */
 import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 import { SubcontractItem } from '@workspace/shared/data-access-models';
-import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
+import { UntypedFormGroup, FormBuilder, Validators } from '@angular/forms';
 import {
   DateAdapter,
   MAT_DATE_FORMATS,
@@ -30,7 +30,7 @@ import { DateTime } from 'luxon';
     { provide: MAT_DATE_FORMATS, useValue: MAT_LUXON_DATE_FORMATS },
   ],
 })
-export class SubcontractItemDetailUiComponent implements OnInit {
+export class SubcontractItemDetailUiComponent  {
   subcontractItem: SubcontractItem | undefined;
   subcontractItemDetailForm: UntypedFormGroup;
   itemId = '';
@@ -44,28 +44,26 @@ export class SubcontractItemDetailUiComponent implements OnInit {
 
 
     }
-    console.log('Subcontract Item', v)
+    // console-log('Subcontract Item', v)
     this.subcontractItemDetailForm.reset(v);
   }
 
   @Output() saveItem = new EventEmitter<SubcontractItem>();
   @Output() navigateBack = new EventEmitter<null>();
 
-  constructor(private fb: UntypedFormBuilder) {
+  constructor(private fb: FormBuilder) {
     this.createForm();
   }
 
-  ngOnInit(): void {
-    console.log();
-  }
+
   createForm() {
     this.subcontractItemDetailForm = this.fb.group({
       id: '',
       itemDateTime: [null, Validators.required],
       itemNumber: null,
       title: [null, Validators.required],
-      details: null,
-      description: null,
+      details: '',
+      description: '',
       contractAmount: [null, Validators.required]
     });
   }

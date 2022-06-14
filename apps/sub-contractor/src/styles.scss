@@ -31,3 +31,20 @@ h2 {
   text-transform: capitalize;
   color: var(--primary);
 }
+
+.mat-header-cell {
+  font-size: 14px;
+  font-weight: 600;
+  background-color: #eee;
+}
+
+.mat-cell {
+  font-size: 12px;
+  font-weight: 400;
+  color: #0091ae;
+}
+
+tr.mat-row.cdk-row {
+  height: 32px;
+}
+

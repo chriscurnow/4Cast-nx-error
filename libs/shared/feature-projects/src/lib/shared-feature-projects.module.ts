@@ -12,6 +12,8 @@ import { RouterModule } from '@angular/router';
         children: [
           { path: 'subcontracts',
             loadChildren: () =>
+
+                // eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
                 import(
                   '@workspace/shared/subcontract-group/feature-subcontract'
                 ).then(

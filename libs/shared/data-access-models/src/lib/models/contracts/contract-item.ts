@@ -63,7 +63,22 @@ export enum ContractItemStatus {
 //     sortComparer: sortByNumber,
 //   });
 
-export function createItemForApprovedContract(subcontract: Subcontract): any {
+
+export class SubcontractItemClass {
+
+
+  static createNew(subcontractId: string, projectId: string){
+    const item: SubcontractItem = {
+      id: '',
+      isDraft: true,
+      itemDateTime: DateTime.now(),
+      subcontractId,
+      projectId
+    }
+
+    return item;
+  }
+  static createItemForApprovedContract(subcontract: Subcontract): any {
     const contractItem: SubcontractItem = {
       id: undefined,
       isNew: undefined,
@@ -102,3 +117,8 @@ export function createItemForApprovedContract(subcontract: Subcontract): any {
     const contractUpdate = JSON.parse(JSON.stringify(contractItem));
     return contractUpdate;
   }
+
+}
+
+
+

@@ -1,2 +1,2 @@
 export * from './subcontract-list-container.component';
-export * from './subcontract-list/subcontract-list.component';
+export * from './subcontract-list-ui/subcontract-list.component';
