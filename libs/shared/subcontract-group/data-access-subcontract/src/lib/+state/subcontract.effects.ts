@@ -39,14 +39,7 @@ export class SubcontractEffects {
         action: ReturnType<typeof SubcontractActions.loadSubcontractsList>,
         state: SubcontractFeature.SubcontractPartialState
       ) => {
-
-        return this.subcontractService
-          .getContractsList()
-          .pipe(
-            map((subcontracts) =>
-              SubcontractActions.loadSubcontractsListSuccess({ subcontracts })
-            )
-          );
+       return this.getContractListResult();
       },
       onError: (action, error) => {
         console.error('Error', error);
@@ -79,4 +72,14 @@ export class SubcontractEffects {
 
     })
   );
+
+  getContractListResult(){
+     return this.subcontractService
+       .getContractsList()
+       .pipe(
+         map((subcontracts) =>
+           SubcontractActions.loadSubcontractsListSuccess({ subcontracts })
+         )
+       );
+  }
 }

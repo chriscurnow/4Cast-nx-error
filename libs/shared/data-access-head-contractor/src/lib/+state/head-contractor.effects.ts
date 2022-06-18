@@ -2,34 +2,34 @@ import { Injectable } from '@angular/core';
 import { createEffect, Actions, ofType } from '@ngrx/effects';
 import { DataPersistence } from '@nrwl/angular';
 
-import * as HeadContractorActions from './head-contractor.actions';
-import * as HeadContractorFeature from './head-contractor.reducer';
+import * as CompanyActions from './head-contractor.actions';
+import * as CompanyFeature from './head-contractor.reducer';
 
 @Injectable()
-export class HeadContractorEffects {
+export class CompanyEffects {
   init$ = createEffect(() =>
-    this.dataPersistence.fetch(HeadContractorActions.init, {
+    this.dataPersistence.fetch(CompanyActions.init, {
       run: (
-        action: ReturnType<typeof HeadContractorActions.init>,
-        state: HeadContractorFeature.HeadContractorPartialState
+        action: ReturnType<typeof CompanyActions.init>,
+        state: CompanyFeature.CompanyPartialState
       ) => {
         // Your custom service 'load' logic goes here. For now just return a success action...
-        return HeadContractorActions.loadHeadContractorSuccess({
-          headContractor: [],
+        return CompanyActions.loadCompanySuccess({
+          {company},
         });
       },
       onError: (
-        action: ReturnType<typeof HeadContractorActions.init>,
+        action: ReturnType<typeof CompanyActions.init>,
         error
       ) => {
         console.error('Error', error);
-        return HeadContractorActions.loadHeadContractorFailure({ error });
+        return CompanyActions.loadCompanyFailure({ error });
       },
     })
   );
 
   constructor(
     private readonly actions$: Actions,
-    private readonly dataPersistence: DataPersistence<HeadContractorFeature.HeadContractorPartialState>
+    private readonly dataPersistence: DataPersistence<CompanyFeature.CompanyPartialState>
   ) {}
 }

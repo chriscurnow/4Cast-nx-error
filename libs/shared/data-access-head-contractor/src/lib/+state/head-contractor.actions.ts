@@ -1,14 +1,37 @@
 import { createAction, props } from '@ngrx/store';
-import { HeadContractorEntity } from './head-contractor.models';
+// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+import { Company } from '@workspace/shared/data-access-models';
+export const init = createAction('[Company Page] Init');
 
-export const init = createAction('[HeadContractor Page] Init');
+export const loadCompany = createAction(
+  '[Company/API] load Company',
+  props<{ companyId: string}>
 
-export const loadHeadContractorSuccess = createAction(
-  '[HeadContractor/API] Load HeadContractor Success',
-  props<{ headContractor: HeadContractorEntity[] }>()
+)
+
+export const loadCompanySuccess = createAction(
+  '[Company/API] Load Company Success',
+  props<{ company: Company }>()
 );
 
-export const loadHeadContractorFailure = createAction(
-  '[HeadContractor/API] Load HeadContractor Failure',
+export const loadCompanyFailure = createAction(
+  '[Company/API] Load Company Failure',
   props<{ error: any }>()
 );
+
+
+export const loadCompanyList = createAction(
+  '[Company/API] load Company List'
+)
+
+export const loadCompanyListSuccess = createAction(
+  '[Company/API] Load Company Success',
+  props<{ companies: Company[] }>()
+);
+
+export const loadCompanyListFailure = createAction(
+  '[Company/API] Load Company Failure',
+  props<{ error: any }>()
+);
+
+

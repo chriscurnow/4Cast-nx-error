@@ -1,44 +1,44 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import {
   HEAD_CONTRACTOR_FEATURE_KEY,
-  State,
-  headContractorAdapter,
+  CompanyEntityState,
+  companyAdapter,
 } from './head-contractor.reducer';
 
-// Lookup the 'HeadContractor' feature state managed by NgRx
-export const getHeadContractorState = createFeatureSelector<State>(
+// Lookup the 'Company' feature state managed by NgRx
+export const getCompanyState = createFeatureSelector<CompanyEntityState>(
   HEAD_CONTRACTOR_FEATURE_KEY
 );
 
-const { selectAll, selectEntities } = headContractorAdapter.getSelectors();
+const { selectAll, selectEntities } = companyAdapter.getSelectors();
 
-export const getHeadContractorLoaded = createSelector(
-  getHeadContractorState,
-  (state: State) => state.loaded
+export const getCompanyLoaded = createSelector(
+  getCompanyState,
+  (state: CompanyEntityState) => state.loaded
 );
 
-export const getHeadContractorError = createSelector(
-  getHeadContractorState,
-  (state: State) => state.error
+export const getCompanyError = createSelector(
+  getCompanyState,
+  (state: CompanyEntityState) => state.error
 );
 
-export const getAllHeadContractor = createSelector(
-  getHeadContractorState,
-  (state: State) => selectAll(state)
+export const getAllCompany = createSelector(
+  getCompanyState,
+  (state: CompanyEntityState) => selectAll(state)
 );
 
-export const getHeadContractorEntities = createSelector(
-  getHeadContractorState,
-  (state: State) => selectEntities(state)
+export const getCompanyEntities = createSelector(
+  getCompanyState,
+  (state: CompanyEntityState) => selectEntities(state)
 );
 
 export const getSelectedId = createSelector(
-  getHeadContractorState,
-  (state: State) => state.selectedId
+  getCompanyState,
+  (state: CompanyEntityState) => state.selectedId
 );
 
 export const getSelected = createSelector(
-  getHeadContractorEntities,
+  getCompanyEntities,
   getSelectedId,
   (entities, selectedId) => (selectedId ? entities[selectedId] : undefined)
 );

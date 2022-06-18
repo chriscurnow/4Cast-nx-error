@@ -73,7 +73,7 @@ export function createCompanyContact(companyContact: CompanyContact | undefined)
   const newCompanyContact: CompanyContact = {};
   if (companyContact){
     setTypeValue<CompanyContact>(companyContact, newCompanyContact, 'trade')
-    newCompanyContact.company = createCompany(companyContact.company)
+    // newCompanyContact.company = createCompany(companyContact.company)
   }
   return newCompanyContact
 }

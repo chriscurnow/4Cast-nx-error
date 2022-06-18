@@ -1,47 +1,63 @@
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 import { createReducer, on, Action } from '@ngrx/store';
 
-import * as HeadContractorActions from './head-contractor.actions';
-import { HeadContractorEntity } from './head-contractor.models';
+import * as CompanyActions from './head-contractor.actions';
+// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+import { Company } from '@workspace/shared/data-access-models';
+// import { CompanyEntity as Company } from './head-contractor.models';
 
-export const HEAD_CONTRACTOR_FEATURE_KEY = 'headContractor';
+export const HEAD_CONTRACTOR_FEATURE_KEY = 'company';
 
-export interface State extends EntityState<HeadContractorEntity> {
-  selectedId?: string | number; // which HeadContractor record has been selected
-  loaded: boolean; // has the HeadContractor list been loaded
+export interface CompanyEntityState extends EntityState<Company> {
+  selectedId?: string | number; // which Company record has been selected
+  loaded: boolean; // has the Company list been loaded
   error?: string | null; // last known error (if any)
 }
 
-export interface HeadContractorPartialState {
-  readonly [HEAD_CONTRACTOR_FEATURE_KEY]: State;
+export function sortByName(a: Company, b: Company): number {
+ if (a.companyName && b.companyName){
+   return a.companyName.localeCompare(b.companyName);
+ } else {
+  return 0;
+ }
+
 }
 
-export const headContractorAdapter: EntityAdapter<HeadContractorEntity> =
-  createEntityAdapter<HeadContractorEntity>();
+export interface CompanyPartialState {
+  readonly [HEAD_CONTRACTOR_FEATURE_KEY]: CompanyEntityState;
+}
 
-export const initialState: State = headContractorAdapter.getInitialState({
-  // set initial required properties
-  loaded: false,
-});
+export const companyAdapter: EntityAdapter<Company> =
+  createEntityAdapter<Company>({
+    sortComparer: sortByName
+  });
 
-const headContractorReducer = createReducer(
+export const initialState: CompanyEntityState =
+  companyAdapter.getInitialState({
+    // set initial required properties
+    selectedId: '',
+    loaded: false,
+    error: null
+  });
+
+const companyReducer = createReducer(
   initialState,
-  on(HeadContractorActions.init, (state) => ({
+  on(CompanyActions.init, (state) => ({
     ...state,
     loaded: false,
     error: null,
   })),
   on(
-    HeadContractorActions.loadHeadContractorSuccess,
-    (state, { headContractor }) =>
-      headContractorAdapter.setAll(headContractor, { ...state, loaded: true })
+    CompanyActions.loadCompanySuccess,
+    (state, { company }) =>
+      companyAdapter.setOne(company, { ...state, loaded: true })
   ),
-  on(HeadContractorActions.loadHeadContractorFailure, (state, { error }) => ({
+  on(CompanyActions.loadCompanyFailure, (state, { error }) => ({
     ...state,
     error,
   }))
 );
 
-export function reducer(state: State | undefined, action: Action) {
-  return headContractorReducer(state, action);
+export function reducer(state: CompanyEntityState | undefined, action: Action) {
+  return companyReducer(state, action);
 }
