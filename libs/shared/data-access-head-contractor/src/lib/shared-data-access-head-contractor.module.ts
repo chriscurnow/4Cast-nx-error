@@ -2,17 +2,17 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-import * as fromHeadContractor from './+state/head-contractor.reducer';
-import { HeadContractorEffects } from './+state/head-contractor.effects';
+import * as fromCompany from './+state/company.reducer';
+import { CompanyEffects } from './+state/company.effects';
 
 @NgModule({
   imports: [
     CommonModule,
     StoreModule.forFeature(
-      fromHeadContractor.HEAD_CONTRACTOR_FEATURE_KEY,
-      fromHeadContractor.reducer
+      fromCompany.COMPANY_FEATURE_KEY,
+      fromCompany.reducer
     ),
-    EffectsModule.forFeature([HeadContractorEffects]),
+    EffectsModule.forFeature([CompanyEffects]),
   ],
 })
 export class SharedDataAccessHeadContractorModule {}

@@ -1,12 +1,12 @@
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 import { createReducer, on, Action } from '@ngrx/store';
 
-import * as CompanyActions from './head-contractor.actions';
+import * as CompanyActions from './company.actions';
 // eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
 import { Company } from '@workspace/shared/data-access-models';
-// import { CompanyEntity as Company } from './head-contractor.models';
+// import { CompanyEntity as Company } from './company.models';
 
-export const HEAD_CONTRACTOR_FEATURE_KEY = 'company';
+export const COMPANY_FEATURE_KEY = 'company';
 
 export interface CompanyEntityState extends EntityState<Company> {
   selectedId?: string | number; // which Company record has been selected
@@ -24,7 +24,7 @@ export function sortByName(a: Company, b: Company): number {
 }
 
 export interface CompanyPartialState {
-  readonly [HEAD_CONTRACTOR_FEATURE_KEY]: CompanyEntityState;
+  readonly [COMPANY_FEATURE_KEY]: CompanyEntityState;
 }
 
 export const companyAdapter: EntityAdapter<Company> =

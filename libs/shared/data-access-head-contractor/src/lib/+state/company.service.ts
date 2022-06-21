@@ -12,7 +12,7 @@ export class CompanyService {
 
   getCompanyList() {
     return this.afs
-      .collectionGroup<Company>('companies')
+      .collection<Company>('suppliers') // use suppliers for the momemnt because we have data there
       .valueChanges()
       .pipe(
         map((companies) => {

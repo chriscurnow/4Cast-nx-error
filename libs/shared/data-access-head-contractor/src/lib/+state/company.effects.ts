@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
 import { createEffect, Actions, ofType } from '@ngrx/effects';
 import { DataPersistence } from '@nrwl/angular';
+import { Company } from '@workspace/shared/data-access-models';
 
-import * as CompanyActions from './head-contractor.actions';
-import * as CompanyFeature from './head-contractor.reducer';
+import * as CompanyActions from './company.actions';
+import * as CompanyFeature from './company.reducer';
+import { CompanyService } from './company.service';
 
 @Injectable()
 export class CompanyEffects {
@@ -14,8 +16,10 @@ export class CompanyEffects {
         state: CompanyFeature.CompanyPartialState
       ) => {
         // Your custom service 'load' logic goes here. For now just return a success action...
+        this.companyService.getCompanyList
+        const company: Company = {};
         return CompanyActions.loadCompanySuccess({
-          {company},
+          company,
         });
       },
       onError: (
@@ -30,6 +34,7 @@ export class CompanyEffects {
 
   constructor(
     private readonly actions$: Actions,
-    private readonly dataPersistence: DataPersistence<CompanyFeature.CompanyPartialState>
+    private readonly dataPersistence: DataPersistence<CompanyFeature.CompanyPartialState>,
+    private companyService: CompanyService
   ) {}
 }

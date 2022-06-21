@@ -7,7 +7,7 @@ export interface Supplier extends Company {
 
 export function createSupplier(supplier: Supplier | undefined){
 
-  let newSupplier = {};
+  const newSupplier = {};
   if(supplier){
     // newSupplier = createCompany(supplier);
     const properties = ['isSupplier'];

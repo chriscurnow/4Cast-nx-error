@@ -1,13 +1,13 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import {
-  HEAD_CONTRACTOR_FEATURE_KEY,
+  COMPANY_FEATURE_KEY,
   CompanyEntityState,
   companyAdapter,
-} from './head-contractor.reducer';
+} from './company.reducer';
 
 // Lookup the 'Company' feature state managed by NgRx
 export const getCompanyState = createFeatureSelector<CompanyEntityState>(
-  HEAD_CONTRACTOR_FEATURE_KEY
+  COMPANY_FEATURE_KEY
 );
 
 const { selectAll, selectEntities } = companyAdapter.getSelectors();
@@ -22,7 +22,7 @@ export const getCompanyError = createSelector(
   (state: CompanyEntityState) => state.error
 );
 
-export const getAllCompany = createSelector(
+export const getAllCompanies = createSelector(
   getCompanyState,
   (state: CompanyEntityState) => selectAll(state)
 );

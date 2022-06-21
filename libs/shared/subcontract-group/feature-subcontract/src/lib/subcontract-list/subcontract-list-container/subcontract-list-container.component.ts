@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit  } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Subcontract } from '@workspace/shared/data-access-models';
 import {
