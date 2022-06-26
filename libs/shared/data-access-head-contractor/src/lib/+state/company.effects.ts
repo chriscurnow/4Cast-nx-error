@@ -6,6 +6,7 @@ import { Company } from '@workspace/shared/data-access-models';
 import * as CompanyActions from './company.actions';
 import * as CompanyFeature from './company.reducer';
 import { CompanyService } from './company.service';
+import { map } from 'rxjs/operators'
 
 @Injectable()
 export class CompanyEffects {
@@ -16,11 +17,15 @@ export class CompanyEffects {
         state: CompanyFeature.CompanyPartialState
       ) => {
         // Your custom service 'load' logic goes here. For now just return a success action...
-        this.companyService.getCompanyList
-        const company: Company = {};
-        return CompanyActions.loadCompanySuccess({
-          company,
-        });
+        return this.companyService
+          .getCompanyList()
+          .pipe(
+            map((companies: Company[]) =>
+              CompanyActions.loadCompanyListSuccess({ companies })
+            )
+          );
+
+
       },
       onError: (
         action: ReturnType<typeof CompanyActions.init>,

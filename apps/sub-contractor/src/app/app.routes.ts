@@ -62,16 +62,24 @@ export const routingConfiguration: ExtraOptions = {
               //   ),
             },
 
-            { path: 'projects',
+            {
+              path: 'companies',
               loadChildren: () =>
-              import(
-                `@workspace/shared/feature-projects`
-              ).then(
-                (module) => module.SharedFeatureProjectsModule
-              )
-              },
+                import(`@workspace/shared/feature-head-contractor`).then(
+                  (module) => module.SharedFeatureHeadContractorModule
+                ),
+            },
 
-            { path: 'subcontract-items',
+            {
+              path: 'projects',
+              loadChildren: () =>
+                import(`@workspace/shared/feature-projects`).then(
+                  (module) => module.SharedFeatureProjectsModule
+                ),
+            },
+
+            {
+              path: 'subcontract-items',
               loadChildren: () =>
                 import(
                   '@workspace/shared/subcontract-group/feature-subcontract-item'

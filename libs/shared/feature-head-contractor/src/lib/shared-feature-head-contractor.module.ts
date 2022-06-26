@@ -12,7 +12,10 @@ import { CompanyDetailUiComponent } from './company-detail/company-detail-ui/com
     CommonModule,
     SharedDataAccessHeadContractorModule,
     RouterModule.forChild([
-      /* {path: '', pathMatch: 'full', component: InsertYourComponentHere} */
+
+      {path: '', pathMatch: 'full', redirectTo: 'list'},
+      {path: 'list', component: CompanyListContainerComponent}
+
     ]),
   ],
   declarations: [

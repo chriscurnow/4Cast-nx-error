@@ -55,8 +55,21 @@ const companyReducer = createReducer(
   on(CompanyActions.loadCompanyFailure, (state, { error }) => ({
     ...state,
     error,
+  })),
+  on(CompanyActions.loadCompanyList, (state) => ({
+    ...state,
+    loaded: false,
+    error: null
+  })
+  ),
+  on(CompanyActions.loadCompanyListSuccess, (state, { companies }) =>
+    companyAdapter.setAll(companies, { ...state, loaded: true})
+  ),
+   on(CompanyActions.loadCompanyListFailure, (state, { error }) => ({
+    ...state,
+    error,
   }))
-);
+)
 
 export function reducer(state: CompanyEntityState | undefined, action: Action) {
   return companyReducer(state, action);

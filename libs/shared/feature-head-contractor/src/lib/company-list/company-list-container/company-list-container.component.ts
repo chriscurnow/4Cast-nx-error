@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Company } from '@workspace/shared/data-access-models';
 
-import { loadCompanyList, CompanyPartialState, getAllCompanies  } from '@workspace/shared/data-access-head-contractor';
+import { loadCompanyList, CompanyPartialState, getAllCompanies, init  } from '@workspace/shared/data-access-head-contractor';
 import { Observable } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -23,12 +23,13 @@ export class CompanyListContainerComponent implements OnInit {
     this.companies$ = this.store.select(getAllCompanies)
     this.companies$.subscribe((res) => {
        this.companies = res;
+       console.log('COMPANY LIST CONTAINER companies', this.companies)
     }
    )
    }
 
   ngOnInit(): void {
-    this.store.dispatch(loadCompanyList())
+    this.store.dispatch(init())
   }
 
 }

@@ -25,12 +25,12 @@ export const loadCompanyList = createAction(
 )
 
 export const loadCompanyListSuccess = createAction(
-  '[Company/API] Load Company Success',
+  '[Company/API] Load Company List Success',
   props<{ companies: Company[] }>()
 );
 
 export const loadCompanyListFailure = createAction(
-  '[Company/API] Load Company Failure',
+  '[Company/API] Load Company List Failure',
   props<{ error: any }>()
 );
 
