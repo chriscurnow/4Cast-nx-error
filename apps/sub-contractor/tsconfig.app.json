@@ -10,7 +10,9 @@
     "../../libs/subcontractor/feature-dashboard/src/index.ts",
     "../../libs/subcontractor/feature-contracts/src/index.ts",
     "../../libs/shared-feature-projects/src/index.ts",
-    "../../libs/shared/feature-projects/src/index.ts"
+    "../../libs/shared/feature-projects/src/index.ts",
+    "../../libs/libs/shared/feature-head-contractor/src/index.ts",
+    "../../libs/shared/feature-head-contractor/src/index.ts"
   ],
   "exclude": ["jest.config.ts"]
 }
