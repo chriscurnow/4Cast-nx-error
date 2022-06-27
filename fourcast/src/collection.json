@@ -1,0 +1,10 @@
+{
+  "$schema": "../node_modules/@angular-devkit/schematics/collection-schema.json",
+  "schematics": {
+    "fourcast": {
+      "description": "A blank schematic.",
+      "factory": "./fourcast/index#fourcast",
+      "schema": "./fourcast/schema.json"
+    }
+  }
+}

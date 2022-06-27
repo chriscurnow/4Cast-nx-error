@@ -18,7 +18,8 @@ export interface Company {
   // tenant: Tenant;
 }
 
-export function createCompany(
+export class CompanyClass {
+ static createCompany(
   company: Company | undefined
 ): Company {
   const properties = ['id', 'companyName', 'abn', 'abbreviation', 'code'];
@@ -30,6 +31,8 @@ export function createCompany(
   }
   return newCompany;
 }
+}
+
 
 
 
@@ -70,7 +73,7 @@ export function createCompanyContact(companyContact: CompanyContact | undefined)
   const newCompanyContact: CompanyContact = {};
   if (companyContact){
     setTypeValue<CompanyContact>(companyContact, newCompanyContact, 'trade')
-    newCompanyContact.company = createCompany(companyContact.company)
+    // newCompanyContact.company = createCompany(companyContact.company)
   }
   return newCompanyContact
 }

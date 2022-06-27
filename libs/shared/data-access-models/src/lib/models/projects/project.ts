@@ -3,7 +3,7 @@ import { Superintendent } from './superintendent';
 import { ProjectDates } from './project-dates';
 
 
-import { Company, createCompany } from '..';
+import { Company } from '..';
 import { setTypeValues } from '@workspace/shared/util';
 import { createSuperintendant } from '.';
 
@@ -36,7 +36,7 @@ export function createProject(project: Project | undefined): Project {
       'clientName'
     ];
     setTypeValues(project, newProject, properties);
-    newProject.company = createCompany(project.company );
+    // newProject.company = createCompany(project.company );
     newProject.superintendent = createSuperintendant(project.superintendent);
 
   }

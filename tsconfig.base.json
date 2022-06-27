@@ -23,6 +23,9 @@
       "@workspace/contractor/feature-dashboard": [
         "libs/contractor/feature-dashboard/src/index.ts"
       ],
+      "@workspace/libs/shared/feature-head-contractor": [
+        "libs/libs/shared/feature-head-contractor/src/index.ts"
+      ],
       "@workspace/shared-subcontract-group-ui-sub-detail": [
         "libs/shared/subcontract-group/ui-sub-detail/src/index.ts"
       ],
@@ -47,6 +50,9 @@
       "@workspace/shared/data-access-auth": [
         "libs/shared/data-access-auth/src/index.ts"
       ],
+      "@workspace/shared/data-access-head-contractor": [
+        "libs/shared/data-access-head-contractor/src/index.ts"
+      ],
       "@workspace/shared/data-access-models": [
         "libs/shared/data-access-models/src/index.ts"
       ],
@@ -61,6 +67,9 @@
       ],
       "@workspace/shared/data-access-user": [
         "libs/shared/data-access-user/src/index.ts"
+      ],
+      "@workspace/shared/feature-head-contractor": [
+        "libs/shared/feature-head-contractor/src/index.ts"
       ],
       "@workspace/shared/feature-login": [
         "libs/shared/feature-login/src/index.ts"
