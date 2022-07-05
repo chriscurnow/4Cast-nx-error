@@ -91,6 +91,21 @@ const subcontractReducer = createReducer(
     error,
   })),
 
+  on(SubcontractActions.updateSubcontract, (state) => ({
+    ...state,
+    loaded: false,
+    error: null,
+  })),
+
+  on(SubcontractActions.updateSubcontractSuccess, (state, { subcontract }) =>
+    subcontractAdapter.setOne(subcontract, { ...state, loaded: true })
+  ),
+
+  on(SubcontractActions.updateSubcontractFailure, (state, { error }) => ({
+    ...state,
+    error,
+  })),
+
   on(SubcontractActions.displayItemDetail, (state) => ({
     ...state,
     itemDetailDisplayed: true,

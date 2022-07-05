@@ -16,7 +16,9 @@ import { Subscription } from 'rxjs';
 // } from '@angular/material-moment-adapter';
 import { LuxonDateAdapter, MAT_LUXON_DATE_FORMATS } from '@angular/material-luxon-adapter';
 import { DateTime } from 'luxon';
-
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { ReactiveFormsModule } from '@angular/forms';
 import {
   DateAdapter,
   MAT_DATE_FORMATS,
@@ -26,6 +28,7 @@ import { DateUtilsService } from '@workspace/shared/util';
 
 // eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
 import { ContractDates } from '@workspace/shared/data-access-models';
+import { ImportState } from '@ngrx/store-devtools/src/actions';
 
 @Component({
   selector: 'fourcast-subcontract-dates',
@@ -34,6 +37,8 @@ import { ContractDates } from '@workspace/shared/data-access-models';
     './subcontract-dates.component.scss',
     '../scss/subcontract-detail.scss',
   ],
+  standalone: true,
+  imports: [MatDatepickerModule, MatFormFieldModule, ReactiveFormsModule],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -66,7 +71,10 @@ export class SubcontractDatesComponent
   datesForm: UntypedFormGroup;
   subscriptions: Subscription[] = [];
 
-  constructor(private fb: UntypedFormBuilder, private dateUtils: DateUtilsService) {
+  constructor(
+    private fb: UntypedFormBuilder,
+    private dateUtils: DateUtilsService
+  ) {
     this.datesForm = this.fb.group({
       contract: [null, Validators.required],
       commencement: [null, Validators.required],
@@ -101,7 +109,6 @@ export class SubcontractDatesComponent
 
   onChange: any = () => {};
   onTouched: any = () => {};
-
 
   registerOnChange(fn: any): void {
     this.onChange = fn;

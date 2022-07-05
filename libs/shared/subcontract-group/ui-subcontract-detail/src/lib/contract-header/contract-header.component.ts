@@ -2,11 +2,15 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Project } from '@workspace/shared/data-access-models';
 import { Subcontract } from '@workspace/shared/data-access-models';
+import { MatCardModule } from '@angular/material/card';
+
 
 @Component({
   selector: 'fourcast-subcontract-header',
   templateUrl: './contract-header.component.html',
   styleUrls: ['./contract-header.component.scss'],
+  standalone: true,
+  imports: [MatCardModule],
 })
 export class SubcontractHeaderComponent {
   project: Project;

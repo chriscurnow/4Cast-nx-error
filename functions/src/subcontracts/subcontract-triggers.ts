@@ -1,5 +1,6 @@
 import * as admin from 'firebase-admin';
 import * as functions from 'firebase-functions';
+import { setId}  from '../utils/utils';
 // import { SubcontractService, ContractItem } from '@4cast/subcontract';
 
 
@@ -14,11 +15,7 @@ if (!admin.apps.length) {
 
 export const subcontractCreate = functions.firestore.document('subcontracts/{id}')
 .onCreate((snap, context) => {
-
-    const id = snap.id;
-    const data = {id};
-    return snap.ref.set(data, {merge: true});
-
+    return setId(snap);
 });
 
 export const subcontractUpdate = functions.firestore.document('subcontracts/{subcontractId}')

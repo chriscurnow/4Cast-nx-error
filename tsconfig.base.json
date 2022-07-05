@@ -26,6 +26,12 @@
       "@workspace/libs/shared/feature-head-contractor": [
         "libs/libs/shared/feature-head-contractor/src/index.ts"
       ],
+      "@workspace/shared-global-group-company-group-data-access-company": [
+        "libs/shared/global-group/company-group/data-access-company/src/index.ts"
+      ],
+      "@workspace/shared-global-group-company-group-feature-head-contractor": [
+        "libs/shared/global-group/company-group/feature-head-contractor/src/index.ts"
+      ],
       "@workspace/shared-subcontract-group-ui-sub-detail": [
         "libs/shared/subcontract-group/ui-sub-detail/src/index.ts"
       ],
@@ -68,9 +74,6 @@
       "@workspace/shared/data-access-user": [
         "libs/shared/data-access-user/src/index.ts"
       ],
-      "@workspace/shared/feature-head-contractor": [
-        "libs/shared/feature-head-contractor/src/index.ts"
-      ],
       "@workspace/shared/feature-login": [
         "libs/shared/feature-login/src/index.ts"
       ],
@@ -79,6 +82,18 @@
       ],
       "@workspace/shared/feature-toolbar-user": [
         "libs/shared/feature-toolbar-user/src/index.ts"
+      ],
+      "@workspace/shared/global-group/project-group/data-access-project": [
+        "libs/shared/global-group/project-group/data-access-project/src/index.ts"
+      ],
+      "@workspace/shared/global-group/project-group/feature-project": [
+        "libs/shared/global-group/project-group/feature-project/src/index.ts"
+      ],
+      "@workspace/shared/global/company/data-access-company": [
+        "libs/shared/global/company/data-access-company/src/index.ts"
+      ],
+      "@workspace/shared/global/company/feature-head-contractor": [
+        "libs/shared/global/company/feature-head-contractor/src/index.ts"
       ],
       "@workspace/shared/styles-theming": [
         "libs/shared/styles-theming/src/index.ts"
@@ -116,7 +131,8 @@
       ],
       "@workspace/subcontractor/feature-dashboard": [
         "libs/subcontractor/feature-dashboard/src/index.ts"
-      ]
+      ],
+      "@workspace/test": ["libs/test/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

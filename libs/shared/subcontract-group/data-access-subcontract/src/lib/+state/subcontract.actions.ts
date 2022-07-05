@@ -31,6 +31,21 @@ export const loadSubcontractsListFailure = createAction(
   props<{ error: any }>()
 );
 
+export const updateSubcontract = createAction(
+  '[Contract/API] Update Subcontract',
+  props<{subcontract: Subcontract}>()
+);
+
+export const updateSubcontractSuccess = createAction(
+  '[Contract/API] Update Subcontract Success',
+  props<{ subcontract: Subcontract }>()
+);
+
+export const updateSubcontractFailure = createAction(
+  '[Contract/API] Update Subcontract Failure',
+  props<{ error: any }>()
+);
+
 export const displayItemDetail = createAction(
   '[Subcontract Detail Form] Display Item Detail'
 )

@@ -5,31 +5,37 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
-
-
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { SubcontractHeaderComponent } from '../contract-header/contract-header.component';
 
 @Component({
   selector: 'fourcast-subcontract-detail',
   templateUrl: './subcontract-detail.component.html',
   styleUrls: ['./subcontract-detail.component.scss'],
+  standalone: true,
+  imports: [
+    ReactiveFormsModule,
+    MatCardModule,
+    MatFormFieldModule,
+    SubcontractHeaderComponent,
+  ],
+
 })
 export class SubcontractDetailComponent implements OnInit {
   contractId: string;
   detailForm: FormGroup;
 
-
-
-
-
-
   @Output() navigateBack = new EventEmitter<null>();
   @Output() createItemZero = new EventEmitter<null>();
   @Output() createNewVariation = new EventEmitter<null>();
 
-  constructor(private fb: FormBuilder,
-              private router: Router,
-              private route: ActivatedRoute
-              ) {
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {
     this.createForm();
   }
 
