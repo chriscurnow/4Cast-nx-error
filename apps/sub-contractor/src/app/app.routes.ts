@@ -7,12 +7,11 @@ import {
   SharedDataAccessAuthModule,
 } from '@workspace/shared/data-access-auth';
 
-
 export const routingConfiguration: ExtraOptions = {
   paramsInheritanceStrategy: 'always',
   enableTracing: false,
   relativeLinkResolution: 'corrected',
-  initialNavigation: 'enabledBlocking'
+  initialNavigation: 'enabledBlocking',
 };
 
 @NgModule({
@@ -45,7 +44,7 @@ export const routingConfiguration: ExtraOptions = {
             {
               path: '',
               pathMatch: 'full',
-              redirectTo: 'subcontractor-feature-contracts',
+              redirectTo: 'subcontractor-feature-head-contractor',
             },
             {
               path: 'subcontractor-feature-contracts',
@@ -63,10 +62,13 @@ export const routingConfiguration: ExtraOptions = {
             },
 
             {
-              path: 'companies',
+              path: 'subcontractor-feature-head-contractor',
               loadChildren: () =>
-                import(`@workspace/shared/feature-head-contractor`).then(
-                  (module) => module.SharedFeatureHeadContractorModule
+                import(
+                  `@workspace/shared/global/company/feature-head-contractor`
+                ).then(
+                  (module) =>
+                    module.SharedGlobalCompanyFeatureHeadContractorModule
                 ),
             },
 

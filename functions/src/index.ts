@@ -17,5 +17,7 @@ exports.makeUppercase = functions.firestore.document('/messages/{documentId}')
 
 
 export * from './subcontracts';
+export * from './global/company';
+export * from './global/project';
 // export * from './subcontractVariations/subcontract-variations-triggers';
 // export * from './contract-items/contract-items-triggers';

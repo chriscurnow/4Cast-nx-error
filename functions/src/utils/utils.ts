@@ -7,6 +7,13 @@ import { options } from '../config'
 export const collectionBase = options.collectionBase;
 export const projectId = ''
 
+
+export const setId = function(snap: functions.firestore.QueryDocumentSnapshot ){
+   const id = snap.id;
+   const data = { id };
+   return snap.ref.set(data, { merge: true });
+}
+
 export const updateCounter = function (path: string, collectionName: string,  state: any): Promise<any> {
         // Select a shard of the counter at random:
         const num_shards = 10;
@@ -123,6 +130,7 @@ export const updateCounter = function (path: string, collectionName: string,  st
 
     })
 
+    // eslint-disable-next-line @typescript-eslint/ban-types
     function getAndSetCount(collectionName: string, callback: Function) {
         // Sum the count of each shard in the subcollection
 
@@ -139,6 +147,7 @@ export const updateCounter = function (path: string, collectionName: string,  st
         .catch(error => console.log(error));
     }
 
+    // eslint-disable-next-line @typescript-eslint/ban-types
     function setCounter(collectionName: string, newCount: number, callback: Function) {
         const docRef = admin.firestore().doc('collectionCounts/'+collectionName);
         const shard_id = '0';

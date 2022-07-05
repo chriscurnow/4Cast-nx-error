@@ -12,7 +12,7 @@ import { CurrencyUtilitiesModule } from '@workspace/shared/util';
 
 @NgModule({
   declarations: [
-    SubcontractHeaderComponent,
+
     SubcontractDatesComponent,
     SubcontractItemComponent,
   ],
@@ -26,7 +26,7 @@ import { CurrencyUtilitiesModule } from '@workspace/shared/util';
     CurrencyUtilitiesModule,
   ],
   exports: [
-    SubcontractHeaderComponent,
+
     SubcontractDatesComponent,
     SubcontractItemComponent,
   ],

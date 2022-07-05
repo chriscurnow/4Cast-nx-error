@@ -8,6 +8,7 @@ import { setTypeValue, setTypeValues } from '@workspace/shared/util';
 export interface Company {
   id?: string;
   companyName?: string;
+  lowerCaseName?: string;
   companyContact?: CompanyContact;
   abn?: string;
   abbreviation?: string;

@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 import {
   SubcontractPartialState,
   selectSubcontract,
+  updateSubcontract,
   selectItemDetailDisplayed,
   loadSubcontractsList,
 } from '@workspace/shared/subcontract-group/data-access-subcontract';
@@ -94,6 +95,12 @@ export class SubcontractDetailContainerComponent
     this.store.dispatch(
       createVariation({ subcontract: this.subcontract as Subcontract })
     );
+  }
+
+  updateEntity(subcontract: Subcontract ){
+    this.store.dispatch(updateSubcontract(
+      {subcontract}
+    ))
   }
 
   navigate(path: string){

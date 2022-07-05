@@ -1,32 +1,28 @@
-import { Rule, SchematicContext, Tree, apply, mergeWith, template, url } from '@angular-devkit/schematics';
-import { strings } from '@angular-devkit/core';
+import { Rule, SchematicContext, Tree } from '@angular-devkit/schematics';
+// import { strings } from '@angular-devkit/core';
 import { Schema } from './schema';
-
+//  apply, mergeWith, template, , url
 // You don't have to export the function as default. You can also have more than one rule factory
 // per file.
 export function fourcast(_options: Schema): Rule {
 
   return (tree: Tree, _context: SchematicContext) => {
 
-    const sourceTemplates = url('./files');;
+    // const sourceTemplates = url('./files');;
 
-    const sourceParameterizedTemplates = apply(sourceTemplates, [
-      template({
-        ..._options,
-        ...strings,
-        addExclamation
-      })
-    ])
+    // const sourceParameterizedTemplates = apply(sourceTemplates, [
+    //   template({
+    //     ..._options,
+    //     ...strings
+    //   })
+    // ])
 
-    function addExclamation(value: string): string {
-      return value + '!';
-    }
+    tree.create(`${name}.js`, `console.log('Hello!');`);
 
-    // tree.create('hello.js', `console.log('Hello ${name}!');`);
+    return tree;
 
-    // return tree;
-
-    return mergeWith(sourceParameterizedTemplates)(tree, _context);
+    // const mergetree = mergeWith(sourceParameterizedTemplates)(tree, _context);
+    // return mergetree;
 
   };
 }

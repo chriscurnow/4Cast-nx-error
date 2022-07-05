@@ -1,0 +1,27 @@
+{
+  "projectType": "library",
+  "sourceRoot": "libs/shared/global-group/project-group/feature-project/src",
+  "prefix": "fourcast",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": [
+        "coverage/libs/shared/global-group/project-group/feature-project"
+      ],
+      "options": {
+        "jestConfig": "libs/shared/global-group/project-group/feature-project/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/shared/global-group/project-group/feature-project/**/*.ts",
+          "libs/shared/global-group/project-group/feature-project/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": ["scope:feature"]
+}
