@@ -1,7 +1,10 @@
 import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy} from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 // TODO: [NX-19] resolve circular dependency
-
+import { MatCardModule } from '@angular/material/card';
+import { MatTabsModule } from '@angular/material/tabs';
+import { RouterModule } from '@angular/router';
+import { SubcontractHeaderComponent } from '@workspace/shared-subcontract-group-ui-subcontract-detail'
 
 
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
@@ -17,6 +20,14 @@ interface Link {
   selector: 'fourcast-subcontract-detail-ui',
   templateUrl: './subcontract-detail-ui.component.html',
   styleUrls: ['./subcontract-detail-ui.component.scss'],
+  standalone: true,
+  imports: [
+    SubcontractHeaderComponent,
+    MatCardModule,
+    MatTabsModule,
+    RouterModule,
+  ],
+
   // changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SubcontractDetailUIComponent implements OnInit {
@@ -44,10 +55,12 @@ export class SubcontractDetailUIComponent implements OnInit {
   }
 
   @Input() set itemDetailDisplayed(v: boolean | undefined) {
-    if(v) {this._itemDetailDisplayed = v;} else {
+    if (v) {
+      this._itemDetailDisplayed = v;
+    } else {
       this._itemDetailDisplayed = false;
     }
-  };
+  }
 
   @Input() set items(v: SubcontractItem[] | undefined) {
     this._items = v;
@@ -63,11 +76,7 @@ export class SubcontractDetailUIComponent implements OnInit {
   @Output() createNewVariation = new EventEmitter<null>();
   @Output() activatedLink = new EventEmitter<string>();
 
-  constructor(
-    private fb: FormBuilder,
-    private router: Router,
-    private route: ActivatedRoute
-  ) {
+  constructor(private fb: FormBuilder, private route: ActivatedRoute) {
     this.createForm();
   }
 
@@ -138,7 +147,8 @@ export class SubcontractDetailUIComponent implements OnInit {
   }
 
   onSubmit(): void {
-    this.router.navigate(['../../list'], { relativeTo: this.route });
+    this.back();
+    // this.router.navigate(['../../list'], { relativeTo: this.route });
 
     // just now, there is nothing to save from this form
     // this.subcontractService.saveForm(this.subcontract, this.subcontractForm.value)

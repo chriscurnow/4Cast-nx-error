@@ -1,0 +1,6 @@
+<h1>Head Contractors</h1>
+<fourcast-company-list-ui
+  [entities]="companies"
+  (entitySelected)="rowSelected($event)"
+  (createNew)="createNew()"
+></fourcast-company-list-ui>

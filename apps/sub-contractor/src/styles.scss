@@ -15,6 +15,12 @@
   margin-right: 20px;
 }
 
+.flex-col-0 {
+  flex: 1;
+  margin-right: 20px;
+  flex-grow: 0;
+}
+
 .flex-col:last-child {
   margin-right: 0;
 }
@@ -34,17 +40,25 @@ h2 {
 
 .mat-header-cell {
   font-size: 14px;
-  font-weight: 600;
-  background-color: #eee;
+  font-weight: 400;
+  background-color: rgba(29,150,178,1);
+  color: white;
 }
 
 .mat-cell {
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 400;
-  color: #0091ae;
+  color: #666;
 }
 
 tr.mat-row.cdk-row {
   height: 32px;
 }
 
+tr.mat-header-row.cdk-header-row {
+  height:40px;
+}
+
+.mat-row:nth-child(even){
+    background-color: #eee;
+}

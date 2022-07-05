@@ -12,7 +12,9 @@
     "../../libs/shared-feature-projects/src/index.ts",
     "../../libs/shared/feature-projects/src/index.ts",
     "../../libs/libs/shared/feature-head-contractor/src/index.ts",
-    "../../libs/shared/feature-head-contractor/src/index.ts"
+    "../../libs/shared/feature-head-contractor/src/index.ts",
+    "../../libs/shared/global-group/project-group/feature-project/src/index.ts",
+    "../../libs/shared/global/company/feature-head-contractor/src/index.ts"
   ],
   "exclude": ["jest.config.ts"]
 }
