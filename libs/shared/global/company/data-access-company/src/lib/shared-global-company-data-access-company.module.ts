@@ -4,7 +4,7 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import * as fromCompany from './+state/company.reducer';
 import { CompanyEffects } from './+state/company.effects';
-
+import * as actions from './+state/company.actions';
 @NgModule({
   imports: [
     CommonModule,
@@ -14,5 +14,6 @@ import { CompanyEffects } from './+state/company.effects';
     ),
     EffectsModule.forFeature([CompanyEffects]),
   ],
+
 })
 export class SharedGlobalCompanyDataAccessCompanyModule {}

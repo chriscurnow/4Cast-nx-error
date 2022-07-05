@@ -21,11 +21,13 @@ import {
 } from '@workspace/shared/subcontract-group/data-access-subcontract-item';
 import { delay, startWith } from 'rxjs/operators';
 
-
+import { SubcontractDetailUIComponent } from '../subcontract-detail-ui/subcontract-detail-ui.component';
 
 @Component({
   templateUrl: './subcontract-detail-container.component.html',
   styleUrls: ['./subcontract-detail-container.component.scss'],
+  standalone: true,
+  imports: [SubcontractDetailUIComponent ],
 })
 export class SubcontractDetailContainerComponent
   implements OnInit, AfterViewInit
@@ -97,15 +99,16 @@ export class SubcontractDetailContainerComponent
     );
   }
 
-  updateEntity(subcontract: Subcontract ){
-    this.store.dispatch(updateSubcontract(
-      {subcontract}
-    ))
+  updateEntity(subcontract: Subcontract) {
+    this.store.dispatch(updateSubcontract({ subcontract }));
   }
 
-  navigate(path: string){
+  navigate(path: string) {
     // console-log('SUBCONTRACT DETAIL CONTAINER, navigate, path', path);
-    this.router.navigate([ path ], {queryParams: {projectId: this.projectId}, relativeTo: this.route });
+    this.router.navigate([path], {
+      queryParams: { projectId: this.projectId },
+      relativeTo: this.route,
+    });
   }
 
   backToList() {

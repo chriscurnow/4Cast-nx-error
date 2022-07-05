@@ -9,12 +9,15 @@ import {
   loadSubcontractsList,
 } from '@workspace/shared/subcontract-group/data-access-subcontract';
 import { Observable } from 'rxjs';
+import { GeneralDetailsUIComponent } from '../general-details-ui/general-details-ui.component';
 
 
 @Component({
   selector: 'fourcast-general-details-container',
   templateUrl: './general-details-container.component.html',
   styleUrls: ['./general-details-container.component.scss'],
+  standalone: true,
+  imports: [GeneralDetailsUIComponent],
 })
 export class GeneralDetailsContainerComponent implements OnInit {
   contract$: Observable<Subcontract | undefined>;

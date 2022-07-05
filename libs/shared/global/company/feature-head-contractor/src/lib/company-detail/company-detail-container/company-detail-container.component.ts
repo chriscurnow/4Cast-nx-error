@@ -8,7 +8,7 @@ import {
   init,
   updateCompany,
   getCompanyLoaded,
-} from '@workspace/shared-global-group-company-group-data-access-company';
+} from '@workspace/shared/global/company/data-access-company';
 import { Observable } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Company } from '@workspace/shared/data-access-models'; // import model
