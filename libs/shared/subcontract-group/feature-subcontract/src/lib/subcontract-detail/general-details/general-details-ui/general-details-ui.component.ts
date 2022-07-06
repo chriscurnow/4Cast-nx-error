@@ -4,13 +4,23 @@ import { Subcontract } from '@workspace/shared/data-access-models';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { SubcontractDatesComponent } from '@workspace/shared-subcontract-group-ui-subcontract-detail';
 
 @Component({
   selector: 'fourcast-general-details-ui',
   templateUrl: './general-details-ui.component.html',
   styleUrls: ['./general-details-ui.component.scss'],
   standalone: true,
-  imports: [ReactiveFormsModule, MatCardModule, MatFormFieldModule],
+  imports: [
+    ReactiveFormsModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    SubcontractDatesComponent,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GeneralDetailsUIComponent implements OnInit {

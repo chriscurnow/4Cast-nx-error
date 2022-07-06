@@ -18,6 +18,7 @@ import { LuxonDateAdapter, MAT_LUXON_DATE_FORMATS } from '@angular/material-luxo
 import { DateTime } from 'luxon';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
 import {
   DateAdapter,
@@ -28,7 +29,7 @@ import { DateUtilsService } from '@workspace/shared/util';
 
 // eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
 import { ContractDates } from '@workspace/shared/data-access-models';
-import { ImportState } from '@ngrx/store-devtools/src/actions';
+
 
 @Component({
   selector: 'fourcast-subcontract-dates',
@@ -38,7 +39,12 @@ import { ImportState } from '@ngrx/store-devtools/src/actions';
     '../scss/subcontract-detail.scss',
   ],
   standalone: true,
-  imports: [MatDatepickerModule, MatFormFieldModule, ReactiveFormsModule],
+  imports: [
+    MatDatepickerModule,
+    MatFormFieldModule,
+    ReactiveFormsModule,
+    MatInputModule,
+  ],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,

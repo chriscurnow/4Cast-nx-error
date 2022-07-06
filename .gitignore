@@ -40,3 +40,6 @@ Thumbs.db
 .angular/
 
 .angular
+/hello/
+/fourcast/
+fourcast/node_modules/readable-stream/lib/_stream_duplex.js

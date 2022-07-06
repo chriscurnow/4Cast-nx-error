@@ -51,7 +51,7 @@ export class SubcontractDetailContainerComponent
     this.contract$.subscribe((res) => {
       this.subcontract = res;
       this.projectId = this.subcontract?.project?.id;
-      // console-log('SUBCONTRACT DETAIL CONTAINER subcontrasct from select subcontract', this.subcontract)
+      console.log('SUBCONTRACT DETAIL CONTAINER subcontrasct from select subcontract', this.subcontract)
     });
   }
 
