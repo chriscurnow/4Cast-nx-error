@@ -1,8 +1,12 @@
 import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy} from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 // TODO: [NX-19] resolve circular dependency
+import { ReactiveFormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatButtonModule } from '@angular/material/button';
 import { RouterModule } from '@angular/router';
 import { SubcontractHeaderComponent } from '@workspace/shared-subcontract-group-ui-subcontract-detail'
 
@@ -22,9 +26,13 @@ interface Link {
   styleUrls: ['./subcontract-detail-ui.component.scss'],
   standalone: true,
   imports: [
+    CommonModule,
+    ReactiveFormsModule,
     SubcontractHeaderComponent,
     MatCardModule,
     MatTabsModule,
+    MatFormFieldModule,
+    MatButtonModule,
     RouterModule,
   ],
 
@@ -46,6 +54,7 @@ export class SubcontractDetailUIComponent implements OnInit {
   activeLink = this.links[0];
 
   @Input() set subcontract(v: Subcontract | null | undefined) {
+    console.log('SUBCONTRACT DETAIL UI subcontract input', v)
     if (v) {
       this._subcontract = v;
       this._subcontract.description = 'Plumbing';
