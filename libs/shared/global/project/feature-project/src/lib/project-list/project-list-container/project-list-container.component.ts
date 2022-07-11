@@ -43,8 +43,14 @@ export class ProjectListContainerComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-      if(this.entitiesSubscription){
-        this.entitiesSubscription.unsubscribe();
-      }
+    if (this.entitiesSubscription) {
+      this.entitiesSubscription.unsubscribe();
+    }
+  }
+
+  createNew() {
+    this.router.navigate(['../detail', 'new'], {
+      relativeTo: this.route,
+    });
   }
 }

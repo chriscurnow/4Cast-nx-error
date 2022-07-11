@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ViewChild, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
@@ -17,37 +18,40 @@ import { Project } from '@workspace/shared/data-access-models'; // import model 
 @Component({
   selector: 'fourcast-project-list-ui',
 
-
   standalone: true,
   imports: [CommonModule, MatTableModule],
 
-
   templateUrl: './project-list-ui.component.html',
-  styleUrls: ['./project-list-ui.component.css']
+  styleUrls: ['./project-list-ui.component.css'],
 })
-export class ProjectListUiComponent  {
+export class ProjectListUiComponent {
   dataSource!: MatTableDataSource<Project>;
   selection!: SelectionModel<Project>;
 
+  constructor(private router: Router,
+              private route: ActivatedRoute ){}
+
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-  @ViewChild(MatTable) table!: MatTable< Project>;
+  @ViewChild(MatTable) table!: MatTable<Project>;
 
-  displayedColumns = [
-    "number", "name"
-  ];
+    @Output() createNew = new EventEmitter<null>();
 
-   @Input() set entities(value:  Project[]) {
+  displayedColumns = ['number', 'name'];
+
+  @Input() set entities(value: Project[]) {
     this.dataSource = new MatTableDataSource(value);
     this.dataSource.sort = this.sort;
   }
 
   @Output() entitySelected = new EventEmitter<Project>();
 
-
-
   rowSelected(entity: Project) {
-    this.entitySelected.emit(entity)
+    this.entitySelected.emit(entity);
+  }
+
+  create(){
+    this.createNew.emit();
   }
 
 }
