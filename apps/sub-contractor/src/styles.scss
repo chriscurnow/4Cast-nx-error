@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 
+
 .flex-row {
   display: flex;
   flex-direction: row;
@@ -29,7 +30,8 @@
 }
 
 .full-width {
-  width: 100%;
+  width: 95vw;
+  margin:auto
 }
 
 h2 {
@@ -61,4 +63,39 @@ tr.mat-header-row.cdk-header-row {
 
 .mat-row:nth-child(even){
     background-color: #eee;
+}
+
+table.mat-table.cdk-table.full-width-table{
+  width: 100%;
+}
+
+/*
+**Active tab label colour changes:**
+**/
+
+
+.mat-tab-label-active
+{
+    color: white !important;
+}
+
+/**To remove the border for the tabs:**/
+
+.remove-border-bottom .mat-tab-header
+{
+    border-bottom: none;
+}
+
+/**To chnage the colour of the ink bar(tab border):**/
+
+.mat-tab-nav-bar:active
+{
+    color: #00ADEE !important;
+}
+/** To specify the height && color for the ink bar:**/
+
+.mat-ink-bar{
+    background-color: white !important;
+    display:block;
+    height: 1px !important;
 }

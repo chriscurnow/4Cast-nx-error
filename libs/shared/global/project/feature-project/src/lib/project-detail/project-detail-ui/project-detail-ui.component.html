@@ -3,11 +3,18 @@
 
 <form [formGroup]="detailForm" novalidate >
 <mat-card-content>
-    <mat-form-field appearance="outline" class="full-width">
-      <mat-label>Description of work</mat-label>
-      <input matInput placeholder="Description of work" formControlName="description">
+  <div>
+    <mat-form-field appearance="outline" >
+      <mat-label>Project Number</mat-label>
+      <input matInput placeholder="Description of work" formControlName="number">
     </mat-form-field>
-
+  </div>
+  <div>
+     <mat-form-field appearance="outline">
+      <mat-label>Project Name</mat-label>
+      <input matInput placeholder="Description of work" formControlName="name">
+    </mat-form-field>
+  </div>
   </mat-card-content>
     <mat-card-actions>
       <div fxLayout="row" fxLayoutAlign="end center" style="height:60px; padding-right:20px">

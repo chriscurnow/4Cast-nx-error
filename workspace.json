@@ -9,7 +9,6 @@
     "contractor-e2e": "apps/contractor-e2e",
     "contractor-feature-costing": "libs/contractor/feature-costing",
     "contractor-feature-dashboard": "libs/contractor/feature-dashboard",
-    "interface-test": "libs/interface-test",
     "shared-data-access-actions": "libs/shared/data-access-actions",
     "shared-data-access-auth": "libs/shared/data-access-auth",
     "shared-data-access-head-contractor": "libs/shared/data-access-head-contractor",
@@ -23,8 +22,6 @@
     "shared-feature-toolbar-user": "libs/shared/feature-toolbar-user",
     "shared-global-company-data-access-company": "libs/shared/global/company/data-access-company",
     "shared-global-company-feature-head-contractor": "libs/shared/global/company/feature-head-contractor",
-    "shared-global-group-company-group-data-access-company": "libs/shared/global-group/company-group/data-access-company",
-    "shared-global-group-company-group-feature-head-contractor": "libs/shared/global-group/company-group/feature-head-contractor",
     "shared-global-project-data-access-project": "libs/shared/global/project/data-access-project",
     "shared-global-project-feature-project": "libs/shared/global/project/feature-project",
     "shared-subcontract-group-data-access-subcontract": "libs/shared/subcontract-group/data-access-subcontract",
@@ -46,8 +43,7 @@
     "signup-e2e": "apps/signup-e2e",
     "sub-contractor": "apps/sub-contractor",
     "sub-contractor-e2e": "apps/sub-contractor-e2e",
-    "subcontractor-feature-dashboard": "libs/subcontractor/feature-dashboard",
-    "test": "libs/test"
+    "subcontractor-feature-dashboard": "libs/subcontractor/feature-dashboard"
   },
   "$schema": "./node_modules/nx/schemas/workspace-schema.json"
 }

@@ -1,38 +1,44 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { PROJECT_FEATURE_KEY, State, projectAdapter } from './project.reducer';
+import {
+  PROJECT_FEATURE_KEY,
+  ProjectEntityState,
+  projectAdapter,
+} from './project.reducer';
+import { selectRouteParams } from './project.router.selectors';
 
 // Lookup the 'Project' feature state managed by NgRx
 export const getProjectState =
-  createFeatureSelector<State>(PROJECT_FEATURE_KEY);
+  createFeatureSelector<ProjectEntityState>(PROJECT_FEATURE_KEY);
 
 const { selectAll, selectEntities } = projectAdapter.getSelectors();
 
 export const getProjectLoaded = createSelector(
   getProjectState,
-  (state: State) => state.loaded
+  (state: ProjectEntityState) => state.loaded
 );
 
 export const getProjectError = createSelector(
   getProjectState,
-  (state: State) => state.error
+  (state: ProjectEntityState) => state.error
 );
 
-export const getAllProject = createSelector(getProjectState, (state: State) =>
-  selectAll(state)
+export const getAllProjects = createSelector(
+  getProjectState,
+  (state: ProjectEntityState) => selectAll(state)
 );
 
 export const getProjectEntities = createSelector(
   getProjectState,
-  (state: State) => selectEntities(state)
+  (state: ProjectEntityState) => selectEntities(state)
 );
 
 export const getSelectedId = createSelector(
   getProjectState,
-  (state: State) => state.selectedId
+  (state: ProjectEntityState) => state.selectedId
 );
 
-export const getSelected = createSelector(
+export const getSelectedProject = createSelector(
   getProjectEntities,
-  getSelectedId,
-  (entities, selectedId) => (selectedId ? entities[selectedId] : undefined)
+  selectRouteParams,
+  (entities, { projectId }) => (projectId ? entities[projectId] : undefined)
 );

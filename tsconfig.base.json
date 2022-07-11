@@ -23,7 +23,6 @@
       "@workspace/contractor/feature-dashboard": [
         "libs/contractor/feature-dashboard/src/index.ts"
       ],
-      "@workspace/interface-test": ["libs/interface-test/src/index.ts"],
       "@workspace/libs/shared/feature-head-contractor": [
         "libs/libs/shared/feature-head-contractor/src/index.ts"
       ],
@@ -132,8 +131,7 @@
       ],
       "@workspace/subcontractor/feature-dashboard": [
         "libs/subcontractor/feature-dashboard/src/index.ts"
-      ],
-      "@workspace/test": ["libs/test/src/index.ts"]
+      ]
     }
   },
   "exclude": ["node_modules", "tmp"]

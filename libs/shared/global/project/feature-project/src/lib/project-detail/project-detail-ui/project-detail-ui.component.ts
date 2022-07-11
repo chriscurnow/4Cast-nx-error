@@ -10,16 +10,16 @@ import { Project } from '@workspace/shared/data-access-models'; // import model
 
 
 @Component({
-  selector: 'app-project-detail-ui',
+  selector: 'fourcast-project-detail-ui',
   standalone: true,
   imports: [CommonModule, MatCardModule, MatInputModule, MatButtonModule, MatFormFieldModule, ReactiveFormsModule],
 
   templateUrl: './project-detail-ui.component.html',
-  styleUrls: ['./project-detail-ui.component'],
+  styleUrls: ['./project-detail-ui.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProjectDetailUiComponent  {
-  entityId!: string;
+  entityId!: string | undefined;
   detailForm!: FormGroup;
   _entity: Project;
 
@@ -27,6 +27,7 @@ export class ProjectDetailUiComponent  {
   if(v) {
     this._entity = v;
     this.entityId = this._entity.id;
+    console.log('PROJECT DETAIL UI on entity input', this.entity)
     this.detailForm.reset(this._entity);
   }
 }
@@ -44,15 +45,14 @@ export class ProjectDetailUiComponent  {
  createForm() {
     this.detailForm = this.fb.group({
       id: null,
-      name: null,
-      dates: new FormControl([]),
-      description: null,
+      name: [''],
+      number: [''],
     });
   }
 
   update() {
     this._entity = this.detailForm.value();
-    this.update.emit(this._entity);
+    this.updateEntity.emit(this._entity);
   }
 
   back() {

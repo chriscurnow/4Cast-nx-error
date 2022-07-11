@@ -13,7 +13,7 @@ import { Company } from '@workspace/shared/data-access-models'; // import model
 import { CompanyListUiComponent } from '../company-list-ui/company-list-ui.component';
 
 @Component({
-  selector: 'app-company-list-container',
+  selector: 'fourcast-company-list-container',
   standalone: true,
   imports: [CommonModule, CompanyListUiComponent],
 

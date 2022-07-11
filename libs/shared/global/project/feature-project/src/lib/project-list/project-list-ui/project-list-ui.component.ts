@@ -15,13 +15,13 @@ import { Project } from '@workspace/shared/data-access-models'; // import model 
 
 
 @Component({
-  selector: 'app-project-list-ui',
+  selector: 'fourcast-project-list-ui',
 
 
   standalone: true,
   imports: [CommonModule, MatTableModule],
 
-  
+
   templateUrl: './project-list-ui.component.html',
   styleUrls: ['./project-list-ui.component.css']
 })
@@ -34,6 +34,7 @@ export class ProjectListUiComponent  {
   @ViewChild(MatTable) table!: MatTable< Project>;
 
   displayedColumns = [
+    "number", "name"
   ];
 
    @Input() set entities(value:  Project[]) {

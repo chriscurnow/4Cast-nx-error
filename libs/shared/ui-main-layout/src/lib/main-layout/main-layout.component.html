@@ -1,8 +1,25 @@
-<mat-toolbar color="primary" class="mat-toolbar-single-row">
-  <a href="/" class="logo"><img src="assets/logo.png" alt="4CastPro" /></a>
-  <span>{{ appName }}</span>
-  <span class="push-content"></span>
-  <ng-content></ng-content>
+<mat-toolbar color="primary" class="mat-toolbar-multiple-rows main-nav">
+<div class="flex-row">
+  <div class="flex-col logo-col">
+     <a href="/" class="logo"><img src="assets/logo.png" alt="4CastPro" /></a>
+  </div>
+  <div class="flex-col main-col">
+    <div class="flex-row first-row">
+      <div class="flex-col main-col">
+        <span>{{ appName }}</span>
+     </div>
+      <div class="flex-col">
+        <fourcast-toolbar-user></fourcast-toolbar-user>
+      </div>
+  </div>
+  <!-- <span class="push-content"></span> -->
+  <div class="flex-row">
+    <ng-content></ng-content>
+  </div>
+
+    <!-- <ng-content select="[nav]"></ng-content> -->
+    </div>
+</div>
 </mat-toolbar>
 <main>
   <router-outlet></router-outlet>
