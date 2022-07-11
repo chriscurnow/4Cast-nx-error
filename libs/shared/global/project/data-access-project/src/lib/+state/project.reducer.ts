@@ -11,6 +11,7 @@ export const PROJECT_FEATURE_KEY = 'project';
 export interface ProjectEntityState extends EntityState<Project> {
   selectedId?: string | number; // which Project record has been selected
   loaded: boolean; // has the Project list been loaded
+  updated?: boolean; // the project entity has been updated
   error?: string | null; // last known error (if any)
 }
 
@@ -66,11 +67,11 @@ const projectReducer = createReducer(
   })),
   on(ProjectActions.updateProject, (state) => ({
     ...state,
-    loaded: false,
+    updated: false,
     error: null,
   })),
   on(ProjectActions.updateProjectSuccess, (state, { project }) =>
-    projectAdapter.setOne(project, { ...state, loaded: true })
+    projectAdapter.setOne(project, { ...state, updated: true })
   ),
   on(ProjectActions.updateProjectFailure, (state, { error }) => ({
     ...state,

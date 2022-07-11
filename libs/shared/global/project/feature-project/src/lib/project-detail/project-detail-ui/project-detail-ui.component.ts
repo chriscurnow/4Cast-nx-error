@@ -51,7 +51,9 @@ export class ProjectDetailUiComponent  {
   }
 
   update() {
-    this._entity = this.detailForm.value();
+     console.log('PROJECT DETAIL UI, detailForm', this.detailForm);
+    this._entity = this.detailForm.value;
+    console.log('PROJECT DETAIL UI, update')
     this.updateEntity.emit(this._entity);
   }
 

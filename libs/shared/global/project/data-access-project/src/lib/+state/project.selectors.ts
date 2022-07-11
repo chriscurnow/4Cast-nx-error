@@ -42,3 +42,8 @@ export const getSelectedProject = createSelector(
   selectRouteParams,
   (entities, { projectId }) => (projectId ? entities[projectId] : undefined)
 );
+
+export const getUpdated = createSelector(
+  getProjectState,
+  (state: ProjectEntityState) => state.updated
+);

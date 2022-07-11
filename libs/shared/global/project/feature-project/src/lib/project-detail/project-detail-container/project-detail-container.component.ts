@@ -1,9 +1,8 @@
-import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { CommonModule, Location } from '@angular/common';
 import { Store } from '@ngrx/store';
-import { loadProjectList, ProjectPartialState, getSelectedProject,  init  } from '@workspace/shared-global-project-data-access-project';
-import { Observable } from 'rxjs';
-import { ActivatedRoute, Router } from '@angular/router';
+import { loadProjectList, ProjectPartialState, getSelectedProject,  init, updateProject, getUpdated  } from '@workspace/shared-global-project-data-access-project';
+import { Observable, Subscription } from 'rxjs';
 import { Project } from '@workspace/shared/data-access-models'; // import model
 import { ProjectDetailUiComponent } from '../project-detail-ui/project-detail-ui.component';
 
@@ -15,19 +14,17 @@ import { ProjectDetailUiComponent } from '../project-detail-ui/project-detail-ui
   templateUrl: './project-detail-container.component.html',
   styleUrls: ['./project-detail-container.component.css'],
 })
-export class ProjectDetailContainerComponent {
+export class ProjectDetailContainerComponent implements OnInit, OnDestroy {
   entity$!: Observable<Project | undefined>;
   entity!: Project | undefined;
+  isUpdatedSubscription!: Subscription;
 
   constructor(
-    private route: ActivatedRoute,
-    private router: Router,
-    private store: Store<ProjectPartialState>
+    private store: Store<ProjectPartialState>,
+    private location: Location
   ) {
     this.entity$ = this.store.select(getSelectedProject);
-
     this.entity$.subscribe((res) => {
-
       this.entity = res;
     });
   }
@@ -38,7 +35,19 @@ export class ProjectDetailContainerComponent {
     this.store.dispatch(init());
   }
 
-  updateEntity(entity: Project | undefined) {
-    console.log('update Entity', entity)
+  updateEntity(entity: Project) {
+    this.store.dispatch(updateProject({ project: entity }));
+    const updated$ = this.store.select(getUpdated);
+    this.isUpdatedSubscription = updated$.subscribe((updated: boolean | undefined) => {
+      if (updated) {
+        this.location.back();
+      }
+    });
+  }
+
+  ngOnDestroy(): void {
+    if (this.isUpdatedSubscription) {
+      this.isUpdatedSubscription.unsubscribe();
+    }
   }
 }
