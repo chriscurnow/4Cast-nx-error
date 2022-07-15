@@ -3,7 +3,8 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
 import { MatToolbarModule } from '@angular/material/toolbar';
-
+// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+import { SharedFeatureToolbarUserModule } from '@workspace/shared/feature-toolbar-user';
 import { MainLayoutComponent } from './main-layout/main-layout.component';
 
 @NgModule({
@@ -14,6 +15,7 @@ import { MainLayoutComponent } from './main-layout/main-layout.component';
 
     // material
     MatToolbarModule,
+    SharedFeatureToolbarUserModule,
   ],
   declarations: [MainLayoutComponent],
   exports: [MainLayoutComponent],

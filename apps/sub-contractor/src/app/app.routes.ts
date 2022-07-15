@@ -73,10 +73,10 @@ export const routingConfiguration: ExtraOptions = {
             },
 
             {
-              path: 'projects',
+              path: 'subcontractor-feature-project',
               loadChildren: () =>
-                import(`@workspace/shared/feature-projects`).then(
-                  (module) => module.SharedFeatureProjectsModule
+                import(`@workspace/shared-global-project-feature-project`).then(
+                  (module) => module.SharedGlobalProjectFeatureProjectModule
                 ),
             },
 

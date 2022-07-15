@@ -1,0 +1,29 @@
+
+  <mat-card class="mat-card mat-elevation-z4 p-24 mr-24">
+
+<form [formGroup]="detailForm" novalidate >
+<mat-card-content>
+  <div>
+    <mat-form-field appearance="outline" >
+      <mat-label>Project Number</mat-label>
+      <input matInput placeholder="Description of work" formControlName="number">
+    </mat-form-field>
+  </div>
+  <div>
+     <mat-form-field appearance="outline">
+      <mat-label>Project Name</mat-label>
+      <input matInput placeholder="Description of work" formControlName="name">
+    </mat-form-field>
+  </div>
+  </mat-card-content>
+    <mat-card-actions>
+      <div fxLayout="row" fxLayoutAlign="end center" style="height:60px; padding-right:20px">
+        <!-- <button mat-raised-button (click)="createItemZeroForContract()">Create Item 0</button>
+        <button mat-raised-button color="accent" (click)="newVariation()">NEW VARIATION</button>
+        <button mat-raised-button color="accent" (click)="newClaim()">NEW CLAIM</button> -->
+        <button mat-raised-button color="primary" (click)="update()" >OK</button>
+      </div>
+<!-- (click)="onSubmit()" -->
+    </mat-card-actions>
+  </form>
+    </mat-card>

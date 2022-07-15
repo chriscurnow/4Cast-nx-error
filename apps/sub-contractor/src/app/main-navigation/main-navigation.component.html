@@ -1,5 +1,6 @@
 <fourcast-main-layout appName="4CastPro Sub-Contractor">
-  <a
+  <div>
+  <!-- <a
     mat-raised-button
     routerLink="subcontractor-feature-dashboard"
     routerLinkActive="active"
@@ -19,6 +20,41 @@
   >
   <a mat-raised-button routerLink="TODO" routerLinkActive="active" disabled
     >Settings</a
+  > -->
+
+  </div>
+  <div nav class="main-nav">
+     <a
+    mat-button
+    routerLink="subcontractor-feature-dashboard"
+    routerLinkActive="active"
+    >Dashboard</a
   >
-  <fourcast-toolbar-user></fourcast-toolbar-user>
+
+   <a
+    mat-button
+    routerLink="subcontractor-feature-head-contractor"
+    routerLinkActive="active"
+    >Companies</a
+  >
+   <a
+    mat-button
+    routerLink="subcontractor-feature-project"
+    routerLinkActive="active"
+    >Projects</a
+  >
+   <a
+    mat-button
+    routerLink="subcontractor-feature-contracts"
+    routerLinkActive="active"
+    >Subcontracts</a
+  >
+   <!-- <nav mat-tab-nav-bar  [tabPanel]="tabPanel">
+  <a mat-tab-link style="height:24px" *ngFor="let link of links"
+     (click)="activeLink = link"
+     [active]="activeLink === link"> {{link}} </a>
+  <a mat-tab-link disabled>Settings</a>
+</nav>
+<mat-tab-nav-panel #tabPanel></mat-tab-nav-panel> -->
+  </div>
 </fourcast-main-layout>

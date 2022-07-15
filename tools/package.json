@@ -1,0 +1,6 @@
+{
+  "name": "fc-ngrx",
+  "scripts": {
+    "build:watch": "tsc -p tsconfig.tools.json --watch"
+  }
+}

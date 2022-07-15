@@ -1,0 +1,24 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "cli": "nx",
+  "$id": "interface",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Interface name",
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      }
+    },
+    "projectName": {
+      "type": "string",
+      "description": "Project Name",
+      "$default": {
+        "$source": "projectName"
+      }
+    }
+  },
+  "required": ["name", "projectName"]
+}

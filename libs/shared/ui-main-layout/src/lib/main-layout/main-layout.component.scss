@@ -24,9 +24,11 @@ mat-toolbar {
 
   ::ng-deep {
     a {
+      color: rgba($color:#fff, $alpha:0.5);
       margin: 0 10px 0 0;
       &.active {
-        color: var(--primary);
+        color: white;
+        //  var(--primary);
       }
     }
   }
@@ -44,4 +46,31 @@ footer {
 
   color: var(--text-contrast);
   background-color: var(--accent-darker);
+}
+
+.first-row {
+  height: 32px;
+}
+.second-row {
+  height: 24px;
+  margin-left:120px;
+  font-size: 14px;
+ font-weight: 400;
+}
+
+.logo-col {
+  flex-basis: 50px;
+}
+
+.main-col {
+  flex-basis: 100%;
+}
+
+.flex-row {
+  justify-content: flex-start;
+  width: 100%
+}
+
+.main.nav.mat-tab-link{
+  height: 28px
 }

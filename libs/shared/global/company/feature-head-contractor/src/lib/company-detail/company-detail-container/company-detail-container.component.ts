@@ -1,5 +1,5 @@
 import { CommonModule, Location } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import {
   loadCompanyList,
@@ -9,22 +9,23 @@ import {
   updateCompany,
   getCompanyLoaded,
 } from '@workspace/shared/global/company/data-access-company';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Company } from '@workspace/shared/data-access-models'; // import model
 import { CompanyDetailUiComponent } from '../company-detail-ui/company-detail-ui.component';
 
 @Component({
-  selector: 'app-company-detail-container',
   standalone: true,
   imports: [CommonModule, CompanyDetailUiComponent],
 
   templateUrl: './company-detail-container.component.html',
   styleUrls: ['./company-detail-container.component.css'],
 })
-export class CompanyDetailContainerComponent {
+export class CompanyDetailContainerComponent implements OnInit, OnDestroy {
   company$!: Observable<Company | undefined>;
   company!: Company | undefined;
+  updatedSubscription!: Subscription
+
 
   constructor(
     private route: ActivatedRoute,
@@ -47,11 +48,16 @@ export class CompanyDetailContainerComponent {
   update(company: Company) {
     this.store.dispatch(updateCompany({ company: company }));
     const loaded$ = this.store.select(getCompanyLoaded);
-    const loadedSubscription = loaded$.subscribe((loaded: boolean) => {
+    this.updatedSubscription = loaded$.subscribe((loaded: boolean) => {
       if (loaded) {
         this.location.back();
-        loadedSubscription.unsubscribe();
       }
     });
+  }
+
+  ngOnDestroy(): void{
+    if(this.updatedSubscription){
+      this.updatedSubscription.unsubscribe();
+    }
   }
 }

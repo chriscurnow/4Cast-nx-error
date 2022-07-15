@@ -33,6 +33,10 @@
     "deps": "nx dep-graph",
     "postinstall": "ngcc --properties es2020 browser module main"
   },
+  "workspaces": [
+    "./packages/*",
+    "./tools"
+  ],
   "private": true,
   "dependencies": {
     "-": "^0.0.1",
