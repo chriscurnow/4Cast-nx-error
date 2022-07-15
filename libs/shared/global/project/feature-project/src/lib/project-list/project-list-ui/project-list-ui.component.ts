@@ -28,8 +28,6 @@ export class ProjectListUiComponent {
   dataSource!: MatTableDataSource<Project>;
   selection!: SelectionModel<Project>;
 
-  constructor(private router: Router,
-              private route: ActivatedRoute ){}
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;

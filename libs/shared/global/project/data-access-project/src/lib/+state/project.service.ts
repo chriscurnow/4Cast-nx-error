@@ -14,7 +14,8 @@ export class ProjectService {
   getProjectList() {
     console.log('get project list');
     return this.afs
-      .collection<Project>('projects')
+      .collection<Project>('projects', ref => ref.orderBy('number'))
+
       .valueChanges()
       .pipe(
         map((projects) => {
