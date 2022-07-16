@@ -7,6 +7,10 @@ import { Component, Input } from '@angular/core';
 })
 export class MainLayoutComponent {
   @Input() appName = '4CastPro';
-
+  showAddButton = true;
   year = new Date().getFullYear();
+
+  addButtonClicked() {
+    console.log('Add button clicked');
+  }
 }

@@ -1,0 +1,8 @@
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" height="400" width="400" style="width: 40px; height:40px;">
+
+<defs>
+  <style>.cls-1{fill:#ffdb1e;}.cls-2{fill:#fbb03b;}.cls-2,.cls-3{stroke:#ffdb1e;stroke-linecap:round;stroke-miterlimit:10;stroke-width:6px;}.cls-3{fill:none;}</style>
+</defs>
+<path class="cls-1" d="M50,6A44,44,0,1,1,6,50,44.05,44.05,0,0,1,50,6m0-6a50,50,0,1,0,50,50A50,50,0,0,0,50,0Z"/>
+<line class="cls-2" x1="83" y1="67" x2="50.97" y2="48.75"/><line class="cls-3" x1="52.19" y1="19.07" x2="49.31" y2="48.43"/>
+</svg>
