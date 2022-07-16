@@ -74,3 +74,28 @@ footer {
 .main.nav.mat-tab-link{
   height: 28px
 }
+
+.fab-container {
+  display: flex;
+  flex-direction: row-reverse;
+  // justify-content: end;
+  margin-top: -32px;
+  margin-right: 10px;
+  position: relative;
+  z-index: 100;
+  height: 64px;
+}
+
+.fab-item {
+  flex-basis: 0;
+}
+
+.fab-container .mat-icon {
+  font-size: 24px;
+}
+
+.example-button-container {
+  display: flex;
+  justify-content: center;
+  width: 120px;
+}

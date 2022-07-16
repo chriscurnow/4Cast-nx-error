@@ -20,7 +20,17 @@
     <!-- <ng-content select="[nav]"></ng-content> -->
     </div>
 </div>
+
 </mat-toolbar>
+<div class="fab-container">
+  <ng-container *ngIf="showAddButton">
+    <div class="example-button-container">
+  <button mat-fab color="accent" aria-label="New Contract" matTooltip="Create new contract" (click)="addButtonClicked()">
+    <mat-icon>add</mat-icon>
+    </button>
+    </div>
+  </ng-container>
+</div>
 <main>
   <router-outlet></router-outlet>
 </main>
