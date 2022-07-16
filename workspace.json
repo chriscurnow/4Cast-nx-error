@@ -13,6 +13,7 @@
     "shared-data-access-auth": "libs/shared/data-access-auth",
     "shared-data-access-head-contractor": "libs/shared/data-access-head-contractor",
     "shared-data-access-models": "libs/shared/data-access-models",
+    "shared-data-access-navigation": "libs/shared/data-access-navigation",
     "shared-data-access-ngrx-default-module-collection": "libs/shared/data-access-ngrx-default-module-collection",
     "shared-data-access-router": "libs/shared/data-access-router",
     "shared-data-access-supplier": "libs/shared/data-access-supplier",

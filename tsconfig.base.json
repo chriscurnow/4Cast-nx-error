@@ -68,6 +68,9 @@
       "@workspace/shared/data-access-models": [
         "libs/shared/data-access-models/src/index.ts"
       ],
+      "@workspace/shared/data-access-navigation": [
+        "libs/shared/data-access-navigation/src/index.ts"
+      ],
       "@workspace/shared/data-access-ngrx-default-module-collection": [
         "libs/shared/data-access-ngrx-default-module-collection/src/index.ts"
       ],
@@ -135,7 +138,7 @@
     }
   },
   "exclude": ["node_modules", "tmp"],
-   "angularCompilerOptions": {
+  "angularCompilerOptions": {
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
     "strictTemplates": true

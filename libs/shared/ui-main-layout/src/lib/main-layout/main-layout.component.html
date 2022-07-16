@@ -9,12 +9,15 @@
         <span>{{ appName }}</span>
      </div>
       <div class="flex-col">
+      <ng-content></ng-content>
+      </div>
+      <div class="flex-col">
         <fourcast-toolbar-user></fourcast-toolbar-user>
       </div>
   </div>
   <!-- <span class="push-content"></span> -->
   <div class="flex-row">
-    <ng-content></ng-content>
+
   </div>
 
     <!-- <ng-content select="[nav]"></ng-content> -->
