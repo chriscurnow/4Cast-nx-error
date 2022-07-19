@@ -1,6 +1,6 @@
 import * as admin  from 'firebase-admin';
 import * as functions from 'firebase-functions';
-import { resolve } from 'url';
+// import { resolve } from 'url';
 import { options } from '../config'
 
 
@@ -61,7 +61,7 @@ export const updateCounter = function (path: string, collectionName: string,  st
         else{
 
             // just create an empty promise
-            return new Promise(succeed => setTimeout(resolve, 1));
+            return new Promise(null);
 
         }
     }
@@ -113,10 +113,10 @@ export const updateCounter = function (path: string, collectionName: string,  st
 
         // Commit the write batch
         batch.commit()
-              .then(res => {
+              .then(() => {
                   callback()
                 })
-              .catch(error => {
+              .catch(() => {
                   callback()
                 });
     }
@@ -139,7 +139,7 @@ export const updateCounter = function (path: string, collectionName: string,  st
         ref.get()
         .then(snapshot => {
             let total_count = 0;
-            snapshot.forEach(doc => {
+            snapshot.forEach(() => {
                 total_count ++;
             });
             setCounter(collectionName, total_count, callback);
@@ -154,12 +154,12 @@ export const updateCounter = function (path: string, collectionName: string,  st
         const shard_ref = docRef.collection('shards').doc(shard_id);
 
         admin.firestore().runTransaction(t => transactionFunction(t))
-            .then(res => callback)
+            .then(() => callback)
             .catch(error => console.log(error))
 
         function transactionFunction(t: any){
             return t.get(shard_ref)
-            .then((doc: any )=> {
+            .then(()=> {
                 t.update(shard_ref, { count: newCount });
                 })
             .catch((Error: any) => console.log(Error))
@@ -185,6 +185,7 @@ export const updateCounter = function (path: string, collectionName: string,  st
             // response.send('Done');
 })
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const getTotal = functions.https.onCall((data,context) => {
     const collectionName = 'suppliers' //data.collectionName;
     return getTotalCount(collectionName)

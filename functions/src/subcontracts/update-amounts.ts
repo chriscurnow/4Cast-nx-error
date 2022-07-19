@@ -13,14 +13,14 @@ import * as admin from 'firebase-admin';
 export const updateVariations = function(subcontractId: string): Promise<any> {
   return admin.firestore().doc(`subcontracts/${subcontractId}`)
   .get()
-  .then(subcontractSnap => {
+  .then(() => {
 
 
    return admin.firestore().collection('subcontractItems')
       .where('subcontract.id', '==', subcontractId)
       .where('itemNumber', '>', 0) //
       .get()
-      .then(variationsSnapshot => {
+      .then(() => {
         // const toDateVariations = createCurrency();
 
         return Promise.resolve(null);

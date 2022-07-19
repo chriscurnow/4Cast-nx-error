@@ -14,12 +14,12 @@ if (!admin.apps.length) {
 // so right now we don't have to do anything on create new payment
 
 export const subcontractCreate = functions.firestore.document('subcontracts/{id}')
-.onCreate((snap, context) => {
+.onCreate((snap) => {
     return setId(snap);
 });
 
 export const subcontractUpdate = functions.firestore.document('subcontracts/{subcontractId}')
-.onUpdate((change, context) => {
+.onUpdate((change) => {
 
   // const subcontractId =  context.params.subcontractId;
   const newValue = change.after.data();

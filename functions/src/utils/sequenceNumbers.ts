@@ -31,7 +31,8 @@ export const getLocalProjectSequenceNumber = function(documentSnapshot: Firebase
         }
 
         return documentSnapshot.ref.set(docData)
-        .then((writeResult: any) => {
+        .then(() => {
+          return null;
         })
     })
 
@@ -55,9 +56,9 @@ export const getSequenceNumberForParent = function(collection: string, parent: I
     try {
         admin.initializeApp()
     }
-    catch (err ) {};
-    let parentIdName: string = '';
-    let parentId: string = '';
+    catch (err ) {return err};
+    let parentIdName = '';
+    let parentId = '';
     if(parent) {
         parentIdName = parent.parentIdName;
         parentId = parent.id;
@@ -100,6 +101,7 @@ export const testSeqNo = functions.https.onRequest((request,response) => {
 
 })
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const getProjectSequenceNumber = functions.https.onCall((data,context)=> {
     const tenantId = data.tenantId;
     const projectId = data.projectId;
@@ -168,7 +170,7 @@ function getStoredSequenceNumber(seqNoSnapshot: FirebaseFirestore.DocumentSnapsh
             const newNumber = nextNumber+1;
             const seqNoDocRef = seqNoSnapshot.ref;
             return seqNoDocRef.set({value: newNumber}, {merge: true})
-            .then(result => {
+            .then(() => {
                 const sequenceNumber: ISequenceNumber = ({number: nextNumber}) ;
                 return sequenceNumber
             })

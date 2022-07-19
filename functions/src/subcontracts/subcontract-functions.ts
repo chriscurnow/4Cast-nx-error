@@ -12,7 +12,7 @@ if(!admin.apps.length) {
 /**
  * We are moving subcontracts from top level to be aq sub-collection of projects
  */
-export const moveSubcontracts = functions.https.onCall((data, context) => {
+export const moveSubcontracts = functions.https.onCall(() => {
 
 
     const promises: any[] = [];
@@ -32,7 +32,7 @@ export const moveSubcontracts = functions.https.onCall((data, context) => {
         }));
 
         return Promise.all(promises)
-        .then(result => {
+        .then(() => {
 
             return 'Completed OK';
         })
@@ -43,7 +43,7 @@ export const moveSubcontracts = functions.https.onCall((data, context) => {
     });
 });
 
-export const oldMoveSubcontracts = functions.https.onCall((data, context) => {
+export const oldMoveSubcontracts = functions.https.onCall(() => {
 
 
     const promises: any[] = [];
@@ -81,7 +81,7 @@ export const oldMoveSubcontracts = functions.https.onCall((data, context) => {
 
 
 function logProjectProgress(projectId: string) {
-
+  console.log(projectId)
 
 // function moveContractsForProject(subcontracts: FirebaseFirestore.QuerySnapshot){
 
@@ -116,7 +116,7 @@ function doMove(contractSnapshot: FirebaseFirestore.QueryDocumentSnapshot){
  * Update all subcontracts to use new currency format
  * (No parameters required.)
  */
-export const updateSubcontractCurrency = functions.https.onCall((data, context) => {
+export const updateSubcontractCurrency = functions.https.onCall(() => {
 
     // let i = 0;
     const promises: any[] = [];
@@ -181,6 +181,7 @@ export const updateSubcontractCurrency = functions.https.onCall((data, context) 
 
 
   function convertOldFormat(value: any) {
+    console.log(value);
     // let newValue: Currency
     // switch (typeof(value)) {
     //   case 'string' :

@@ -29,12 +29,12 @@ if (!app){
 };
 
 
-export const testCreateStatus = functions.https.onCall((data, context) => {
+export const testCreateStatus = functions.https.onCall(() => {
   const status = PaymentStatus.Draft;
   return status;
 });
 
-export const createSubcontractPayment = functions.https.onCall((data, context) => {
+export const createSubcontractPayment = functions.https.onCall((data) => {
   initialize();
   const subcontractId = data.subcontractId;
   const path =  'subcontractPayments';

@@ -62,9 +62,6 @@
       "@workspace/shared/data-access-auth": [
         "libs/shared/data-access-auth/src/index.ts"
       ],
-      "@workspace/shared/data-access-head-contractor": [
-        "libs/shared/data-access-head-contractor/src/index.ts"
-      ],
       "@workspace/shared/data-access-models": [
         "libs/shared/data-access-models/src/index.ts"
       ],

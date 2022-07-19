@@ -12,12 +12,12 @@ if (!admin.apps.length) {
 
 
 export const companyCreate = functions.firestore.document('companies/{id}')
-.onCreate((snap, context) => {
+.onCreate((snap) => {
     return setId(snap);
 });
 
 export const companyUpdate = functions.firestore.document('companies/{id}')
-.onUpdate((change, context) => {
+.onUpdate((change) => {
 
   const before: Company = change.before.data();
   const after: Company = change.after.data();

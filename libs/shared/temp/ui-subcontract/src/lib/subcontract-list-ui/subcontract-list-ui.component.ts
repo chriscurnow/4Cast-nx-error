@@ -11,6 +11,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { MatTable } from '@angular/material/table';
+// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
 import { Subcontract } from '@workspace/shared/data-access-models';
 import { createCurrency, DateUtilsService } from '@workspace/shared/util';
 import { Currency, CurrencyClass } from '@workspace/shared/util';

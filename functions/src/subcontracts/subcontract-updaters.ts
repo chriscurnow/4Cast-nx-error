@@ -15,7 +15,7 @@ if (!app){
 }
 }
 
-export const deleteTopLevelSubcontracts = functions.https.onCall((data, context) => {
+export const deleteTopLevelSubcontracts = functions.https.onCall(() => {
   // initialize();
   const promises: any[] = [];
   return admin.firestore().collection('subcontracts')
@@ -27,7 +27,7 @@ export const deleteTopLevelSubcontracts = functions.https.onCall((data, context)
   return Promise.all(promises);
 
 });
-export const updateSubcontractmostRecentPayment = functions.https.onCall((data, context) => {
+export const updateSubcontractmostRecentPayment = functions.https.onCall(() => {
 
     initialize();
     // let i = 0;
@@ -66,7 +66,7 @@ export const updateSubcontractmostRecentPayment = functions.https.onCall((data, 
             });
         });
         Promise.all(promises)
-        .then(result => {
+        .then(() => {
         })
         .catch(err => {
             console.log('An error occurred', err);

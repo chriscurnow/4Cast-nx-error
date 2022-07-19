@@ -5,7 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { MatTable } from '@angular/material/table';
 import { Subcontract } from '@workspace/shared/data-access-models';
-import { createCurrency, DateUtilsService } from '@workspace/shared/util';
+import { DateUtilsService } from '@workspace/shared/util';
 import { Currency, CurrencyClass } from '@workspace/shared/util';
 
 @Component({
@@ -15,12 +15,12 @@ import { Currency, CurrencyClass } from '@workspace/shared/util';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SubcontractListUIComponent {
-  public selection: SelectionModel<any>;
-  public dataSource: MatTableDataSource<any>;
+  public selection: SelectionModel<Subcontract>;
+  public dataSource: MatTableDataSource<Subcontract>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  @ViewChild(MatTable) table: MatTable<any>;
+  @ViewChild(MatTable) table: MatTable<Subcontract>;
 
   displayedColumns = [
     'project',
@@ -34,13 +34,12 @@ export class SubcontractListUIComponent {
   @Input() set subcontracts(value: Subcontract[]) {
     this.dataSource = new MatTableDataSource(value);
     this.dataSource.sort = this.sort;
-
   }
 
   @Output() subcontractSelected = new EventEmitter<Subcontract>();
 
   rowClicked(subcontract: Subcontract) {
-    this.subcontractSelected.emit(subcontract)
+    this.subcontractSelected.emit(subcontract);
   }
 
   formatCurrency(value: number): string {
@@ -55,6 +54,7 @@ export class SubcontractListUIComponent {
     }
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   formatDate(date: any): string {
     // const returnValue = this.dateUtils.setDate(date);
     // return returnValue;

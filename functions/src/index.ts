@@ -8,7 +8,7 @@ export const helloWorld = functions.https.onRequest((request, response) => {
 });
 
 exports.makeUppercase = functions.firestore.document('/messages/{documentId}')
-      .onCreate((snap, context) => {
+      .onCreate((snap) => {
         const original = snap.data().original;
 
         const uppercase = original.toUpperCase();

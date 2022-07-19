@@ -7,7 +7,7 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Store } from '@ngrx/store';
 import {
   loadItemsForSubcontract,
-  selectOriginalItem,
+  // selectOriginalItem,
   selectVariationItems,
   SubcontractItemPartialState,
 } from '@workspace/shared/subcontract-group/data-access-subcontract-item';

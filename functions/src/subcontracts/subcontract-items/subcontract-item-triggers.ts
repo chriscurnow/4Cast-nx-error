@@ -26,8 +26,8 @@ export const subcontractItemUpdate = functions.firestore
   .document(
     'projects/{projectId}/subcontracts/{subcontractId}/subcontractItems/{itemId}'
   )
-  .onUpdate((changes, context) => {
-    return onUpdateSubcontractItem(changes, context);
+  .onUpdate((changes) => {
+    return onUpdateSubcontractItem(changes);
   });
 
 
@@ -82,8 +82,7 @@ function onCreteSubcontractItem(snap: FirebaseFirestore.DocumentSnapshot, contex
 }
 
 function onUpdateSubcontractItem(
-  changes: functions.Change<functions.firestore.QueryDocumentSnapshot>,
-  context: functions.EventContext){
+  changes: functions.Change<functions.firestore.QueryDocumentSnapshot>){
     const snap = changes.after;
     const item: SubcontractItem = changes.after.data();
     const oldItem: SubcontractItem = changes.before.data();
