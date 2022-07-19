@@ -5,12 +5,13 @@ import { CompanyDetailContainerComponent } from './company-detail/company-detail
 import { CompanyListContainerComponent } from './company-list/company-list-container/company-list-container.component';
 // eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
 import { SharedGlobalCompanyDataAccessCompanyModule } from '@workspace/shared/global/company/data-access-company';
-
+import { SharedDataAccessNavigationModule } from '@workspace/shared/data-access-navigation';
 
 @NgModule({
   imports: [
     CommonModule,
     SharedGlobalCompanyDataAccessCompanyModule,
+    SharedDataAccessNavigationModule,
     RouterModule.forChild([
       { path: '', pathMatch: 'full', redirectTo: 'list' },
       { path: 'list', component: CompanyListContainerComponent },

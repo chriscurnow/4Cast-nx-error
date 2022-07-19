@@ -2,8 +2,8 @@ import { CommonModule,  } from '@angular/common';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
 // eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
-import { loadProjectList, ProjectPartialState, getAllProjects, init  } from '@workspace/shared-global-project-data-access-project';
-import { addEntity, NavigationPartialState, getAddEntity, showAddButton, addEntitySuccess } from '@workspace/shared/data-access-navigation';
+import { ProjectPartialState, getAllProjects, init  } from '@workspace/shared-global-project-data-access-project';
+import { NavigationPartialState, getAddEntity, showAddButton, addEntitySuccess } from '@workspace/shared/data-access-navigation';
 import { Observable, Subscription } from 'rxjs';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Project } from '@workspace/shared/data-access-models'; // import model

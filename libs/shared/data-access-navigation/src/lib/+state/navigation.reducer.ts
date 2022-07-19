@@ -10,7 +10,7 @@ export interface State extends EntityState<NavigationEntity> {
   selectedId?: string | number; // which Navigation record has been selected
   loaded: boolean; // has the Navigation list been loaded
   addEntity?: boolean;
-  hideAddButton?: boolean;
+  addButtonHidden?: boolean;
   error?: string | null; // last known error (if any)
 }
 
@@ -24,6 +24,8 @@ export const navigationAdapter: EntityAdapter<NavigationEntity> =
 export const initialState: State = navigationAdapter.getInitialState({
   // set initial required properties
   loaded: false,
+  addEntity: false,
+  addButtonHidden: false
 });
 
 const navigationReducer = createReducer(
@@ -48,11 +50,11 @@ const navigationReducer = createReducer(
   })),
   on(NavigationActions.showAddButton, (state) => ({
     ...state,
-    hideAddButton: false,
+    addButtonHidden: false,
   })),
   on(NavigationActions.hideAddButton, (state) => ({
     ...state,
-    hideAddButton: true,
+    addButtonHidden: true,
   }))
 );
 

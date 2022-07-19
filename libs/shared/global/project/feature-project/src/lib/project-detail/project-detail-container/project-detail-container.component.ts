@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule, Location } from '@angular/common';
 import { Store } from '@ngrx/store';
-import { loadProjectList, ProjectPartialState, getSelectedProject,  init, updateProject, getUpdated  } from '@workspace/shared-global-project-data-access-project';
+import { ProjectPartialState, getSelectedProject,  init, updateProject, getUpdated  } from '@workspace/shared-global-project-data-access-project';
 import { hideAddButton, NavigationPartialState } from '@workspace/shared/data-access-navigation';
 import { Observable, Subscription } from 'rxjs';
 import { Project } from '@workspace/shared/data-access-models'; // import model

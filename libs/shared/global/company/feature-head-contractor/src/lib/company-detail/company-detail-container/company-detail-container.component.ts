@@ -2,13 +2,16 @@ import { CommonModule, Location } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import {
-  loadCompanyList,
   CompanyPartialState,
   getSelectedCompany,
   init,
   updateCompany,
   getCompanyLoaded,
 } from '@workspace/shared/global/company/data-access-company';
+import {
+  hideAddButton,
+  NavigationPartialState,
+} from '@workspace/shared/data-access-navigation';
 import { Observable, Subscription } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Company } from '@workspace/shared/data-access-models'; // import model
@@ -24,18 +27,19 @@ import { CompanyDetailUiComponent } from '../company-detail-ui/company-detail-ui
 export class CompanyDetailContainerComponent implements OnInit, OnDestroy {
   company$!: Observable<Company | undefined>;
   company!: Company | undefined;
-  updatedSubscription!: Subscription
-
+  updatedSubscription!: Subscription;
+  companySubscription!: Subscription;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private location: Location,
-    private store: Store<CompanyPartialState>
+    private store: Store<CompanyPartialState>,
+    private navStore: Store<NavigationPartialState>
   ) {
     this.company$ = this.store.select(getSelectedCompany);
 
-    this.company$.subscribe((res) => {
+    this.companySubscription = this.company$.subscribe((res) => {
       this.company = res;
       console.log('COMPANY DETAIL CONTAINER company', this.company);
     });
@@ -43,6 +47,7 @@ export class CompanyDetailContainerComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.store.dispatch(init());
+    this.navStore.dispatch(hideAddButton());
   }
 
   update(company: Company) {
@@ -55,9 +60,12 @@ export class CompanyDetailContainerComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnDestroy(): void{
-    if(this.updatedSubscription){
+  ngOnDestroy(): void {
+    if (this.updatedSubscription) {
       this.updatedSubscription.unsubscribe();
+    }
+    if (this.companySubscription) {
+      this.companySubscription.unsubscribe();
     }
   }
 }
