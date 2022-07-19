@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import * as functions from 'firebase-functions';
 
 // Start writing Firebase Functions
@@ -8,7 +9,7 @@ export const helloWorld = functions.https.onRequest((request, response) => {
 });
 
 exports.makeUppercase = functions.firestore.document('/messages/{documentId}')
-      .onCreate((snap) => {
+      .onCreate((snap, context) => {
         const original = snap.data().original;
 
         const uppercase = original.toUpperCase();
@@ -16,7 +17,7 @@ exports.makeUppercase = functions.firestore.document('/messages/{documentId}')
       });
 
 
-export * from './subcontracts';
+// export * from './subcontracts';
 export * from './global/company';
 export * from './global/project';
 // export * from './subcontractVariations/subcontract-variations-triggers';

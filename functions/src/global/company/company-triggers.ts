@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import * as admin from 'firebase-admin';
 import * as functions from 'firebase-functions';
 import { setId}  from '../../utils/utils';
@@ -12,12 +13,12 @@ if (!admin.apps.length) {
 
 
 export const companyCreate = functions.firestore.document('companies/{id}')
-.onCreate((snap) => {
+.onCreate((snap, context) => {
     return setId(snap);
 });
 
 export const companyUpdate = functions.firestore.document('companies/{id}')
-.onUpdate((change) => {
+.onUpdate((change, context) => {
 
   const before: Company = change.before.data();
   const after: Company = change.after.data();

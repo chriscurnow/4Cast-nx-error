@@ -17,8 +17,8 @@
     "@google-cloud/firestore": "^5.0.2",
     "array-includes": "^3.1.5",
     "firebase": "^9.9.0",
-    "firebase-admin": "^9.8.0",
-    "firebase-functions": "^3.19.0",
+    "firebase-admin": "^11.0.0",
+    "firebase-functions": "^3.22.0",
     "jshint": "^2.13.4",
     "luxon": "^2.4.0"
   },

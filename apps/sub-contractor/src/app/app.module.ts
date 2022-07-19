@@ -9,18 +9,18 @@ import { routerReducer, StoreRouterConnectingModule, DefaultRouterStateSerialize
 import { AngularFireModule } from '@angular/fire/compat';
 import {
   AngularFirestore,
-  SETTINGS as FIRESTORE_SETTINGS,
+  // SETTINGS as FIRESTORE_SETTINGS,
 } from '@angular/fire/compat/firestore';
-import {
-  AngularFireDatabaseModule,
-  URL as DATABASE_URL,
-} from '@angular/fire/compat/database';
-import { ORIGIN } from '@angular/fire/compat/functions';
+// import {
+//   AngularFireDatabaseModule,
+//   URL as DATABASE_URL,
+// } from '@angular/fire/compat/database';
+// import { ORIGIN } from '@angular/fire/compat/functions';
 import { DataPersistence } from '@nrwl/angular';
 
 import {
-  AlreadyLoggedInGuard,
-  AuthGuard,
+  // AlreadyLoggedInGuard,
+  // AuthGuard,
   SharedDataAccessAuthModule,
 } from '@workspace/shared/data-access-auth';
 import { SharedDataAccessUserModule } from '@workspace/shared/data-access-user';
@@ -34,7 +34,7 @@ import { MainNavigationComponent } from './main-navigation/main-navigation.compo
 import { SharedFeatureToolbarUserModule } from '@workspace/shared/feature-toolbar-user';
 import { AppRoutes } from './app.routes';
 
-const shouldUseEmulator = () => false;
+// const shouldUseEmulator = () => false;
 
 @NgModule({
   declarations: [AppComponent, MainNavigationComponent],
