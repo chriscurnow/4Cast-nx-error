@@ -5,9 +5,9 @@ export const init = createAction('[Company Page] Init');
 
 export const loadCompany = createAction(
   '[Company/API] load Company',
-  props<{ companyId: string}>
+  props<{ companyId: string}>()
 
-)
+);
 
 export const loadCompanySuccess = createAction(
   '[Company/API] Load Company Success',
@@ -22,7 +22,7 @@ export const loadCompanyFailure = createAction(
 
 export const loadCompanyList = createAction(
   '[Company/API] load Company List'
-)
+);
 
 export const loadCompanyListSuccess = createAction(
   '[Company/API] Load Company List Success',
@@ -37,12 +37,12 @@ export const loadCompanyListFailure = createAction(
 export const updateCompany = createAction(
   '[Company/API] Update Company',
   props<{ company: Company}>()
-)
+);
 
 export const updateCompanySuccess = createAction(
   '[Company/API] Update Company SUCCESS',
   props<{ company: Company}>()
-)
+);
 
 export const updateCompanyFailure = createAction(
   '[Company/API] Update Company Failure',

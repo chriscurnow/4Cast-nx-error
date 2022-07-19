@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import * as admin from 'firebase-admin';
 import * as functions from 'firebase-functions';
 import { setId}  from '../../utils/utils';
@@ -11,7 +12,7 @@ if (!admin.apps.length) {
 }
 
 export const projectCreate = functions.firestore.document('projects/{id}')
-.onCreate((snap) => {
+.onCreate((snap, context) => {
     return setId(snap);
 });
 

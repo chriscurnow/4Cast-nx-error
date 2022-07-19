@@ -5,9 +5,9 @@ export const init = createAction('[Project Page] Init');
 
 export const loadProject = createAction(
   '[Project/API] load Project',
-  props<{ projectId: string}>
+  props<{ projectId: string}>()
 
-)
+);
 
 export const loadProjectSuccess = createAction(
   '[Project/API] Load Project Success',
@@ -22,7 +22,7 @@ export const loadProjectFailure = createAction(
 
 export const loadProjectList = createAction(
   '[Project/API] load Project List'
-)
+);
 
 export const loadProjectListSuccess = createAction(
   '[Project/API] Load Project List Success',
@@ -37,12 +37,12 @@ export const loadProjectListFailure = createAction(
 export const updateProject = createAction(
   '[Project/API] Update Project',
   props<{ project: Project}>()
-)
+);
 
 export const updateProjectSuccess = createAction(
   '[Project/API] Update Project SUCCESS',
   props<{ project: Project}>()
-)
+);
 
 export const updateProjectFailure = createAction(
   '[Project/API] Update Project Failure',

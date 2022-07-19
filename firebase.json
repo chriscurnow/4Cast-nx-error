@@ -18,8 +18,10 @@
       "npm --prefix \"$RESOURCE_DIR\" run build"
     ]
   },
-  "hosting": {
-    "public": "public",
+  "hosting":[
+    {
+    "target": "signup",
+    "public": "dist/apps/signup",
     "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
     "rewrites": [
       {
@@ -27,5 +29,39 @@
         "destination": "/index.html"
       }
     ]
-  }
+  },
+   {
+     "target": "admin",
+     "public": "dist/apps/admin",
+     "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+     "rewrites": [
+       {
+         "source": "**",
+         "destination": "/index.html"
+       }
+     ]
+   },
+    {
+      "target": "contractor",
+      "public": "dist/apps/contractor",
+      "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+      "rewrites": [
+        {
+          "source": "**",
+          "destination": "/index.html"
+        }
+      ]
+    },
+     {
+       "target": "subcontractor",
+       "public": "dist/apps/sub-contractor",
+       "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+       "rewrites": [
+         {
+           "source": "**",
+           "destination": "/index.html"
+         }
+       ]
+     }
+]
 }

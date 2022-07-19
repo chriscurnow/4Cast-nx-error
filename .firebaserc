@@ -1,5 +1,24 @@
 {
   "projects": {
     "default": "fourcastpro"
-  }
+  },
+  "targets": {
+    "fourcastpro": {
+      "hosting": {
+        "signup": [
+          "fourcastpro-signup"
+        ],
+        "admin": [
+          "fourcastpro-admin"
+        ],
+        "contractor": [
+          "fourcastpro-contractor"
+        ],
+        "subcontractor": [
+          "fourcastpro-subcontractor"
+        ]
+      }
+    }
+  },
+  "etags": {}
 }
