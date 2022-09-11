@@ -1,0 +1,12 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "name": "fourcast",
+  "version": "0.0.1",
+  "generators": {
+    "fourcast": {
+      "factory": "./src/generators/fourcast/generator",
+      "schema": "./src/generators/fourcast/schema.json",
+      "description": "fourcast generator"
+    }
+  }
+}

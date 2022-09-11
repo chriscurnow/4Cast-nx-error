@@ -9,6 +9,8 @@
     "contractor-e2e": "apps/contractor-e2e",
     "contractor-feature-costing": "libs/contractor/feature-costing",
     "contractor-feature-dashboard": "libs/contractor/feature-dashboard",
+    "fourcast": "libs/fourcast",
+    "fourcast-e2e": "apps/fourcast-e2e",
     "shared-data-access-actions": "libs/shared/data-access-actions",
     "shared-data-access-auth": "libs/shared/data-access-auth",
     "shared-data-access-models": "libs/shared/data-access-models",

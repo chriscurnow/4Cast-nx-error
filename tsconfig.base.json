@@ -23,6 +23,7 @@
       "@workspace/contractor/feature-dashboard": [
         "libs/contractor/feature-dashboard/src/index.ts"
       ],
+      "@workspace/fourcast": ["libs/fourcast/src/index.ts"],
       "@workspace/libs/shared/feature-head-contractor": [
         "libs/libs/shared/feature-head-contractor/src/index.ts"
       ],
