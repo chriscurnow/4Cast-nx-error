@@ -5,7 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { routerReducer, StoreRouterConnectingModule, DefaultRouterStateSerializer } from '@ngrx/router-store';
+import { routerReducer, StoreRouterConnectingModule, FullRouterStateSerializer } from '@ngrx/router-store';
 import { AngularFireModule } from '@angular/fire/compat';
 import {
   AngularFirestore,
@@ -70,7 +70,7 @@ import { AppRoutes } from './app.routes';
     EffectsModule.forRoot([]),
     // StoreRouterConnectingModule.forRoot(),
     StoreRouterConnectingModule.forRoot({
-      serializer: DefaultRouterStateSerializer,
+      serializer: FullRouterStateSerializer,
     }),
     // [STARTED DOCS] this might cause perf issues in large APPs (DEV mode only)
     // (with lots of state in its NgRx store, eg 3+ MB of data)
